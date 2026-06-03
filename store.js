@@ -18,7 +18,7 @@ import { loadState, saveState, requestPersistence } from './db.js';
 //   pieces:           [{ songId, fragmentId, points, skipped, artistOk, bonusMatch }]
 //   seenKeys:         array of "songId:fragmentId" already drawn this game
 
-const SCHEMA = 4;
+const SCHEMA = 5;
 
 const initialState = () => ({
   schema: SCHEMA,
@@ -32,13 +32,12 @@ const initialState = () => ({
   score: 0,
   pieces: [],
   seenKeys: [],
-  // Wall-clock timestamp set on startGame; the playing screen renders a
-  // live clock against this, and endGame folds the elapsed time into the
-  // record entry. Null on intro/final.
-  startedAt: null,
-  // Lifetime record of finished games. Each entry:
-  //   { score, played, when, elapsed }
-  // `endGame` appends one; persists across reloads and across games.
+  // Wall-clock deadline for the current stage. The playing screen renders
+  // a countdown against this; when the deadline passes, the timer expiry
+  // auto-resolves the round (artist stage = 0 pts, bonus stage = +1).
+  // Null outside the artist/bonus stages.
+  deadlineAt: null,
+  // Lifetime record of finished games. Each entry: { score, played, when }.
   record: [],
 });
 

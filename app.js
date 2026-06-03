@@ -45,24 +45,38 @@ const h = (tag, attrs = {}, ...children) => {
 
 const fmtN = (n) => String(n).padStart(2, '0');
 
-const fmtClock = (ms) => {
-  const total = Math.max(0, Math.floor(ms / 1000));
-  const m = Math.floor(total / 60);
-  const s = total % 60;
-  return `${m}:${fmtN(s)}`;
+// ── Stage timer ──────────────────────────────────────────────────
+// The user has TURN_MS to act in each guess stage; when the deadline
+// passes the round auto-resolves. `activeTimeoutId` lets us cancel the
+// scheduled expiry whenever the user acts before time runs out.
+const TURN_MS = 8000;
+let activeTimeoutId = null;
+
+const cancelTimer = () => {
+  if (activeTimeoutId !== null) {
+    clearTimeout(activeTimeoutId);
+    activeTimeoutId = null;
+  }
 };
 
-// Verses per minute (rounded to 1 decimal); guards against zero elapsed.
-const ratePerMin = (played, elapsed) => {
-  if (!elapsed || elapsed < 1000) return 0;
-  return Math.round((played / (elapsed / 60000)) * 10) / 10;
+const armTimer = (onExpire) => {
+  cancelTimer();
+  activeTimeoutId = setTimeout(() => {
+    activeTimeoutId = null;
+    onExpire();
+  }, TURN_MS);
+  return Date.now() + TURN_MS;
 };
+
+const remainingSec = (deadlineAt) =>
+  deadlineAt ? Math.max(0, Math.ceil((deadlineAt - Date.now()) / 1000)) : null;
 
 // ── Game lifecycle (bypasses commands) ───────────────────────────
 const startGame = () => {
   animated.clear();
   const piece = pickFragment([]);
   const correct = findSong(piece.songId).artistId;
+  const deadlineAt = armTimer(timeoutArtist);
   store.setLifecycle({
     screen: 'playing',
     stage: 'artist',
@@ -74,7 +88,7 @@ const startGame = () => {
     pickedArtistId: null,
     bonusGuess: '',
     revealed: null,
-    startedAt: Date.now(),
+    deadlineAt,
   });
 };
 
@@ -85,6 +99,7 @@ const nextRound = () => {
     ? seenKeys
     : [...seenKeys, `${piece.songId}:${piece.fragmentId}`];
   const correct = findSong(piece.songId).artistId;
+  const deadlineAt = armTimer(timeoutArtist);
   store.setLifecycle({
     stage: 'artist',
     currentPiece: piece,
@@ -93,36 +108,61 @@ const nextRound = () => {
     bonusGuess: '',
     revealed: null,
     seenKeys: newSeen,
+    deadlineAt,
   });
 };
 
 const pickArtist = (artistId) => {
+  cancelTimer();
   const { currentPiece } = store.state;
   const song = findSong(currentPiece.songId);
   const artistOk = artistId === song.artistId;
   if (artistOk) {
-    // Advance to bonus stage; reveal stays null until bonus submit.
+    // Advance to bonus stage. No timer — the user can take their time on
+    // the song/album guess.
     store.setLifecycle({
       stage: 'bonus',
       pickedArtistId: artistId,
+      deadlineAt: null,
     });
   } else {
     // Wrong pick: no bonus stage; reveal immediately, 0 points.
     store.setLifecycle({
       stage: 'revealed',
       pickedArtistId: artistId,
-      revealed: { artistOk: false, bonusMatch: null, points: 0 },
+      revealed: { artistOk: false, bonusMatch: null, points: 0, timedOut: false },
       pieces: [...store.state.pieces, {
         songId: currentPiece.songId,
         fragmentId: currentPiece.fragmentId,
         points: 0, skipped: false,
         artistOk: false, bonusMatch: null,
       }],
+      deadlineAt: null,
     });
   }
 };
 
+// Timer expiry — artist stage. Treated as "no pick", 0 points; reveals
+// the correct answer so the user can still learn what they missed.
+const timeoutArtist = () => {
+  if (store.state.stage !== 'artist') return;
+  const { currentPiece } = store.state;
+  store.setLifecycle({
+    stage: 'revealed',
+    pickedArtistId: null,
+    revealed: { artistOk: false, bonusMatch: null, points: 0, timedOut: true },
+    pieces: [...store.state.pieces, {
+      songId: currentPiece.songId,
+      fragmentId: currentPiece.fragmentId,
+      points: 0, skipped: false,
+      artistOk: false, bonusMatch: null,
+    }],
+    deadlineAt: null,
+  });
+};
+
 const submitBonus = () => {
+  cancelTimer();
   const { currentPiece } = store.state;
   const song = findSong(currentPiece.songId);
   const bonusGuess = document.querySelector('input[name="bonus"]')?.value ?? '';
@@ -131,7 +171,7 @@ const submitBonus = () => {
   store.setLifecycle({
     stage: 'revealed',
     bonusGuess,
-    revealed: { artistOk: true, bonusMatch, points },
+    revealed: { artistOk: true, bonusMatch, points, timedOut: false },
     score: store.state.score + points,
     pieces: [...store.state.pieces, {
       songId: currentPiece.songId,
@@ -139,16 +179,18 @@ const submitBonus = () => {
       points, skipped: false,
       artistOk: true, bonusMatch,
     }],
+    deadlineAt: null,
   });
 };
 
 const skipBonus = () => {
+  cancelTimer();
   // Take the artist point; no bonus.
   const { currentPiece } = store.state;
   store.setLifecycle({
     stage: 'revealed',
     bonusGuess: '',
-    revealed: { artistOk: true, bonusMatch: null, points: 1 },
+    revealed: { artistOk: true, bonusMatch: null, points: 1, timedOut: false },
     score: store.state.score + 1,
     pieces: [...store.state.pieces, {
       songId: currentPiece.songId,
@@ -156,10 +198,12 @@ const skipBonus = () => {
       points: 1, skipped: false,
       artistOk: true, bonusMatch: null,
     }],
+    deadlineAt: null,
   });
 };
 
 const skipVerse = () => {
+  cancelTimer();
   // Skip the whole verse (artist stage); no points awarded.
   const { currentPiece } = store.state;
   store.setLifecycle({
@@ -169,6 +213,7 @@ const skipVerse = () => {
       points: 0, skipped: true,
       artistOk: false, bonusMatch: null,
     }],
+    deadlineAt: null,
   });
   nextRound();
 };
@@ -176,15 +221,14 @@ const skipVerse = () => {
 const MAX_RECORD = 500;
 
 const endGame = () => {
+  cancelTimer();
   const played = store.state.pieces.length;
-  const now = Date.now();
-  const elapsed = store.state.startedAt ? now - store.state.startedAt : 0;
-  const entry = { score: store.state.score, played, when: now, elapsed };
+  const entry = { score: store.state.score, played, when: Date.now() };
   const record = [...store.state.record, entry].slice(-MAX_RECORD);
-  store.setLifecycle({ screen: 'final', revealed: null, record, startedAt: null });
+  store.setLifecycle({ screen: 'final', revealed: null, record, deadlineAt: null });
 };
-const restart   = () => startGame();
-const backToIntro = () => store.setLifecycle({ screen: 'intro' });
+const restart   = () => { cancelTimer(); startGame(); };
+const backToIntro = () => { cancelTimer(); store.setLifecycle({ screen: 'intro' }); };
 
 // ── Top-level view ───────────────────────────────────────────────
 const view = (state) => {
@@ -230,36 +274,79 @@ const Intro = () =>
   );
 
 // ── Shared: epigraph + pieza ─────────────────────────────────────
+// Word-by-word reveal — each word becomes its own animated span carrying
+// a running index `--i` for CSS to stagger animation-delay. Whitespace
+// and line breaks are preserved so wrapping still feels natural.
 const renderLyric = (text, pieceKey) => {
   const lines = text.split('\n');
-  return lines.map((line, i) =>
-    h('span', {
-      class: 'epigraph__line' + onceClass(`line:${pieceKey}:${i}`, 'is-animate'),
-    }, line + (line ? '' : ' '))
-  );
+  let w = 0;
+  const out = [];
+  lines.forEach((line, li) => {
+    const tokens = line.split(/(\s+)/);
+    const lineChildren = tokens.map((tok) => {
+      if (tok === '' || /^\s+$/.test(tok)) return tok;
+      const idx = w++;
+      return h('span', {
+        class: 'word' + onceClass(`word:${pieceKey}:${li}:${idx}`, 'is-animate'),
+        style: `--i:${idx}`,
+      }, tok);
+    });
+    out.push(h('span', { class: 'epigraph__line' }, ...lineChildren));
+    if (li < lines.length - 1) out.push(h('br'));
+  });
+  return out;
 };
 
 const Epigraph = (piece, song, pieceKey, isRevealed) =>
   h('blockquote', { class: 'epigraph' },
-    h('span', { class: 'epigraph__corner epigraph__corner--tl' }, 'anonymous verse'),
-    h('span', { class: 'epigraph__corner epigraph__corner--tr' }, '— · —'),
+    h('span', { class: 'epigraph__corner epigraph__corner--tl' }, 'mystery line'),
+    h('span', { class: 'epigraph__corner epigraph__corner--tr' }, '◆◆◆'),
     h('p', { class: 'epigraph__quote' },
       ...renderLyric(piece.fragment, pieceKey)
     ),
     h('span', { class: 'epigraph__corner epigraph__corner--br' }, isRevealed ? song.year : '???'),
   );
 
+// Visual timer bar — drained by CSS animation. Negative animation-delay
+// snapshots how much time has already passed so re-renders or hydrates
+// resume from the right position instead of restarting from 100%.
+const TimerBar = (deadlineAt) => {
+  const elapsed = Math.max(0, TURN_MS - (deadlineAt - Date.now()));
+  return h('div', {
+    class: 'pieza__timer',
+    'aria-hidden': 'true',
+  },
+    h('div', {
+      class: 'pieza__timer__fill',
+      style: `--turn-ms:${TURN_MS}ms; --elapsed:${elapsed};`,
+    }),
+  );
+};
+
 const Pieza = (state) => {
   // While playing a round, show the round-in-progress number; in the
   // revealed stage `pieces` already includes this round, so don't +1.
   const n = state.stage === 'revealed' ? state.pieces.length : state.pieces.length + 1;
-  const elapsed = state.startedAt ? Date.now() - state.startedAt : 0;
-  return h('div', { class: 'pieza' },
-    h('span', { class: 'pieza__no' },
-      'Verse ', h('em', {}, '№'), fmtN(n)),
-    h('span', { class: 'pieza__clock', 'aria-label': 'Elapsed time' }, fmtClock(elapsed)),
-    h('span', { class: 'pieza__score' },
-      h('em', {}, state.score), 'pts'),
+  // Countdown is shown only during the artist stage. The bonus stage is
+  // untimed so the user can think through the song/album guess.
+  const sec = state.stage === 'artist' ? remainingSec(state.deadlineAt) : null;
+  const urgent = sec !== null && sec <= 2;
+  return h('div', { class: 'pieza-wrap' + (urgent ? ' is-urgent' : '') },
+    h('div', { class: 'pieza' },
+      h('span', { class: 'pieza__no' },
+        'R', h('em', {}, '#'), fmtN(n)),
+      h('span', { class: 'pieza__score' },
+        h('em', {}, state.score), 'pts'),
+    ),
+    sec !== null
+      ? h('div', { class: 'pieza__timeline' },
+          TimerBar(state.deadlineAt),
+          h('span', {
+            class: 'pieza__clock' + (urgent ? ' pieza__clock--urgent' : ''),
+            'aria-label': 'Seconds remaining',
+          }, `${sec}s`),
+        )
+      : null,
   );
 };
 
@@ -347,7 +434,7 @@ const RevealedStage = (state, song, artist, pieceKey) => {
   const stampText = (() => {
     if (r.points === 2) return 'Sweep · +2';
     if (r.points === 1) return 'Just artist · +1';
-    return 'Nothing · +0';
+    return r.timedOut ? 'Timed out · +0' : 'Nothing · +0';
   })();
 
   // What the user typed in the bonus stage (if any).
@@ -429,26 +516,71 @@ const quipFor = (score, played) => {
   return { line: 'El que nace mona Chita nunca llega a ser Tarzán.', cite: 'R. Musso' };
 };
 
+// Tier: drives banner color, title, and which entry animation plays.
+const tierFor = (score, played) => {
+  if (played === 0) return 'none';
+  const r = score / (played * 2);
+  if (r >= 0.6) return 'win';
+  if (r < 0.3)  return 'lose';
+  return 'mid';
+};
+
+const TITLE_BY_TIER = {
+  win:  'ENCORE!',
+  mid:  'NOT BAD',
+  lose: 'OFF KEY',
+  none: 'CURTAIN',
+};
+
+const SUB_BY_TIER = {
+  win:  'crowd is on its feet',
+  mid:  'crowd is half-listening',
+  lose: 'crowd has left the building',
+  none: 'no songs were sung',
+};
+
+// Confetti — fixed pattern of falling colored dots. Pure CSS animation,
+// each span carrying its own --x, --d (delay), --dur, --c (color) so the
+// pile feels random without any JS-driven motion.
+const CONFETTI_COLORS = ['#ff2d95', '#00e5ff', '#ffd60a', '#7cff6b', '#9b5cff'];
+const Confetti = () => {
+  const N = 32;
+  const spans = [];
+  for (let i = 0; i < N; i++) {
+    const x = Math.floor(Math.random() * 100);
+    const d = Math.floor(Math.random() * 1100);
+    const dur = 1500 + Math.floor(Math.random() * 1200);
+    const c = CONFETTI_COLORS[i % CONFETTI_COLORS.length];
+    spans.push(h('span', {
+      style: `--x:${x}; --d:${d}ms; --dur:${dur}ms; --c:${c};`,
+    }));
+  }
+  return h('div', { class: 'confetti', 'aria-hidden': 'true' }, ...spans);
+};
+
 const Final = (state) => {
   const played = state.pieces.length;
   const max = played * 2;
   const quip = quipFor(state.score, played);
+  const tier = tierFor(state.score, played);
   // The just-finished game's entry is the last one in record. Pass the
   // prior entries to Record() so it can compare and stamp NEW RECORD.
   const justFinished = state.record[state.record.length - 1] ?? null;
-  const priorRecord = state.record.slice(0, -1);
 
-  return h('div', { class: 'final' },
+  return h('div', { class: `final final--${tier}` },
     Masthead(),
-    h('h1', { class: 'final__head' }, 'End of the songbook.'),
+    h('div', { class: 'final__banner' },
+      tier === 'win' ? Confetti() : null,
+      h('h1', { class: 'final__title' }, TITLE_BY_TIER[tier]),
+      h('div', { class: 'final__sub' }, SUB_BY_TIER[tier]),
+    ),
     h('div', { class: 'final__big' },
-      state.score,
-      h('small', {},
-        `${state.score} pts of ${max} · ${played} verses`,
-        justFinished?.elapsed
-          ? ` · ${fmtClock(justFinished.elapsed)} · ${ratePerMin(played, justFinished.elapsed)}/min`
-          : '',
-      ),
+      h('span', {
+        class: 'final__big__num is-animate',
+        style: `--target:${state.score};`,
+        'aria-label': `${state.score} points`,
+      }),
+      h('small', {}, `${state.score} pts of ${max} · ${played} verses`),
     ),
     played > 0
       ? h('blockquote', { class: 'final__quip' },
@@ -482,7 +614,7 @@ const Record = (record, justFinished) => {
   const ratio = (e) => e.played === 0 ? 0 : e.score / (e.played * 2);
   const bestScore = Math.max(...record.map((e) => e.score));
   const bestRatio = Math.max(...record.map(ratio));
-  const bestPace  = Math.max(0, ...record.map((e) => ratePerMin(e.played, e.elapsed ?? 0)));
+  const last = record[record.length - 1];
 
   const newRecord = justFinished
     && justFinished.score > 0
@@ -499,7 +631,7 @@ const Record = (record, justFinished) => {
       Stat('Best',   bestScore),
       Stat('Acc.',   `${Math.round(bestRatio * 100)}%`),
       Stat('Games',  games),
-      Stat('Pace',   bestPace > 0 ? `${bestPace}/m` : '—'),
+      Stat('Last',   last.score),
     ),
   );
 };
@@ -527,16 +659,24 @@ const render = (state) => {
   root.replaceChildren(view(state));
 };
 
-// Clock ticker: updates only the `.pieza__clock` text node every second
-// while the playing screen is mounted. Touching one text node — not the
-// whole tree — avoids restarting any animations or losing focus.
+// Countdown ticker: updates the `.pieza__clock` text node ~5x/sec while
+// the artist stage is live, and toggles the urgent class on both the
+// clock badge and the wrapping HUD (so the whole row can shake at <2s).
+// Touching narrow DOM bits — not the whole tree — avoids restarting any
+// animations or losing focus.
 const startTicker = () => {
   setInterval(() => {
-    const { screen, startedAt } = store.state;
-    if (screen !== 'playing' || !startedAt) return;
-    const el = document.querySelector('.pieza__clock');
-    if (el) el.textContent = fmtClock(Date.now() - startedAt);
-  }, 1000);
+    const { screen, stage, deadlineAt } = store.state;
+    if (screen !== 'playing' || stage !== 'artist' || !deadlineAt) return;
+    const clock = document.querySelector('.pieza__clock');
+    const wrap  = document.querySelector('.pieza-wrap');
+    if (!clock || !wrap) return;
+    const sec = remainingSec(deadlineAt);
+    clock.textContent = `${sec}s`;
+    const urgent = sec <= 2;
+    clock.classList.toggle('pieza__clock--urgent', urgent);
+    wrap.classList.toggle('is-urgent', urgent);
+  }, 200);
 };
 
 const start = async () => {
@@ -544,6 +684,12 @@ const start = async () => {
   store.subscribe(render);
   render(store.state);
   startTicker();
+  // If we hydrated mid-artist-stage (user reloaded mid-guess), re-arm
+  // the timer with a fresh window — the in-memory setTimeout from before
+  // the reload is gone. Bonus stage has no timer.
+  if (store.state.screen === 'playing' && store.state.stage === 'artist') {
+    store.setLifecycle({ deadlineAt: armTimer(timeoutArtist) });
+  }
 };
 
 start();

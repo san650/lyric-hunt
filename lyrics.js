@@ -424,6 +424,23 @@ export const findSong   = (id) => SONGS.find((s) => s.id === id);
 export const artistOf   = (songId) => findArtist(findSong(songId).artistId);
 
 // ── Normalization + matching ─────────────────────────────────────
+//
+// Normalization (case-insensitive + diacritic-coalesced) is the floor
+// every comparison rests on: `é`/`E`/`e` all collapse to `e`, punctuation
+// becomes whitespace, multiple spaces collapse. Built on top of that,
+// `matches()` is intentionally lenient — five-second timer, no autocomplete,
+// no hint — so it accepts four flavors of "close enough":
+//
+//   1. Exact (after norm).
+//   2. Substring either way, with length floors so two-letter slivers
+//      like "el" don't sneak through against a 20-char album title.
+//   3. Token-set: every guess word is a whole-word match somewhere in
+//      the canonical. Handles word reorder ("Mí Para Eres") and dropped
+//      stop-words ("Limon Sal" vs "Limón y Sal"). Requires at least one
+//      substantial (≥4 chars) token so "el del" can't pass.
+//   4. Edit distance for typos: "Money" → "Monei", "Trinkeras" → "Trincheras".
+//      Allowance scales with the shorter string's length.
+
 const norm = (s) =>
   (s ?? '')
     .toString()
@@ -433,15 +450,63 @@ const norm = (s) =>
     .replace(/\s+/g, ' ')
     .trim();
 
+const tokens = (s) => s.split(' ').filter(Boolean);
+
+// Two-row Levenshtein. O(m*n) time, O(n) space — fine for titles.
+const levenshtein = (a, b) => {
+  if (a === b) return 0;
+  const m = a.length, n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  let prev = new Array(n + 1);
+  let curr = new Array(n + 1);
+  for (let j = 0; j <= n; j++) prev[j] = j;
+  for (let i = 1; i <= m; i++) {
+    curr[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(curr[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
+    }
+    const tmp = prev; prev = curr; curr = tmp;
+  }
+  return prev[n];
+};
+
 const matches = (guess, canonical, aliases) => {
   const g = norm(guess);
-  if (!g || g.length < 2) return false;
-  const candidates = [canonical, ...aliases].map(norm);
+  if (g.length < 2) return false;
+  const gTokens = tokens(g);
+  const gCharBudget = gTokens.reduce((sum, t) => sum + t.length, 0);
+  const hasSubstantialToken = gTokens.some((t) => t.length >= 4);
+
+  const candidates = [canonical, ...aliases].map(norm).filter(Boolean);
   for (const c of candidates) {
-    if (!c) continue;
+    // 1. Exact (post-norm).
     if (c === g) return true;
-    if (c.includes(g) && g.length >= Math.max(4, Math.floor(c.length * 0.5))) return true;
+
+    // 2. Substring either way. The guess→canonical floor is the looser
+    //    of "3 chars" or "a third of the canonical" so that long titles
+    //    can be matched by a meaningful chunk ("vals del obrero") but
+    //    stop-word substrings don't pass.
+    if (c.includes(g) && g.length >= Math.max(3, Math.ceil(c.length / 3))) return true;
     if (g.includes(c) && c.length >= 4) return true;
+
+    // 3. Token-set: every guess word must appear as a whole word in the
+    //    canonical, and the guess must carry at least one ≥4-char token
+    //    so single stop-words can't drag a match in.
+    const cTokens = new Set(tokens(c));
+    if (gTokens.length >= 1
+        && gCharBudget >= 4
+        && hasSubstantialToken
+        && gTokens.every((t) => t.length >= 2 && cTokens.has(t))) return true;
+
+    // 4. Edit distance for typo tolerance, only when the two strings are
+    //    a similar length to begin with (otherwise it's no longer a typo).
+    const minLen = Math.min(c.length, g.length);
+    if (minLen >= 4 && Math.abs(c.length - g.length) <= Math.ceil(minLen / 3)) {
+      const allowance = Math.max(1, Math.floor(minLen / 4));
+      if (levenshtein(g, c) <= allowance) return true;
+    }
   }
   return false;
 };
