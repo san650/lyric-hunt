@@ -146,6 +146,29 @@ main {
   color: var(--scarlet);
   font-weight: 500;
 }
+.pieza__clock {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4ch;
+  white-space: nowrap;
+  /* Soft tick: the colon between m:ss blinks once per second to reinforce
+     "this is live". CSS-only, animation runs forever — cheap. */
+}
+.pieza__clock::before {
+  content: "◐";
+  color: var(--scarlet);
+  font-size: 0.7em;
+  animation: clockBlink 1s steps(2, end) infinite;
+}
+@keyframes clockBlink {
+  50% { opacity: 0.25; }
+}
 .pieza__score {
   color: var(--ink);
 }
@@ -866,6 +889,111 @@ main {
   outline-offset: 2px;
 }
 .btn:focus-visible { outline-offset: 3px; }
+
+/* ────────────────────────────────────────────────────────────
+   Record panel — lifetime stats, shown on intro + final
+   ──────────────────────────────────────────────────────────── */
+.record {
+  margin: 0.3rem 0 0.4rem;
+  padding: 0.65rem 0.75rem 0.7rem;
+  border: 1px solid var(--rule);
+  background: linear-gradient(180deg, transparent, rgba(180, 110, 40, 0.025));
+  display: grid;
+  gap: 0.55rem;
+}
+
+.record__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.record__title {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.record__badge {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--scarlet);
+  padding: 0.22rem 0.55rem 0.24rem;
+  border: 1.5px solid var(--scarlet);
+  transform: rotate(-2.5deg);
+  font-weight: 600;
+  position: relative;
+}
+.record__badge::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px solid var(--paper);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.record__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+}
+
+.record__stat {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.1rem 0;
+  border-left: 1px dotted var(--rule);
+  padding-left: 0.5rem;
+}
+.record__stat:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.record__stat-label {
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-thin);
+}
+
+.record__stat-value {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 700;
+  font-variation-settings: "opsz" 144, "SOFT" 90;
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+.record--empty {
+  padding: 0.65rem 0.75rem 0.75rem;
+}
+.record__placeholder {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+/* Slim on tighter widths — drop label to one line */
+@media (max-width: 360px) {
+  .record__grid { gap: 0.3rem; }
+  .record__stat { padding-left: 0.35rem; }
+  .record__stat-value { font-size: 1.25rem; }
+}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {

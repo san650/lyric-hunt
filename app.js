@@ -45,6 +45,19 @@ const h = (tag, attrs = {}, ...children) => {
 
 const fmtN = (n) => String(n).padStart(2, '0');
 
+const fmtClock = (ms) => {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${m}:${fmtN(s)}`;
+};
+
+// Verses per minute (rounded to 1 decimal); guards against zero elapsed.
+const ratePerMin = (played, elapsed) => {
+  if (!elapsed || elapsed < 1000) return 0;
+  return Math.round((played / (elapsed / 60000)) * 10) / 10;
+};
+
 // ── Game lifecycle (bypasses commands) ───────────────────────────
 const startGame = () => {
   animated.clear();
@@ -61,6 +74,7 @@ const startGame = () => {
     pickedArtistId: null,
     bonusGuess: '',
     revealed: null,
+    startedAt: Date.now(),
   });
 };
 
@@ -159,7 +173,16 @@ const skipVerse = () => {
   nextRound();
 };
 
-const endGame   = () => store.setLifecycle({ screen: 'final', revealed: null });
+const MAX_RECORD = 500;
+
+const endGame = () => {
+  const played = store.state.pieces.length;
+  const now = Date.now();
+  const elapsed = store.state.startedAt ? now - store.state.startedAt : 0;
+  const entry = { score: store.state.score, played, when: now, elapsed };
+  const record = [...store.state.record, entry].slice(-MAX_RECORD);
+  store.setLifecycle({ screen: 'final', revealed: null, record, startedAt: null });
+};
 const restart   = () => startGame();
 const backToIntro = () => store.setLifecycle({ screen: 'intro' });
 
@@ -197,6 +220,7 @@ const Intro = () =>
       h('li', {}, h('b', {}, '+1'), 'bonus for the song or the album.'),
       h('li', {}, h('b', {}, '0'), 'if you skip the verse.'),
     ),
+    Record(store.state.record, null),
     h('button', { class: 'btn btn--primary intro__btn', onclick: startGame },
       'Begin →'
     ),
@@ -229,9 +253,11 @@ const Pieza = (state) => {
   // While playing a round, show the round-in-progress number; in the
   // revealed stage `pieces` already includes this round, so don't +1.
   const n = state.stage === 'revealed' ? state.pieces.length : state.pieces.length + 1;
+  const elapsed = state.startedAt ? Date.now() - state.startedAt : 0;
   return h('div', { class: 'pieza' },
     h('span', { class: 'pieza__no' },
       'Verse ', h('em', {}, '№'), fmtN(n)),
+    h('span', { class: 'pieza__clock', 'aria-label': 'Elapsed time' }, fmtClock(elapsed)),
     h('span', { class: 'pieza__score' },
       h('em', {}, state.score), 'pts'),
   );
@@ -407,13 +433,22 @@ const Final = (state) => {
   const played = state.pieces.length;
   const max = played * 2;
   const quip = quipFor(state.score, played);
+  // The just-finished game's entry is the last one in record. Pass the
+  // prior entries to Record() so it can compare and stamp NEW RECORD.
+  const justFinished = state.record[state.record.length - 1] ?? null;
+  const priorRecord = state.record.slice(0, -1);
 
   return h('div', { class: 'final' },
     Masthead(),
     h('h1', { class: 'final__head' }, 'End of the songbook.'),
     h('div', { class: 'final__big' },
       state.score,
-      h('small', {}, `${state.score} pts of ${max} · ${played} verses`),
+      h('small', {},
+        `${state.score} pts of ${max} · ${played} verses`,
+        justFinished?.elapsed
+          ? ` · ${fmtClock(justFinished.elapsed)} · ${ratePerMin(played, justFinished.elapsed)}/min`
+          : '',
+      ),
     ),
     played > 0
       ? h('blockquote', { class: 'final__quip' },
@@ -421,6 +456,7 @@ const Final = (state) => {
           h('cite', {}, quip.cite),
         )
       : null,
+    Record(state.record, justFinished),
     played > 0 ? Tally(state) : null,
     h('div', { class: 'actions' },
       h('button', { class: 'btn btn--primary', type: 'button', onclick: restart }, 'Play again →'),
@@ -428,6 +464,51 @@ const Final = (state) => {
     ),
   );
 };
+
+// ── Record panel ─────────────────────────────────────────────────
+// Lifetime stats across every finished game. Shown on intro and final.
+// `justFinished` is the most recent entry (so we can stamp NEW RECORD if
+// the current game beat the previous best); pass null on the intro.
+const Record = (record, justFinished) => {
+  const games = record.length;
+  if (games === 0) {
+    return h('aside', { class: 'record record--empty' },
+      h('div', { class: 'record__title' }, 'Record'),
+      h('p', { class: 'record__placeholder' },
+        'Your best score will appear here after the first game.'),
+    );
+  }
+
+  const ratio = (e) => e.played === 0 ? 0 : e.score / (e.played * 2);
+  const bestScore = Math.max(...record.map((e) => e.score));
+  const bestRatio = Math.max(...record.map(ratio));
+  const bestPace  = Math.max(0, ...record.map((e) => ratePerMin(e.played, e.elapsed ?? 0)));
+
+  const newRecord = justFinished
+    && justFinished.score > 0
+    && justFinished.score >= bestScore
+    && (record.length === 1
+        || justFinished.score > Math.max(...record.slice(0, -1).map((e) => e.score)));
+
+  return h('aside', { class: 'record' },
+    h('div', { class: 'record__head' },
+      h('span', { class: 'record__title' }, 'Record'),
+      newRecord ? h('span', { class: 'record__badge' }, 'New record') : null,
+    ),
+    h('div', { class: 'record__grid' },
+      Stat('Best',   bestScore),
+      Stat('Acc.',   `${Math.round(bestRatio * 100)}%`),
+      Stat('Games',  games),
+      Stat('Pace',   bestPace > 0 ? `${bestPace}/m` : '—'),
+    ),
+  );
+};
+
+const Stat = (label, value) =>
+  h('div', { class: 'record__stat' },
+    h('span', { class: 'record__stat-label' }, label),
+    h('span', { class: 'record__stat-value' }, value),
+  );
 
 const Tally = (state) =>
   h('div', { class: 'tally' },
@@ -446,10 +527,23 @@ const render = (state) => {
   root.replaceChildren(view(state));
 };
 
+// Clock ticker: updates only the `.pieza__clock` text node every second
+// while the playing screen is mounted. Touching one text node — not the
+// whole tree — avoids restarting any animations or losing focus.
+const startTicker = () => {
+  setInterval(() => {
+    const { screen, startedAt } = store.state;
+    if (screen !== 'playing' || !startedAt) return;
+    const el = document.querySelector('.pieza__clock');
+    if (el) el.textContent = fmtClock(Date.now() - startedAt);
+  }, 1000);
+};
+
 const start = async () => {
   await store.ready;
   store.subscribe(render);
   render(store.state);
+  startTicker();
 };
 
 start();
