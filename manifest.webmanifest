@@ -1,0 +1,20 @@
+{
+  "name": "Lyric Hunt",
+  "short_name": "Lyric Hunt",
+  "description": "Guess the artist, song, and album from a single line of a lyric.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f0e8",
+  "theme_color": "#f4f0e8",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

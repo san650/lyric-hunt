@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Cancionero Apócrifo icon: bone paper, ink C, scarlet diamond.
+       Geometry-only accents so fontconfig can never miss a glyph during
+       splash PNG rasterization; the only <text> uses Georgia. -->
+
+  <!-- Paper background -->
+  <rect width="200" height="200" fill="#f4f0e8"/>
+
+  <!-- Faint warm corner wash, geometry-only -->
+  <polygon points="0,0 200,0 200,40 0,80" fill="#d8c8a8" opacity="0.10"/>
+  <polygon points="0,200 200,200 200,160 0,120" fill="#a89878" opacity="0.06"/>
+
+  <!-- Single ink rule under the wordmark -->
+  <rect x="30" y="155" width="140" height="2" fill="#0c0d0c"/>
+
+  <!-- Editorial serif "L" for Lyric Hunt, sized to live inside the safe zone. -->
+  <text x="100" y="142"
+        text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic"
+        font-weight="700"
+        font-size="138"
+        fill="#0c0d0c">L</text>
+
+  <!-- Scarlet sello: a hand-cut diamond, two stacked rotated squares.
+       No text → no font fallback risk. -->
+  <g transform="translate(154 60) rotate(45)">
+    <rect x="-13" y="-13" width="26" height="26" fill="#c8201c"/>
+    <rect x="-7" y="-7" width="14" height="14" fill="#f4f0e8"/>
+    <rect x="-3" y="-3" width="6" height="6" fill="#c8201c"/>
+  </g>
+
+  <!-- Two small ledger ticks bracketing the rule, like a fanzine fold -->
+  <rect x="22" y="153" width="6" height="6" fill="#0c0d0c"/>
+  <rect x="172" y="153" width="6" height="6" fill="#0c0d0c"/>
+
+  <!-- Faint Nº mark below the rule, lower right -->
+  <text x="170" y="180"
+        text-anchor="end"
+        font-family="Georgia, serif"
+        font-style="italic"
+        font-weight="400"
+        font-size="13"
+        fill="#0c0d0c"
+        opacity="0.55">N°</text>
+</svg>
