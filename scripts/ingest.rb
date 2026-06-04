@@ -51,22 +51,28 @@ rescue LoadError
 end
 
 ARTISTS = [
-  { id: 'cuarteto-de-nos',  aliases: ['El Cuarteto de Nos', 'Cuarteto de Nos', 'El Cuarteto', 'Cuarteto'] },
-  { id: 'redondos',         aliases: [
-                              'Los Redondos',
-                              'Patricio Rey y Sus Redonditos de Ricota',
-                              'Patricio Rey y Los Redonditos de Ricota',
-                              'Los Redonditos de Ricota',
-                              'Redonditos de Ricota',
-                              'Patricio Rey',
-                              'Redondos',
-                              'Redonditos',
-                            ] },
-  { id: 'la-tabare',        aliases: ['La Tabaré', 'La Tabare', 'Tabaré', 'Tabare', 'La Tabaré Riverock Banda'] },
-  { id: 'angeles-azules',   aliases: ['Los Ángeles Azules', 'Los Angeles Azules', 'Ángeles Azules', 'Angeles Azules'] },
-  { id: 'damas-gratis',     aliases: ['Damas Gratis', 'Damas G'] },
-  { id: 'julieta-venegas',  aliases: ['Julieta Venegas', 'Venegas Julieta', 'Julieta', 'Venegas'] },
-  { id: 'ska-p',            aliases: ['Ska-P', 'SkaP', 'Skap', 'Ska P'] },
+  { id: 'cuarteto-de-nos',    aliases: ['El Cuarteto de Nos', 'Cuarteto de Nos', 'El Cuarteto', 'Cuarteto'] },
+  { id: 'redondos',           aliases: [
+                                'Los Redondos',
+                                'Patricio Rey y Sus Redonditos de Ricota',
+                                'Patricio Rey y Los Redonditos de Ricota',
+                                'Los Redonditos de Ricota',
+                                'Redonditos de Ricota',
+                                'Patricio Rey',
+                                'Redondos',
+                                'Redonditos',
+                              ] },
+  { id: 'la-tabare',          aliases: ['La Tabaré', 'La Tabare', 'Tabaré', 'Tabare', 'La Tabaré Riverock Banda'] },
+  { id: 'angeles-azules',     aliases: ['Los Ángeles Azules', 'Los Angeles Azules', 'Ángeles Azules', 'Angeles Azules'] },
+  { id: 'damas-gratis',       aliases: ['Damas Gratis', 'Damas G'] },
+  { id: 'julieta-venegas',    aliases: ['Julieta Venegas', 'Venegas Julieta', 'Julieta', 'Venegas'] },
+  { id: 'ska-p',              aliases: ['Ska-P', 'SkaP', 'Skap', 'Ska P'] },
+  { id: '2-minutos',          aliases: ['2 Minutos', 'Dos Minutos'] },
+  { id: 'los-buitres',        aliases: ['Los Buitres', 'Buitres después de la una'] },
+  { id: 'trotsky-vengaran',   aliases: ['Trotsky Vengaran'] },
+  { id: 'la-vela',            aliases: ['La Vela Puerca', 'La Vela'] },
+  { id: '4-pesos-de-propina', aliases: ['4 Pesos de Propina', '4 Pesos'] },
+  { id: 'no-te-va-gustar',    aliases: ['No Te Va Gustar', 'NTVG'] },
 ].freeze
 
 # ── Helpers ──────────────────────────────────────────────────────

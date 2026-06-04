@@ -1,24 +1,33 @@
 import { COMMANDS, isNoOp } from './commands.js';
 import { History } from './history.js';
 import { loadState, saveState, requestPersistence } from './db.js';
+import { ARTISTS } from './lyrics.js';
 
 // Top-level state shape:
 //   schema:           shape version; bump when adding/removing fields so
 //                     old persisted blobs get discarded instead of merged
 //                     into the new defaults (and leaving holes like an
 //                     empty `choices` mid-game)
-//   screen:           'intro' | 'playing' | 'final'
-//   stage:            'artist' | 'bonus' | 'revealed'   (within `playing`)
+//   screen:           'intro' | 'setup' | 'playing' | 'final'
+//   stage:            'artist' | 'revealed'   (within `playing`)
 //   currentPiece:     { fragment, songId, fragmentId }  ← seeded on next()
 //   choices:          array of artistId — the chips shown in artist stage
 //   pickedArtistId:   the artistId the user clicked (set when leaving artist)
-//   bonusGuess:       what the user typed (set when leaving bonus)
-//   revealed:         null | { artistOk, bonusMatch: 'song'|'album'|null, points: 0..2 }
-//   score:            total accumulated points
-//   pieces:           [{ songId, fragmentId, points, skipped, artistOk, bonusMatch }]
+//   revealed:         null | { artistOk, timedOut }
+//   score:            current streak — number of correct guesses in a row
+//   pieces:           [{ songId, fragmentId, artistOk, pickedArtistId }]
 //   seenKeys:         array of "songId:fragmentId" already drawn this game
+//   deadlineAt:       wall-clock millis for the artist-stage timer expiry
+//   record:           lifetime [{ score, played, when }] — score is streak
+//   prefs:            persisted user preferences ({ artistIds, turnSec })
 
-const SCHEMA = 5;
+const SCHEMA = 6;
+const DEFAULT_TURN_SEC = 8;
+
+const defaultPrefs = () => ({
+  artistIds: ARTISTS.map((a) => a.id),
+  turnSec: DEFAULT_TURN_SEC,
+});
 
 const initialState = () => ({
   schema: SCHEMA,
@@ -27,18 +36,16 @@ const initialState = () => ({
   currentPiece: null,
   choices: [],
   pickedArtistId: null,
-  bonusGuess: '',
   revealed: null,
+  // Transient flash overlay between artist pick and next-round/end-game.
+  // Never persisted across reloads — see #hydrate.
+  flash: null,
   score: 0,
   pieces: [],
   seenKeys: [],
-  // Wall-clock deadline for the current stage. The playing screen renders
-  // a countdown against this; when the deadline passes, the timer expiry
-  // auto-resolves the round (artist stage = 0 pts, bonus stage = +1).
-  // Null outside the artist/bonus stages.
   deadlineAt: null,
-  // Lifetime record of finished games. Each entry: { score, played, when }.
   record: [],
+  prefs: defaultPrefs(),
 });
 
 class Store {
@@ -52,7 +59,9 @@ class Store {
   async #hydrate() {
     const persisted = await loadState();
     if (persisted?.state?.schema === SCHEMA) {
-      this.state = { ...initialState(), ...persisted.state };
+      // Drop `flash` on hydration: the setTimeout that advanced past it is
+      // gone, so a persisted flash would freeze the screen forever.
+      this.state = { ...initialState(), ...persisted.state, flash: null };
       if (persisted.history) this.history.hydrate(persisted.history);
     }
     // Older schemas are silently discarded — the user lands on the intro

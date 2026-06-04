@@ -18,7 +18,7 @@
 //   albumAliases — same, for the album
 //   fragments    — list of multi-line excerpts the game samples from
 
-const ARTIST_CHOICE_LIMIT = 10;
+const ARTIST_CHOICE_LIMIT = 4;
 
 export const ARTISTS = [
   {
@@ -64,6 +64,36 @@ export const ARTISTS = [
     id: 'ska-p',
     displayName: 'Ska-P',
     aliases: ['Ska-P', 'SkaP', 'Skap', 'Ska P'],
+  },
+  {
+    id: '2-minutos',
+    displayName: '2 Minutos',
+    aliases: ['2 Minutos', 'Dos Minutos']
+  },
+  {
+    id: 'los-buitres',
+    displayName: 'Los Buitres',
+    aliases: ['Los Buitres', 'Buitres después de la una']
+  },
+  {
+    id: 'trotsky-vengaran',
+    displayName: 'Trotsky Vengaran',
+    aliases: ['Trotsky Vengaran']
+  },
+  {
+    id: 'la-vela',
+    displayName: 'La Vela',
+    aliases: ['La Vela Puerca', 'La Vela']
+  },
+  {
+    id: '4-pesos-de-propina',
+    displayName: '4 Pesos',
+    aliases: ['4 Pesos de Propina', '4 Pesos']
+  },
+  {
+    id: 'no-te-va-gustar',
+    displayName: 'No Te Va Gustar',
+    aliases: ['No Te Va Gustar', 'NTVG']
   },
 ];
 
@@ -423,6 +453,17 @@ export const findArtist = (id) => ARTISTS.find((a) => a.id === id);
 export const findSong   = (id) => SONGS.find((s) => s.id === id);
 export const artistOf   = (songId) => findArtist(findSong(songId).artistId);
 
+// Artists that have at least one song with at least one fragment. The
+// ARTISTS registry can contain entries we don't have material for yet (the
+// ingest pipeline references all of them); the playable subset is what the
+// game offers as suspects.
+const PLAYABLE_IDS = new Set(
+  SONGS
+    .filter((s) => s.fragments && s.fragments.length > 0)
+    .map((s) => s.artistId),
+);
+export const playableArtists = () => ARTISTS.filter((a) => PLAYABLE_IDS.has(a.id));
+
 // ── Normalization + matching ─────────────────────────────────────
 //
 // Normalization (case-insensitive + diacritic-coalesced) is the floor
@@ -529,16 +570,23 @@ const shuffle = (a) => {
   return r;
 };
 
-const allPairs = () => {
+// Build {songId, fragmentId} pairs from SONGS — optionally restricted to a
+// subset of artist ids. Passing `null` or omitting returns every pair.
+const allPairs = (allowedArtistIds = null) => {
+  const ok = allowedArtistIds ? new Set(allowedArtistIds) : null;
   const out = [];
-  for (const s of SONGS) for (let i = 0; i < s.fragments.length; i++) {
-    out.push({ songId: s.id, fragmentId: i });
+  for (const s of SONGS) {
+    if (ok && !ok.has(s.artistId)) continue;
+    for (let i = 0; i < s.fragments.length; i++) {
+      out.push({ songId: s.id, fragmentId: i });
+    }
   }
   return out;
 };
 
-export const pickFragment = (seenKeys = []) => {
-  const all = allPairs();
+export const pickFragment = (seenKeys = [], allowedArtistIds = null) => {
+  const all = allPairs(allowedArtistIds);
+  if (all.length === 0) return null;
   let available = all.filter((p) => !seenKeys.includes(`${p.songId}:${p.fragmentId}`));
   if (available.length === 0) available = all;
   const pick = available[Math.floor(Math.random() * available.length)];
@@ -551,14 +599,18 @@ export const pickFragment = (seenKeys = []) => {
 };
 
 // For a piece, decide which artist chips to show. Below the threshold,
-// every artist appears in shuffled order; above it, the correct artist
-// plus a random sample of decoys, also shuffled.
-export const pickArtistChoices = (correctArtistId) => {
-  if (ARTISTS.length <= ARTIST_CHOICE_LIMIT) {
-    return shuffle(ARTISTS).map((a) => a.id);
+// every selected artist appears in shuffled order; above it, the correct
+// artist plus a random sample of selected decoys, also shuffled.
+// `allowedArtistIds` should always contain `correctArtistId`.
+export const pickArtistChoices = (correctArtistId, allowedArtistIds = null) => {
+  const pool = allowedArtistIds
+    ? ARTISTS.filter((a) => allowedArtistIds.includes(a.id))
+    : ARTISTS;
+  if (pool.length <= ARTIST_CHOICE_LIMIT) {
+    return shuffle(pool).map((a) => a.id);
   }
   const correct = findArtist(correctArtistId);
-  const others  = ARTISTS.filter((a) => a.id !== correctArtistId);
+  const others  = pool.filter((a) => a.id !== correctArtistId);
   const picks   = [correct, ...shuffle(others).slice(0, ARTIST_CHOICE_LIMIT - 1)];
   return shuffle(picks).map((a) => a.id);
 };

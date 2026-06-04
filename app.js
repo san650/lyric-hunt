@@ -1,7 +1,7 @@
 import { store } from './store.js';
 import {
   ARTISTS, SONGS, pickFragment, pickArtistChoices,
-  findArtist, findSong, artistOf, checkBonus,
+  findArtist, findSong, artistOf, playableArtists,
 } from './lyrics.js';
 
 const root = document.getElementById('view');
@@ -46,10 +46,8 @@ const h = (tag, attrs = {}, ...children) => {
 const fmtN = (n) => String(n).padStart(2, '0');
 
 // ── Stage timer ──────────────────────────────────────────────────
-// The user has TURN_MS to act in each guess stage; when the deadline
-// passes the round auto-resolves. `activeTimeoutId` lets us cancel the
-// scheduled expiry whenever the user acts before time runs out.
-const TURN_MS = 8000;
+// The user has turnSec seconds to pick an artist; when the deadline
+// passes the round auto-resolves and the game ends.
 let activeTimeoutId = null;
 
 const cancelTimer = () => {
@@ -59,24 +57,61 @@ const cancelTimer = () => {
   }
 };
 
-const armTimer = (onExpire) => {
+const armTimer = (onExpire, ms) => {
   cancelTimer();
   activeTimeoutId = setTimeout(() => {
     activeTimeoutId = null;
     onExpire();
-  }, TURN_MS);
-  return Date.now() + TURN_MS;
+  }, ms);
+  return Date.now() + ms;
 };
 
 const remainingSec = (deadlineAt) =>
   deadlineAt ? Math.max(0, Math.ceil((deadlineAt - Date.now()) / 1000)) : null;
 
-// ── Game lifecycle (bypasses commands) ───────────────────────────
+const turnMs = () => store.state.prefs.turnSec * 1000;
+
+// ── Flash + lifecycle ────────────────────────────────────────────
+// After a pick we briefly hold the screen so the player sees lime on the
+// right answer (and red on a wrong one) before advancing.
+const FLASH_OK_MS  = 420;
+const FLASH_BAD_MS = 900;
+
+const goToSetup = () => {
+  cancelTimer();
+  store.setLifecycle({ screen: 'setup' });
+};
+const backToIntro = () => {
+  cancelTimer();
+  store.setLifecycle({ screen: 'intro' });
+};
+
+const toggleArtist = (artistId) => {
+  const set = new Set(store.state.prefs.artistIds);
+  if (set.has(artistId)) set.delete(artistId);
+  else set.add(artistId);
+  // Guard: never let the lineup drop below two — view also disables the
+  // last toggle, this is just belt-and-braces.
+  if (set.size < 2) return;
+  store.setLifecycle({
+    prefs: { ...store.state.prefs, artistIds: [...set] },
+  });
+};
+
+const setTurnSec = (sec) => {
+  if (sec === store.state.prefs.turnSec) return;
+  store.setLifecycle({
+    prefs: { ...store.state.prefs, turnSec: sec },
+  });
+};
+
 const startGame = () => {
   animated.clear();
-  const piece = pickFragment([]);
+  const { prefs } = store.state;
+  const piece = pickFragment([], prefs.artistIds);
+  if (!piece) return;
   const correct = findSong(piece.songId).artistId;
-  const deadlineAt = armTimer(timeoutArtist);
+  const deadlineAt = armTimer(timeoutArtist, turnMs());
   store.setLifecycle({
     screen: 'playing',
     stage: 'artist',
@@ -84,138 +119,76 @@ const startGame = () => {
     pieces: [],
     seenKeys: [`${piece.songId}:${piece.fragmentId}`],
     currentPiece: piece,
-    choices: pickArtistChoices(correct),
+    choices: pickArtistChoices(correct, prefs.artistIds),
     pickedArtistId: null,
-    bonusGuess: '',
     revealed: null,
+    flash: null,
     deadlineAt,
   });
 };
 
 const nextRound = () => {
-  const { seenKeys } = store.state;
-  const piece = pickFragment(seenKeys);
-  const newSeen = seenKeys.includes(`${piece.songId}:${piece.fragmentId}`)
-    ? seenKeys
-    : [...seenKeys, `${piece.songId}:${piece.fragmentId}`];
+  const { seenKeys, prefs } = store.state;
+  const piece = pickFragment(seenKeys, prefs.artistIds);
+  if (!piece) { endGame(); return; }
+  const key = `${piece.songId}:${piece.fragmentId}`;
+  const newSeen = seenKeys.includes(key) ? seenKeys : [...seenKeys, key];
   const correct = findSong(piece.songId).artistId;
-  const deadlineAt = armTimer(timeoutArtist);
+  const deadlineAt = armTimer(timeoutArtist, turnMs());
   store.setLifecycle({
     stage: 'artist',
     currentPiece: piece,
-    choices: pickArtistChoices(correct),
+    choices: pickArtistChoices(correct, prefs.artistIds),
     pickedArtistId: null,
-    bonusGuess: '',
     revealed: null,
+    flash: null,
     seenKeys: newSeen,
     deadlineAt,
   });
 };
 
 const pickArtist = (artistId) => {
+  // Ignore taps while we're already showing the flash for this round.
+  if (store.state.flash) return;
   cancelTimer();
   const { currentPiece } = store.state;
   const song = findSong(currentPiece.songId);
-  const artistOk = artistId === song.artistId;
-  if (artistOk) {
-    // Advance to bonus stage. No timer — the user can take their time on
-    // the song/album guess.
-    store.setLifecycle({
-      stage: 'bonus',
+  const ok = artistId === song.artistId;
+  store.setLifecycle({
+    pickedArtistId: artistId,
+    deadlineAt: null,
+    flash: { ok, pickedArtistId: artistId, correctArtistId: song.artistId, timedOut: false },
+    score: ok ? store.state.score + 1 : store.state.score,
+    pieces: [...store.state.pieces, {
+      songId: currentPiece.songId,
+      fragmentId: currentPiece.fragmentId,
       pickedArtistId: artistId,
-      deadlineAt: null,
-    });
-  } else {
-    // Wrong pick: no bonus stage; reveal immediately, 0 points.
-    store.setLifecycle({
-      stage: 'revealed',
-      pickedArtistId: artistId,
-      revealed: { artistOk: false, bonusMatch: null, points: 0, timedOut: false },
-      pieces: [...store.state.pieces, {
-        songId: currentPiece.songId,
-        fragmentId: currentPiece.fragmentId,
-        points: 0, skipped: false,
-        artistOk: false, bonusMatch: null,
-      }],
-      deadlineAt: null,
-    });
-  }
+      artistOk: ok,
+      timedOut: false,
+    }],
+  });
+  setTimeout(ok ? nextRound : endGame, ok ? FLASH_OK_MS : FLASH_BAD_MS);
 };
 
-// Timer expiry — artist stage. Treated as "no pick", 0 points; reveals
-// the correct answer so the user can still learn what they missed.
+// Timer expiry — treat as a wrong pick (no pick). Brief flash showing the
+// right answer, then end the game.
 const timeoutArtist = () => {
-  if (store.state.stage !== 'artist') return;
-  const { currentPiece } = store.state;
-  store.setLifecycle({
-    stage: 'revealed',
-    pickedArtistId: null,
-    revealed: { artistOk: false, bonusMatch: null, points: 0, timedOut: true },
-    pieces: [...store.state.pieces, {
-      songId: currentPiece.songId,
-      fragmentId: currentPiece.fragmentId,
-      points: 0, skipped: false,
-      artistOk: false, bonusMatch: null,
-    }],
-    deadlineAt: null,
-  });
-};
-
-const submitBonus = () => {
-  cancelTimer();
+  if (store.state.screen !== 'playing' || store.state.flash) return;
   const { currentPiece } = store.state;
   const song = findSong(currentPiece.songId);
-  const bonusGuess = document.querySelector('input[name="bonus"]')?.value ?? '';
-  const bonusMatch = checkBonus(bonusGuess, song);
-  const points = 1 + (bonusMatch ? 1 : 0);
   store.setLifecycle({
-    stage: 'revealed',
-    bonusGuess,
-    revealed: { artistOk: true, bonusMatch, points, timedOut: false },
-    score: store.state.score + points,
+    pickedArtistId: null,
+    deadlineAt: null,
+    flash: { ok: false, pickedArtistId: null, correctArtistId: song.artistId, timedOut: true },
     pieces: [...store.state.pieces, {
       songId: currentPiece.songId,
       fragmentId: currentPiece.fragmentId,
-      points, skipped: false,
-      artistOk: true, bonusMatch,
+      pickedArtistId: null,
+      artistOk: false,
+      timedOut: true,
     }],
-    deadlineAt: null,
   });
-};
-
-const skipBonus = () => {
-  cancelTimer();
-  // Take the artist point; no bonus.
-  const { currentPiece } = store.state;
-  store.setLifecycle({
-    stage: 'revealed',
-    bonusGuess: '',
-    revealed: { artistOk: true, bonusMatch: null, points: 1, timedOut: false },
-    score: store.state.score + 1,
-    pieces: [...store.state.pieces, {
-      songId: currentPiece.songId,
-      fragmentId: currentPiece.fragmentId,
-      points: 1, skipped: false,
-      artistOk: true, bonusMatch: null,
-    }],
-    deadlineAt: null,
-  });
-};
-
-const skipVerse = () => {
-  cancelTimer();
-  // Skip the whole verse (artist stage); no points awarded.
-  const { currentPiece } = store.state;
-  store.setLifecycle({
-    pieces: [...store.state.pieces, {
-      songId: currentPiece.songId,
-      fragmentId: currentPiece.fragmentId,
-      points: 0, skipped: true,
-      artistOk: false, bonusMatch: null,
-    }],
-    deadlineAt: null,
-  });
-  nextRound();
+  setTimeout(endGame, FLASH_BAD_MS);
 };
 
 const MAX_RECORD = 500;
@@ -225,15 +198,16 @@ const endGame = () => {
   const played = store.state.pieces.length;
   const entry = { score: store.state.score, played, when: Date.now() };
   const record = [...store.state.record, entry].slice(-MAX_RECORD);
-  store.setLifecycle({ screen: 'final', revealed: null, record, deadlineAt: null });
+  store.setLifecycle({ screen: 'final', flash: null, record, deadlineAt: null });
 };
-const restart   = () => { cancelTimer(); startGame(); };
-const backToIntro = () => { cancelTimer(); store.setLifecycle({ screen: 'intro' }); };
+
+const restart = goToSetup;
 
 // ── Top-level view ───────────────────────────────────────────────
 const view = (state) => {
-  if (state.screen === 'intro') return Intro();
-  if (state.screen === 'final') return Final(state);
+  if (state.screen === 'intro')   return Intro();
+  if (state.screen === 'setup')   return Setup(state);
+  if (state.screen === 'final')   return Final(state);
   return Playing(state);
 };
 
@@ -256,16 +230,16 @@ const Intro = () =>
       'Guess', h('em', {}, 'whose line this is.'),
     ),
     h('p', { class: 'intro__deck' },
-      `A single line, ${ARTISTS.length} suspects. Pick the artist. If you nail it, name the song or the album for a bonus point.`,
+      `A single line, ${ARTISTS.length} suspects. Pick the artist before the clock runs out. One miss and the curtain falls.`,
     ),
     h('div', { class: 'intro__rule' }),
     h('ul', { class: 'intro__rules' },
-      h('li', {}, h('b', {}, '1'), 'point for the right artist.'),
-      h('li', {}, h('b', {}, '+1'), 'bonus for the song or the album.'),
-      h('li', {}, h('b', {}, '0'), 'if you skip the verse.'),
+      h('li', {}, h('b', {}, '01'), 'A line appears. Tap the band.'),
+      h('li', {}, h('b', {}, '02'), 'Right answer? On to the next.'),
+      h('li', {}, h('b', {}, '03'), 'Wrong, or out of time? Game over.'),
     ),
     Record(store.state.record, null),
-    h('button', { class: 'btn btn--primary intro__btn', onclick: startGame },
+    h('button', { class: 'btn btn--primary intro__btn', onclick: goToSetup },
       'Begin →'
     ),
     h('div', { class: 'intro__foot' },
@@ -273,10 +247,112 @@ const Intro = () =>
     ),
   );
 
-// ── Shared: epigraph + pieza ─────────────────────────────────────
-// Word-by-word reveal — each word becomes its own animated span carrying
-// a running index `--i` for CSS to stagger animation-delay. Whitespace
-// and line breaks are preserved so wrapping still feels natural.
+// ── Setup ────────────────────────────────────────────────────────
+const ArtistToggle = (artist, idx, selected, soleSelected) => {
+  const isOn = selected.includes(artist.id);
+  const songCount = SONGS.filter((s) => s.artistId === artist.id).length;
+  const silent = songCount === 0;
+  // Stop the user disabling the second-to-last artist from the UI; the
+  // toggleArtist guard also catches this but disabling here is what makes
+  // the affordance obvious (cursor + dim state).
+  const disabled = isOn && soleSelected;
+  return h('button', {
+    class: 'lineup__card'
+      + (isOn ? ' is-on' : '')
+      + (disabled ? ' is-locked' : '')
+      + (silent ? ' is-silent' : '')
+      + onceClass(`lineup:${artist.id}`, 'is-animate'),
+    type: 'button',
+    style: `--i:${idx}`,
+    'aria-pressed': isOn ? 'true' : 'false',
+    onclick: disabled ? null : () => toggleArtist(artist.id),
+  },
+    h('span', { class: 'lineup__check', 'aria-hidden': 'true' }, isOn ? '✓' : ''),
+    h('span', { class: 'lineup__body' },
+      h('span', { class: 'lineup__name' }, artist.displayName),
+      h('span', { class: 'lineup__meta' },
+        silent ? 'no lyrics yet — decoy only' : `${songCount} song${songCount === 1 ? '' : 's'}`,
+      ),
+    ),
+  );
+};
+
+const DurationOption = (sec, current) => {
+  const isOn = sec === current;
+  return h('button', {
+    class: 'duration__opt' + (isOn ? ' is-on' : ''),
+    type: 'button',
+    'aria-pressed': isOn ? 'true' : 'false',
+    onclick: () => setTurnSec(sec),
+  },
+    h('span', { class: 'duration__num' }, fmtN(sec)),
+    h('span', { class: 'duration__unit' }, 's'),
+  );
+};
+
+const Setup = (state) => {
+  const { prefs } = state;
+  const lineup = ARTISTS;
+  const lineupIds = new Set(lineup.map((a) => a.id));
+  const selected = prefs.artistIds.filter((id) => lineupIds.has(id));
+  const soleSelected = selected.length <= 2;
+  // Need ≥2 selected so we have at least one decoy, and at least one of
+  // those must actually have material so pickFragment has a piece to draw.
+  const playableSet = new Set(playableArtists().map((a) => a.id));
+  const playableSelected = selected.filter((id) => playableSet.has(id)).length;
+  const canStart = selected.length >= 2 && playableSelected >= 1;
+  return h('div', { class: 'setup' },
+    Masthead(),
+    h('div', { class: 'setup__head' },
+      h('h2', { class: 'setup__title' },
+        'Setup',
+        h('span', { class: 'setup__title-dot' }),
+      ),
+      h('p', { class: 'setup__deck' }, "Choose tonight's lineup and how long you've got to call each line."),
+    ),
+
+    h('section', { class: 'setup__section' },
+      h('div', { class: 'setup__sectionhead' },
+        h('span', { class: 'setup__label' }, 'Lineup'),
+        h('span', { class: 'setup__count' }, `${selected.length}/${lineup.length}`),
+      ),
+      h('div', { class: 'lineup' },
+        ...lineup.map((a, i) => ArtistToggle(a, i, selected, soleSelected)),
+      ),
+      soleSelected
+        ? h('div', { class: 'setup__hint' }, 'Two minimum — the rest are yours to drop.')
+        : selected.length >= 2 && playableSelected === 0
+          ? h('div', { class: 'setup__hint' }, "None of the picked artists have lyrics yet — add at least one that does.")
+          : null,
+    ),
+
+    h('section', { class: 'setup__section' },
+      h('div', { class: 'setup__sectionhead' },
+        h('span', { class: 'setup__label' }, 'Turn length'),
+      ),
+      h('div', { class: 'duration' },
+        DurationOption(8, prefs.turnSec),
+        DurationOption(10, prefs.turnSec),
+      ),
+    ),
+
+    h('div', { class: 'actions setup__actions' },
+      h('button', {
+        class: 'btn btn--primary setup__start',
+        type: 'button',
+        disabled: !canStart,
+        onclick: startGame,
+      }, 'Start the round →'),
+      h('button', {
+        class: 'btn btn--ghost',
+        type: 'button',
+        onclick: backToIntro,
+      }, 'Back'),
+    ),
+  );
+};
+
+// ── Shared: epigraph + word-by-word ──────────────────────────────
 const renderLyric = (text, pieceKey) => {
   const lines = text.split('\n');
   let w = 0;
@@ -297,56 +373,52 @@ const renderLyric = (text, pieceKey) => {
   return out;
 };
 
-const Epigraph = (piece, song, pieceKey, isRevealed) =>
+const Epigraph = (piece, pieceKey) =>
   h('blockquote', { class: 'epigraph' },
     h('span', { class: 'epigraph__corner epigraph__corner--tl' }, 'mystery line'),
     h('span', { class: 'epigraph__corner epigraph__corner--tr' }, '◆◆◆'),
     h('p', { class: 'epigraph__quote' },
       ...renderLyric(piece.fragment, pieceKey)
     ),
-    h('span', { class: 'epigraph__corner epigraph__corner--br' }, isRevealed ? song.year : '???'),
   );
 
 // Visual timer bar — drained by CSS animation. Negative animation-delay
 // snapshots how much time has already passed so re-renders or hydrates
 // resume from the right position instead of restarting from 100%.
 const TimerBar = (deadlineAt) => {
-  const elapsed = Math.max(0, TURN_MS - (deadlineAt - Date.now()));
+  const ms = turnMs();
+  const elapsed = Math.max(0, ms - (deadlineAt - Date.now()));
   return h('div', {
     class: 'pieza__timer',
     'aria-hidden': 'true',
   },
     h('div', {
       class: 'pieza__timer__fill',
-      style: `--turn-ms:${TURN_MS}ms; --elapsed:${elapsed};`,
+      style: `--turn-ms:${ms}ms; --elapsed:${elapsed};`,
     }),
   );
 };
 
 const Pieza = (state) => {
-  // While playing a round, show the round-in-progress number; in the
-  // revealed stage `pieces` already includes this round, so don't +1.
-  const n = state.stage === 'revealed' ? state.pieces.length : state.pieces.length + 1;
-  // Countdown is shown only during the artist stage. The bonus stage is
-  // untimed so the user can think through the song/album guess.
-  const sec = state.stage === 'artist' ? remainingSec(state.deadlineAt) : null;
+  const sec = state.flash ? null : remainingSec(state.deadlineAt);
   const urgent = sec !== null && sec <= 2;
+  const streak = state.score;
   return h('div', { class: 'pieza-wrap' + (urgent ? ' is-urgent' : '') },
     h('div', { class: 'pieza' },
-      h('span', { class: 'pieza__no' },
-        'R', h('em', {}, '#'), fmtN(n)),
-      h('span', { class: 'pieza__score' },
-        h('em', {}, state.score), 'pts'),
-    ),
-    sec !== null
-      ? h('div', { class: 'pieza__timeline' },
-          TimerBar(state.deadlineAt),
-          h('span', {
+      h('span', { class: 'pieza__streak' },
+        h('span', { class: 'pieza__streak__label' }, 'Streak'),
+        h('em', { class: 'pieza__streak__num' + (streak >= 5 ? ' is-hot' : '') }, fmtN(streak)),
+      ),
+      sec !== null
+        ? h('span', {
             class: 'pieza__clock' + (urgent ? ' pieza__clock--urgent' : ''),
             'aria-label': 'Seconds remaining',
-          }, `${sec}s`),
-        )
-      : null,
+          }, `${sec}s`)
+        : h('span', { class: 'pieza__clock pieza__clock--paused' }, state.flash?.ok ? '✓' : '✗'),
+    ),
+    state.flash
+      ? null
+      : h('div', { class: 'pieza__timeline' }, TimerBar(state.deadlineAt)),
   );
 };
 
@@ -354,29 +426,32 @@ const Pieza = (state) => {
 const Playing = (state) => {
   const piece = state.currentPiece;
   if (!piece) return Intro();
-  const song = findSong(piece.songId);
-  const artist = artistOf(piece.songId);
   const pieceKey = `${piece.songId}:${piece.fragmentId}`;
-
-  let stageBlock;
-  if (state.stage === 'artist')        stageBlock = ArtistStage(state, pieceKey);
-  else if (state.stage === 'bonus')    stageBlock = BonusStage(state, artist, pieceKey);
-  else                                 stageBlock = RevealedStage(state, song, artist, pieceKey);
 
   return h('div', { class: 'page' },
     Masthead(),
     Pieza(state),
-    Epigraph(piece, song, pieceKey, state.stage === 'revealed'),
-    stageBlock,
+    Epigraph(piece, pieceKey),
+    ArtistStage(state, pieceKey),
   );
 };
 
-const Choice = (artistId, idx, pieceKey) => {
+const choiceClass = (artistId, flash) => {
+  if (!flash) return '';
+  if (artistId === flash.correctArtistId) return ' is-correct';
+  if (artistId === flash.pickedArtistId)  return ' is-wrong';
+  return ' is-dim';
+};
+
+const Choice = (artistId, idx, pieceKey, flash) => {
   const artist = findArtist(artistId);
   return h('button', {
-    class: 'choice' + onceClass(`choice:${pieceKey}:${idx}`, 'is-animate'),
+    class: 'choice'
+      + onceClass(`choice:${pieceKey}:${idx}`, 'is-animate')
+      + choiceClass(artistId, flash),
     type: 'button',
     style: `--i:${idx}`,
+    disabled: !!flash,
     onclick: () => pickArtist(artistId),
   }, artist.displayName);
 };
@@ -385,143 +460,25 @@ const ArtistStage = (state, pieceKey) =>
   h('section', { class: 'stage stage--artist' },
     h('div', { class: 'prompt' }, 'Who?'),
     h('div', { class: 'choices' },
-      ...state.choices.map((id, i) => Choice(id, i, pieceKey))
-    ),
-    h('div', { class: 'actions actions--right' },
-      h('button', { class: 'btn btn--end', type: 'button', onclick: skipVerse }, 'Skip verse'),
+      ...state.choices.map((id, i) => Choice(id, i, pieceKey, state.flash))
     ),
   );
-
-const BonusStage = (state, artist, pieceKey) =>
-  h('section', { class: 'stage stage--bonus' + onceClass(`bonus:${pieceKey}`, 'is-animate') },
-    h('div', { class: 'confirmed' },
-      h('span', { class: 'confirmed__tick' }, '✓'),
-      h('span', { class: 'confirmed__name' }, artist.displayName),
-      h('span', { class: 'confirmed__pts' }, '+1'),
-    ),
-    h('form', {
-      class: 'bonus',
-      onsubmit: (e) => { e.preventDefault(); submitBonus(); },
-    },
-      h('label', { class: 'bonus__field' },
-        h('span', { class: 'bonus__label' }, 'Now: song or album'),
-        h('input', {
-          class: 'bonus__input',
-          name: 'bonus',
-          type: 'text',
-          autocomplete: 'off',
-          autocapitalize: 'words',
-          spellcheck: false,
-          placeholder: 'Either earns +1',
-        }),
-      ),
-      h('div', { class: 'actions' },
-        h('button', { class: 'btn btn--primary', type: 'submit' }, 'Reveal'),
-        h('button', { class: 'btn btn--ghost',  type: 'button', onclick: skipBonus }, 'Pass on bonus'),
-      ),
-    ),
-  );
-
-const Stamp = (text, isNull, pieceKey) =>
-  h('span', {
-    class: 'stamp' + (isNull ? ' stamp--null' : '') + onceClass(`stamp:${pieceKey}`, 'is-animate'),
-  }, text);
-
-const RevealedStage = (state, song, artist, pieceKey) => {
-  const r = state.revealed;
-  const picked = findArtist(state.pickedArtistId);
-
-  const stampText = (() => {
-    if (r.points === 2) return 'Sweep · +2';
-    if (r.points === 1) return 'Just artist · +1';
-    return r.timedOut ? 'Timed out · +0' : 'Nothing · +0';
-  })();
-
-  // What the user typed in the bonus stage (if any).
-  const bonusTyped = (state.bonusGuess || '').trim();
-
-  return h('section', { class: 'stage stage--revealed' },
-    h('div', { class: 'outcome__head' },
-      Stamp(stampText, r.points === 0, pieceKey),
-      h('span', { class: 'outcome__points' },
-        `+${r.points}`, h('span', {}, ' / 2'),
-      ),
-    ),
-    h('dl', { class: 'attribution' },
-      // Artist row — always shown, marked by what the user picked.
-      r.artistOk
-        ? h('div', { class: 'attribution__row attribution__row--ok' },
-            h('dt', {}, h('span', { class: 'mark' }, '✓'), ' Artist'),
-            h('dd', {}, artist.displayName),
-          )
-        : h('div', { class: 'attribution__row attribution__row--bad' },
-            h('dt', {}, h('span', { class: 'mark' }, '✗'), ' You picked'),
-            h('dd', {}, picked ? picked.displayName : '—'),
-          ),
-      !r.artistOk
-        ? h('div', { class: 'attribution__row attribution__row--ok' },
-            h('dt', {}, h('span', { class: 'mark' }, '→'), ' Correct'),
-            h('dd', {}, artist.displayName),
-          )
-        : null,
-
-      // Bonus rows — only meaningful if artist was correct.
-      r.artistOk && r.bonusMatch
-        ? h('div', { class: 'attribution__row attribution__row--ok' },
-            h('dt', {}, h('span', { class: 'mark' }, '✓'),
-              ' Bonus (', r.bonusMatch, ')'),
-            h('dd', {}, bonusTyped || '—'),
-          )
-        : null,
-      r.artistOk && !r.bonusMatch && bonusTyped
-        ? h('div', { class: 'attribution__row attribution__row--bad' },
-            h('dt', {}, h('span', { class: 'mark' }, '✗'), ' You said'),
-            h('dd', {}, bonusTyped),
-          )
-        : null,
-
-      // Always show song; hide empty album/year rows.
-      h('div', { class: 'attribution__row attribution__row--info' },
-        h('dt', {}, 'Song'),
-        h('dd', {}, song.song),
-      ),
-      song.album
-        ? h('div', { class: 'attribution__row attribution__row--info' },
-            h('dt', {}, 'Album'),
-            h('dd', {}, song.album),
-          )
-        : null,
-      song.year
-        ? h('div', { class: 'attribution__row attribution__row--info' },
-            h('dt', {}, 'Year'),
-            h('dd', {}, song.year),
-          )
-        : null,
-    ),
-    h('div', { class: 'actions' },
-      h('button', { class: 'btn btn--primary', type: 'button', onclick: nextRound }, 'Another verse →'),
-      h('button', { class: 'btn btn--end',    type: 'button', onclick: endGame },    'Finish'),
-    ),
-  );
-};
 
 // ── Final ────────────────────────────────────────────────────────
-const quipFor = (score, played) => {
+const quipFor = (streak, played) => {
   if (played === 0) return { line: 'Stepping out for air. Back soon.', cite: 'Anonymous' };
-  const ratio = score / Math.max(1, played * 2);
-  if (ratio >= 0.9)  return { line: "You're a walking jukebox.", cite: 'The jury' };
-  if (ratio >= 0.6)  return { line: 'Top marks.', cite: 'The dean' };
-  if (ratio >= 0.3)  return { line: 'Not bad. Listen more.', cite: 'Uncle Discman' };
-  if (ratio > 0)     return { line: "One day you'll reach the trenches.", cite: 'Indio Solari, paraphrased' };
-  return { line: 'El que nace mona Chita nunca llega a ser Tarzán.', cite: 'R. Musso' };
+  if (streak === 0) return { line: 'El que nace mona Chita nunca llega a ser Tarzán.', cite: 'R. Musso' };
+  if (streak >= 10) return { line: "You're a walking jukebox.", cite: 'The jury' };
+  if (streak >= 5)  return { line: 'Top marks.', cite: 'The dean' };
+  if (streak >= 2)  return { line: 'Not bad. Listen more.', cite: 'Uncle Discman' };
+  return { line: "One day you'll reach the trenches.", cite: 'Indio Solari, paraphrased' };
 };
 
 // Tier: drives banner color, title, and which entry animation plays.
-const tierFor = (score, played) => {
+const tierFor = (streak, played) => {
   if (played === 0) return 'none';
-  const r = score / (played * 2);
-  if (r >= 0.6) return 'win';
-  if (r < 0.3)  return 'lose';
+  if (streak >= 5)  return 'win';
+  if (streak === 0) return 'lose';
   return 'mid';
 };
 
@@ -534,14 +491,11 @@ const TITLE_BY_TIER = {
 
 const SUB_BY_TIER = {
   win:  'crowd is on its feet',
-  mid:  'crowd is half-listening',
+  mid:  'a respectable run',
   lose: 'crowd has left the building',
   none: 'no songs were sung',
 };
 
-// Confetti — fixed pattern of falling colored dots. Pure CSS animation,
-// each span carrying its own --x, --d (delay), --dur, --c (color) so the
-// pile feels random without any JS-driven motion.
 const CONFETTI_COLORS = ['#ff2d95', '#00e5ff', '#ffd60a', '#7cff6b', '#9b5cff'];
 const Confetti = () => {
   const N = 32;
@@ -560,11 +514,9 @@ const Confetti = () => {
 
 const Final = (state) => {
   const played = state.pieces.length;
-  const max = played * 2;
-  const quip = quipFor(state.score, played);
-  const tier = tierFor(state.score, played);
-  // The just-finished game's entry is the last one in record. Pass the
-  // prior entries to Record() so it can compare and stamp NEW RECORD.
+  const streak = state.score;
+  const quip = quipFor(streak, played);
+  const tier = tierFor(streak, played);
   const justFinished = state.record[state.record.length - 1] ?? null;
 
   return h('div', { class: `final final--${tier}` },
@@ -577,10 +529,10 @@ const Final = (state) => {
     h('div', { class: 'final__big' },
       h('span', {
         class: 'final__big__num is-animate',
-        style: `--target:${state.score};`,
-        'aria-label': `${state.score} points`,
+        style: `--target:${streak};`,
+        'aria-label': `${streak} in a row`,
       }),
-      h('small', {}, `${state.score} pts of ${max} · ${played} verses`),
+      h('small', {}, streak === 1 ? '1 in a row' : `${streak} in a row`),
     ),
     played > 0
       ? h('blockquote', { class: 'final__quip' },
@@ -591,29 +543,24 @@ const Final = (state) => {
     Record(state.record, justFinished),
     played > 0 ? Tally(state) : null,
     h('div', { class: 'actions' },
-      h('button', { class: 'btn btn--primary', type: 'button', onclick: restart }, 'Play again →'),
+      h('button', { class: 'btn btn--primary', type: 'button', onclick: restart }, 'Again →'),
       h('button', { class: 'btn btn--ghost',  type: 'button', onclick: backToIntro }, 'Back to start'),
     ),
   );
 };
 
 // ── Record panel ─────────────────────────────────────────────────
-// Lifetime stats across every finished game. Shown on intro and final.
-// `justFinished` is the most recent entry (so we can stamp NEW RECORD if
-// the current game beat the previous best); pass null on the intro.
 const Record = (record, justFinished) => {
   const games = record.length;
   if (games === 0) {
     return h('aside', { class: 'record record--empty' },
       h('div', { class: 'record__title' }, 'Record'),
       h('p', { class: 'record__placeholder' },
-        'Your best score will appear here after the first game.'),
+        'Your best streak will appear here after the first game.'),
     );
   }
 
-  const ratio = (e) => e.played === 0 ? 0 : e.score / (e.played * 2);
   const bestScore = Math.max(...record.map((e) => e.score));
-  const bestRatio = Math.max(...record.map(ratio));
   const last = record[record.length - 1];
 
   const newRecord = justFinished
@@ -628,10 +575,9 @@ const Record = (record, justFinished) => {
       newRecord ? h('span', { class: 'record__badge' }, 'New record') : null,
     ),
     h('div', { class: 'record__grid' },
-      Stat('Best',   bestScore),
-      Stat('Acc.',   `${Math.round(bestRatio * 100)}%`),
-      Stat('Games',  games),
-      Stat('Last',   last.score),
+      Stat('Best',  bestScore),
+      Stat('Games', games),
+      Stat('Last',  last.score),
     ),
   );
 };
@@ -646,10 +592,24 @@ const Tally = (state) =>
   h('div', { class: 'tally' },
     ...state.pieces.map((p, i) => {
       const song = findSong(p.songId);
-      return h('div', { class: 'tally__row' + (p.skipped ? ' skipped' : '') },
-        h('span', {}, fmtN(i + 1)),
-        h('b', {}, song.song + ' — ' + artistOf(p.songId).displayName),
-        h('span', { class: 'pts' }, p.skipped ? '—' : '+' + p.points),
+      const realArtist = artistOf(p.songId);
+      if (p.artistOk) {
+        return h('div', { class: 'tally__row tally__row--ok' },
+          h('span', { class: 'tally__no' }, fmtN(i + 1)),
+          h('span', { class: 'tally__mark' }, '✓'),
+          h('b', {}, realArtist.displayName),
+          h('span', { class: 'tally__song' }, song.song),
+        );
+      }
+      const picked = p.pickedArtistId ? findArtist(p.pickedArtistId) : null;
+      return h('div', { class: 'tally__row tally__row--bad' },
+        h('span', { class: 'tally__no' }, fmtN(i + 1)),
+        h('span', { class: 'tally__mark' }, '✗'),
+        h('b', {}, realArtist.displayName),
+        h('span', { class: 'tally__song' }, song.song),
+        h('span', { class: 'tally__pick' },
+          p.timedOut ? 'timed out' : `you said: ${picked ? picked.displayName : '—'}`,
+        ),
       );
     }),
   );
@@ -666,8 +626,8 @@ const render = (state) => {
 // animations or losing focus.
 const startTicker = () => {
   setInterval(() => {
-    const { screen, stage, deadlineAt } = store.state;
-    if (screen !== 'playing' || stage !== 'artist' || !deadlineAt) return;
+    const { screen, deadlineAt, flash } = store.state;
+    if (screen !== 'playing' || flash || !deadlineAt) return;
     const clock = document.querySelector('.pieza__clock');
     const wrap  = document.querySelector('.pieza-wrap');
     if (!clock || !wrap) return;
@@ -684,11 +644,13 @@ const start = async () => {
   store.subscribe(render);
   render(store.state);
   startTicker();
-  // If we hydrated mid-artist-stage (user reloaded mid-guess), re-arm
-  // the timer with a fresh window — the in-memory setTimeout from before
-  // the reload is gone. Bonus stage has no timer.
-  if (store.state.screen === 'playing' && store.state.stage === 'artist') {
-    store.setLifecycle({ deadlineAt: armTimer(timeoutArtist) });
+  // If we hydrated mid-round (user reloaded with the timer running), re-arm
+  // it with a fresh window — the in-memory setTimeout from before the reload
+  // is gone, and there's no flash mid-flight on cold start.
+  if (store.state.screen === 'playing'
+      && store.state.stage === 'artist'
+      && !store.state.flash) {
+    store.setLifecycle({ deadlineAt: armTimer(timeoutArtist, turnMs()) });
   }
 };
 
