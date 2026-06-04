@@ -1,5 +1,5 @@
 const CACHE_NAME = 'lyrics';
-const CACHE_VERSION = 'v12';    // bump per deploy
+const CACHE_VERSION = 'v13';    // bump per deploy
 const CACHE = `${CACHE_NAME}-${CACHE_VERSION}`;
 
 const SHELL = [

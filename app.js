@@ -234,8 +234,13 @@ const Intro = () =>
     ),
     h('div', { class: 'intro__rule' }),
     BestRecord(store.state.record, null),
-    h('button', { class: 'btn btn--primary intro__btn', onclick: goToSetup },
-      'Begin →'
+    h('div', { class: 'actions intro__actions' },
+      h('button', { class: 'btn btn--primary intro__btn', onclick: startGame },
+        'Play →'
+      ),
+      h('button', { class: 'btn btn--ghost intro__setup', onclick: goToSetup },
+        'Setup'
+      ),
     ),
     h('div', { class: 'intro__foot' },
       `Catalogue: ${ARTISTS.length} artists · ${SONGS.length} songs · ${SONGS.reduce((a, s) => a + s.fragments.length, 0)} verses`
