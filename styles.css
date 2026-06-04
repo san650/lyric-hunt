@@ -770,45 +770,6 @@ main {
   max-width: 28ch;
 }
 
-.intro__rules {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  color: var(--ink-soft);
-  text-transform: none;
-  list-style: none;
-  padding: 0.75rem 0.95rem;
-  margin: 0;
-  display: grid;
-  gap: 0.5rem;
-  border: 1.5px solid var(--rule);
-  background: var(--stage);
-  border-radius: 10px;
-  font-weight: 500;
-}
-.intro__rules li {
-  padding-left: 1.6rem;
-  position: relative;
-  line-height: 1.4;
-}
-.intro__rules li::before {
-  content: "▸";
-  position: absolute;
-  left: 0.1rem;
-  color: var(--cyan);
-  text-shadow: 0 0 6px rgba(0, 229, 255, 0.6);
-}
-.intro__rules b {
-  font-family: var(--serif);
-  font-weight: 800;
-  font-style: italic;
-  font-variation-settings: "opsz" 144, "SOFT" 100;
-  font-size: 1.25em;
-  color: var(--pink);
-  margin-right: 0.25ch;
-  text-shadow: 0 0 8px rgba(255, 45, 149, 0.6);
-}
-
 .intro__btn {
   margin-top: 0.4rem;
   align-self: stretch;
@@ -1358,36 +1319,6 @@ main {
   margin-top: 0.4rem;
 }
 
-.final__head {
-  /* legacy — kept hidden if not used */
-  display: none;
-}
-
-.final__quip {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--ink);
-  border-left: 3px solid var(--cyan);
-  padding: 0.4rem 0.9rem;
-  margin: 0;
-  background: var(--stage);
-  border-radius: 0 8px 8px 0;
-  line-height: 1.4;
-}
-.final__quip cite {
-  display: block;
-  font-family: var(--mono);
-  font-style: normal;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  margin-top: 0.4rem;
-  font-weight: 700;
-}
-
 /* Lose container shakes once on enter */
 .final--lose {
   animation: pageShake 0.35s ease-in-out 0.7s 2;
@@ -1466,113 +1397,62 @@ main {
 }
 
 /* ────────────────────────────────────────────────────────────
-   Record panel
+   Best record — slim badge. Mono label, italic-serif numeral,
+   optional wobbling "new" flag.
    ──────────────────────────────────────────────────────────── */
-.record {
-  margin: 0.3rem 0 0.4rem;
-  padding: 0.75rem 0.85rem 0.85rem;
+.best-record {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.8ch;
+  padding: 0.4rem 0.75rem 0.45rem;
   border: 1.5px solid var(--rule);
   background:
-    linear-gradient(180deg, rgba(155, 92, 255, 0.06), transparent),
+    linear-gradient(180deg, rgba(155, 92, 255, 0.08), transparent),
     var(--stage);
-  border-radius: 10px;
-  display: grid;
-  gap: 0.6rem;
+  border-radius: 8px;
+  align-self: flex-start;
+  justify-self: start;
 }
-
-.record__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.6rem;
-}
-
-.record__title {
+.best-record__label {
   font-family: var(--mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--cyan);
   font-weight: 700;
   text-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
 }
-
-.record__badge {
+.best-record__value {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 800;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-size: 1.45rem;
+  line-height: 0.9;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 12px rgba(255, 248, 240, 0.2);
+}
+.best-record__badge {
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size: 0.56rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink);
   background: linear-gradient(135deg, var(--pink), var(--violet));
-  padding: 0.28rem 0.6rem;
+  padding: 0.2rem 0.5rem;
   border: 2px solid var(--pink);
   border-radius: 4px;
   transform: rotate(-3deg);
   font-weight: 800;
-  position: relative;
-  box-shadow: 0 0 20px rgba(255, 45, 149, 0.5);
+  margin-left: 0.2ch;
+  box-shadow: 0 0 16px rgba(255, 45, 149, 0.5);
   animation: badgeWobble 1.6s ease-in-out infinite;
 }
 @keyframes badgeWobble {
   0%, 100% { transform: rotate(-3deg) scale(1); }
   50%      { transform: rotate(-1deg) scale(1.04); }
-}
-
-.record__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.4rem;
-}
-
-.record__stat {
-  display: grid;
-  gap: 0.15rem;
-  padding: 0.1rem 0 0.1rem 0.5rem;
-  border-left: 1.5px solid var(--rule);
-}
-.record__stat:first-child {
-  border-left: 0;
-  padding-left: 0;
-}
-
-.record__stat-label {
-  font-family: var(--mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-thin);
-  font-weight: 600;
-}
-
-.record__stat-value {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 800;
-  font-variation-settings: "opsz" 144, "SOFT" 100;
-  font-size: 1.55rem;
-  line-height: 1;
-  color: var(--ink);
-  letter-spacing: -0.02em;
-  text-shadow: 0 0 12px rgba(255, 248, 240, 0.2);
-}
-
-.record--empty {
-  padding: 0.75rem 0.85rem 0.85rem;
-}
-.record__placeholder {
-  margin: 0;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 500;
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  line-height: 1.4;
-}
-
-@media (max-width: 360px) {
-  .record__grid { gap: 0.3rem; }
-  .record__stat { padding-left: 0.35rem; }
-  .record__stat-value { font-size: 1.3rem; }
 }
 
 /* Focus visible */
@@ -1592,7 +1472,7 @@ main {
   .pieza__clock--urgent         { animation: none; }
   .pieza-wrap.is-urgent         { animation: none; }
   .intro__btn::before           { animation: none; }
-  .record__badge                { animation: none; }
+  .best-record__badge           { animation: none; }
   .final__title                 { animation: none; opacity: 1; transform: none; }
   .final--lose                  { animation: none; }
   .confetti span                { display: none; }

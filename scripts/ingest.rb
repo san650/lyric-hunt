@@ -1,11 +1,16 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 #
-# scripts/ingest.rb — fetch lyric pages from letras.com and emit JS song
-# objects ready to paste into the SONGS array in lyrics.js.
+# scripts/ingest.rb — fetch lyric pages from letras.com and merge them
+# into db.json (artists + songs). Idempotent: running with the same
+# input twice does not duplicate songs.
 #
 # Usage:
-#   ruby scripts/ingest.rb input.txt > new-songs.js
+#   ruby scripts/ingest.rb input.txt
+#
+# Optional flag:
+#   --db PATH    override the db.json path (defaults to ../db.json
+#                relative to this script).
 #
 # Input format (blank-line separated band sections):
 #
@@ -17,32 +22,27 @@
 #   https://www.letras.com/los-redonditos-de-ricota/.../
 #
 # Band headers are matched (diacritic-tolerant, case-insensitive) against
-# the ARTISTS constant below — which is the source of truth that lyrics.js
-# also mirrors. Headers can use any registered alias for a band
-# ("Los Redondos", "Patricio Rey y Sus Redonditos de Ricota", "Redondos",
-# etc. all resolve to artistId 'redondos').
+# the artists registered in db.json. Unknown headers are auto-registered
+# as new artists (id = kebab-slug of header, displayName = header,
+# aliases = [header]); edit db.json afterwards if you want richer aliases.
 #
-# Unknown bands report to STDERR and their URLs are skipped. Add new
-# bands by editing BOTH this constant and the ARTISTS array in lyrics.js.
+# Song ids are derived as "<artistId>-<slug(title)>". If a song with that
+# id is already in db.json it is skipped (no overwrite).
 #
 # Requires: nokogiri (gem install nokogiri).
 #
 # Note on letras.com fetching: the site fingerprints bots. The Fetcher
-# below sends the full Chrome-like header set (Sec-Fetch-*, Sec-Ch-Ua,
-# Upgrade-Insecure-Requests, Accept-Encoding gzip) and does a warmup GET
-# of the homepage first to pick up the session cookies the subsequent
-# lyric pages expect. If you still see repeated 403s, the cause is almost
-# certainly TLS-fingerprint detection (JA3) — Ruby's OpenSSL handshake
-# differs from Chrome's. In that case switch to a real browser:
-#
-#   gem install ferrum    # ~30MB Chromium controller, no Node required
-#
-# and replace Fetcher.fetch with `Ferrum::Browser.new.go_to(url).body`.
-# The parse_lyric block below is reusable as-is against either source.
+# below sends the full Chrome-like header set and warms up with a GET of
+# the homepage to pick up session cookies. If you still see 403s, the
+# cause is likely TLS-fingerprint detection (JA3); swap in a Ferrum-
+# driven headless Chrome and reuse parse_lyric as-is.
 
 require 'net/http'
 require 'uri'
 require 'json'
+require 'set'
+require 'zlib'
+require 'stringio'
 
 begin
   require 'nokogiri'
@@ -50,32 +50,7 @@ rescue LoadError
   abort "Missing dependency: install with `gem install nokogiri` (or `bundle add nokogiri`)."
 end
 
-ARTISTS = [
-  { id: 'cuarteto-de-nos',    aliases: ['El Cuarteto de Nos', 'Cuarteto de Nos', 'El Cuarteto', 'Cuarteto'] },
-  { id: 'redondos',           aliases: [
-                                'Los Redondos',
-                                'Patricio Rey y Sus Redonditos de Ricota',
-                                'Patricio Rey y Los Redonditos de Ricota',
-                                'Los Redonditos de Ricota',
-                                'Redonditos de Ricota',
-                                'Patricio Rey',
-                                'Redondos',
-                                'Redonditos',
-                              ] },
-  { id: 'la-tabare',          aliases: ['La Tabaré', 'La Tabare', 'Tabaré', 'Tabare', 'La Tabaré Riverock Banda'] },
-  { id: 'angeles-azules',     aliases: ['Los Ángeles Azules', 'Los Angeles Azules', 'Ángeles Azules', 'Angeles Azules'] },
-  { id: 'damas-gratis',       aliases: ['Damas Gratis', 'Damas G'] },
-  { id: 'julieta-venegas',    aliases: ['Julieta Venegas', 'Venegas Julieta', 'Julieta', 'Venegas'] },
-  { id: 'ska-p',              aliases: ['Ska-P', 'SkaP', 'Skap', 'Ska P'] },
-  { id: '2-minutos',          aliases: ['2 Minutos', 'Dos Minutos'] },
-  { id: 'los-buitres',        aliases: ['Los Buitres', 'Buitres después de la una'] },
-  { id: 'trotsky-vengaran',   aliases: ['Trotsky Vengaran'] },
-  { id: 'la-vela',            aliases: ['La Vela Puerca', 'La Vela'] },
-  { id: '4-pesos-de-propina', aliases: ['4 Pesos de Propina', '4 Pesos'] },
-  { id: 'no-te-va-gustar',    aliases: ['No Te Va Gustar', 'NTVG'] },
-].freeze
-
-# ── Helpers ──────────────────────────────────────────────────────
+# ── Normalization helpers ────────────────────────────────────────
 
 def normalize(s)
   s.to_s.downcase
@@ -84,11 +59,6 @@ def normalize(s)
    .gsub(/[^a-z0-9 ]/, ' ')
    .gsub(/\s+/, ' ')
    .strip
-end
-
-def find_artist(name)
-  n = normalize(name)
-  ARTISTS.find { |a| a[:aliases].any? { |al| normalize(al) == n } }
 end
 
 def slug(s)
@@ -101,23 +71,31 @@ end
 
 def song_aliases(title)
   bare = strip_parens(title)
-  list = [title, bare]
-  list << bare.gsub('Á', 'A').gsub('É', 'E').gsub('Í', 'I').gsub('Ó', 'O').gsub('Ú', 'U')
-              .gsub('á', 'a').gsub('é', 'e').gsub('í', 'i').gsub('ó', 'o').gsub('ú', 'u')
-              .gsub('ñ', 'n').gsub('Ñ', 'N')
-  list.uniq.reject { |s| s.empty? }
+  unaccented = bare.gsub('Á', 'A').gsub('É', 'E').gsub('Í', 'I').gsub('Ó', 'O').gsub('Ú', 'U')
+                   .gsub('á', 'a').gsub('é', 'e').gsub('í', 'i').gsub('ó', 'o').gsub('ú', 'u')
+                   .gsub('ñ', 'n').gsub('Ñ', 'N')
+  [title, bare, unaccented].uniq.reject(&:empty?)
 end
 
-# ── Fetching ─────────────────────────────────────────────────────
-#
-# A small browser-shaped fetcher with a shared cookie jar. A warmup GET
-# of the homepage establishes whatever session cookies letras.com sets,
-# and subsequent lyric GETs replay them — matching what a real Chrome
-# session does in DevTools. Without the cookies we got HTTP 403; with
-# them most networks pass.
+# ── Artist registry (db.json-backed) ─────────────────────────────
 
-require 'zlib'
-require 'stringio'
+def find_artist(artists, name)
+  n = normalize(name)
+  artists.find { |a| Array(a['aliases']).any? { |al| normalize(al) == n } }
+end
+
+def register_artist!(artists, header)
+  id = slug(header)
+  raise "couldn't derive id from header #{header.inspect}" if id.empty?
+  if artists.any? { |a| a['id'] == id }
+    raise "id collision: #{id.inspect} already in db.json — add an alias to the existing entry instead"
+  end
+  artist = { 'id' => id, 'displayName' => header, 'aliases' => [header] }
+  artists << artist
+  artist
+end
+
+# ── HTTP fetcher (browser-shaped, with cookie jar) ───────────────
 
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 
@@ -217,7 +195,6 @@ def parse_lyric(html, url)
   lyric_node = doc.css('.lyric-original').first || doc.css('.cnt-letra').first
   raise "no lyric body at #{url}" if lyric_node.nil?
 
-  # Normalize <br> → \n and <p> → \n\n; then strip tags.
   lyric_node.css('br').each { |br| br.replace("\n") }
   lyric_node.css('p').each { |p| p.add_next_sibling("\n\n") }
   text = lyric_node.text
@@ -235,57 +212,59 @@ def fragments_from(text)
   uniq.reject { |p| p.length < 30 || (p.split("\n").size < 2 && p.length < 50) }
 end
 
-# ── JS emission ──────────────────────────────────────────────────
+# ── Main ─────────────────────────────────────────────────────────
 
-def js_string(s)
-  '"' + s.gsub('\\', '\\\\').gsub('"', '\\"') + '"'
-end
+DEFAULT_DB = File.expand_path('../db.json', __dir__)
 
-def js_template(s)
-  '`' + s.gsub('\\', '\\\\').gsub('`', '\\`').gsub('${', '\\${') + '`'
-end
+input_path = nil
+db_path    = DEFAULT_DB
 
-def emit(songs, out: $stdout)
-  out.puts "// Generated by scripts/ingest.rb. Paste each entry into the SONGS"
-  out.puts "// array in lyrics.js. album/year start empty — fill them in by hand."
-  out.puts
-  songs.each do |s|
-    out.puts "  {"
-    out.puts "    id: #{js_string(s[:id])},"
-    out.puts "    artistId: #{js_string(s[:artistId])},"
-    out.puts "    song: #{js_string(s[:song])},"
-    out.puts "    album: #{js_string(s[:album])},"
-    out.puts "    year: #{s[:year].nil? ? 'null' : s[:year]},"
-    out.puts "    songAliases: [#{s[:songAliases].map { |a| js_string(a) }.join(', ')}],"
-    out.puts "    albumAliases: [#{s[:albumAliases].map { |a| js_string(a) }.join(', ')}],"
-    out.puts "    fragments: ["
-    s[:fragments].each { |f| out.puts "      #{js_template(f)}," }
-    out.puts "    ],"
-    out.puts "  },"
-    out.puts
+args = ARGV.dup
+while (a = args.shift)
+  case a
+  when '--db'  then db_path = args.shift
+  when '-h', '--help'
+    puts "usage: ruby #{$PROGRAM_NAME} [--db db.json] input.txt"
+    exit 0
+  else
+    if input_path.nil?
+      input_path = a
+    else
+      abort "unexpected argument: #{a.inspect}"
+    end
   end
 end
 
-# ── Main ─────────────────────────────────────────────────────────
-
-input_path = ARGV[0]
-abort "usage: ruby #{$PROGRAM_NAME} input.txt > new-songs.js" if input_path.nil?
+abort "usage: ruby #{$PROGRAM_NAME} [--db db.json] input.txt" if input_path.nil?
 abort "no such file: #{input_path}" unless File.exist?(input_path)
 
-raw = File.read(input_path)
-songs = []
-errors = []
+db = if File.exist?(db_path)
+       JSON.parse(File.read(db_path))
+     else
+       { 'artists' => [], 'songs' => [] }
+     end
+db['artists'] ||= []
+db['songs']   ||= []
+
+existing_song_ids = Set.new(db['songs'].map { |s| s['id'] })
+
+added_artists = []
+added_songs   = []
+skipped       = []
+errors        = []
 current_artist = nil
 
-raw.each_line do |line|
+File.read(input_path).each_line do |line|
   line = line.strip
   next if line.empty?
 
   if line.end_with?(':')
     header = line[0..-2].strip
-    current_artist = find_artist(header)
+    current_artist = find_artist(db['artists'], header)
     if current_artist.nil?
-      errors << "Unknown band header: #{header.inspect}. Add it to ARTISTS in #{$PROGRAM_NAME} and lyrics.js."
+      current_artist = register_artist!(db['artists'], header)
+      added_artists << current_artist
+      $stderr.puts "+ new artist: #{current_artist['id']} (#{current_artist['displayName']})"
     end
     next
   end
@@ -305,24 +284,45 @@ raw.each_line do |line|
     frags = fragments_from(data[:text])
     raise 'no usable fragments extracted' if frags.empty?
 
-    title = data[:title]
-    songs << {
-      id: "#{current_artist[:id]}-#{slug(strip_parens(title))}",
-      artistId: current_artist[:id],
-      song: strip_parens(title),
-      album: '',
-      year: nil,
-      songAliases: song_aliases(title),
-      albumAliases: [],
-      fragments: frags,
+    title  = data[:title]
+    bare   = strip_parens(title)
+    new_id = "#{current_artist['id']}-#{slug(bare)}"
+
+    if existing_song_ids.include?(new_id)
+      skipped << "#{new_id} (already in db.json)"
+      $stderr.puts "= #{current_artist['id']} :: #{bare} (skipped — already present)"
+      next
+    end
+
+    song = {
+      'id'           => new_id,
+      'artistId'     => current_artist['id'],
+      'song'         => bare,
+      'album'        => '',
+      'year'         => nil,
+      'songAliases'  => song_aliases(title),
+      'albumAliases' => [],
+      'fragments'    => frags,
     }
-    $stderr.puts "✓ #{current_artist[:id]} :: #{strip_parens(title)}  (#{frags.size} fragments)"
+    db['songs'] << song
+    existing_song_ids << new_id
+    added_songs << song
+    $stderr.puts "+ #{current_artist['id']} :: #{bare} (#{frags.size} fragments)"
   rescue StandardError => e
     errors << "ERR #{url}: #{e.message}"
   end
 end
 
-emit(songs)
+# Persist with stable 2-space indentation. Always rewrite to keep
+# formatting consistent — easier to diff than mixed indentation.
+File.write(db_path, JSON.pretty_generate(db) + "\n")
+
+$stderr.puts
+$stderr.puts '──── Summary ────'
+$stderr.puts "artists added: #{added_artists.size}"
+$stderr.puts "songs added:   #{added_songs.size}"
+$stderr.puts "songs skipped: #{skipped.size}"
+$stderr.puts "db: #{db_path}"
 
 unless errors.empty?
   $stderr.puts

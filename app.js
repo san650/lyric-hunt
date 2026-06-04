@@ -233,12 +233,7 @@ const Intro = () =>
       `A single line, ${ARTISTS.length} suspects. Pick the artist before the clock runs out. One miss and the curtain falls.`,
     ),
     h('div', { class: 'intro__rule' }),
-    h('ul', { class: 'intro__rules' },
-      h('li', {}, h('b', {}, '01'), 'A line appears. Tap the band.'),
-      h('li', {}, h('b', {}, '02'), 'Right answer? On to the next.'),
-      h('li', {}, h('b', {}, '03'), 'Wrong, or out of time? Game over.'),
-    ),
-    Record(store.state.record, null),
+    BestRecord(store.state.record, null),
     h('button', { class: 'btn btn--primary intro__btn', onclick: goToSetup },
       'Begin →'
     ),
@@ -270,9 +265,10 @@ const ArtistToggle = (artist, idx, selected, soleSelected) => {
     h('span', { class: 'lineup__check', 'aria-hidden': 'true' }, isOn ? '✓' : ''),
     h('span', { class: 'lineup__body' },
       h('span', { class: 'lineup__name' }, artist.displayName),
-      h('span', { class: 'lineup__meta' },
-        silent ? 'no lyrics yet — decoy only' : `${songCount} song${songCount === 1 ? '' : 's'}`,
-      ),
+      silent
+        ? null
+        : h('span', { class: 'lineup__meta' },
+            `${songCount} song${songCount === 1 ? '' : 's'}`),
     ),
   );
 };
@@ -465,15 +461,6 @@ const ArtistStage = (state, pieceKey) =>
   );
 
 // ── Final ────────────────────────────────────────────────────────
-const quipFor = (streak, played) => {
-  if (played === 0) return { line: 'Stepping out for air. Back soon.', cite: 'Anonymous' };
-  if (streak === 0) return { line: 'El que nace mona Chita nunca llega a ser Tarzán.', cite: 'R. Musso' };
-  if (streak >= 10) return { line: "You're a walking jukebox.", cite: 'The jury' };
-  if (streak >= 5)  return { line: 'Top marks.', cite: 'The dean' };
-  if (streak >= 2)  return { line: 'Not bad. Listen more.', cite: 'Uncle Discman' };
-  return { line: "One day you'll reach the trenches.", cite: 'Indio Solari, paraphrased' };
-};
-
 // Tier: drives banner color, title, and which entry animation plays.
 const tierFor = (streak, played) => {
   if (played === 0) return 'none';
@@ -515,7 +502,6 @@ const Confetti = () => {
 const Final = (state) => {
   const played = state.pieces.length;
   const streak = state.score;
-  const quip = quipFor(streak, played);
   const tier = tierFor(streak, played);
   const justFinished = state.record[state.record.length - 1] ?? null;
 
@@ -534,13 +520,7 @@ const Final = (state) => {
       }),
       h('small', {}, streak === 1 ? '1 in a row' : `${streak} in a row`),
     ),
-    played > 0
-      ? h('blockquote', { class: 'final__quip' },
-          quip.line,
-          h('cite', {}, quip.cite),
-        )
-      : null,
-    Record(state.record, justFinished),
+    BestRecord(state.record, justFinished),
     played > 0 ? Tally(state) : null,
     h('div', { class: 'actions' },
       h('button', { class: 'btn btn--primary', type: 'button', onclick: restart }, 'Again →'),
@@ -549,44 +529,23 @@ const Final = (state) => {
   );
 };
 
-// ── Record panel ─────────────────────────────────────────────────
-const Record = (record, justFinished) => {
-  const games = record.length;
-  if (games === 0) {
-    return h('aside', { class: 'record record--empty' },
-      h('div', { class: 'record__title' }, 'Record'),
-      h('p', { class: 'record__placeholder' },
-        'Your best streak will appear here after the first game.'),
-    );
-  }
-
+// ── Best record ──────────────────────────────────────────────────
+// Slim badge — just the lifetime high score (and a "New record" flag when
+// the just-finished game eclipses every prior one).
+const BestRecord = (record, justFinished) => {
+  if (record.length === 0) return null;
   const bestScore = Math.max(...record.map((e) => e.score));
-  const last = record[record.length - 1];
-
   const newRecord = justFinished
     && justFinished.score > 0
     && justFinished.score >= bestScore
     && (record.length === 1
         || justFinished.score > Math.max(...record.slice(0, -1).map((e) => e.score)));
-
-  return h('aside', { class: 'record' },
-    h('div', { class: 'record__head' },
-      h('span', { class: 'record__title' }, 'Record'),
-      newRecord ? h('span', { class: 'record__badge' }, 'New record') : null,
-    ),
-    h('div', { class: 'record__grid' },
-      Stat('Best',  bestScore),
-      Stat('Games', games),
-      Stat('Last',  last.score),
-    ),
+  return h('aside', { class: 'best-record' },
+    h('span', { class: 'best-record__label' }, 'Best Record'),
+    h('span', { class: 'best-record__value' }, bestScore),
+    newRecord ? h('span', { class: 'best-record__badge' }, 'New') : null,
   );
 };
-
-const Stat = (label, value) =>
-  h('div', { class: 'record__stat' },
-    h('span', { class: 'record__stat-label' }, label),
-    h('span', { class: 'record__stat-value' }, value),
-  );
 
 const Tally = (state) =>
   h('div', { class: 'tally' },

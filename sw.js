@@ -1,5 +1,5 @@
 const CACHE_NAME = 'lyrics';
-const CACHE_VERSION = 'v11';    // bump per deploy
+const CACHE_VERSION = 'v12';    // bump per deploy
 const CACHE = `${CACHE_NAME}-${CACHE_VERSION}`;
 
 const SHELL = [
@@ -12,6 +12,7 @@ const SHELL = [
   './history.js',
   './store.js',
   './db.js',
+  './db.json',
   './lyrics.js',
   './icon.svg',
   './fonts/fonts.css',
