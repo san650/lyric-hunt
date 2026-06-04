@@ -3,7 +3,12 @@
     {
       "id": "cuarteto-de-nos",
       "displayName": "El Cuarteto de Nos",
-      "aliases": ["El Cuarteto de Nos", "Cuarteto de Nos", "El Cuarteto", "Cuarteto"]
+      "aliases": [
+        "El Cuarteto de Nos",
+        "Cuarteto de Nos",
+        "El Cuarteto",
+        "Cuarteto"
+      ]
     },
     {
       "id": "redondos",
@@ -22,57 +27,109 @@
     {
       "id": "la-tabare",
       "displayName": "La Tabaré",
-      "aliases": ["La Tabaré", "La Tabare", "Tabaré", "Tabare", "La Tabaré Riverock Banda"]
+      "aliases": [
+        "La Tabaré",
+        "La Tabare",
+        "Tabaré",
+        "Tabare",
+        "La Tabaré Riverock Banda"
+      ]
     },
     {
       "id": "angeles-azules",
       "displayName": "Los Ángeles Azules",
-      "aliases": ["Los Ángeles Azules", "Los Angeles Azules", "Ángeles Azules", "Angeles Azules"]
+      "aliases": [
+        "Los Ángeles Azules",
+        "Los Angeles Azules",
+        "Ángeles Azules",
+        "Angeles Azules"
+      ]
     },
     {
       "id": "damas-gratis",
       "displayName": "Damas Gratis",
-      "aliases": ["Damas Gratis", "Damas G"]
+      "aliases": [
+        "Damas Gratis",
+        "Damas G"
+      ]
     },
     {
       "id": "julieta-venegas",
       "displayName": "Julieta Venegas",
-      "aliases": ["Julieta Venegas", "Venegas Julieta", "Julieta", "Venegas"]
+      "aliases": [
+        "Julieta Venegas",
+        "Venegas Julieta",
+        "Julieta",
+        "Venegas"
+      ]
     },
     {
       "id": "ska-p",
       "displayName": "Ska-P",
-      "aliases": ["Ska-P", "SkaP", "Skap", "Ska P"]
+      "aliases": [
+        "Ska-P",
+        "SkaP",
+        "Skap",
+        "Ska P"
+      ]
     },
     {
       "id": "2-minutos",
       "displayName": "2 Minutos",
-      "aliases": ["2 Minutos", "Dos Minutos"]
+      "aliases": [
+        "2 Minutos",
+        "Dos Minutos"
+      ]
     },
     {
       "id": "los-buitres",
       "displayName": "Los Buitres",
-      "aliases": ["Los Buitres", "Buitres después de la una"]
+      "aliases": [
+        "Los Buitres",
+        "Buitres después de la una"
+      ]
     },
     {
       "id": "trotsky-vengaran",
       "displayName": "Trotsky Vengaran",
-      "aliases": ["Trotsky Vengaran"]
+      "aliases": [
+        "Trotsky Vengaran"
+      ]
     },
     {
       "id": "la-vela",
       "displayName": "La Vela",
-      "aliases": ["La Vela Puerca", "La Vela"]
+      "aliases": [
+        "La Vela Puerca",
+        "La Vela"
+      ]
     },
     {
       "id": "4-pesos-de-propina",
       "displayName": "4 Pesos",
-      "aliases": ["4 Pesos de Propina", "4 Pesos"]
+      "aliases": [
+        "4 Pesos de Propina",
+        "4 Pesos"
+      ]
     },
     {
       "id": "no-te-va-gustar",
       "displayName": "No Te Va Gustar",
-      "aliases": ["No Te Va Gustar", "NTVG"]
+      "aliases": [
+        "No Te Va Gustar",
+        "NTVG"
+      ]
+    },
+    {
+      "id": "l-autentika",
+      "displayName": "L'Autentika",
+      "aliases": [
+        "L'Autentika",
+        "L' Autentika",
+        "La Auténtica",
+        "La Autentica",
+        "Autentika"
+      ]
     }
   ],
   "songs": [
@@ -82,8 +139,15 @@
       "song": "No Somos Latinos",
       "album": "Otra Navidad en las Trincheras",
       "year": 1994,
-      "songAliases": ["No Somos Latinos", "No Soy Latino"],
-      "albumAliases": ["Otra Navidad en las Trincheras", "Otra Navidad", "Trincheras"],
+      "songAliases": [
+        "No Somos Latinos",
+        "No Soy Latino"
+      ],
+      "albumAliases": [
+        "Otra Navidad en las Trincheras",
+        "Otra Navidad",
+        "Trincheras"
+      ],
       "fragments": [
         "Pensarán que soy medio ladino\nO qué vivo borracho de vino\nQuieren hacerme creer estos cretinos\nQue los uruguayos somos latinos",
         "Si me viera mi abuelito Arsenio\nCantando con acento caribeño",
@@ -100,8 +164,15 @@
       "song": "Monei",
       "album": "El Tren Bala",
       "year": 1996,
-      "songAliases": ["Monei", "Money", "Plata"],
-      "albumAliases": ["El Tren Bala", "Tren Bala"],
+      "songAliases": [
+        "Monei",
+        "Money",
+        "Plata"
+      ],
+      "albumAliases": [
+        "El Tren Bala",
+        "Tren Bala"
+      ],
       "fragments": [
         "Yo quería en Carrasco una mansión\nPero solo conseguí un ranchito en Casabó",
         "Yo quería andar en un Meredes Benz\nY ahora solo ando en un 126",
@@ -119,8 +190,19 @@
       "song": "Un Poco de Amor Francés",
       "album": "Un Baión para el Ojo Idiota",
       "year": 1988,
-      "songAliases": ["Un Poco de Amor Francés", "Un Poco de Amor Frances", "Amor Francés", "Amor Frances"],
-      "albumAliases": ["Un Baión para el Ojo Idiota", "Un Baion para el Ojo Idiota", "Un Baión", "Baión", "Baion"],
+      "songAliases": [
+        "Un Poco de Amor Francés",
+        "Un Poco de Amor Frances",
+        "Amor Francés",
+        "Amor Frances"
+      ],
+      "albumAliases": [
+        "Un Baión para el Ojo Idiota",
+        "Un Baion para el Ojo Idiota",
+        "Un Baión",
+        "Baión",
+        "Baion"
+      ],
       "fragments": [
         "Una tipa rapaz, como te gusta a vos\nEsa tipa vino a consolarte",
         "Un poco de amor francés no muerde su lengua, no\nNo es sincera, pero te gusta oírla",
@@ -135,8 +217,16 @@
       "song": "De Estos Polvos Futuros Lodos",
       "album": "Lobo Suelto / Cordero Atado",
       "year": 1993,
-      "songAliases": ["De Estos Polvos Futuros Lodos", "Polvos Futuros Lodos", "El Perro Bobi"],
-      "albumAliases": ["Lobo Suelto", "Cordero Atado", "Lobo Suelto / Cordero Atado"],
+      "songAliases": [
+        "De Estos Polvos Futuros Lodos",
+        "Polvos Futuros Lodos",
+        "El Perro Bobi"
+      ],
+      "albumAliases": [
+        "Lobo Suelto",
+        "Cordero Atado",
+        "Lobo Suelto / Cordero Atado"
+      ],
       "fragments": [
         "El Perro Bobi es\nUn servicio de amor a todo rock\nCanta como un león\nPero es el más salmón de la ciudad",
         "Chunga combinación de polvos\nQue darán lodos después\nMágico inter-terror más arma blanca\nEn cruda pasión",
@@ -149,8 +239,14 @@
       "song": "La Bestia Pop",
       "album": "Gulp!",
       "year": 1985,
-      "songAliases": ["La Bestia Pop", "Bestia Pop"],
-      "albumAliases": ["Gulp!", "Gulp"],
+      "songAliases": [
+        "La Bestia Pop",
+        "Bestia Pop"
+      ],
+      "albumAliases": [
+        "Gulp!",
+        "Gulp"
+      ],
       "fragments": [
         "Mi héroe es la gran bestia pop\nQue enciende, en sueños, la vigilia\nY antes que cuente diez, dormirá",
         "A brillar, mi amor\nVamos a brillar, mi amor",
@@ -164,8 +260,14 @@
       "song": "Tarea Fina",
       "album": "La Mosca y la Sopa",
       "year": 1991,
-      "songAliases": ["Tarea Fina"],
-      "albumAliases": ["La Mosca y la Sopa", "La Mosca", "La Sopa"],
+      "songAliases": [
+        "Tarea Fina"
+      ],
+      "albumAliases": [
+        "La Mosca y la Sopa",
+        "La Mosca",
+        "La Sopa"
+      ],
       "fragments": [
         "Quemando la turbina\nTe escapas\n¿Vas a volver a herirme\nOtra vez?",
         "En tu ternura, está acechándome\nUna buena traición de mujer\nQue echa hielo y brasas en mi corazón",
@@ -179,8 +281,14 @@
       "song": "Esa Estrella Era Mi Lujo",
       "album": "Oktubre",
       "year": 1986,
-      "songAliases": ["Esa Estrella Era Mi Lujo", "Era Mi Lujo"],
-      "albumAliases": ["Oktubre", "Octubre"],
+      "songAliases": [
+        "Esa Estrella Era Mi Lujo",
+        "Era Mi Lujo"
+      ],
+      "albumAliases": [
+        "Oktubre",
+        "Octubre"
+      ],
       "fragments": [
         "¿Era todo?, pregunté\nSoy un iluso\nNo nos dimos nada más\nSolo un buen gesto",
         "Mordí el anzuelo una vez más\nSiempre un iluso\nNuestra estrella se agotó\nY era mi lujo",
@@ -193,8 +301,15 @@
       "song": "Un Ángel Para Tu Soledad",
       "album": "Oktubre",
       "year": 1986,
-      "songAliases": ["Un Ángel Para Tu Soledad", "Un Angel Para Tu Soledad", "Ángel Para Tu Soledad"],
-      "albumAliases": ["Oktubre", "Octubre"],
+      "songAliases": [
+        "Un Ángel Para Tu Soledad",
+        "Un Angel Para Tu Soledad",
+        "Ángel Para Tu Soledad"
+      ],
+      "albumAliases": [
+        "Oktubre",
+        "Octubre"
+      ],
       "fragments": [
         "Ya sufriste cosas mejores que estas\nY vas a andar esta ruta hoy cuando anochezca",
         "Tu esqueleto te trajo hasta aquí\nCon un cuerpo hambriento, veloz\nY aquí, gracias a Dios\nUno no cree en lo que oye",
@@ -208,8 +323,13 @@
       "song": "Alegrís",
       "album": "",
       "year": null,
-      "songAliases": ["Alegrís", "Alegris"],
-      "albumAliases": [],
+      "songAliases": [
+        "Alegrís",
+        "Alegris"
+      ],
+      "albumAliases": [
+
+      ],
       "fragments": [
         "Voy... Por ahí\nSomos tantos desencuentros\nCallejeando por el centro\nAlmas de ciudad por dentro\nY zás... Me perdí",
         "Ya ni se en que bocacalle\nQue se callen las bocinas\nY esas bocas de oficina",
@@ -224,8 +344,14 @@
       "song": "Acicaladas Alas Alicaídas",
       "album": "",
       "year": null,
-      "songAliases": ["Acicaladas Alas Alicaídas", "Acicaladas Alas Alicaidas", "Alas Alicaídas"],
-      "albumAliases": [],
+      "songAliases": [
+        "Acicaladas Alas Alicaídas",
+        "Acicaladas Alas Alicaidas",
+        "Alas Alicaídas"
+      ],
+      "albumAliases": [
+
+      ],
       "fragments": [
         "Casi tu mirada, casi aquello\nCasi nada bello en mi.\nUn atardece, la playa\nY pretender que vaya casi a mil",
         "Piña, pica, pito, pucha, ¡pum!\nPena, pana, pene, pompas, plus\nNo me trates mal.\nNo me grites así",
@@ -239,8 +365,12 @@
       "song": "Contrapunto",
       "album": "",
       "year": null,
-      "songAliases": ["Contrapunto"],
-      "albumAliases": [],
+      "songAliases": [
+        "Contrapunto"
+      ],
+      "albumAliases": [
+
+      ],
       "fragments": [
         "Lo quiero invitar compadre\nA cantar por lo que es nuestro\nPorque, le juro, es siniestro\nEl ver nacer como hongos",
         "Tropicalero es traición\nTraición es nieve en enero.",
@@ -255,8 +385,15 @@
       "song": "Distopía En Blues",
       "album": "",
       "year": null,
-      "songAliases": ["Distopía En Blues", "Distopia En Blues", "Distopía", "Distopia"],
-      "albumAliases": [],
+      "songAliases": [
+        "Distopía En Blues",
+        "Distopia En Blues",
+        "Distopía",
+        "Distopia"
+      ],
+      "albumAliases": [
+
+      ],
       "fragments": [
         "El mundo se queda reseco\nSin agua\nY oímos el eco\nDe toda esta fragua",
         "La culpa sin dudas\nLa tiene la gente\nTan maeducada\nTan desobediente\nQue no cierra la canilla\nAl lavarse los dientes",
@@ -270,8 +407,13 @@
       "song": "La Enemistad",
       "album": "",
       "year": null,
-      "songAliases": ["La Enemistad", "Enemistad"],
-      "albumAliases": [],
+      "songAliases": [
+        "La Enemistad",
+        "Enemistad"
+      ],
+      "albumAliases": [
+
+      ],
       "fragments": [
         "Atrás de las botellas\nNuestra rubia mireya\nEn un rincón",
         "Eso como patadas en los huevos\nComo los besos, que volaron\nLa amistad y nos dejaron\nPresos de la resignación",
@@ -285,8 +427,14 @@
       "song": "Que Nochen La de Aquel Día",
       "album": "",
       "year": null,
-      "songAliases": ["Que Nochen La de Aquel Día", "Que Noche La de Aquel Día", "Que Nochen La de Aquel Dia"],
-      "albumAliases": [],
+      "songAliases": [
+        "Que Nochen La de Aquel Día",
+        "Que Noche La de Aquel Día",
+        "Que Nochen La de Aquel Dia"
+      ],
+      "albumAliases": [
+
+      ],
       "fragments": [
         "Volvés pa´trás\nVos cada vez\nQue ves que vos\nCreés que te vas...\nNo entiendo.",
         "Desabrochando broches en cuartos de hotel\nHundiendo a troches y moche barcos de papel\n¡Que noche aquella noche la del día aquel!",
@@ -300,8 +448,14 @@
       "song": "El Vals Del Obrero",
       "album": "El Vals del Obrero",
       "year": 1996,
-      "songAliases": ["El Vals Del Obrero", "Vals Del Obrero"],
-      "albumAliases": ["El Vals del Obrero", "Vals del Obrero"],
+      "songAliases": [
+        "El Vals Del Obrero",
+        "Vals Del Obrero"
+      ],
+      "albumAliases": [
+        "El Vals del Obrero",
+        "Vals del Obrero"
+      ],
       "fragments": [
         "Orgulloso de estar entre el proletariado\nEs difícil llegar a fin de mes\nY tener que sudar y sudar\nPa' ganar nuestro pan",
         "Este es mi sitio, esta es mi gente\nSomos obreros, la clase preferente",
@@ -315,8 +469,12 @@
       "song": "Mis Colegas",
       "album": "Eurosis",
       "year": 1998,
-      "songAliases": ["Mis Colegas"],
-      "albumAliases": ["Eurosis"],
+      "songAliases": [
+        "Mis Colegas"
+      ],
+      "albumAliases": [
+        "Eurosis"
+      ],
       "fragments": [
         "Vas caminando despacio\nSin ganas de sonreír, de sonreír\nHemos quedado en el barrio\nUnos litros y cien duros de hachís",
         "Han pasado 10 años\nMis colegas, ¿dónde están?\nEl que no anda en el Mako\nHace poco lo acabaron de enterrar\nLa heroína no acudió a su funeral",
@@ -330,8 +488,12 @@
       "song": "Cannabis",
       "album": "Eurosis",
       "year": 1998,
-      "songAliases": ["Cannabis"],
-      "albumAliases": ["Eurosis"],
+      "songAliases": [
+        "Cannabis"
+      ],
+      "albumAliases": [
+        "Eurosis"
+      ],
       "fragments": [
         "Y saco un papelillo, me preparo un cigarrillo\nY una china pa'l canuto de hachís\nSaca ya la china, tron; venga ya esa china, tron",
         "Lega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición",
@@ -345,8 +507,14 @@
       "song": "Limón y Sal",
       "album": "Limón y Sal",
       "year": 2006,
-      "songAliases": ["Limón y Sal", "Limon y Sal"],
-      "albumAliases": ["Limón y Sal", "Limon y Sal"],
+      "songAliases": [
+        "Limón y Sal",
+        "Limon y Sal"
+      ],
+      "albumAliases": [
+        "Limón y Sal",
+        "Limon y Sal"
+      ],
       "fragments": [
         "Tengo que confesar que a veces\nNo me gusta tu forma de ser\nLuego te me desapareces\nY no entiendo muy bien por qué",
         "No dices nada romántico\nCuando llega el atardecer\nTe pones de un humor extraño\nCon cada luna llena al mes",
@@ -360,8 +528,13 @@
       "song": "Me Voy",
       "album": "Limón y Sal",
       "year": 2006,
-      "songAliases": ["Me Voy"],
-      "albumAliases": ["Limón y Sal", "Limon y Sal"],
+      "songAliases": [
+        "Me Voy"
+      ],
+      "albumAliases": [
+        "Limón y Sal",
+        "Limon y Sal"
+      ],
       "fragments": [
         "Porque no\nSupiste entender a mi corazón\nLo que había en él, porque no\nTuviste el valor de ver quién soy",
         "No voy a llorar y decir\nQue no merezco esto, porque\nEs probable que\nLo merezco, pero no lo quiero, por eso, me voy",
@@ -375,8 +548,14 @@
       "song": "Eres Para Mí",
       "album": "Limón y Sal",
       "year": 2006,
-      "songAliases": ["Eres Para Mí", "Eres Para Mi"],
-      "albumAliases": ["Limón y Sal", "Limon y Sal"],
+      "songAliases": [
+        "Eres Para Mí",
+        "Eres Para Mi"
+      ],
+      "albumAliases": [
+        "Limón y Sal",
+        "Limon y Sal"
+      ],
       "fragments": [
         "Sería mejor empezar otra vez\nPero eso ya sé que no se puede\nVas a decirme que es imposible\nPero, por lo menos, déjame que lo intente",
         "Aprendí a sacarle jugo a mis defectos\nY me va mejor desde que deje de odiarlo",
@@ -391,8 +570,12 @@
       "song": "Perfecta",
       "album": "",
       "year": null,
-      "songAliases": ["Perfecta"],
-      "albumAliases": [],
+      "songAliases": [
+        "Perfecta"
+      ],
+      "albumAliases": [
+
+      ],
       "fragments": [
         "Tan pronto yo te vi\nNo pude descubrir\nEl amor a primera vista no funciona en mí",
         "Éramos tan buenos amigos hasta hoy\nQue yo probé tu desempeño en el amor",
@@ -406,13 +589,662 @@
       "song": "No Me Importa El Dinero",
       "album": "",
       "year": null,
-      "songAliases": ["No Me Importa El Dinero", "No Me Importa el Dinero"],
-      "albumAliases": [],
+      "songAliases": [
+        "No Me Importa El Dinero",
+        "No Me Importa el Dinero"
+      ],
+      "albumAliases": [
+
+      ],
       "fragments": [
         "Me dijeron que llamaste, pero ya me había ido\nPues salimos más temprano del taller\nYo me vine caminando para no gastar dinero",
         "Menos mal que solo es eso\nSentí alivio, lo confieso\nTuve miedo de que fuera otra mujer",
         "A mí no me importa el dinero\nTengo lo que yo más quiero a mi lado\nSoy tu fiel compañera",
         "Sos mi escudo ante el miedo\nY aunque se derrumbe el cielo\nNunca vas a estar solo\nPorque siempre estaré"
+      ]
+    },
+    {
+      "id": "no-te-va-gustar-clara",
+      "artistId": "no-te-va-gustar",
+      "song": "Clara",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Clara"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Qué lindo que era verlos caminando\nUn alma sola, dividida en dos\nLa orilla de ese mar los encantaba\nQuedaba todo quieto alrededor",
+        "Hermosa fue la vida que llevaron\nLa suerte no les quiso dar un sol\nCurioso es que su risa iluminaba\nHasta el día que ese mal se la llevó",
+        "Se queda con su foto en un rincón\nY sueña encontrarla arriba\nEscucha susurrar un disco viejo\nQue su Clara una vez le regaló",
+        "Él sigue con su vida recortada\nSin Clara fue una vida sin color\nLa imagen de sus ratos más felices\nHasta ahora siguen siendo su motor",
+        "La lleva bien pegada al corazón\nSe alegra de nunca despedirla\nPero no va más por la orilla caminando\nPorque sabe que era hermoso entre los dos"
+      ]
+    },
+    {
+      "id": "no-te-va-gustar-cielo-de-un-solo-color",
+      "artistId": "no-te-va-gustar",
+      "song": "Cielo de un Solo Color",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Cielo de un Solo Color"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Cuantas lunas que se van\nY nosotros esperando\nQue despierte el corazón\nQue parece estar quebrado",
+        "Todo el tiempo que pasó\nNo me aleja de tu lado\nCielo de un solo color\nQue me sigue enamorando",
+        "Hay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro\nEl momento ya llegó",
+        "Vida, que vida pobre\nVivirla en este lugar\nQué saben, qué saben ellos\nQue no le pueden cantar",
+        "Hay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro\nAy, celeste regaláme un Sol"
+      ]
+    },
+    {
+      "id": "no-te-va-gustar-chau",
+      "artistId": "no-te-va-gustar",
+      "song": "Chau",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Chau"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Estábamos los dos mirando el mar\nCuando la tarde moría\nComo moría lo nuestro\nJuro que no lo sabía",
+        "Miré para mi derecha\nVi que desaparecías\nGrité con todas mis fuerzas\nY noté que no me oías",
+        "No puedo conseguir\nCambiar ni corregir\nLo que me corre en las venas",
+        "Corazón\nHoy no dejes de latir\nTe alejaste un día\nAhora decidiste venir",
+        "Ha pasado más de un año y vos no estás\n¿Por qué habría de creerte?\nHubiera dado la vida y mucho más\nPor solo volver a verte",
+        "No podría darme el lujo\nDe ceder ante tu llanto\nNo pienso abrir las heridas\nDe haberte querido tanto"
+      ]
+    },
+    {
+      "id": "angeles-azules-17-anos",
+      "artistId": "angeles-azules",
+      "song": "17 Años",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "17 Años",
+        "17 Anos"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Amigo, sabes, acabo de conocer\nUna mujer que aún es una niña\nSabes, tiene los 17 aún\nEs jovencita y ya es mi novia",
+        "Amo su inocencia (17 años)\nAmo sus errores (17 años)\nSoy su primer novio (17 años)\nSu primer amor",
+        "Es callada, tímida, inocente y tiene la mirada\nLe tomo la mano y siente algo extraño\nLa abrazo, me abraza y empieza a temblar",
+        "A temblar de miedo, diciéndome que nunca\nHabía sentido sensación así en su vida",
+        "¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?"
+      ]
+    },
+    {
+      "id": "damas-gratis-no-te-creas-tan-importante",
+      "artistId": "damas-gratis",
+      "song": "No Te Creas Tan Importante",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "No Te Creas Tan Importante"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "No te creas tan importante\nYa no te pienso todo el día como antes\nSe me cerraron las heridas con alcohol\nY ni borracha volvería a buscarte\nPorque ya no siento amor",
+        "No te creas tan importante\nYa soy feliz, no tengo tiempo para odiarte\nYa no te extraño pues sin ti estoy mejor\nNo andes diciendo que me muero por mirarte\nEso ya se terminó",
+        "No te confundas\nYo no camino para atrás\nComo un cangrejo",
+        "Yo te conozco y sé que no vales ni un peso\nY de personas como tú\nYa no me dejo",
+        "Ya me contaron\nQue te estás hablando mal de mí\nY que te burlas"
+      ]
+    },
+    {
+      "id": "damas-gratis-los-duenos-del-pabellon",
+      "artistId": "damas-gratis",
+      "song": "Los Dueños del Pabellón",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Los Dueños del Pabellón",
+        "Los Duenos del Pabellon"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Ahora nosotros tomamos el control\nSomos los dueños del pabellon\nEstamos cansados de tanta represion\nY vamo a tocar de esta prision",
+        "Quiero que todos se amotinen\nLevanten bien las manos\nQue se pongan a rezar\nLos guardias y refugiados\nDe esta prision uhh ohh ohh",
+        "A mi no me importa morir\nAbrime la celda que me quiero ir",
+        "Señor carcelero\nDejeme salir\nSeñor carcelero\nDejeme salir",
+        "Este es el super teclado de pablito lescano"
+      ]
+    },
+    {
+      "id": "damas-gratis-el-humo-de-este-fasito",
+      "artistId": "damas-gratis",
+      "song": "El Humo de Este Fasito",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "El Humo de Este Fasito"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Quiero ponerme a beber y un alto faso fumar\nPor la mujer que mató mis sentimientos iré a buscar",
+        "Mi amor te quiero, ingrata mala gata",
+        "No estoy triste, no es mi llanto\nEs el humo de este fasito que me hace llorar",
+        "Quién te crees, una diosa\nFlor hermosa que algún día lo pagarás",
+        "No, no debiste jugar con mi tonto corazón\nLo que hiciste con mi amor algún día lo vas a pagar",
+        "Esta llorando mi corazón por tu falso amor\nCuando pienso en las horas de tu amor\nY en tus brazos sólo me queda esta noche\nFumancharme mi alto faso, te quierooo"
+      ]
+    },
+    {
+      "id": "2-minutos-pinas-van-pinas-vienen",
+      "artistId": "2-minutos",
+      "song": "Piñas Van, Piñas Vienen",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Piñas Van, Piñas Vienen",
+        "Pinas Van, Pinas Vienen"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Piñas van, piñas vienen, los muchachos se entretienen\npiñas van, piñas vienen, los muchachos se entretienen",
+        "todo puede ser por una mujer\ntodo puede ser por algún billete",
+        "Víctor Galindez, Carlos Monzón, Nicolino Loche,\nHoracio Acavallo",
+        "Víctor Galindez, Carlos Monzón, Ringo Bonavena, Uby Sacco"
+      ]
+    },
+    {
+      "id": "2-minutos-otra-mujer",
+      "artistId": "2-minutos",
+      "song": "Otra Mujer",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Otra Mujer"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "No te tortures más, ella te abandonó\nY ya no hay solución\nEl verano que pasaron, pudo ser mejor\nPero ella igual, te abandonó",
+        "Y el invierno se quedó, y su fantasma también\nY la herida que no para, de sanar",
+        "Es de noche en la ciudad, y hace frío en las calles\nY en la televisión, no hay nada para ver\nTu vaso esta vacío, la botella también\nSon las 6 de la mañana, y no hay nada para hacer",
+        "No te tortures más\nElla te abandonó\nPero otra mujer\nA tu vida llegará",
+        "Otra mujer, llegará\nOtra mujer, a tu vida llegará"
+      ]
+    },
+    {
+      "id": "2-minutos-cancion-de-amor",
+      "artistId": "2-minutos",
+      "song": "Canción de Amor",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Canción de Amor",
+        "Cancion de Amor"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Yo que estoy enamorado de vos\nDesde hace mucho tiempo\nMe gusta tu cuerpo esbelto\nPero más me gusta lo de adentro",
+        "Muchas veces me di vuelta por vos\nY muchas dadas vueltas más yo tendré\nSiempre te he sido fiel\nPero vos conmigo no lo sos",
+        "¡Cerveza, yo te quiero!\n¡Cerveza, yo adoro!\n¡Cerveza, yo te quiero!\n¡Gancia, yo te adoro!",
+        "¡Cerveza, yo te quiero!\n¡Cerveza, yo adoro!\n¡Cerveza, yo te quiero!\n¡Ginebra, yo te adoro!"
+      ]
+    },
+    {
+      "id": "los-buitres-carretera-perdida",
+      "artistId": "los-buitres",
+      "song": "Carretera Perdida",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Carretera Perdida"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Tan fácil, fácil, no es\nHorizonte lejano\nCorrer y correr\nEl día que no llega\nY dura es la noche en soledad",
+        "Pero el hombre que mira lejos no aprende a ver",
+        "Estás parada en el umbral\nDivina, furiosa, dispuesta a matar\nUna daga y una estrella del fondo del mar",
+        "Ahora estamos aquí\nCarretera perdida\nCamino sin fin",
+        "Se estrellan en la pared\nLas flores, los vasos, la risa, la hiel\nPreguntaste por qué te quiero\nY un viento azul\nQue nos lleva a los dos",
+        "Yo conozco al boxeador\nQue besa la lona y escupe la cruz\nSe arrastra hasta la esquina\nSusurra al oído de su entrenador"
+      ]
+    },
+    {
+      "id": "los-buitres-fresias",
+      "artistId": "los-buitres",
+      "song": "Fresias",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Fresias"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "fresias\nen las manos\nojos de lluvia\ny cuatro filtros muertos",
+        "cardos\nen los labios\nborra de un café que jamás pediste",
+        "preguntaste:\n\"donde hay otra vida para mi?\ndonde el cielo es azul?\ndonde me perdí?\"",
+        "vamos al mar\nvamos a otro lugar\nquiero estar bien\npuede ser esta vez?",
+        "es mi cara un cristal roto en mil pedazos\npero ya sabés yo no elijo mi suerte\nmi verano\nmi cura de sueño"
+      ]
+    },
+    {
+      "id": "los-buitres-ojos",
+      "artistId": "los-buitres",
+      "song": "Ojos",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Ojos"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "es de madrugada\ntibia el sol y miro el cielo\npara preguntar\ndonde están mis sueños",
+        "quise así tanto, tanto, tanto\npara mi soledad\ntres canciones con palabras por llenar\npara mi soledad",
+        "al fin primavera\nBioy saluda desde el cielo\nquiero mis alas\nme voy a nadar",
+        "vino, tinta y sangre\ny una siesta muy cerca del mar",
+        "La copa frágil del amor\nse llena con el corazón"
+      ]
+    },
+    {
+      "id": "los-buitres-soy-del-monton",
+      "artistId": "los-buitres",
+      "song": "Soy del Montón",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Soy del Montón",
+        "Soy del Monton"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Nunca hubo una palabra que valiera para ti\nSiempre me viste como el payaso de la fiesta\nPorque yo soy del montón\nSoy del montón y no me podés ver",
+        "Porque tu piel siempre quiso brillar\nY ahora que todo cae estás tan loco por cambiar\nY yo no\nYo soy del montón\nY esta es mi cara",
+        "Te vi crecer y predicar\nQue hay que decir\nA quien hay que votar\nQue música hay que escuchar\nQue ropa, droga y que se yo",
+        "Decí\nRaviol\nQue hacés\nPor dios\nBailando mal\nHacé el favor\nUn paso atrás\nQue se te ve la hilacha",
+        "Tenés mi edad y solo sabés lamer\nPor un lugar en donde otros suden sangre para vos\nPero yo no\nYo soy del montón"
+      ]
+    },
+    {
+      "id": "trotsky-vengaran-ni-olvido-ni-perdon",
+      "artistId": "trotsky-vengaran",
+      "song": "Ni Olvido Ni Perdón",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Ni Olvido Ni Perdón",
+        "Ni Olvido Ni Perdon"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Ni olvido ni perdón\nLa muerte nunca fue peor\nLa justicia tarda pero llegará\nYa no podrás matar",
+        "Escondido entre mentiras\nCuanto durarás\nLas cuentas en Suiza\nTe van a congelar\nYa no podrás robar",
+        "Ni olvido ni perdón\nPorque además fuiste ladrón\nDe alguna manera\nLa vas a quedar\nYa no podrás matar"
+      ]
+    },
+    {
+      "id": "trotsky-vengaran-el-alma-en-2",
+      "artistId": "trotsky-vengaran",
+      "song": "El Alma en 2",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "El Alma en 2"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "No puedo entender\nQuizas nunca lo hare\nPero te juro que esta vez\nEsperaba mejor suerte",
+        "Tus besos de hotel\nEl perfume de tu piel\nQuiero tenerlo y nunca aprendo a perder\nAlto es el precio de querer\nA un amor cuando es infiel",
+        "Me gusta pensar\nQue algun dia volveras\nQue estas arrepentida\nQue ya nada sera igual",
+        "Pero vuelvo a escuchar la mas cruda realidad\nEn boca de amigos que ya no vuelven mas",
+        "Abierta la herida juro q esta vez aprendere\na no dejar de volver por mas que extrañe\ntus piernas, tu risa tus manos rayandome de pasion\nDrogandome con tu voz\nPartiendome el alma en dos..."
+      ]
+    },
+    {
+      "id": "trotsky-vengaran-detras-del-arco",
+      "artistId": "trotsky-vengaran",
+      "song": "Detrás del Arco",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Detrás del Arco",
+        "Detras del Arco"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Desde muy temprano el barrio te llama\nLevantás los trapos y algo para entrar\nLos de verde miran, como si fueras al frente\nNo se dan cuenta que es tu vida y nada más",
+        "Mandanga de noche, mandanga de día\nEl fino en la boca, ronca de gritar\nContra el alambrado, es como vivís la vida\nTirando el resto hasta el final",
+        "Esta banda no puede parar\nEsta aguanta y nunca va a faltar\nEn las buenas, en las malas mucho más\nLa banda nunca te va a abandonar",
+        "Desde atrás del arco, el cemento tiembla\nNo somos de palo, somos uno más\nSi no vas a la cancha, no podés sacar la foto\nGente de fiesta hasta el final",
+        "Y juegues donde juegues voy a estar\nLa banda nunca te va a abandonar"
+      ]
+    },
+    {
+      "id": "trotsky-vengaran-historias-sin-terminar",
+      "artistId": "trotsky-vengaran",
+      "song": "Historias Sin Terminar",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Historias Sin Terminar"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "No sé qué es lo que me mueve\nNo sé qué es lo que me duele\nNo sé qué es lo que hago mal",
+        "Ya se que no hay atajos\nYa se nada es sin trabajo\n¿Pero cual es el precio que hay que pagar?",
+        "Tanto tienes, tanto vales\nSolo sirve ganar y nada más",
+        "Yo quiero ver la Luna reflejada en el mar\nPerder el tiempo con amigos nada en que pensar\nSentir la brisa de tu aliento muy cerca de mi\nSentir por un momento que no todo tiene un fin",
+        "No te vayas\nEsta noche\nNo te vayas por favor\n¿Por qué nada se detiene?\n¿Por qué nada es suficiente?\n¿Por qué todo tiene que cambiar?",
+        "Se que no existe un final feliz\nSolo historias sin terminar"
+      ]
+    },
+    {
+      "id": "trotsky-vengaran-vestida-para-matar",
+      "artistId": "trotsky-vengaran",
+      "song": "Vestida Para Matar",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Vestida Para Matar"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Princesa del adios\nTe escapaste sin pedir perdon\nDesataste lo peor de mi\nEn el momento que te vi partir",
+        "Princesa del dolor\nFlor de fango en mi callejon\nDe tus espinas no me preocupe\nY la sangre no paro de correr\nComo vos, otra vez",
+        "Y te encuentro hoy y aquí\nVestida para matar\nMe embriago en tus encantos una vez mas",
+        "No se por que se fue\nNo se por que volvio\nFinalmente la encuentro otra vez\nComo siempre caigo a tus pies",
+        "Princesa del perdon\nQuizas mañana no sepa de vos\nYa se ke no puedo cambiar\nPero esat noche no te vas a escapar"
+      ]
+    },
+    {
+      "id": "la-vela-zafar",
+      "artistId": "la-vela",
+      "song": "Zafar",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Zafar"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Soy de la ciudad, con todo lo que ves\nCon su ruido, con su gente, consume vejez\nY no puedo evitar el humo que entra hoy\nPero igual sigo creciendo, soy otro carbón",
+        "No voy a imaginar la pena en los demás\nCompro aire, y si es puro, pago mucho más",
+        "No voy a tolerar que ya no tengan fe\nQue se bajen los brazos, que no haya lucidez",
+        "Me voy, volando por ahí\nY estoy convencido de ir\nMe voy, silbando y sin rencor\nY estoy zafando del olor",
+        "Me encontré con la gente que sabe valorar\nQue de turista, en la capital, han sabido vagar\nY no ha encarado al fin la cruda realidad\nDe respirar hollín, de llorar alquitrán",
+        "Y empiezo a envejecer, sudando mi verdad\nCriado pa' toser con mucha variedad\nDeberíamos andar desnudos pa' sentirnos mejor"
+      ]
+    },
+    {
+      "id": "la-vela-va-a-escampar",
+      "artistId": "la-vela",
+      "song": "Va a Escampar",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Va a Escampar"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Hoy, asume lo que venga\nSea para bien, o todo mal\nY, aunque pierda lo que tenga\nSe va a morder para aguantar",
+        "Hoy, qué claro ve las cosas\nQue ayer no vio, ni va a exigir\nSobre su pena se posa\nQuiere entender para seguir",
+        "Llega la batalla\nY contra él estalla\nAlgún día, va a escampar",
+        "¿Y cómo sale de esta?\nQuiere la respuesta\nSabe qué no es escapar",
+        "Su paciencia va a montar\nTodo un circo para verlo desfilar\nAl dolor que supo ser\nY al que ahora ya no quiere ver volver",
+        "Se refugia en un farol\nY entre dos flores que siempre apuntan al Sol\nAsí cruza su pared\nMe sonríe y rompe con su propia red"
+      ]
+    },
+    {
+      "id": "la-vela-el-viejo",
+      "artistId": "la-vela",
+      "song": "El Viejo",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "El Viejo"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "La cabecita despierta\nOrgullo de su mamá\nEl niño creció en su casa\nEl adolescente quiere asomar",
+        "Resbalando las veredas\nEl barrio lo encandiló\nDando vueltas las esquinas\nTocó placeres, tocó dolor",
+        "Se enamoró de la vida\nTodos los días, todas las noches\nDesayuno con las damas\nLa cena, se la salteó",
+        "Viejo divino, ¿dónde vas?\nYo sé muy bien que no querés mirar atrás\nFinal amargo, solo queda hoy\nTu perro flaco y el fondo de un vino pa' entibiar",
+        "Pero algunos pajaritos\nNo se pueden encerrar\nSe les va penando el alma\nDe pronto, ya no quieren cantar",
+        "Se desparramó de a poco, después que entraba pa' los 40\nY casi sin darse cuenta, alcohólico se volvió\nY fue bajando escalones, muchos inviernos a la deriva\nLas vueltas que da la vida, en la calle, terminó"
+      ]
+    },
+    {
+      "id": "la-vela-jose-sabia",
+      "artistId": "la-vela",
+      "song": "José Sabía",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "José Sabía",
+        "Jose Sabia"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "José sabía que no puede ser\nQue esos amores no pueden durar\nY que la vida es así\nQue te da solo pa' quitarte",
+        "Y, así, arrancó para algún callejón\nMirando nada, escuchando un adiós\nAdiós a todo placer\nQue te saque de la amargura",
+        "El mostrador ya no aguantaba más\nDe codo, un callo, y de pie por la fe\nQue tiene el que se cayó\nPara levantarse de nuevo",
+        "Y, sin embargo, levantó\nCopas y copas al dolor",
+        "Al dolor de seguir vivo\nQue es lo bueno que tiene el dolor\nY también al placer de ganar y perder\nCuando todo parece jodido, es cuando hay que poner",
+        "El amor sabe durar\nLo que dura en llorar un muerto"
+      ]
+    },
+    {
+      "id": "4-pesos-de-propina-mi-revolucion",
+      "artistId": "4-pesos-de-propina",
+      "song": "Mi Revolución",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Mi Revolución",
+        "Mi Revolucion"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Hoy la pelea que doy\nEs quererme más\nHoy el grito que doy\nEs silencio",
+        "Hoy te pido perdón\nSi te lastimé el corazón",
+        "Hoy no quiero lo que me hace mal\nLo oscuro del juego\nHoy que es tiempo de sanar\nLas heridas del tiempo",
+        "Hoy pude ver quien soy\nConocerme más\nHoy que el veneno\nEncontró su remedio",
+        "Esa es mi revolución\nLlenar de amor mi sangre\nY si reviento\nQue se esparza en el viento\nEl amor que llevo adentro"
+      ]
+    },
+    {
+      "id": "4-pesos-de-propina-pirata",
+      "artistId": "4-pesos-de-propina",
+      "song": "Pirata",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Pirata"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Pirata,\nno todo lo que brilla es plata\nescucha mi consejo\nlibertad o sello",
+        "Estas esperando que mi canto te de de comer\nestas engordando con mi arte y aparte\nle pones un sello, linda foto y lo queres vender\nno inventaste nada y te llevás la mejor parte",
+        "ay que bonito el cartelito\nque anuncia un hit total\ntotal, total para que",
+        "Si vende como loco y esta primero en las radios\nson catorce pesos que agarras por unidad\nlo que vos grabaste hoy lo maneja un otario\nque se queda con el resto, del resto del total",
+        "En mi bandera va una calavera\nlibertad o sello\nescucha mi consejo",
+        "Hoy te lo digo no cuentes conmigo\ncon un solo ojo\nveo mucho más"
+      ]
+    },
+    {
+      "id": "4-pesos-de-propina-hoy-sopa-hoy",
+      "artistId": "4-pesos-de-propina",
+      "song": "Hoy Sopa Hoy",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Hoy Sopa Hoy"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Hay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso",
+        "Métale baldosas grises, y pedazos de cordones\nÉchele un poco de sal al hormigón\nAlquitrán bien picadito,\nAdoquines saltaditos\nY en las bocas de tormenta pimentón",
+        "Que la risa con permiso\nY la flor del paraíso\nA ese guiso le dará un toque dulzón",
+        "Hoy invito yo, no me vaya a despreciar\nTómelo con calma porque otra cosa no hay\nTome servilleta\nTome plato hondo\nTápese la ñata\nTome carrerita\nY zambúllase como en el mar",
+        "Que el mecanismo de las ollas a presión\nHace aprontar la comida rapidito\nCon el vapor organizado en una gran concentración"
+      ]
+    },
+    {
+      "id": "l-autentika-cumbia-ni-ahi",
+      "artistId": "l-autentika",
+      "song": "Cumbia Ni Ahí",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Cumbia Ni Ahí",
+        "Cumbia Ni Ahi"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Cumbia ni ahí cumbia ni ahí la cumbia no es para mi\nCumbia ni ahí cumbia ni ahí De cumbia estoy hasta aquí",
+        "Esta es la autentika la que te arranca la cabeza",
+        "Fui a las cataratas del Iguazú a desenchufarme de la ciudad\nAlla todo el mundo es re cumbiancha, yo con esa merza no estoy ni ahí",
+        "Un negro grandote que dijo asi\nVen mi capullito de aleli ahora tu serás mi cumbia ni ahí",
+        "Cierra los ojitos y no respondas yo voy a enseñarte mi anaconda",
+        "Me pinto los labios y me puso peluca\nSentí que su aliento me quemo la nunca\nEmpecé a correr me siguieron diez\nQue suerte que tuve me salve de tres",
+        "Hay que lindas playas y sus garotas\nVuelvo del casino me quede en pelotas"
+      ]
+    },
+    {
+      "id": "cuarteto-de-nos-al-cielo-no",
+      "artistId": "cuarteto-de-nos",
+      "song": "Al Cielo No",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Al Cielo No"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Resulta que agarré y que decidí matarme\nPorque ya no había nada de donde agarrarme\nNo es que yo sea un tipo bajoneado\nPero no me iba a salvar ni Superman drogado",
+        "Una cosa sí tenía bien clarita\nAl cielo no iba a ir ni aunque me dieran guita\nEl infierno para mí era una maravilla\nQuemándome al igual que un pollo a la parrilla",
+        "Así que sí, sí, iba a pedir\nAl cielo no pretendía ir\nY a ver con quien tenía que ir a hablar\nQue yo tenía cuña en Uruguay",
+        "Al cielo siempre me lo había imaginado\nComo cuando se moría un dibujo animado\nComo algún cuadro horrible de Miguel Ángel\nO como el paraíso que contaba el Dante",
+        "De rebote me enteré que la eternidad\nDura mucho tiempo, y a veces más\nY no puedo soportar que todo prosiga\nSentado en una nube como un vejiga",
+        "Tocando mal el arpa y desafinando\nRodeado de angelitos siempre meando\nSacando telarañas de mis genitales\nPorque allá son todas vírgenes las orientales",
+        "Prefería en el infierno estar\nAunque tuviera que soportar\nA Rivera, a Oribe y a Garzón\nY la hinchada de Peñarol"
+      ]
+    },
+    {
+      "id": "cuarteto-de-nos-cancion-de-amor",
+      "artistId": "cuarteto-de-nos",
+      "song": "Canción de Amor",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Canción de Amor",
+        "Cancion de Amor"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Aunque hable de resaca\nDe pichí y de hacerse caca\nAunque ahora esté cenando\nY en la sopa vomitando\nA pesar del mal olor\nEsta es una canción de amor",
+        "Aunque las chicas no deliren\nY cuando canto no suspiren\nY aunque no me tiren flores\nNi me den sus direcciones",
+        "Aunque hable de mi muerte\nY de un transexual sin suerte\nY aunque hable de mi entierro\nMi velorio y mi destierro",
+        "Aunque pronuncie sho en lugar de yo\nY nadie diga que soy un triunfador\nSigue siendo una canción de amor",
+        "Aunque te parezca relajada\nY no la cante tu empleada\nY aunque la toque el cuarteto\nY no cuente ni un secreto\nQue se ahogue en el alcohol\nEsta es una canción de amor"
+      ]
+    },
+    {
+      "id": "cuarteto-de-nos-el-dia-que-artigas-se-emborracho",
+      "artistId": "cuarteto-de-nos",
+      "song": "El Día Que Artigas Se Emborrachó",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "El Día Que Artigas Se Emborrachó",
+        "El Dia Que Artigas Se Emborracho"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "El día que Artigas se emborrachó\nHizo cualquier cagada como un buen señor\nPero como ningún libro nunca lo contó\nPor eso ahora agarro y se los cuento yo",
+        "Con la lengua trabada explicó el general\nQué color en su bandera iba a utilizar\nBlanco y rojo en honor al vino que me tomé\nY azul por el pedo que después me agarré",
+        "Y se emborrachó, porque la guerra perdió\nY se emborrachó, porque alguien lo traicionó\nSe emborrachó, y la patria se lo agradeció",
+        "Llegamos al Ayuí con el éxodo oriental\nGritaba haciendo eses nuestro general\nY un paisano le avisó: Pero usté está en cuete\nEste no es el Ayui, no ve que es el Miguelete",
+        "Llegó al Hervidero y antes de tropezar\nPreguntó a que hora tocaba la Banda Oriental\nTomó un bicarbonato que después eructó\nY le puso a ese pueblo Purificación",
+        "Ese día dejó como a diez embarazadas\nSe casó con la prima que era medio retardada\nLe dijo a Posadas: Agarrala que me crece\nY vomitó en las instrucciones del año trece",
+        "Y mamado hasta las patas dijo: Me gusta esa china\nY en realidad no era otro que el negro Ansina\nFajó a Lavalleja que le quiso explicar\nY el pedo se le fue recién en el Paraguay"
+      ]
+    },
+    {
+      "id": "cuarteto-de-nos-el-empleado-y-la-muerte",
+      "artistId": "cuarteto-de-nos",
+      "song": "El Empleado y la Muerte",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "El Empleado y la Muerte"
+      ],
+      "albumAliases": [
+
+      ],
+      "fragments": [
+        "Esta es la muerte que te viene a buscar\nTe está buscando por todo el Uruguay",
+        "Ahora iba a pagar la cuenta del gas\nY mañana tengo que ir a trabajar\nLas horas del mes ya me las tomé\nAsí que ni miras que vaya a faltar",
+        "Tengo que pagar ahora el alquiler\nY la cuota del calefón también\nYo no puedo irme así sin avisar\nSi me muero ahora me van a matar",
+        "Pasan el partido en la televisión\nYa va deteniéndose tu corazón",
+        "Por el túnel negro vas hacia la luz\nUy! La ute! Sáquenme del ataúd!",
+        "Mañana el cuarenta y siete va a salir. Tenemos que irnos\nNo quiero morir!"
       ]
     }
   ]
