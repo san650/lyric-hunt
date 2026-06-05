@@ -121,17 +121,6 @@
       ]
     },
     {
-      "id": "l-autentika",
-      "displayName": "L'Autentika",
-      "aliases": [
-        "L'Autentika",
-        "L' Autentika",
-        "La Auténtica",
-        "La Autentica",
-        "Autentika"
-      ]
-    },
-    {
       "id": "andres-calamaro",
       "displayName": "Andrés Calamaro",
       "aliases": [
@@ -246,57 +235,6 @@
   ],
   "songs": [
     {
-      "id": "cuarteto-no-somos-latinos",
-      "artistId": "cuarteto-de-nos",
-      "song": "No Somos Latinos",
-      "album": "Otra Navidad en las Trincheras",
-      "year": 1994,
-      "songAliases": [
-        "No Somos Latinos",
-        "No Soy Latino"
-      ],
-      "albumAliases": [
-        "Otra Navidad en las Trincheras",
-        "Otra Navidad",
-        "Trincheras"
-      ],
-      "fragments": [
-        "Pensarán que soy medio ladino\nO qué vivo borracho de vino\nQuieren hacerme creer estos cretinos\nQue los uruguayos somos latinos",
-        "Si me viera mi abuelito Arsenio\nCantando con acento caribeño",
-        "No me jodan más, no somos latinos\nYo me crié acá, en la Suiza del sur",
-        "Yo no sé bailar ni cumbia ni salsa\nNi me escapé de Cuba en una balsa\nMe parió en Montevideo mi mami\nYo no quiero ir a vivir a Miami",
-        "En Colombia me decían \"gringo\"\nO \"alemán\" en Santo Domingo",
-        "Y cuando leí \"Las venas abiertas\"\nQue era un bodrio me di cuenta\nA la cuarta hoja me dormí",
-        "Prefiero hablar con un filósofo sueco\nQue con un indio guatemalteco\nY tengo más en común con un rumano\nQue con un cholo boliviano"
-      ]
-    },
-    {
-      "id": "cuarteto-monei",
-      "artistId": "cuarteto-de-nos",
-      "song": "Monei",
-      "album": "El Tren Bala",
-      "year": 1996,
-      "songAliases": [
-        "Monei",
-        "Money",
-        "Plata"
-      ],
-      "albumAliases": [
-        "El Tren Bala",
-        "Tren Bala"
-      ],
-      "fragments": [
-        "Yo quería en Carrasco una mansión\nPero solo conseguí un ranchito en Casabó",
-        "Yo quería andar en un Meredes Benz\nY ahora solo ando en un 126",
-        "Soy negado viejo y siempre lo sabrán\nComo decía aquel viejo refrán\nEl que nace mona Chita nunca llega a ser Tarzán",
-        "Yo quería tomar Sol en el Caribe\nY por ahora solo surfo en la playa Ramirez",
-        "Yo quería ir a las fiestas del jet set\nPero a los bailes del Coco fue a dónde yo más llegué",
-        "Como en la parábola de Rodó\nEl que nace pa letrina nuca llega a water cló",
-        "Yo quería vestirme en Christian Dior\nY no este buzo apolillado que mi abuela me tejió",
-        "Yo quería comer caviar y faisán\nY no sacarme de los dientes el perejil de un choripán"
-      ]
-    },
-    {
       "id": "redondos-un-poco-de-amor-frances",
       "artistId": "redondos",
       "song": "Un Poco de Amor Francés",
@@ -316,34 +254,13 @@
         "Baion"
       ],
       "fragments": [
-        "Una tipa rapaz, como te gusta a vos\nEsa tipa vino a consolarte",
+        "Una tipa rapaz, como te gusta a vos\nEsa tipa vino a consolarte\nUn poco de amor francés no muerde su lengua, no",
         "Un poco de amor francés no muerde su lengua, no\nNo es sincera, pero te gusta oírla",
-        "Es una linda ración\nCon un defecto, con uno o dos\nY es un cóctel que no se mezcla solo",
         "Quiere, si quiere más\nYa no la engatusás\nEs una copa de lo mejor\nCuando se ríe",
         "El lujo es vulgaridad, dijo, y me conquistó\nDe esa miel no comen las hormigas"
-      ]
-    },
-    {
-      "id": "redondos-de-estos-polvos-futuros-lodos",
-      "artistId": "redondos",
-      "song": "De Estos Polvos Futuros Lodos",
-      "album": "Lobo Suelto / Cordero Atado",
-      "year": 1993,
-      "songAliases": [
-        "De Estos Polvos Futuros Lodos",
-        "Polvos Futuros Lodos",
-        "El Perro Bobi"
       ],
-      "albumAliases": [
-        "Lobo Suelto",
-        "Cordero Atado",
-        "Lobo Suelto / Cordero Atado"
-      ],
-      "fragments": [
-        "El Perro Bobi es\nUn servicio de amor a todo rock\nCanta como un león\nPero es el más salmón de la ciudad",
-        "Chunga combinación de polvos\nQue darán lodos después\nMágico inter-terror más arma blanca\nEn cruda pasión",
-        "Una papela por el walkman\nQue chorizó tu hermanito\nEl perro cruzó los pies\nSu sonrisa ofertó y la vendió"
-      ]
+      "url": "https://www.letras.com/los-redonditos-de-ricota/203051/",
+      "lyric": "Una tipa rapaz, como te gusta a vos\nEsa tipa vino a consolarte\nUn poco de amor francés no muerde su lengua, no\nNo es sincera, pero te gusta oírla\n\nEs una linda ración\nCon un defecto, con uno o dos\nY es un cóctel que no se mezcla solo\n\nQuiere, si quiere más\nYa no la engatusás\nEs una copa de lo mejor\nCuando se ríe\n\nQuiere, si quiere más\nYa no la engatusás\nEs una copa de lo mejor\nCuando se ríe\n\nEl lujo es vulgaridad, dijo, y me conquistó\nDe esa miel no comen las hormigas\nUna tipa rapaz, como te gusta a vos\nEsa tipa vino a consolarte\n\nQuiere, si quiere más\nYa no la engatusás\nEs una copa de lo mejor\nCuando se ríe"
     },
     {
       "id": "redondos-la-bestia-pop",
@@ -361,10 +278,13 @@
       ],
       "fragments": [
         "Mi héroe es la gran bestia pop\nQue enciende, en sueños, la vigilia\nY antes que cuente diez, dormirá",
-        "A brillar, mi amor\nVamos a brillar, mi amor",
+        "A brillar, mi amor\nVamos a brillar, mi amor\nA brillar, mi amor\nVamos a brillar, mi amor",
         "Mi amigo está grogui sin destilar\nPero yo sé que hay caballos que\nSe mueren potros sin galopar",
-        "Voy a bailar el rock del rico Luna Park\nY atomizar la butaca y brillar\nComo mi héroe, la gran bestia pop"
-      ]
+        "Voy a bailar el rock del rico Luna Park\nY atomizar la butaca y brillar",
+        "Como mi héroe, la gran bestia pop"
+      ],
+      "url": "https://www.letras.com/los-redonditos-de-ricota/202066/",
+      "lyric": "Mi héroe es la gran bestia pop\nQue enciende, en sueños, la vigilia\nY antes que cuente diez, dormirá\n\nA brillar, mi amor\nVamos a brillar, mi amor\nA brillar, mi amor\nVamos a brillar, mi amor\n\nMi amigo está grogui sin destilar\nPero yo sé que hay caballos que\nSe mueren potros sin galopar\n\nA brillar, mi amor\nVamos a brillar, mi amor\nA brillar, mi amor\nVamos a brillar, mi amor\n\nVoy a bailar el rock del rico Luna Park\nY atomizar la butaca y brillar\nComo mi héroe, la gran bestia pop\n\nA brillar, mi amor\nVamos a brillar, mi amor\nA brillar, mi amor\nVamos a brillar, mi amor\n\nMi héroe es la gran bestia pop\nQue enciende, en sueños, la vigilia\nY antes que cuente diez, dormirá\n\nA brillar, mi amor\nVamos a brillar, mi amor\nA brillar, mi amor\nVamos a brillar, mi amor"
     },
     {
       "id": "redondos-tarea-fina",
@@ -383,9 +303,11 @@
       "fragments": [
         "Quemando la turbina\nTe escapas\n¿Vas a volver a herirme\nOtra vez?",
         "En tu ternura, está acechándome\nUna buena traición de mujer\nQue echa hielo y brasas en mi corazón",
-        "Un auto guapo va a venir por vos\nY nada va a cambiar\nVas a vivir en el Delta, en un lanchón\nBuscando de qué reír",
-        "Con las piernas más bonitas\nLas más lindas piernas que vi\nY un juego rico de amores\nCaída libre para dos"
-      ]
+        "Con las piernas más bonitas\nLas más lindas piernas que vi, oh-oh-oh\nY un juego rico de amores\nCaída libre para dos, oh-oh-oh",
+        "Le das la copa, al fin, al vencedor\nTarea fina, perdida en mi soledad"
+      ],
+      "url": "https://www.letras.com/los-redonditos-de-ricota/203044/",
+      "lyric": "Quemando la turbina\nTe escapas\n¿Vas a volver a herirme\nOtra vez?\n\nEn tu ternura, está acechándome\nUna buena traición de mujer\nQue echa hielo y brasas en mi corazón\nFumando en la oscuridad\n\nSobrio, no te puedo ni hablar\nEstoy perdido sin mi estupidez\n\nUn auto guapo va a venir por vos\nY nada va a cambiar\nVas a vivir en el Delta, en un lanchón\nBuscando de qué reír\n\nCon las piernas más bonitas\nLas más lindas piernas que vi, oh-oh-oh\nY un juego rico de amores\nCaída libre para dos, oh-oh-oh\n\nLe das la copa, al fin, al vencedor\nTarea fina, perdida en mi soledad\n\nNo sé si no me gusta más que el rock\nNunca la vi llorar\nSi no va sin frenos, no anda bien\nNi me encadena a su show\n\nCon las piernas más bonitas\nLas más lindas piernas que vi, oh-oh-oh\nY un juego rico de amores\nCaída libre para dos, oh-oh-oh"
     },
     {
       "id": "redondos-esa-estrella-era-mi-lujo",
@@ -404,30 +326,12 @@
       "fragments": [
         "¿Era todo?, pregunté\nSoy un iluso\nNo nos dimos nada más\nSolo un buen gesto",
         "Mordí el anzuelo una vez más\nSiempre un iluso\nNuestra estrella se agotó\nY era mi lujo",
-        "Ella fue, por esa vez\nMi héroe vivo, ¡bah!\nFue mi único héroe en este lío\nLa más linda del amor\nQue un tonto ha visto soñar"
-      ]
-    },
-    {
-      "id": "redondos-un-angel-para-tu-soledad",
-      "artistId": "redondos",
-      "song": "Un Ángel Para Tu Soledad",
-      "album": "Oktubre",
-      "year": 1986,
-      "songAliases": [
-        "Un Ángel Para Tu Soledad",
-        "Un Angel Para Tu Soledad",
-        "Ángel Para Tu Soledad"
+        "Ella fue, por esa vez\nMi héroe vivo, ¡bah!\nFue mi único héroe en este lío",
+        "Fue mi único héroe en este lío\nLa más linda del amor",
+        "La más linda del amor\nQue un tonto ha visto soñar\nMetió, metió mi rock 'n' roll\nBajo este pulso"
       ],
-      "albumAliases": [
-        "Oktubre",
-        "Octubre"
-      ],
-      "fragments": [
-        "Ya sufriste cosas mejores que estas\nY vas a andar esta ruta hoy cuando anochezca",
-        "Tu esqueleto te trajo hasta aquí\nCon un cuerpo hambriento, veloz\nY aquí, gracias a Dios\nUno no cree en lo que oye",
-        "Ángel de la soledad\nY de la desolación\nPreso de tu ilusión, vas a bailar",
-        "Alguna vez, quizás, se te va la mano\nY las llamas en pena invaden tu cuerpo\nY caés en manos del ángel de la soledad"
-      ]
+      "url": "https://www.letras.com/los-redonditos-de-ricota/202993/",
+      "lyric": "¿Era todo?, pregunté\nSoy un iluso\nNo nos dimos nada más\nSolo un buen gesto\n\nMordí el anzuelo una vez más\nSiempre un iluso\nNuestra estrella se agotó\nY era mi lujo\n\nElla fue, por esa vez\nMi héroe vivo, ¡bah!\nFue mi único héroe en este lío\nLa más linda del amor\nQue un tonto ha visto soñar\nMetió, metió mi rock 'n' roll\nBajo este pulso"
     },
     {
       "id": "la-tabare-alegris",
@@ -545,27 +449,6 @@
       "lyric": "Atrás de las botellas\nNuestra rubia mireya\nEn un rincón\n\nFinal del primer acto\nComo cumpliendo el pacto\nEn la función\n\nEso como patadas en los huevos\nComo los besos, que volaron\nLa amistad y nos dejaron\nPresos de la resignación\n\nAcodado al tablero\nBebiendo el aguacero\nDel perdón\n(En pleno mes de enero cavando el agujero del perdón)\n\nNos dimos un abrazo\nY barajando el mazo\nLa traición\n(Estoy hecho pedazos, así que no hago caso, es la intuición)\n\nEso de la amistad, salir ilesos\nTiesos en esta inexperiencia\nPor el no a la convivencia\nPresos de la desilusión\n\nEn todos estos años\nDe rock y desengaños\nLa pasión (diapasón)\n\nPerdí tantos amigos\nMirándome el ombligo\nSin condón\n(Caí en pleno verano de des-amor, desgano, desazón)\n\nPero ahora ya sé que no te quiero\nEntre probos re-rockeros\nY otros robos y rateros (musiqueros)\nFueron con mi corazón"
     },
     {
-      "id": "la-tabare-que-noche-aquella",
-      "artistId": "la-tabare",
-      "song": "Que Nochen La de Aquel Día",
-      "album": "",
-      "year": null,
-      "songAliases": [
-        "Que Nochen La de Aquel Día",
-        "Que Noche La de Aquel Día",
-        "Que Nochen La de Aquel Dia"
-      ],
-      "albumAliases": [
-
-      ],
-      "fragments": [
-        "Volvés pa´trás\nVos cada vez\nQue ves que vos\nCreés que te vas...\nNo entiendo.",
-        "Desabrochando broches en cuartos de hotel\nHundiendo a troches y moche barcos de papel\n¡Que noche aquella noche la del día aquel!",
-        "No entiendo por que no entiendo\nAlgunas cosas sencillas:\n¿Por qué nos sentamos en sillas?\n¿Por qué para andar un rato\nNos ponemos un par de zapatos?",
-        "Fantoche buda conectado vía antel\nProfeta del derroche de amor a granel"
-      ]
-    },
-    {
       "id": "ska-p-el-vals-del-obrero",
       "artistId": "ska-p",
       "song": "El Vals Del Obrero",
@@ -581,10 +464,15 @@
       ],
       "fragments": [
         "Orgulloso de estar entre el proletariado\nEs difícil llegar a fin de mes\nY tener que sudar y sudar\nPa' ganar nuestro pan",
-        "Este es mi sitio, esta es mi gente\nSomos obreros, la clase preferente",
-        "Sí señor, la revolución\nSí señor, sí señor, somos la revolución\nTu enemigo es el patrón",
-        "Feliz el empresario, más callos en mis manos\nMis riñones van a reventar\nNo tengo un puto duro pero sigo cotizando"
-      ]
+        "Este es mi sitio, esta es mi gente\nSomos obreros, la clase preferente\nPor eso, hermano proletario, con orgullo yo te canto esta canción\n¡Somos la revolución!",
+        "Sí señor, sí señor, somos la revolución\nTu enemigo es el patrón\nSí señor, sí señor, somos la revolución\n¡Viva la revolución!",
+        "Esta y Hasta los cojones de aguantara\nSanguijuelas, los que me roban mi dignidad",
+        "Feliz el empresario, más callos en mis manos\nMis riñones van a reventar\nNo tengo un puto duro pero sigo cotizando\nA tu estado del bienestar, ¡arriba!",
+        "Somos los obreros, la base de este juego\nEn el que siempre pierde el mismo pringao'",
+        "¡Resistencia!\n¡Resistencia!\n¡Resistencia!"
+      ],
+      "url": "https://www.letras.com/skap/36660/",
+      "lyric": "Orgulloso de estar entre el proletariado\nEs difícil llegar a fin de mes\nY tener que sudar y sudar\nPa' ganar nuestro pan\n\nEste es mi sitio, esta es mi gente\nSomos obreros, la clase preferente\nPor eso, hermano proletario, con orgullo, yo te canto esta canción\n¡Somos la revolución!\n\nSí señor, la revolución\nSí señor, sí señor, somos la revolución\nTu enemigo es el patrón\nSí señor, sí señor, somos la revolución\n¡Viva la revolución!\n\nEsta y Hasta los cojones de aguantara\nSanguijuelas, los que me roban mi dignidad\nMi vida se consume soportando esta rutina\nQue me ahoga cada día más\n\nFeliz el empresario, más callos en mis manos\nMis riñones van a reventar\nNo tengo un puto duro pero sigo cotizando\nA tu estado del bienestar, ¡arriba!\n\n¡Resistencia!\n¡Resistencia!\n¡Resistencia!\n\n¡Baila, hermano, el vals del obrero!\n\nEste es mi sitio, esta es mi gente\nSomos obreros, la clase preferente\nPor eso, hermano proletario, con orgullo yo te canto esta canción\n¡Somos la revolución!\n\nSí señor, la revolución\nSí señor, sí señor, somos la revolución\nTu enemigo es el patrón\nSí señor, sí señor, somos la revolución\n¡Viva la revolución!\n\nEn esta democracia hay mucho listo que se lucra\nExprimiendo a nuestra clase social\nLes importa cuatro huevos si tienes catorce hijos\nY la abuela no se puede operar\n\nSomos los obreros, la base de este juego\nEn el que siempre pierde el mismo pringao'\nUn juego bien pensado en el que nos tienen callados\nY te joden si no quieres jugar\n\n¡Resistencia!\n¡Resistencia!\n¡Resistencia!\n¡Resistencia!\n\nSka, ska, ska, ska\n\n¡Resistencia!\n¡Resistencia!\n¡Resistencia!\nResistencia, resistencia, resistencia\n\n¡Resistencia!\nInsistimos\n\n¡Resistencia!\n¡Resistencia!\n¡Resistencia!\nResistencia, resistencia\n¡De-so-be-dien-cia!"
     },
     {
       "id": "ska-p-mis-colegas",
@@ -599,11 +487,15 @@
         "Eurosis"
       ],
       "fragments": [
-        "Vas caminando despacio\nSin ganas de sonreír, de sonreír\nHemos quedado en el barrio\nUnos litros y cien duros de hachís",
-        "Han pasado 10 años\nMis colegas, ¿dónde están?\nEl que no anda en el Mako\nHace poco lo acabaron de enterrar\nLa heroína no acudió a su funeral",
-        "Eh, chaval, siempre a la sombra de la sociedad\nSomos la causa de su malestar\nEscúpele al sistema y nunca dejes de molestar",
-        "Qué te ha pasado, princesa\nQue no te veo sonreír... Sonreír\nAún no tienes tu dosis\nPor la noche te tienes que prostituir"
-      ]
+        "Vas caminando despacio\nSin ganas de sonreír, de sonreír",
+        "Han pasado 10 años\nMis colegas, ¿dónde están?",
+        "Eh, chaval, siempre a la sombra de la sociedad\nSomos la causa de su malestar",
+        "Escúpele al sistema y nunca dejes de molestar",
+        "No, chaval, no es ley de vida tu desigualdad\nNo te dieron la oportunidad",
+        "A mis colegas y a la pena en general\nNo os dejéis nunca, nunca esclavizar"
+      ],
+      "url": "https://www.letras.com/skap/305373/",
+      "lyric": "Vas caminando despacio\nSin ganas de sonreír, de sonreír\nHemos quedado en el barrio\nUnos litros y cien duros de hachís\n\nPerdidos en cualquier lado\nSoñando con escapar, con escapar\nLa mayoría del paro\nY el que curra del trabajo temporal\n\nHan pasado 10 años\nMis colegas, ¿dónde están?\nEl que no anda en el Mako\nHace poco lo acabaron de enterrar\nLa heroína no acudió a su funeral\n\nEh, chaval, siempre a la sombra de la sociedad\nSomos la causa de su malestar\nEscúpele al sistema y nunca dejes de molestar\n\nNo, chaval, no es ley de vida tu desigualdad\nNo te dieron la oportunidad\nEscúpele al sistema y nunca dejes de molestar\n\nExiste una alternativa\n¡Legalizar!\nEsto tiene que cambiar\nLo vamos a cambiar\n\nQué te ha pasado, princesa\nQue no te veo sonreír... Sonreír\nAún no tienes tu dosis\nPor la noche te tienes que prostituir\n\nMaldita mierda prohibida\nQue nuestros sueños rompió... Lo rompió\nHablábamos de injusticias\nComenzábamos nuestra revolución\nComenzábamos nuestra revolución\n\nEh, chaval, siempre a la sombra de la sociedad\nSomos la causa de su malestar\nEscúpele al sistema y nunca dejes de molestar\n\nNo, chaval, no es ley de vida tu desigualdad\nNo te dieron la oportunidad\nEscúpele al sistema y nunca dejes de molestar\n\nExiste una alternativa\n¡Legalizar!\nEsto tiene que cambiar\nLo vamos a cambiar\n\n¡Agresividad!\nNo somos ratas de ciudad\n¡Agresividad!\nContra el estado del malestar\n\n¡Agresividad!\nNo somos ratas de ciudad\n¡Agresividad!\nContra el estado del malestar\n\nDel paraíso al infierno\nHay un paso nada más\nLa prohibición es un business\nLa droga existe y no la vas a eliminar\nLa solución consiste en legalizar\n\nEh, chaval, siempre a la sombra de la sociedad\nSomos la causa de su malestar\nEscúpele al sistema y nunca dejes de molestar\n\nNo, chaval, no es ley de vida tu desigualdad\nNo te dieron la oportunidad\n\nA mis colegas y a la pena en general\nNo os dejéis nunca, nunca esclavizar\nLa unión hace la fuerza\nNunca lo has de olvidar"
     },
     {
       "id": "ska-p-cannabis",
@@ -618,11 +510,14 @@
         "Eurosis"
       ],
       "fragments": [
-        "Y saco un papelillo, me preparo un cigarrillo\nY una china pa'l canuto de hachís\nSaca ya la china, tron; venga ya esa china, tron",
-        "Lega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición",
-        "En Chueca, en La Latina, no hay en Tirso de Molina\nNi en Vallecas, ni siquiera en Chamberí",
-        "Sin cortarme un pelo, yo quiero mi caramelo\nVoy corriendo buscando a mi amigo Alí"
-      ]
+        "Saca ya la china, tron; venga ya esa china, tron\nQuémame la china, tron (¡no hay chinas!)",
+        "Y saco un papelillo, me preparo un cigarrillo\nY una china pa'l canuto de hachís (¡hachís!)\nSaca ya la china, tron; venga ya esa china, tron\nQuémame la china, tron",
+        "En Chueca, en La Latina, no hay en Tirso de Molina\nNi en Vallecas, ni siquiera en Chamberí (¡hachís!)\nY yo quiero una china, tron; dame ya esa china, tron",
+        "Legaliza, legaliza\n¡Le-ga-li-za-ción!\n¡Basta ya de hipocresía!\n¡Le-ga-li-za-ción!",
+        "Lega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición"
+      ],
+      "url": "https://www.letras.com/skap/36664/",
+      "lyric": "Y saco un papelillo, me preparo un cigarrillo\nY una china pa'l canuto de hachís (¡hachís!)\nSaca ya la china, tron; venga ya esa china, tron\nQuémame la china, tron (¡no hay chinas!)\n\nSaco un papelillo, me preparo un cigarrillo\nY una china pa'l canuto de hachís (¡hachís!)\nSaca ya la china, tron; venga ya esa china, tron\nQuémame la china, tron\n\nNo hay chinas, no hay chinas hoy\nNo hay chinas, no hay chinas hoy\n\nY saco un papelillo, me preparo un cigarrillo\nY una china pa'l canuto de hachís (¡hachís!)\nSaca ya la china, tron; venga ya esa china, tron\nQuémame la china, tron (¡no hay chinas!)\n\nSaco un papelillo, me preparo un cigarrillo\nY una china pa'l canuto de hachís (¡hachís!)\nSaca ya la china, tron; venga ya esa china, tron\nQuémame la china, tron\n\nNo hay chinas, no hay chinas hoy\nNo hay chinas, no hay chinas hoy\n\nLega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición\n\nLega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición\n\n¡Arriba!\nYo también, pue'\nCon sabrosura\n¡Qué rico!\nHazte el peta, ya\nJa, ja, ja, ja\n\nEn Chueca, en La Latina, no hay en Tirso de Molina\nNi en Vallecas, ni siquiera en Chamberí (¡hachís!)\nY yo quiero una china, tron; dame ya esa china, tron\nSaca ya la china, tron (¡no hay chinas!)\n\nSin cortarme un pelo, yo quiero mi caramelo\nVoy corriendo buscando a mi amigo Alí (¡Alí!)\nPásame una china, tron; yo quiero una china, tron\nUna posturita, tron\n\nNo chinas, no chinas hoy\nNo chinas, no chinas hoy\n\nLega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición\n\nLega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición\n\n¡Aprende, Arguiñano!\n¡Wih!\n¡Y sin semilla!\n\nLega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición\n\nLega-legalización (cannabis)\nDe calidad y barato\nLega-legalización (cannabis)\nBasta de prohibición\n\nCannabis, cannabis, cannabis\nLega-legalización\nCannabis, cannabis, cannabis\nLega-legalización\n\nCannabis, cannabis, cannabis (yo te quiero marihuana, yo te quiero marihuana)\nLega-legalización (yo te quiero marihuana, yo te quiero marihuana)\nCannabis, cannabis, cannabis (yo te quiero marihuana, yo te quiero marihuana)\nLega-legalización (yo te quiero marihuana, yo te quiero marihuana)\n\n¡Azúcar!\n¡Que nadie pare!\n¡Que siga la fiesta!\n¡Ay-ay-ay!, ¡ay!\nRico, qué rico, qué rico está esto\n¡Todo el mundo!\n¡Legaliza!\n\nLegaliza, legaliza\n¡Le-ga-li-za-ción!\n¡Basta ya de hipocresía!\n¡Le-ga-li-za-ción!\nLegaliza, legaliza\n¡Le-ga-li-za-ción!\n¡Basta ya de hipocresía!\n¡Le-ga-li-za-ción!\n¡Le-ga-li-za-ción!"
     },
     {
       "id": "julieta-venegas-limon-y-sal",
@@ -790,27 +685,6 @@
       "lyric": "Cuantas lunas que se van\nY nosotros esperando\nQue despierte el corazón\nQue parece estar quebrado\n\nTodo el tiempo que pasó\nNo me aleja de tu lado\nCielo de un solo color\nQue me sigue enamorando\n\nHay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro\nEl momento ya llegó\n\nCon los dientes apretados\nCielo de un solo color\nEn el alma está guardado\n\nVida, que vida pobre\nVivirla en este lugar\nQué saben, qué saben ellos\nQue no le pueden cantar\n\nHay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro\nAy, celeste regaláme un Sol"
     },
     {
-      "id": "no-te-va-gustar-chau",
-      "artistId": "no-te-va-gustar",
-      "song": "Chau",
-      "album": "",
-      "year": null,
-      "songAliases": [
-        "Chau"
-      ],
-      "albumAliases": [
-
-      ],
-      "fragments": [
-        "Estábamos los dos mirando el mar\nCuando la tarde moría\nComo moría lo nuestro\nJuro que no lo sabía",
-        "Miré para mi derecha\nVi que desaparecías\nGrité con todas mis fuerzas\nY noté que no me oías",
-        "No puedo conseguir\nCambiar ni corregir\nLo que me corre en las venas",
-        "Corazón\nHoy no dejes de latir\nTe alejaste un día\nAhora decidiste venir",
-        "Ha pasado más de un año y vos no estás\n¿Por qué habría de creerte?\nHubiera dado la vida y mucho más\nPor solo volver a verte",
-        "No podría darme el lujo\nDe ceder ante tu llanto\nNo pienso abrir las heridas\nDe haberte querido tanto"
-      ]
-    },
-    {
       "id": "angeles-azules-17-anos",
       "artistId": "angeles-azules",
       "song": "17 Años",
@@ -853,27 +727,6 @@
       ],
       "url": "https://www.letras.com/damas-gratis/no-te-creas-tan-importante/",
       "lyric": "Ya me contaron\nQue te estás hablando mal de mí\nY que te burlas\n\nPorque según ya lo notaste\nQue te ruego, vaya qué imaginación\nY ahora resulta\n\nNo te confundas\nYo no camino para atrás\nComo un cangrejo\n\nYo te conozco y sé que no vales ni un peso\nY de personas como tú\nYa no me dejo\n\nNo te creas tan importante\nYa no te pienso todo el día como antes\nSe me cerraron las heridas con alcohol\nY ni borracha volvería a buscarte\nPorque ya no siento amor\n\nNo te creas tan importante\nYa soy feliz, no tengo tiempo para odiarte\nYa no te extraño pues sin ti estoy mejor\nNo andes diciendo que me muero por mirarte\nEso ya se terminó\n\nNo te creas tan importante\nAhí te encargo por favor\n\nNo te confundas\nYo no camino para atrás\nComo un cangrejo\n\nYa te conozco y sé que no vales ni un peso\nY de personas como tú\nYa no me dejo\n\nNo te creas tan importante\nYa no te pienso todo el día como antes\nSe me cerraron las heridas con alcohol\nY ni borracha volvería a buscarte\nPorque ya no siento amor\n\nNo te creas tan importante\nYa soy feliz, no tengo tiempo para odiarte\nYa no te extraño pues sin ti estoy mejor\nNo andes diciendo que me muero por mirarte\nEso ya se terminó\n\nNo te creas tan importante\nAhí te encargo por favor"
-    },
-    {
-      "id": "damas-gratis-los-duenos-del-pabellon",
-      "artistId": "damas-gratis",
-      "song": "Los Dueños del Pabellón",
-      "album": "",
-      "year": null,
-      "songAliases": [
-        "Los Dueños del Pabellón",
-        "Los Duenos del Pabellon"
-      ],
-      "albumAliases": [
-
-      ],
-      "fragments": [
-        "Ahora nosotros tomamos el control\nSomos los dueños del pabellon\nEstamos cansados de tanta represion\nY vamo a tocar de esta prision",
-        "Quiero que todos se amotinen\nLevanten bien las manos\nQue se pongan a rezar\nLos guardias y refugiados\nDe esta prision uhh ohh ohh",
-        "A mi no me importa morir\nAbrime la celda que me quiero ir",
-        "Señor carcelero\nDejeme salir\nSeñor carcelero\nDejeme salir",
-        "Este es el super teclado de pablito lescano"
-      ]
     },
     {
       "id": "damas-gratis-el-humo-de-este-fasito",
@@ -1014,26 +867,6 @@
       "lyric": "fresias\nen las manos\nojos de lluvia\ny cuatro filtros muertos\n\ncardos\nen los labios\nborra de un café que jamás pediste\n\npreguntaste:\n\"donde hay otra vida para mi?\ndonde el cielo es azul?\ndonde me perdí?\n\nvamos al mar\nvamos a otro lugar\nquiero estar bien\npuede ser esta vez?\"\n\nlluvia\nno me mires\nesta piel\nno es mi piel\nla que más me gusta\n\nvamos\nno quiero mirar\nes mi cara un cristal roto en mil pedazos\npero ya sabés yo no elijo mi suerte\nmi verano\nmi cura de sueño\n\nvamos al mar..."
     },
     {
-      "id": "los-buitres-ojos",
-      "artistId": "los-buitres",
-      "song": "Ojos",
-      "album": "",
-      "year": null,
-      "songAliases": [
-        "Ojos"
-      ],
-      "albumAliases": [
-
-      ],
-      "fragments": [
-        "es de madrugada\ntibia el sol y miro el cielo\npara preguntar\ndonde están mis sueños",
-        "quise así tanto, tanto, tanto\npara mi soledad\ntres canciones con palabras por llenar\npara mi soledad",
-        "al fin primavera\nBioy saluda desde el cielo\nquiero mis alas\nme voy a nadar",
-        "vino, tinta y sangre\ny una siesta muy cerca del mar",
-        "La copa frágil del amor\nse llena con el corazón"
-      ]
-    },
-    {
       "id": "los-buitres-soy-del-monton",
       "artistId": "los-buitres",
       "song": "Soy del Montón",
@@ -1071,10 +904,13 @@
 
       ],
       "fragments": [
-        "Ni olvido ni perdón\nLa muerte nunca fue peor\nLa justicia tarda pero llegará\nYa no podrás matar",
-        "Escondido entre mentiras\nCuanto durarás\nLas cuentas en Suiza\nTe van a congelar\nYa no podrás robar",
-        "Ni olvido ni perdón\nPorque además fuiste ladrón\nDe alguna manera\nLa vas a quedar\nYa no podrás matar"
-      ]
+        "Ni olvido ni perdón\nLa muerte nunca fue peor",
+        "Escondido entre mentiras\nCuanto durarás\nLas cuentas en Suiza\nTe van a congelar",
+        "Porque además fuiste ladrón\nDe alguna manera\nLa vas a quedar",
+        "La muerte nunca fue peor\nLa justicia tarda pero llegará\nYa no podrás matar"
+      ],
+      "url": "https://www.letras.com/trotsky-vengaran/ni-olvido-ni-perdon/",
+      "lyric": "Ni olvido ni perdón\nLa muerte nunca fue peor\nLa justicia tarda pero llegará\nYa no podrás matar\n\nNunca mas\n\nEscondido entre mentiras\nCuanto durarás\nLas cuentas en Suiza\nTe van a congelar\nYa no podrás robar\n\nNunca mas\nNi olvido ni perdón\nPorque además fuiste ladrón\nDe alguna manera\nLa vas a quedar\nYa no podrás matar\n\nNunca mas"
     },
     {
       "id": "trotsky-vengaran-el-alma-en-2",
@@ -1326,29 +1162,6 @@
       "lyric": "Hay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso\n\nHay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso\n\nMétale baldosas grises, y pedazos de cordones\nÉchele un poco de sal al hormigón\nAlquitrán bien picadito,\nAdoquines saltaditos\nY en las bocas de tormenta pimentón\nQué recetón!\n\nHay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso\n\nQue la risa con permiso\nY la flor del paraíso\nA ese guiso le dará un toque dulzón\nRecoja ánimos del piso\nJuegue con melancolía\nY su sopa será de televisión\nQué recetón!\n\nHoy invito yo, no me vaya a despreciar\nTómelo con calma porque otra cosa no hay\nTome servilleta\nTome plato hondo\nTápese la ñata\nTome carrerita\nY zambúllase como en el mar\n\nHay que dura ta la olla\nVamo a meterla en la sopa para ver si la apagamo\nOlla abollada, calle y hueso\nVamo a hacer con ella un caldo bien espeso\n\nPongo (un boton es) entonces agonía\nUna lágrima del día\nComerciantes de neurosis un montón\nAgréguele cansancio y gente\nBien a punto del reviente\nY meta todo dentro de la olla a presión\nY atención\n\nQue el mecanismo de las ollas a presión\nHace aprontar la comida rapidito\nCon el vapor organizado en una gran concentración\nLlevando de estandarte el descarte proteínico\nQue el mecanismo de las ollas a presión\nTiene pensado hasta el último detalle\nCuando el vapor es calentado, acrecentado, propasado\nY hace su manifestación\nAparece de costado un pitito que hace pii\nDéjela hervir algún rato\nQue la suela los zapatos\nNo se cuecen todas al primer hervor\nEche carcamales viejos\nY botones sin pellejo\nDe los verdes\nQue le dan muy buen sabor\nY al comedor\n\nHay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso\nMastique y trague sin parar\nYa se va a ablandar\nCon agua estancada puede acompañar."
     },
     {
-      "id": "l-autentika-cumbia-ni-ahi",
-      "artistId": "l-autentika",
-      "song": "Cumbia Ni Ahí",
-      "album": "",
-      "year": null,
-      "songAliases": [
-        "Cumbia Ni Ahí",
-        "Cumbia Ni Ahi"
-      ],
-      "albumAliases": [
-
-      ],
-      "fragments": [
-        "Cumbia ni ahí cumbia ni ahí la cumbia no es para mi\nCumbia ni ahí cumbia ni ahí De cumbia estoy hasta aquí",
-        "Esta es la autentika la que te arranca la cabeza",
-        "Fui a las cataratas del Iguazú a desenchufarme de la ciudad\nAlla todo el mundo es re cumbiancha, yo con esa merza no estoy ni ahí",
-        "Un negro grandote que dijo asi\nVen mi capullito de aleli ahora tu serás mi cumbia ni ahí",
-        "Cierra los ojitos y no respondas yo voy a enseñarte mi anaconda",
-        "Me pinto los labios y me puso peluca\nSentí que su aliento me quemo la nunca\nEmpecé a correr me siguieron diez\nQue suerte que tuve me salve de tres",
-        "Hay que lindas playas y sus garotas\nVuelvo del casino me quede en pelotas"
-      ]
-    },
-    {
       "id": "cuarteto-de-nos-al-cielo-no",
       "artistId": "cuarteto-de-nos",
       "song": "Al Cielo No",
@@ -1456,12 +1269,12 @@
       "url": "https://www.letras.com/damas-gratis/256864/",
       "lyric": "Ahora nosotros tomamos el control\nSomos los dueños del pabellon\nEstamos cansados de tanta represion\nY vamo a tocar de esta prision\n\nAhora nosotros tomamos el control\nSomos los dueños del pabellon\nEstamos cansados de tanta represion\nY vamo a tocar de esta prision\n\nQuiero que todos se amotinen\nLevanten bien las manos\nQue se pongan a rezar\nLos guardias y refugiados\nDe esta prision uhh ohh ohh\nDe esta prision uhh ohh ohh\n\nA mi no me importa morir\nAbrime la celda que me quiero ir\nA mi no me importa morir\nAbrime la celda que me quiero ir\n\nA mi no me importa morir\nAbrime la celda que me quiero ir\nA mi no me importa morir\nAbrime la celda que me quiero ir\n\nSeñor carcelero\nDejeme salir\nSeñor carcelero\nDejeme salir\n\nOtra vez...\n\nEste es el super teclado de pablito lescano",
       "fragments": [
+        "Ahora nosotros tomamos el control\nSomos los dueños del pabellón",
+        "Estamos cansados de tanta represion\nY vamo a tocar de esta prision",
         "Quiero que todos se amotinen\nLevanten bien las manos",
+        "De esta prisión uhh ohh ohh\nDe esta prisión uhh ohh ohh",
         "A mi no me importa morir\nAbrime la celda que me quiero ir",
-        "Señor carcelero\ndejeme salir",
-        "De esta prision uhh ohh ohh\nDe esta prision uhh ohh ohh",
-        "Ahora nosotros tomamos el control\nSomos los dueños del pabellon",
-        "Estamos cansados de tanta represion\nY vamo a tocar de esta prision"
+        "Señor carcelero\nDejeme salir"
       ]
     },
     {
@@ -1913,10 +1726,10 @@
       "fragments": [
         "Pensarán que soy medio ladino\nO que vivo borracho de vino",
         "No me jodan más no somos latinos\nNo me jodan más no somos latinos",
-        "Yo me crié aca en la suiza del sur",
         "Me parió en Montevideo mi mami\nYo no quiero ir a vivir a Miami",
-        "Prefiero hablar con un filósofo sueco\nQue con un indio guatemalteco",
-        "Uruguay ni saben donde queda"
+        "Y tengo más en común con un rumano\nQue con un cholo boliviano",
+        "Uruguay ni saben donde queda",
+        "Prefiero hablar con un filósofo sueco\nQue con un indio guatemalteco"
       ]
     },
     {
@@ -2667,6 +2480,71 @@
         "Nosotros no somos como los Orozco",
         "Rodolfo Orozco: Con voz como John Scott, ronco, ronco\nFormó todos los coros, tocó: Dobro con mollo, mombo con moro",
         "Yo pongo los votos solo por Rodolfo\nLos otros son locos, yo los conozco\nNo los soporto, stop, Stop"
+      ]
+    },
+    {
+      "id": "cuarteto-de-nos-monei",
+      "artistId": "cuarteto-de-nos",
+      "song": "Monei",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Monei"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/cuarteto-de-nos/quiero-money/",
+      "lyric": "Yo quería en Carrasco una mansión\npero solo conseguí un ranchito en Casabó.\nYo quería andar en un Meredes Benz\ny ahora solo ando en un 126.\n\nSoy negado viejo y siempre lo sabrán\ncomo decía aquel viejo refrán:\nel que nace mona Chita nunca llega a ser Tarzán.\n\nQuiero monei.\n\nYo quería tomar sol en el Caribe\ny por ahora solo surfo en la playa Ramirez.\nYo quería ir a las fiestas del jet set\npero a los bailes del Coco fue a donde yo más llegué.\n\nSoy negado viejo, y no tienen compasión\ncomo en la parábola de Rodó:\nel que nace pa letrina nuca llega a water cló.\n\nQuiero monei.\n\nYo quería vestirme en Christian Dior\ny no este buzo apolillado que mi abuela me tejió.\nYo quería comer caviar y faisán\ny no sacarme de los dientes el perejil de un choripán.\n\nSoy negado viejo, y no tienen corazón\ncomo decía aquella vieja canción:\nel que nace pildorita nunca llega a salchichón.\n\nQuiero monei.",
+      "fragments": [
+        "Yo quería en Carrasco una mansión\npero solo conseguí un ranchito en Casabó.\nYo quería andar en un Meredes Benz\ny ahora solo ando en un 126.",
+        "Soy negado viejo y siempre lo sabrán\ncomo decía aquel viejo refrán:\nel que nace mona Chita nunca llega a ser Tarzán.",
+        "Yo quería tomar sol en el Caribe\ny por ahora solo surfo en la playa Ramirez.\nYo quería ir a las fiestas del jet set\npero a los bailes del Coco fue a donde yo más llegué.",
+        "Yo quería vestirme en Christian Dior\ny no este buzo apolillado que mi abuela me tejió.\nYo quería comer caviar y faisán\ny no sacarme de los dientes el perejil de un choripán.",
+        "Soy negado viejo, y no tienen corazón\ncomo decía aquella vieja canción:\nel que nace pildorita nunca llega a salchichón."
+      ]
+    },
+    {
+      "id": "los-buitres-ojos-rojos",
+      "artistId": "los-buitres",
+      "song": "Ojos Rojos",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Ojos Rojos"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/buitres/254361/",
+      "lyric": "El humo te cubrió\ny lógrate escapar\na los fantasmas de una noche azul\n\nRecuerdo de una vez\nlos días que perdí\nno es tarde para 15 años\n\nLo que fue una vez\nlo quiero siempre\naun hay tiempo para una muerte mas\n\nVoy a beber tus ojos rojos\nvoy a cantarte una canción de amor\nherido el celo de tu sangre\ncaliente hasta que no sienta tu voz\n\nBorracho por demas\nclavado al mostrador\ntodo parece derrumbarse\n\nNi mil resaca mas\npodrán borrarte\nlas horas lentas pasaran al fin\n\nPero antes voy a moverme\nhasta alcanzar el filo\npara morder tu cuello una y otra vez",
+      "fragments": [
+        "El humo te cubrió\ny lógrate escapar\na los fantasmas de una noche azul",
+        "Voy a beber tus ojos rojos\nvoy a cantarte una canción de amor\nherido el celo de tu sangre\ncaliente hasta que no sienta tu voz",
+        "Borracho por demas\nclavado al mostrador\ntodo parece derrumbarse",
+        "Pero antes voy a moverme\nhasta alcanzar el filo\npara morder tu cuello una y otra vez"
+      ]
+    },
+    {
+      "id": "redondos-el-pibe-de-los-astilleros",
+      "artistId": "redondos",
+      "song": "El Pibe de Los Astilleros",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "El Pibe de Los Astilleros"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/los-redonditos-de-ricota/202680/",
+      "lyric": "Fue unos meses a Caseros y su Strato roja\nSe hizo el torbellino que hoy suena en la radio\nLa ceniza no caía desde su cigarro\nY estaba, en sus ojos, desarmándote\n\nAlquiló una rana rubia, tibia y haragana\nSe moría de ganas de matarla\nUna linda damita de Concordia\nEl más bello fuselaje que jamás lustró\n\nLe hizo un par de promesas imprudentes\nY así fue que, de ellas, se aburrió\nLas minitas aman los payasos\nY la pasta de campeón\n\nEl pibe de los astilleros nunca se rendía\nTuvo un palacete por un par de días\nRapiñaba montado a los containers\nEl maldito amor que tanto miedo da\n\nFue por una lluvia que realmente moje\n(Que pusiera fin a su aventura)\nUn final feliz para pimpollos\nAllí estaba, al fin, acechándolo\n\nCiertos reyes no viajan en camello\nEllos andan al tranco del amor\nEsos tipos soplan con el viento\nAl rebaño y su temor",
+      "fragments": [
+        "Fue unos meses a Caseros y su Strato roja\nSe hizo el torbellino que hoy suena en la radio",
+        "Alquiló una rana rubia, tibia y haragana\nSe moría de ganas de matarla",
+        "El pibe de los astilleros nunca se rendía\nTuvo un palacete por un par de días",
+        "Rapiñaba montado a los containers\nEl maldito amor que tanto miedo da",
+        "Ciertos reyes no viajan en camello\nEllos andan al tranco del amor"
       ]
     }
   ]
