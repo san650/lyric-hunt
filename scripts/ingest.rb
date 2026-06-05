@@ -1,41 +1,31 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 #
-# scripts/ingest.rb — fetch lyric pages from letras.com and merge them
-# into db.json (artists + songs). Idempotent: running with the same
-# input twice does not duplicate songs.
+# scripts/ingest.rb — fetch lyric pages from letras.com, run them through
+# a local Ollama Gemma 4 model to pick out memorable sentences, and merge
+# everything into db.json.
+#
+# Two-phase flow:
+#   1. Download every URL into tmp/lyrics/<artistId>__<slug>.json
+#      (one sidecar per song with the full lyric).
+#   2. For each sidecar, ask the LLM to extract fragments and merge into
+#      db.json. Existing songs are rewritten: `fragments` and `lyric` are
+#      overwritten; album/year/aliases are preserved.
 #
 # Usage:
 #   ruby scripts/ingest.rb input.txt
 #
-# Optional flag:
-#   --db PATH    override the db.json path (defaults to ../db.json
-#                relative to this script).
+# Flags:
+#   --db PATH            override db.json path (default ../db.json).
+#   --model NAME         Ollama model tag (default gemma4).
+#   --ollama-url URL     Ollama base URL (default http://localhost:11434).
+#   --skip-download      reuse tmp/ contents; skip Phase 1.
+#   --keep-tmp           don't prune tmp/ files after a successful run
+#                        (default behavior is to keep them; reserved for
+#                        future cleanup logic).
 #
-# Input format (blank-line separated band sections):
-#
-#   El Cuarteto de Nos:
-#   https://www.letras.com/cuarteto-de-nos/.../
-#   https://www.letras.com/cuarteto-de-nos/.../
-#
-#   Los Redondos:
-#   https://www.letras.com/los-redonditos-de-ricota/.../
-#
-# Band headers are matched (diacritic-tolerant, case-insensitive) against
-# the artists registered in db.json. Unknown headers are auto-registered
-# as new artists (id = kebab-slug of header, displayName = header,
-# aliases = [header]); edit db.json afterwards if you want richer aliases.
-#
-# Song ids are derived as "<artistId>-<slug(title)>". If a song with that
-# id is already in db.json it is skipped (no overwrite).
-#
-# Requires: nokogiri (gem install nokogiri).
-#
-# Note on letras.com fetching: the site fingerprints bots. The Fetcher
-# below sends the full Chrome-like header set and warms up with a GET of
-# the homepage to pick up session cookies. If you still see 403s, the
-# cause is likely TLS-fingerprint detection (JA3); swap in a Ferrum-
-# driven headless Chrome and reuse parse_lyric as-is.
+# Requires: nokogiri, a running Ollama daemon with the chosen model
+# pulled (`ollama pull gemma4`).
 
 require 'net/http'
 require 'uri'
@@ -43,6 +33,7 @@ require 'json'
 require 'set'
 require 'zlib'
 require 'stringio'
+require 'fileutils'
 
 begin
   require 'nokogiri'
@@ -179,12 +170,6 @@ class Fetcher
   end
 end
 
-FETCHER = Fetcher.new
-
-def fetch_html(url)
-  FETCHER.fetch(url)
-end
-
 # ── Parsing ──────────────────────────────────────────────────────
 
 def parse_lyric(html, url)
@@ -205,26 +190,325 @@ def parse_lyric(html, url)
   { title: title, text: text }
 end
 
-def fragments_from(text)
-  parts = text.split(/\n\s*\n/).map(&:strip).reject(&:empty?)
-  seen = {}
-  uniq = parts.select { |p| !seen[p] && (seen[p] = true) }
-  uniq.reject { |p| p.length < 30 || (p.split("\n").size < 2 && p.length < 50) }
+# ── Ollama client ────────────────────────────────────────────────
+
+class Ollama
+  class Error < StandardError; end
+
+  def initialize(base_url:, model:)
+    @base = URI.parse(base_url)
+    @model = model
+  end
+
+  def reachable?
+    uri = URI.join(@base.to_s.sub(%r{/?$}, '/'), 'api/tags')
+    res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https', open_timeout: 3, read_timeout: 5) do |http|
+      http.request(Net::HTTP::Get.new(uri.request_uri))
+    end
+    return false unless res.code.to_i == 200
+    body = JSON.parse(res.body)
+    Array(body['models']).any? { |m| m['name'].to_s.start_with?(@model) || m['name'].to_s == @model }
+  rescue StandardError
+    false
+  end
+
+  # Returns the raw assistant response string. Caller parses JSON.
+  def complete(prompt)
+    uri = URI.join(@base.to_s.sub(%r{/?$}, '/'), 'api/generate')
+    req = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
+    req.body = JSON.generate(
+      model:   @model,
+      prompt:  prompt,
+      stream:  false,
+      format:  'json',
+      options: { temperature: 0.2 }
+    )
+
+    res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https', open_timeout: 10, read_timeout: 300) do |http|
+      http.request(req)
+    end
+    raise Error, "Ollama HTTP #{res.code}: #{res.body}" unless res.code.to_i == 200
+
+    body = JSON.parse(res.body)
+    body['response'].to_s
+  rescue JSON::ParserError => e
+    raise Error, "Ollama non-JSON wrapper: #{e.message}"
+  end
+end
+
+PROMPT_TEMPLATE = <<~PROMPT
+  Sos un curador de un juego de adivinar canciones en español.
+  Te paso la letra completa de una canción. Tu tarea es elegir entre 5 y 8
+  fragmentos memorables que un fan reconocería al instante: versos icónicos,
+  hooks, frases distintivas que identifiquen la canción.
+
+  Reglas:
+  - Evitá relleno o frases genéricas que podrían pertenecer a cualquier canción.
+  - Si el coro es icónico, incluilo una sola vez (no repetido).
+  - Cada fragmento puede ser de 1 a 4 líneas.
+  - Conservá los saltos de línea originales dentro del fragmento (usá \\n entre líneas).
+  - No traduzcas. No parafrasees. Copiá los versos tal como aparecen.
+
+  Devolvé EXCLUSIVAMENTE un JSON válido con esta forma exacta:
+  { "fragments": ["...", "...", ...] }
+
+  No agregues texto fuera del JSON. No agregues comentarios.
+
+  Canción: %<title>s
+  Artista: %<artist>s
+  Letra:
+  %<lyric>s
+PROMPT
+
+FRAGMENT_MIN_LEN = 20
+FRAGMENT_MAX_LEN = 400
+FRAGMENT_MIN_COUNT = 3
+FRAGMENT_MAX_COUNT = 12
+
+def validate_fragments(raw_response)
+  obj = JSON.parse(raw_response)
+  frags = obj['fragments']
+  raise "no fragments key" unless frags.is_a?(Array)
+  raise "fragment count #{frags.size} outside [#{FRAGMENT_MIN_COUNT}, #{FRAGMENT_MAX_COUNT}]" \
+    if frags.size < FRAGMENT_MIN_COUNT || frags.size > FRAGMENT_MAX_COUNT
+
+  frags.each_with_index do |f, i|
+    raise "fragment #{i} not a string" unless f.is_a?(String)
+    stripped = f.strip
+    raise "fragment #{i} too short (#{stripped.length} chars)" if stripped.length < FRAGMENT_MIN_LEN
+    raise "fragment #{i} too long (#{stripped.length} chars)"  if stripped.length > FRAGMENT_MAX_LEN
+  end
+
+  frags.map(&:strip).reject(&:empty?)
+end
+
+def select_fragments_with_llm(ollama, title:, artist:, lyric:, max_retries: 3)
+  prompt = format(PROMPT_TEMPLATE, title: title, artist: artist, lyric: lyric)
+  last_error = nil
+  max_retries.times do |attempt|
+    begin
+      raw = ollama.complete(prompt)
+      return validate_fragments(raw)
+    rescue StandardError => e
+      last_error = e
+      $stderr.puts "  llm attempt #{attempt + 1}/#{max_retries} failed: #{e.message}"
+    end
+  end
+  raise Ollama::Error, "gave up after #{max_retries} attempts: #{last_error&.message}"
+end
+
+# ── Input parsing ────────────────────────────────────────────────
+
+# Walks the input file. For each "Artist:" header, resolves (or registers)
+# the artist in db. Yields (artist, url) for every URL line.
+def each_artist_url(input_path, db)
+  current_artist = nil
+  File.foreach(input_path) do |raw|
+    line = raw.strip
+    next if line.empty?
+
+    if line.end_with?(':')
+      header = line[0..-2].strip
+      current_artist = find_artist(db['artists'], header)
+      if current_artist.nil?
+        current_artist = register_artist!(db['artists'], header)
+        $stderr.puts "+ new artist: #{current_artist['id']} (#{current_artist['displayName']})"
+      end
+      next
+    end
+
+    next unless line.start_with?('http')
+    if current_artist.nil?
+      $stderr.puts "WARN: URL #{line} has no preceding band header — skipping"
+      next
+    end
+    yield current_artist, line
+  end
+end
+
+# ── Phase 1: download ────────────────────────────────────────────
+
+def sidecar_path(tmp_dir, artist_id, song_slug)
+  File.join(tmp_dir, "#{artist_id}__#{song_slug}.json")
+end
+
+def download_phase(input_path, db, tmp_dir, fetcher)
+  FileUtils.mkdir_p(tmp_dir)
+  paths  = []
+  errors = []
+
+  each_artist_url(input_path, db) do |artist, url|
+    sleep 0.5  # polite pacing
+    begin
+      html = fetcher.fetch(url)
+      data = parse_lyric(html, url)
+      song_slug = slug(strip_parens(data[:title]))
+      path = sidecar_path(tmp_dir, artist['id'], song_slug)
+      File.write(path, JSON.pretty_generate(
+        'url'      => url,
+        'artistId' => artist['id'],
+        'title'    => data[:title],
+        'lyric'    => data[:text]
+      ) + "\n")
+      paths << path
+      $stderr.puts "↓ #{artist['id']} :: #{data[:title]}"
+    rescue StandardError => e
+      errors << "ERR #{url}: #{e.message}"
+      $stderr.puts "× #{url}: #{e.message}"
+    end
+  end
+
+  [paths, errors]
+end
+
+# For --skip-download: resolve which existing sidecars in tmp_dir
+# correspond to the URLs in input_path by matching the `url` field.
+def sidecars_for_input(input_path, db, tmp_dir)
+  wanted = []
+  each_artist_url(input_path, db) { |_artist, url| wanted << url }
+  wanted_set = Set.new(wanted)
+
+  found_by_url = {}
+  Dir.glob(File.join(tmp_dir, '*.json')).each do |path|
+    begin
+      data = JSON.parse(File.read(path))
+      found_by_url[data['url']] = path if wanted_set.include?(data['url'])
+    rescue StandardError
+      next
+    end
+  end
+
+  paths   = []
+  missing = []
+  wanted.each do |url|
+    if found_by_url.key?(url)
+      paths << found_by_url[url]
+    else
+      missing << url
+    end
+  end
+  [paths, missing]
+end
+
+# ── Phase 2: LLM + merge ─────────────────────────────────────────
+
+# Returns artist matching the given id; raises if missing.
+def artist_by_id!(db, artist_id)
+  a = db['artists'].find { |x| x['id'] == artist_id }
+  raise "artist #{artist_id.inspect} missing from db.json" if a.nil?
+  a
+end
+
+def upsert_song!(db, artist, title, url, lyric, fragments)
+  bare = strip_parens(title)
+  song_id = "#{artist['id']}-#{slug(bare)}"
+  existing = db['songs'].find { |s| s['id'] == song_id }
+
+  if existing
+    existing['url']       = url
+    existing['lyric']     = lyric
+    existing['fragments'] = fragments
+    [:updated, existing]
+  else
+    song = {
+      'id'           => song_id,
+      'artistId'     => artist['id'],
+      'song'         => bare,
+      'album'        => '',
+      'year'         => nil,
+      'songAliases'  => song_aliases(title),
+      'albumAliases' => [],
+      'url'          => url,
+      'lyric'        => lyric,
+      'fragments'    => fragments,
+    }
+    db['songs'] << song
+    [:added, song]
+  end
+end
+
+def process_phase(sidecar_paths, db, ollama)
+  added = []
+  updated = []
+  errors = []
+
+  if sidecar_paths.empty?
+    $stderr.puts "no sidecars to process"
+    return [added, updated, errors]
+  end
+
+  sidecar_paths.each do |path|
+    begin
+      data = JSON.parse(File.read(path))
+      artist = artist_by_id!(db, data['artistId'])
+      title  = data['title']
+      lyric  = data['lyric']
+      url    = data['url']
+
+      $stderr.puts "→ #{artist['id']} :: #{title}"
+      frags = select_fragments_with_llm(
+        ollama,
+        title:  title,
+        artist: artist['displayName'],
+        lyric:  lyric
+      )
+
+      action, song = upsert_song!(db, artist, title, url, lyric, frags)
+      if action == :added
+        added << song
+        $stderr.puts "+ #{song['id']} (#{frags.size} fragments)"
+      else
+        updated << song
+        $stderr.puts "~ #{song['id']} (#{frags.size} fragments)"
+      end
+    rescue StandardError => e
+      errors << "ERR #{path}: #{e.message}"
+      $stderr.puts "× #{path}: #{e.message}"
+    end
+  end
+
+  [added, updated, errors]
 end
 
 # ── Main ─────────────────────────────────────────────────────────
 
-DEFAULT_DB = File.expand_path('../db.json', __dir__)
+DEFAULT_DB     = File.expand_path('../db.json', __dir__)
+DEFAULT_TMP    = File.expand_path('../tmp/lyrics', __dir__)
+DEFAULT_MODEL  = 'gemma4'
+DEFAULT_OLLAMA = 'http://localhost:11434'
 
-input_path = nil
-db_path    = DEFAULT_DB
+# Guard main so other scripts (e.g. reprocess.rb) can `require_relative`
+# this file to reuse Ollama, select_fragments_with_llm, etc.
+if __FILE__ == $PROGRAM_NAME
+
+input_path    = nil
+db_path       = DEFAULT_DB
+tmp_dir       = DEFAULT_TMP
+model         = DEFAULT_MODEL
+ollama_url    = DEFAULT_OLLAMA
+skip_download = false
 
 args = ARGV.dup
 while (a = args.shift)
   case a
-  when '--db'  then db_path = args.shift
+  when '--db'           then db_path = args.shift
+  when '--model'        then model = args.shift
+  when '--ollama-url'   then ollama_url = args.shift
+  when '--tmp'          then tmp_dir = args.shift
+  when '--skip-download' then skip_download = true
+  when '--keep-tmp'     then nil # reserved; tmp is kept by default
   when '-h', '--help'
-    puts "usage: ruby #{$PROGRAM_NAME} [--db db.json] input.txt"
+    puts <<~USAGE
+      usage: ruby #{$PROGRAM_NAME} [flags] input.txt
+
+      flags:
+        --db PATH           db.json path (default #{DEFAULT_DB})
+        --model NAME        Ollama model tag (default #{DEFAULT_MODEL})
+        --ollama-url URL    Ollama base URL (default #{DEFAULT_OLLAMA})
+        --tmp DIR           tmp/ directory (default #{DEFAULT_TMP})
+        --skip-download     reuse tmp/ contents; skip download phase
+        --keep-tmp          reserved (tmp/ is currently kept by default)
+    USAGE
     exit 0
   else
     if input_path.nil?
@@ -235,7 +519,7 @@ while (a = args.shift)
   end
 end
 
-abort "usage: ruby #{$PROGRAM_NAME} [--db db.json] input.txt" if input_path.nil?
+abort "usage: ruby #{$PROGRAM_NAME} [flags] input.txt" if input_path.nil?
 abort "no such file: #{input_path}" unless File.exist?(input_path)
 
 db = if File.exist?(db_path)
@@ -246,87 +530,38 @@ db = if File.exist?(db_path)
 db['artists'] ||= []
 db['songs']   ||= []
 
-existing_song_ids = Set.new(db['songs'].map { |s| s['id'] })
-
-added_artists = []
-added_songs   = []
-skipped       = []
-errors        = []
-current_artist = nil
-
-File.read(input_path).each_line do |line|
-  line = line.strip
-  next if line.empty?
-
-  if line.end_with?(':')
-    header = line[0..-2].strip
-    current_artist = find_artist(db['artists'], header)
-    if current_artist.nil?
-      current_artist = register_artist!(db['artists'], header)
-      added_artists << current_artist
-      $stderr.puts "+ new artist: #{current_artist['id']} (#{current_artist['displayName']})"
-    end
-    next
-  end
-
-  next unless line.start_with?('http')
-  url = line
-
-  if current_artist.nil?
-    errors << "URL #{url} has no preceding band header."
-    next
-  end
-
-  begin
-    sleep 0.5  # polite pacing between requests
-    html = fetch_html(url)
-    data = parse_lyric(html, url)
-    frags = fragments_from(data[:text])
-    raise 'no usable fragments extracted' if frags.empty?
-
-    title  = data[:title]
-    bare   = strip_parens(title)
-    new_id = "#{current_artist['id']}-#{slug(bare)}"
-
-    if existing_song_ids.include?(new_id)
-      skipped << "#{new_id} (already in db.json)"
-      $stderr.puts "= #{current_artist['id']} :: #{bare} (skipped — already present)"
-      next
-    end
-
-    song = {
-      'id'           => new_id,
-      'artistId'     => current_artist['id'],
-      'song'         => bare,
-      'album'        => '',
-      'year'         => nil,
-      'songAliases'  => song_aliases(title),
-      'albumAliases' => [],
-      'fragments'    => frags,
-    }
-    db['songs'] << song
-    existing_song_ids << new_id
-    added_songs << song
-    $stderr.puts "+ #{current_artist['id']} :: #{bare} (#{frags.size} fragments)"
-  rescue StandardError => e
-    errors << "ERR #{url}: #{e.message}"
-  end
+ollama = Ollama.new(base_url: ollama_url, model: model)
+unless ollama.reachable?
+  abort "Ollama unreachable at #{ollama_url} or model #{model.inspect} not pulled.\n" \
+        "  Start Ollama and run: ollama pull #{model}"
 end
 
-# Persist with stable 2-space indentation. Always rewrite to keep
-# formatting consistent — easier to diff than mixed indentation.
+if skip_download
+  $stderr.puts "── Phase 1: skipped (--skip-download) ──"
+  sidecar_paths, missing = sidecars_for_input(input_path, db, tmp_dir)
+  $stderr.puts "found #{sidecar_paths.size} matching sidecars in #{tmp_dir}"
+  missing.each { |u| $stderr.puts "WARN no sidecar for #{u} — run without --skip-download to download it" } unless missing.empty?
+else
+  $stderr.puts '── Phase 1: downloading lyrics ──'
+  sidecar_paths, dl_errors = download_phase(input_path, db, tmp_dir, Fetcher.new)
+  $stderr.puts "downloaded #{sidecar_paths.size} lyrics into #{tmp_dir}"
+  dl_errors.each { |e| $stderr.puts e } unless dl_errors.empty?
+end
+
+$stderr.puts
+$stderr.puts '── Phase 2: extracting fragments via Ollama ──'
+added, updated, llm_errors = process_phase(sidecar_paths, db, ollama)
+
 File.write(db_path, JSON.pretty_generate(db) + "\n")
 
 $stderr.puts
 $stderr.puts '──── Summary ────'
-$stderr.puts "artists added: #{added_artists.size}"
-$stderr.puts "songs added:   #{added_songs.size}"
-$stderr.puts "songs skipped: #{skipped.size}"
-$stderr.puts "db: #{db_path}"
+$stderr.puts "songs added:   #{added.size}"
+$stderr.puts "songs updated: #{updated.size}"
+$stderr.puts "errors:        #{llm_errors.size}"
+$stderr.puts "db:            #{db_path}"
+$stderr.puts "tmp:           #{tmp_dir}"
 
-unless errors.empty?
-  $stderr.puts
-  $stderr.puts '──── Errors ────'
-  errors.each { |e| $stderr.puts e }
-  exit 1
-end
+exit 1 unless llm_errors.empty?
+
+end  # if __FILE__ == $PROGRAM_NAME

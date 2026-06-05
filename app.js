@@ -201,7 +201,7 @@ const endGame = () => {
   store.setLifecycle({ screen: 'final', flash: null, record, deadlineAt: null });
 };
 
-const restart = goToSetup;
+const restart = startGame;
 
 // ── Top-level view ───────────────────────────────────────────────
 const view = (state) => {

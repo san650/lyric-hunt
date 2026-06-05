@@ -524,7 +524,9 @@ main {
   text-shadow: 0 0 8px rgba(255, 45, 149, 0.7);
 }
 
-.choice:hover,
+/* :hover is scoped to hover-capable pointers so installed iOS PWA doesn't
+   sticky-hover the new button at the cursor's last position after the round
+   re-renders. :focus-visible still covers keyboard nav. */
 .choice:focus-visible {
   border-color: var(--pink);
   color: var(--ink);
@@ -537,16 +539,37 @@ main {
   background:
     linear-gradient(135deg, rgba(255, 45, 149, 0.14) 0%, var(--stage-2) 100%);
 }
-.choice:hover::before,
 .choice:focus-visible::before {
   color: var(--pink);
   border-color: var(--pink);
   background: rgba(255, 45, 149, 0.12);
 }
-.choice:hover::after,
 .choice:focus-visible::after {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
+}
+@media (hover: hover) {
+  .choice:hover {
+    border-color: var(--pink);
+    color: var(--ink);
+    outline: none;
+    box-shadow:
+      0 0 0 1px var(--pink),
+      0 0 28px rgba(255, 45, 149, 0.45),
+      0 2px 0 var(--bg-deep),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    background:
+      linear-gradient(135deg, rgba(255, 45, 149, 0.14) 0%, var(--stage-2) 100%);
+  }
+  .choice:hover::before {
+    color: var(--pink);
+    border-color: var(--pink);
+    background: rgba(255, 45, 149, 0.12);
+  }
+  .choice:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
 }
 .choice:active {
   transform: translateY(2px);
@@ -1294,7 +1317,15 @@ main {
   line-height: 0.82;
 }
 .final__big__num.is-animate {
-  animation: countUp 1400ms var(--ease-out) 0.35s both;
+  /* Linear + per-integer duration so the counter ticks at a steady, snappy
+     rate instead of crawling at the tail with ease-out. calc() is split off
+     the shorthand because the animation shorthand silently rejects calc(var())
+     in some engines. */
+  animation-name: countUp;
+  animation-duration: calc(max(var(--target), 1) * 80ms);
+  animation-timing-function: linear;
+  animation-delay: 0.25s;
+  animation-fill-mode: both;
 }
 @keyframes countUp {
   from { --count: 0; }

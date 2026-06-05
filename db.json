@@ -130,6 +130,41 @@
         "La Autentica",
         "Autentika"
       ]
+    },
+    {
+      "id": "andres-calamaro",
+      "displayName": "Andrés Calamaro",
+      "aliases": [
+        "Andrés Calamaro"
+      ]
+    },
+    {
+      "id": "mana",
+      "displayName": "Maná",
+      "aliases": [
+        "Maná"
+      ]
+    },
+    {
+      "id": "vilma-palma",
+      "displayName": "Vilma Palma",
+      "aliases": [
+        "Vilma Palma"
+      ]
+    },
+    {
+      "id": "astroboy",
+      "displayName": "Astroboy",
+      "aliases": [
+        "Astroboy"
+      ]
+    },
+    {
+      "id": "los-ladrones-sueltos",
+      "displayName": "Los Ladrones Sueltos",
+      "aliases": [
+        "Los Ladrones Sueltos"
+      ]
     }
   ],
   "songs": [
@@ -331,12 +366,14 @@
 
       ],
       "fragments": [
-        "Voy... Por ahí\nSomos tantos desencuentros\nCallejeando por el centro\nAlmas de ciudad por dentro\nY zás... Me perdí",
-        "Ya ni se en que bocacalle\nQue se callen las bocinas\nY esas bocas de oficina",
-        "La alegria de los vagabundos\nQue traspasan este mudo\nSin entrar en el",
-        "Carcajada a carcajada\nLa ciudad es una pavada\nLlena de gente apurada",
-        "Voy por 18 comiendo bizcochos\nAgarro para el puerto\nEl bajo esta desierto"
-      ]
+        "Y zás... Me perdí\nOtra esquina a la derecha",
+        "Gris... Alegría\nLa alegria de los vagabundos",
+        "Voy por 18 comiendo bizcochos\nAgarro para el puerto",
+        "Va y que se va y que se va la vida",
+        "Va ahí callejeando por las heridas"
+      ],
+      "url": "https://www.letras.com/la-tabare/alegris/",
+      "lyric": "Voy... Por ahí\nSomos tantos desencuentros\nCallejeando por el centro\nAlmas de ciudad por dentro\nY zás... Me perdí\nOtra esquina a la derecha\nCasi siempre a contra flecha\nY voy... Por ahí\n\nYa ni se en que bocacalle\nQue se callen las bocinas\nY esas bocas de oficina\n¡Huir!... Quiero oir\nTus susurros en mi oreja\nRuidos de la ciudad vieja\nY voy re-feliz\n\nSin agenda y calendario\nBien por fuera del horario\nGris... Alegría\nLa alegria de los vagabundos\nQue traspasan este mudo\nSin entrar en el\nLos inutiles sin referencias\nLos de sin buena presenias\nComo yo...\nLos que detestamos el cuartel\n\nVoy por ahí\nBoludeando por la vida\nLa cosa es más divertida\nAsí... Por ahí\nSin darle bola ninguna\nAl rumor de la comuna\nHoy me reí\n\nCarcajada a carcajada\nLa ciudad es una pavada\nLlena de gente apurada\nY yo... Me reí\nPersiguiendo una poesía\nMe paró la policia\nY ¡zás! Me perdí\n\nVoy por 18 comiendo bizcochos\nAgarro para el puerto\nEl bajo esta desierto\nPor juan carlos gomez hasta sarandi\nOtra vez me perdi, ¡otra vez me perdi!\n\nVa y que se va y que se va la vida\nVa ahí callejeando por las heridas\nVa y que se va y que se va y me quedo\nVa y que se va y que se va y no puedo\nIrme y me voy, irme y estoy\nDando vueltas manzana ¡varón!"
     },
     {
       "id": "la-tabare-acicaladas-alas-alicaidas",
@@ -353,11 +390,15 @@
 
       ],
       "fragments": [
-        "Casi tu mirada, casi aquello\nCasi nada bello en mi.\nUn atardece, la playa\nY pretender que vaya casi a mil",
-        "Piña, pica, pito, pucha, ¡pum!\nPena, pana, pene, pompas, plus\nNo me trates mal.\nNo me grites así",
-        "Paso amor, peso amor, pozo\nAmordazado\nAmorfo, amoral, ¡a morder el polvo!\nAmoratado",
-        "Hambre, sangre, calambre, alambre\nDe púas.\nShoping, zaping, casting, fucking\nAll you need is love"
-      ]
+        "Piña, pica, pito, pucha, ¡pum!.\nPena, pana, pene, pompas, plus",
+        "No me trates mal.\nNo me grites así",
+        "Amorfo, amoral, ¡a morder el polvo!\nAmoratado",
+        "Desata nudos... Crudos... Ruidos mudos\nPido... Dudo",
+        "Hambre, sangre, calambre, alambre\nDe púas.",
+        "Nunca iremos a hollywood\nNunca iremos al chuí en avión"
+      ],
+      "url": "https://www.letras.com/la-tabare/acicaladas-alas-alicaidas/",
+      "lyric": "Casi tu mirada, casi aquello\nCasi nada bello en mi.\nUn atardece, la playa\nY pretender que vaya casi a mil\n¿Será amor?. No sé...\n\nPiña, pica, pito, pucha, ¡pum!.\nPena, pana, pene, pompas, plus\nNo me trates mal.\nNo me grites así\nCaras, claras, taras, raras ¡puaj!.\nDigo: Testigo, mendigo, postigo, paz\nNo me chupes luz.\nNo me vuelvas miel.\n\nPaso amor, peso amor, pozo\nAmordazado\nAmorfo, amoral, ¡a morder el polvo!\nAmoratado\nDesata nudos... Crudos... Ruidos mudos\nPido... Dudo\nNo me quieras bien.\nNo me hagas eso ahí\n\nHambre, sangre, calambre, alambre\nDe púas.\nShoping, zaping, casting, fucking\nAll you need is love\nNunca iremos a hollywood\nNunca iremos al chuí en avión"
     },
     {
       "id": "la-tabare-contrapunto",
@@ -372,12 +413,16 @@
 
       ],
       "fragments": [
-        "Lo quiero invitar compadre\nA cantar por lo que es nuestro\nPorque, le juro, es siniestro\nEl ver nacer como hongos",
-        "Tropicalero es traición\nTraición es nieve en enero.",
-        "Mugre por televisión\nY la radio es pura conga.\nSi quieren algo criollo:\nNada mejor que milonga.",
-        "Porque en la vida tenés dos opciones:\nO echás suerte o echás culo\nSi echás suerte: Buena taba\nSi echás culo:... Jodete",
-        "Un jardín desflorado\nUna luna hecha mierda contra el cielo\nNéctar de rocío en tus lágrimas"
-      ]
+        "Lo quiero invitar compadre\nA cantar por lo que es nuestro",
+        "Nos matan la tradición!\nTropicalero es traición\nTraición es nieve en enero.",
+        "Mugre por televisión\nY la radio es pura conga.",
+        "\"Para apostar a la taba\"\nPorque en la vida tenés dos opciones:",
+        "¡Vení a jugar a la taba con nosotros!\n¡Probá suerte!. ¡iniciate!",
+        "Y si no te gusta, echate culo\nCómplice del mundo",
+        "Que apostar a la taba es pa´gauchos\nY vos... Sos un fi-fi"
+      ],
+      "url": "https://www.letras.com/la-tabare/contrapunto/",
+      "lyric": "Lo quiero invitar compadre\nA cantar por lo que es nuestro\nPorque, le juro, es siniestro\nEl ver nacer como hongos\nInventores de bailongos\n¡Tuitos unos vinteneros!:\nMelódicos, cumbiancheros\n...Y rockeros facilongos.\n\nAhijuna estoy bien de acuerdo\nCon lo que acaba´e decir\nY no le viá discutir\nPos su razón le reitero\n¡No hay nada nuestro, aparcero,\nNos matan la tradición!\nTropicalero es traición\nTraición es nieve en enero.\n\nLo que pasa es que no saben\nQue mas que latino o nuestro\nEs casi como un secuestro\nDe la cultura. Y me explayo:\nEn opinión de este payo\nPerdieron nuestras raíces\nMúsicos cual meretrices\nAl compás de ese bagayo.\n\nGran razón a usté le asiste\nY le explico mi opinión\nMugre por televisión\nY la radio es pura conga.\nPermítame que le exponga\nLa ignorancia es el escollo\nSi quieren algo criollo:\nNada mejor que milonga.\n\nPor eso acepté amigazo\nEl desafío´e payar\nTradición que hay que guardar\nYa que es arte en la versidad.\nNos permite la payada\nOpinar...y ahura le estampo:\nIgual da criollos el campo\n...Es la verdá bien cueriada.\n\n\"Para apostar a la taba\"\nPorque en la vida tenés dos opciones:\nO echás suerte o echás culo\nSi echás suerte: Buena taba\nSi echás culo:... Jodete\nTe consumirán la cabeza\nDestornillando tu vida al mejor postor.\nEntonces:\n¡Vení a jugar a la taba con nosotros!\n¡Probá suerte!. ¡iniciate!\n\nNo te ofrecemos nada mas que esto:\nUn jardín desflorado\nUna luna hecha mierda contra el cielo\nNéctar de rocío en tus lágrimas\nDos o tres añicos de esperanzas\nY un montoncito de ganas\nDe orgías de elegías!.\n\nY si no te gusta, echate culo\nCómplice del mundo\nY por favor jugá a otro juego\nQue apostar a la taba es pa´gauchos\nY vos... Sos un fi-fi"
     },
     {
       "id": "la-tabare-distopia-en-blues",
@@ -395,11 +440,13 @@
 
       ],
       "fragments": [
-        "El mundo se queda reseco\nSin agua\nY oímos el eco\nDe toda esta fragua",
-        "La culpa sin dudas\nLa tiene la gente\nTan maeducada\nTan desobediente\nQue no cierra la canilla\nAl lavarse los dientes",
-        "No creo que los obreros\nCuando la tarde calienta\nLaburando en pleno enero\nUsen protector cuarenta",
-        "El mundo está destruído, mi amor\nY vamos a caer rendidos, nos dicen\nQue no es porque, en algún lado\nCerdos y sórdidos empresariados"
-      ]
+        "Cuanta sed\nCuanta sed\nCuanta sed\nCuanta sed",
+        "Cuánta hipocresía, mi amor\nEcharnos la culpa de todo este horror\nMientras tanto, te regalo\nUn ramo\nDe flores de pástico",
+        "El mundo está destruído, mi amor\nY vamos a caer rendidos, nos dicen",
+        "Nos hayan nublado\nHasta el cielo de smog\nNos hayan talado\nLos bosques y vos"
+      ],
+      "url": "https://www.letras.com/la-tabare/distopia-en-blues/",
+      "lyric": "Cuanta sed\nCuanta sed\nCuanta sed\nCuanta sed\n\nEl mundo se queda reseco\nSin agua\nY oímos el eco\nDe toda esta fragua\nDiciendo que no es\nPorque en algún lado\nLos desechos químicos\nDe los mercados\nNos hayan contaminado\nHasta el alma\n\nNo, no, no, no\nNo, no, no, no, no\nNo, no, no, no\nNo, no, no, no\n\nEso parece ser indiferente\nLa culpa sin dudas\nLa tiene la gente\nTan maeducada\nTan desobediente\nQue no cierra la canilla\nAl lavarse los dientes\n\nCuánta hipocresía, mi amor\nEcharnos la culpa de todo este horror\nMientras tanto, te regalo\nUn ramo\nDe flores de pástico\nY un tanque de oxígeno\nY un pájaro pálido\nY un sueño caótico\nY es que los distópicos\nY un futuro químico\nY un beso electrónico\nY muy poco más\n\nCuanta sed\nCuanta sed\nCuanta sed\nCuanta sed\n\nNo creo que los obreros\nCuando la tarde calienta\nLaburando en pleno enero\nUsen protector cuarenta\nPa no cancerearse el cuero\nNo confío en este enredo\nDe pa' no mal gastar papel\nLimpiarse el culo con miedo\nCon la punta del mantel\nCon la llema de los dedos\n\nEl mundo está destruído, mi amor\nY vamos a caer rendidos, nos dicen\nQue no es porque, en algún lado\nCerdos y sórdidos empresariados\nNos hayan nublado\nHasta el cielo de smog\nNos hayan talado\nLos bosques y vos\n\nVos, vos, vos, vos\nVos, vos, vos, vos, vos\nVos, vos, vos, vos\n\nSi al ir al supermercado nos dicen\nIgual que todos los vecinos de al lado\nEn vez de traer todo amontonado\nUtilizan muchas bolsitas de plástico\n\nCuánta hipocresía, mi amor\nEcharnos la culpa de todo este horror\nMientras tanto, te regalo\nTan solo\nUn grito disfónico"
     },
     {
       "id": "la-tabare-la-enemistad",
@@ -415,11 +462,15 @@
 
       ],
       "fragments": [
-        "Atrás de las botellas\nNuestra rubia mireya\nEn un rincón",
-        "Eso como patadas en los huevos\nComo los besos, que volaron\nLa amistad y nos dejaron\nPresos de la resignación",
+        "Atrás de las botellas\nNuestra rubia mireya",
+        "Eso como patadas en los huevos\nComo los besos, que volaron",
         "Acodado al tablero\nBebiendo el aguacero\nDel perdón",
-        "Perdí tantos amigos\nMirándome el ombligo\nSin condón"
-      ]
+        "Nos dimos un abrazo\nY barajando el mazo\nLa traición",
+        "Perdí tantos amigos\nMirándome el ombligo\nSin condón",
+        "Pero ahora ya sé que no te quiero\nEntre probos re-rockeros\nY otros robos y rateros (musiqueros)"
+      ],
+      "url": "https://www.letras.com/la-tabare/la-enemistad/",
+      "lyric": "Atrás de las botellas\nNuestra rubia mireya\nEn un rincón\n\nFinal del primer acto\nComo cumpliendo el pacto\nEn la función\n\nEso como patadas en los huevos\nComo los besos, que volaron\nLa amistad y nos dejaron\nPresos de la resignación\n\nAcodado al tablero\nBebiendo el aguacero\nDel perdón\n(En pleno mes de enero cavando el agujero del perdón)\n\nNos dimos un abrazo\nY barajando el mazo\nLa traición\n(Estoy hecho pedazos, así que no hago caso, es la intuición)\n\nEso de la amistad, salir ilesos\nTiesos en esta inexperiencia\nPor el no a la convivencia\nPresos de la desilusión\n\nEn todos estos años\nDe rock y desengaños\nLa pasión (diapasón)\n\nPerdí tantos amigos\nMirándome el ombligo\nSin condón\n(Caí en pleno verano de des-amor, desgano, desazón)\n\nPero ahora ya sé que no te quiero\nEntre probos re-rockeros\nY otros robos y rateros (musiqueros)\nFueron con mi corazón"
     },
     {
       "id": "la-tabare-que-noche-aquella",
@@ -516,11 +567,15 @@
         "Limon y Sal"
       ],
       "fragments": [
-        "Tengo que confesar que a veces\nNo me gusta tu forma de ser\nLuego te me desapareces\nY no entiendo muy bien por qué",
-        "No dices nada romántico\nCuando llega el atardecer\nTe pones de un humor extraño\nCon cada luna llena al mes",
-        "Yo te quiero con limón y sal\nYo te quiero tal y como estás\nNo hace falta cambiarte nada",
-        "Tengo que confesarte ahora\nNunca creí en la felicidad\nA veces, algo se le parece\nPero es pura casualidad"
-      ]
+        "Yo te quiero con limón y sal",
+        "Yo te quiero tal y como estás",
+        "No hace falta cambiarte nada",
+        "Solo tenerte cerca\nSiento que vuelvo a empezar",
+        "Tengo que confesar que a veces\nNo me gusta tu forma de ser",
+        "Nunca creí en la felicidad"
+      ],
+      "url": "https://www.letras.com/venegas-julieta/611600/",
+      "lyric": "Tengo que confesar que a veces\nNo me gusta tu forma de ser\nLuego te me desapareces\nY no entiendo muy bien por qué\n\nNo dices nada romántico\nCuando llega el atardecer\nTe pones de un humor extraño\nCon cada luna llena al mes\n\nPero a todo lo demás\nLe gana lo bueno que me das\nSolo tenerte cerca\nSiento que vuelvo a empezar\n\nYo te quiero con limón y sal\nYo te quiero tal y como estás\nNo hace falta cambiarte nada\n\nYo te quiero si vienes o si vas\nSi subes, si bajas, si no estás\nSeguro de lo que sientes\n\nTengo que confesarte ahora\nNunca creí en la felicidad\nA veces, algo se le parece\nPero es pura casualidad\n\nLuego me vengo a encontrar\nCon tus ojos, me dan algo más\nSolo tenerte cerca\nSiento que vuelvo a empezar\n\nYo te quiero con limón y sal\nYo te quiero tal y como estás\nNo hace falta cambiarte nada\n\nYo te quiero si vienes o si vas\nSi subes, si bajas, si no estás\nSeguro de lo que sientes\n\nYo te quiero con limón y sal\nYo te quiero tal y como estás\nNo hace falta cambiarte nada\n\nYo te quiero si vienes o si vas\nSi subes, si bajas, si no estás\nSeguro de lo que sientes\n\nSolo tenerte cerca\nSiento que vuelvo a empezar"
     },
     {
       "id": "julieta-venegas-me-voy",
@@ -536,11 +591,15 @@
         "Limon y Sal"
       ],
       "fragments": [
-        "Porque no\nSupiste entender a mi corazón\nLo que había en él, porque no\nTuviste el valor de ver quién soy",
-        "No voy a llorar y decir\nQue no merezco esto, porque\nEs probable que\nLo merezco, pero no lo quiero, por eso, me voy",
-        "Qué lástima, pero adiós\nMe despido de ti y me voy\nQué lástima, pero adiós\nMe despido de ti",
-        "Yo, que pensé\nNunca me iría de ti, que es amor\nDel bueno, de toda la vida, pero\nHoy, entendí que no hay suficiente para los dos"
-      ]
+        "No voy a llorar y decir\nQue no merezco esto, porque",
+        "Qué lástima, pero adiós\nMe despido de ti y me voy",
+        "Porque sé\nQue me espera algo mejor\nAlguien que sepa darme amor",
+        "Yo, que pensé\nNunca me iría de ti, que es amor\nDel bueno, de toda la vida, pero",
+        "Hoy, entendí que no hay suficiente para los dos",
+        "Me despido de ti y me voy"
+      ],
+      "url": "https://www.letras.com/venegas-julieta/546044/",
+      "lyric": "Porque no\nSupiste entender a mi corazón\nLo que había en él, porque no\nTuviste el valor de ver quién soy\n\nPorque no\nEscuchas lo que está tan cerca de ti\nSolo el ruido de afuera, y yo\nQue estoy a un lado, desaparezco para ti\n\nNo voy a llorar y decir\nQue no merezco esto, porque\nEs probable que\nLo merezco, pero no lo quiero, por eso, me voy\n\nQué lástima, pero adiós\nMe despido de ti y me voy\nQué lástima, pero adiós\nMe despido de ti\n\nPorque sé\nQue me espera algo mejor\nAlguien que sepa darme amor\nDe ese que endulza la sal y hace que salga el Sol\n\nYo, que pensé\nNunca me iría de ti, que es amor\nDel bueno, de toda la vida, pero\nHoy, entendí que no hay suficiente para los dos\n\nNo voy a llorar y decir\nQue no merezco esto, porque\nEs probable que\nLo merezco, pero no lo quiero, por eso, me voy\n\nQué lástima, pero adiós\nMe despido de ti y me voy\nQué lástima, pero adiós\nMe despido de ti, ih-ih-ih, ah-ah\nIh-ih-ih\n\nMe voy\nQué lástima, pero adiós\nMe despido de ti y me voy\nQué lástima, pero adiós\nMe despido de ti y me voy\n\nQué lástima, pero adiós\nMe despido de ti y me voy\nQué lástima, pero adiós\nMe despido de ti y me voy"
     },
     {
       "id": "julieta-venegas-eres-para-mi",
@@ -557,12 +616,14 @@
         "Limon y Sal"
       ],
       "fragments": [
-        "Sería mejor empezar otra vez\nPero eso ya sé que no se puede\nVas a decirme que es imposible\nPero, por lo menos, déjame que lo intente",
-        "Aprendí a sacarle jugo a mis defectos\nY me va mejor desde que deje de odiarlo",
-        "Caminando yo en tus labios por la noche\nPor en medio de la calle\nEstoy pensando\nSi me quieres, no me falles",
-        "Eres para mí\nMe lo ha dicho el viento\nEres para mí\nLo oigo todo el tiempo",
-        "Soy de tierra con el agua\nLlego al cielo, dame tu aire\nY somos fuego y deseo"
-      ]
+        "Eres para mí\nMe lo ha dicho el viento",
+        "La sombra que pasa, la luz que me abraza, tus ojos mirándome",
+        "¿Temes sentir más de la cuenta?\nEl corazón es un músculo, si no late, revienta",
+        "Tú eres para mí, yo soy para ti\nEl viento me lo dijo con un soplo suavecillo",
+        "Y yo sé que tienes miedo y no es un buen momento para ti (para mí)\nY para esto que nos viene sucediendo"
+      ],
+      "url": "https://www.letras.com/venegas-julieta/630285/",
+      "lyric": "Eres para mí\nMe lo ha dicho el viento\nEres para mí\nLo oigo todo el tiempo\nEres para mí\nMe lo ha dicho el viento\nEres para mí\n\nLa sombra que pasa, la luz que me abraza, tus ojos mirándome\nLa calle que canta su canto de diario, el mundo moviéndose\nY yo sé que tienes miedo y no es un buen momento para ti\nY para esto que nos viene sucediendo\n\nPero eres para mí\nMe lo ha dicho el viento\nEres para mí\nLo oigo todo el tiempo\nEres para mí\nMe lo ha dicho el viento\nEres para mí\n\nEl espejo que da su reflejo en todo, lo pinta tal como es\nMi cuerpo que no tiene peso si escucho tu voz llamándome\nY yo sé que tienes miedo y no es un buen momento para ti\nY para esto que nos viene sucediendo\n\n¿Temes sentir más de la cuenta?\nEl corazón es un músculo, si no late, revienta\nExtraño mirarte de lejos\nDe hacernos los tontos, parecemos tan viejos\n¿Tiempo? Hmm, quieres más tiempo\nMírame la piel, ¿no ves, acaso, lo que siento?\nTú eres para mí, yo soy para ti\nEl viento me lo dijo con un soplo suavecillo\n\nY yo sé que tienes miedo y no es un buen momento para ti (para mí)\nY para esto que nos viene sucediendo\n\nPero eres para mí\nMe lo ha dicho el viento\nEres para mí\nLo oigo todo el tiempo\nEres para mí\n(Tal para cual, como el mar y la sal)\nMe lo ha dicho el viento\nEres para mí\n(Sigue mi cadencia, pierdo la paciencia)\n(Tú eres para mí, ¿no te das cuenta?)\n\nEres para mí (tú eres para mí, yo soy para ti)\n(El viento me lo dijo con un soplo suavecillo)\nEres para mí (tú eres para mí)\nLo oigo todo el tiempo\nEres para mí (tú eres para mí)\nMe lo ha dicho el viento (yo soy para ti)\nEres para mí (tú eres para mí)\nLo oigo todo el tiempo (yo soy para ti)\nEres para mí (tú eres para mí, yo soy para ti)\nEres para mí (tú eres para mí, yo soy para ti)\n(Tú eres para mí, yo soy para ti)"
     },
     {
       "id": "julieta-venegas-perfecta",
@@ -577,11 +638,14 @@
 
       ],
       "fragments": [
-        "Tan pronto yo te vi\nNo pude descubrir\nEl amor a primera vista no funciona en mí",
-        "Éramos tan buenos amigos hasta hoy\nQue yo probé tu desempeño en el amor",
-        "Solo tú, no necesito más\nTe adoraría lo que dura la eternidad\nDebes ser perfecta para\nPerfecto para",
-        "¿Cómo fue que de papel cambié?\nEras mi amiga y ahora eres mi mujer"
-      ]
+        "Solo tú, no necesito más",
+        "Te adoraría lo que dura la eternidad",
+        "Debes ser perfecta para\nPerfecto para\nPerfecta (perfecto) para mí, mi amor",
+        "¿Cómo fue que de papel cambié?\nEras mi amiga y ahora eres mi mujer",
+        "Éramos tan buenos amigos hasta hoy\nQue yo probé tu desempeño en el amor"
+      ],
+      "url": "https://www.letras.com/venegas-julieta/1217241/",
+      "lyric": "Tan pronto yo te vi\nNo pude descubrir\nEl amor a primera vista no funciona en mí\nDespués de amarte, comprendí\n\nQue no estaría tan mal\nProbar tu otra mitad\nNo me importó si arruinaríamos nuestra amistad\nNo me importó, ¿ya qué más da?\n\nÉramos tan buenos amigos hasta hoy\nQue yo probé tu desempeño en el amor\nMe aproveché de que habíamos tomado tanto\nTe fuiste dejando y te agarré\n\nA pesar de saber que estaba todo mal\nLo continuamos hasta juntos terminar\nCuando caímos en lo que estaba pasando\nTe seguí besando y fue\n\nSolo tú, no necesito más\nTe adoraría lo que dura la eternidad\nDebes ser perfecta para\nPerfecto para\nPerfecta (perfecto) para mí, mi amor\n\n¿Cómo fue que de papel cambié?\nEras mi amiga y ahora eres mi mujer\nDebe ser perfectamente\nExactamente\nLo que yo siempre soñé\n\nEl tiempo que pasó\nResultó aún mejor\nNos conocíamos de antes y sabíamos\nLo que queríamos los dos\n\nEntonces el amor, uh-uh-uh\nNos tiene de rehén\nSeré tu eterna enamorada y te aseguro que\nTodas las noches, te amaré\n\nÉramos tan buenos amigos hasta hoy\nQue yo probé tu desempeño en el amor\nMe aproveché de que habíamos tomado tanto\nTe fuiste dejando y te agarré\n\nA pesar de saber que estaba todo mal\nLo continuamos hasta juntos terminar\nCuando caímos en lo que estaba pasando\nTe seguí besando y fue\n\nSolo tú, no necesito más\nTe adoraría lo que dura la eternidad\nDebes ser perfecta para\nPerfecto para\nPerfecta (perfecto) para mí, mi amor\n\n¿Cómo fue que de papel cambié?\nEras mi amiga y ahora eres mi mujer\nDebe ser perfectamente\nExactamente\nLo que yo siempre soñé\n\nSolo tú, no necesito más (uh-uh)\nTe adoraría lo que dura la eternidad\nDebes ser perfecta para\nPerfecto para\nPerfecta (perfecto) para mí, mi amor\n\n¿Cómo fue que de papel cambié? (¿Cómo fue?)\nEras mi amiga y ahora eres mi mujer\nDebe ser perfectamente\nExactamente\nLo que yo siempre soñé\n\nSolo tú, no necesito más\nTe adoraría lo que dura la eternidad\nDebes ser perfecta para (para, para, para)\nPerfecto para mí, mi amor\n\n¿Cómo fue que de papel cambié?\nEras mi amiga y ahora eres mi mujer\nDebe ser perfectamente\nExactamente\nLo que yo siempre soñé"
     },
     {
       "id": "julieta-venegas-no-me-importa-el-dinero",
@@ -597,11 +661,13 @@
 
       ],
       "fragments": [
-        "Me dijeron que llamaste, pero ya me había ido\nPues salimos más temprano del taller\nYo me vine caminando para no gastar dinero",
-        "Menos mal que solo es eso\nSentí alivio, lo confieso\nTuve miedo de que fuera otra mujer",
-        "A mí no me importa el dinero\nTengo lo que yo más quiero a mi lado\nSoy tu fiel compañera",
-        "Sos mi escudo ante el miedo\nY aunque se derrumbe el cielo\nNunca vas a estar solo\nPorque siempre estaré"
-      ]
+        "A mí no me importa el dinero\nTengo lo que yo más quiero a mi lado",
+        "Soy tu fiel compañera\nMe gusta que seas así como sos",
+        "Sos mi escudo ante el miedo\nY aunque se derrumbe el cielo",
+        "Nunca vas a estar solo\nPorque siempre estaré"
+      ],
+      "url": "https://www.letras.com/venegas-julieta/no-me-importa-el-dinero-part-los-autenticos-decadentes/",
+      "lyric": "Me dijeron que llamaste, pero ya me había ido\nPues salimos más temprano del taller\nYo me vine caminando para no gastar dinero\nY por eso llego tarde como ayer\n\nYa no trates de ocultarme\nLo que me enteré esta tarde\nYo sabía que algo andaba mal\n\nMenos mal que solo es eso\nSentí alivio, lo confieso\nTuve miedo de que fuera otra mujer\n\nYo no quise preocuparte\nNo querías que supiera\nQue quedaste sin trabajo una vez más\n\nNo me tumba un viento frío\nY si te tengo cerca mío\nNo le temo a lo que pueda suceder\n\nA mí no me importa el dinero\nTengo lo que yo más quiero a mi lado\nSoy tu fiel compañera\nMe gusta que seas así como sos\n\nSos mi escudo ante el miedo\nY aunque se derrumbe el cielo\nNunca vas a estar solo\nPorque siempre estaré\n\nCómo pude imaginarme\nQue se te ocurriría dejarme\nSi pasamos juntos más de un temporal\n\nNi los tiempos buenos ni los malos\nHan podido lograr separarnos\nPorque siempre fue más fuerte nuestro amor\n\nA mí no me importa el dinero\nTengo lo que yo más quiero a mi lado\nSoy tu fiel compañera\nMe gusta que seas así como sos\n\nSos mi escudo ante el miedo\nY aunque se derrumbe el cielo\nNunca vas a estar solo\nPorque siempre estaré\n\n¡Cumbia!\n¡Julieta!\n\nCómo pude imaginarme\nQue se te ocurriría dejarme\nSi pasamos juntos más de un temporal\n\nNi los tiempos buenos ni los malos\nHan podido lograr separarnos\nPorque siempre fue más fuerte nuestro amor\n\nA mí no me importa el dinero\nTengo lo que yo más quiero a mi lado\nSoy tu fiel compañera\nMe gusta que seas así como sos\n\nSos mi escudo ante el miedo\nY aunque se derrumbe el cielo\nNunca vas a estar solo\nPorque siempre estaré\n\n¡Julieta Venegas!"
     },
     {
       "id": "no-te-va-gustar-clara",
@@ -616,12 +682,16 @@
 
       ],
       "fragments": [
-        "Qué lindo que era verlos caminando\nUn alma sola, dividida en dos\nLa orilla de ese mar los encantaba\nQuedaba todo quieto alrededor",
-        "Hermosa fue la vida que llevaron\nLa suerte no les quiso dar un sol\nCurioso es que su risa iluminaba\nHasta el día que ese mal se la llevó",
-        "Se queda con su foto en un rincón\nY sueña encontrarla arriba\nEscucha susurrar un disco viejo\nQue su Clara una vez le regaló",
-        "Él sigue con su vida recortada\nSin Clara fue una vida sin color\nLa imagen de sus ratos más felices\nHasta ahora siguen siendo su motor",
-        "La lleva bien pegada al corazón\nSe alegra de nunca despedirla\nPero no va más por la orilla caminando\nPorque sabe que era hermoso entre los dos"
-      ]
+        "Qué lindo que era verlos caminando",
+        "Un alma sola, dividida en dos",
+        "Se queda con su foto en un rincón\nY sueña encontrarla arriba",
+        "Sin Clara fue una vida sin color",
+        "Escucha susurrar un disco viejo\nQue su Clara una vez le regaló",
+        "La lleva bien pegada al corazón",
+        "Sabe que era hermoso entre los dos"
+      ],
+      "url": "https://www.letras.com/no-te-va-gustar/354593/",
+      "lyric": "Qué lindo que era verlos caminando\nUn alma sola, dividida en dos\nLa orilla de ese mar los encantaba\nQuedaba todo quieto alrededor\n\nHermosa fue la vida que llevaron\nLa suerte no les quiso dar un sol\nCurioso es que su risa iluminaba\nHasta el día que ese mal se la llevó\n\nSe queda con su foto en un rincón\nY sueña encontrarla arriba\nEscucha susurrar un disco viejo\nQue su Clara una vez le regaló\n\nÉl sigue con su vida recortada\nSin Clara fue una vida sin color\nLa imagen de sus ratos más felices\nHasta ahora siguen siendo su motor\n\nSe queda con su foto en un rincón\nY sueña encontrarla arriba\nEscucha susurrar un disco viejo\nQue su Clara una vez le regaló\n\nSe queda con su foto en un rincón\nY sueña encontrarla arriba\nEscucha susurrar un disco viejo\nQue su Clara una vez le regaló\n\nLa siente\nLa escucha\nLa espera\nY sueña\n\nSe queda con su foto en un rincón\nY sueña encontrarla arriba\nEscucha susurrar un disco viejo\nQue su Clara una vez le regaló\n\nLa lleva bien pegada al corazón\nSe alegra de nunca despedirla\nPero no va más por la orilla caminando\nPorque sabe que era hermoso entre los dos\n\nSabe que era hermoso entre los dos\nSabe que era hermoso"
     },
     {
       "id": "no-te-va-gustar-cielo-de-un-solo-color",
@@ -636,12 +706,14 @@
 
       ],
       "fragments": [
-        "Cuantas lunas que se van\nY nosotros esperando\nQue despierte el corazón\nQue parece estar quebrado",
+        "Cielo de un solo color",
         "Todo el tiempo que pasó\nNo me aleja de tu lado\nCielo de un solo color\nQue me sigue enamorando",
-        "Hay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro\nEl momento ya llegó",
-        "Vida, que vida pobre\nVivirla en este lugar\nQué saben, qué saben ellos\nQue no le pueden cantar",
-        "Hay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro\nAy, celeste regaláme un Sol"
-      ]
+        "Con los dientes apretados\nCielo de un solo color\nEn el alma está guardado",
+        "Vida, que vida pobre\nVivirla en este lugar",
+        "Hay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro"
+      ],
+      "url": "https://www.letras.com/no-te-va-gustar/371371/",
+      "lyric": "Cuantas lunas que se van\nY nosotros esperando\nQue despierte el corazón\nQue parece estar quebrado\n\nTodo el tiempo que pasó\nNo me aleja de tu lado\nCielo de un solo color\nQue me sigue enamorando\n\nHay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro\nEl momento ya llegó\n\nCon los dientes apretados\nCielo de un solo color\nEn el alma está guardado\n\nVida, que vida pobre\nVivirla en este lugar\nQué saben, qué saben ellos\nQue no le pueden cantar\n\nHay algo que sigue vivo\nNos renueva la ilusión\nY en el último suspiro\nAy, celeste regaláme un Sol"
     },
     {
       "id": "no-te-va-gustar-chau",
@@ -678,12 +750,13 @@
 
       ],
       "fragments": [
-        "Amigo, sabes, acabo de conocer\nUna mujer que aún es una niña\nSabes, tiene los 17 aún\nEs jovencita y ya es mi novia",
-        "Amo su inocencia (17 años)\nAmo sus errores (17 años)\nSoy su primer novio (17 años)\nSu primer amor",
-        "Es callada, tímida, inocente y tiene la mirada\nLe tomo la mano y siente algo extraño\nLa abrazo, me abraza y empieza a temblar",
-        "A temblar de miedo, diciéndome que nunca\nHabía sentido sensación así en su vida",
-        "¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?"
-      ]
+        "Amigo, sabes, acabo de conocer\nUna mujer que aún es una niña",
+        "Amo su inocencia (17 años)\nAmo sus errores (17 años)",
+        "¿Que si eso es el amor?",
+        "Es callada, tímida, inocente y tiene la mirada\nLe tomo la mano y siente algo extraño"
+      ],
+      "url": "https://www.letras.com/los-angeles-azules/1050616/",
+      "lyric": "Amigo, sabes, acabo de conocer\nUna mujer que aún es una niña\nSabes, tiene los 17 aún\nEs jovencita y ya es mi novia\n\nAmigo, sabes, acabo de conocer\nUna mujer que aún es una niña\nSabes, tiene los 17 aún\nEs jovencita y ya es mi novia\n\nAmo su inocencia (17 años)\nAmo sus errores (17 años)\nSoy su primer novio (17 años)\nSu primer amor\n\nAmo su inocencia (17 años)\nAmo sus errores (17 años)\nSoy su primer novio (17 años)\nSu primer amor\n\nEs callada, tímida, inocente y tiene la mirada\nLe tomo la mano y siente algo extraño\nLa abrazo, me abraza y empieza a temblar\nA temblar de miedo, diciéndome que nunca\nHabía sentido sensación así en su vida\nAsí en su vida\n\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n\nEs callada, tímida, inocente y tiene la mirada\nLe tomo la mano y siente algo extraño\nLa abrazo, me abraza y empieza a temblar\nA temblar de miedo, diciéndome que nunca\nHabía sentido sensación así en su vida\nAsí en su vida\n\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n(¿Que si eso es el amor?)\n\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?\n¿Que si eso es el amor?"
     },
     {
       "id": "damas-gratis-no-te-creas-tan-importante",
@@ -698,12 +771,13 @@
 
       ],
       "fragments": [
-        "No te creas tan importante\nYa no te pienso todo el día como antes\nSe me cerraron las heridas con alcohol\nY ni borracha volvería a buscarte\nPorque ya no siento amor",
-        "No te creas tan importante\nYa soy feliz, no tengo tiempo para odiarte\nYa no te extraño pues sin ti estoy mejor\nNo andes diciendo que me muero por mirarte\nEso ya se terminó",
-        "No te confundas\nYo no camino para atrás\nComo un cangrejo",
-        "Yo te conozco y sé que no vales ni un peso\nY de personas como tú\nYa no me dejo",
-        "Ya me contaron\nQue te estás hablando mal de mí\nY que te burlas"
-      ]
+        "Yo te conozco y sé que no vales ni un peso",
+        "Ya no te pienso todo el día como antes\nSe me cerraron las heridas con alcohol",
+        "Ya soy feliz, no tengo tiempo para odiarte\nYa no te extraño pues sin ti estoy mejor",
+        "No te creas tan importante"
+      ],
+      "url": "https://www.letras.com/damas-gratis/no-te-creas-tan-importante/",
+      "lyric": "Ya me contaron\nQue te estás hablando mal de mí\nY que te burlas\n\nPorque según ya lo notaste\nQue te ruego, vaya qué imaginación\nY ahora resulta\n\nNo te confundas\nYo no camino para atrás\nComo un cangrejo\n\nYo te conozco y sé que no vales ni un peso\nY de personas como tú\nYa no me dejo\n\nNo te creas tan importante\nYa no te pienso todo el día como antes\nSe me cerraron las heridas con alcohol\nY ni borracha volvería a buscarte\nPorque ya no siento amor\n\nNo te creas tan importante\nYa soy feliz, no tengo tiempo para odiarte\nYa no te extraño pues sin ti estoy mejor\nNo andes diciendo que me muero por mirarte\nEso ya se terminó\n\nNo te creas tan importante\nAhí te encargo por favor\n\nNo te confundas\nYo no camino para atrás\nComo un cangrejo\n\nYa te conozco y sé que no vales ni un peso\nY de personas como tú\nYa no me dejo\n\nNo te creas tan importante\nYa no te pienso todo el día como antes\nSe me cerraron las heridas con alcohol\nY ni borracha volvería a buscarte\nPorque ya no siento amor\n\nNo te creas tan importante\nYa soy feliz, no tengo tiempo para odiarte\nYa no te extraño pues sin ti estoy mejor\nNo andes diciendo que me muero por mirarte\nEso ya se terminó\n\nNo te creas tan importante\nAhí te encargo por favor"
     },
     {
       "id": "damas-gratis-los-duenos-del-pabellon",
@@ -739,13 +813,14 @@
 
       ],
       "fragments": [
-        "Quiero ponerme a beber y un alto faso fumar\nPor la mujer que mató mis sentimientos iré a buscar",
-        "Mi amor te quiero, ingrata mala gata",
+        "Quiero ponerme a beber y un alto faso fumar",
+        "Por la mujer que mató mis sentimientos iré a buscar",
         "No estoy triste, no es mi llanto\nEs el humo de este fasito que me hace llorar",
         "Quién te crees, una diosa\nFlor hermosa que algún día lo pagarás",
-        "No, no debiste jugar con mi tonto corazón\nLo que hiciste con mi amor algún día lo vas a pagar",
-        "Esta llorando mi corazón por tu falso amor\nCuando pienso en las horas de tu amor\nY en tus brazos sólo me queda esta noche\nFumancharme mi alto faso, te quierooo"
-      ]
+        "Esta llorando mi corazón por tu falso amor"
+      ],
+      "url": "https://www.letras.com/damas-gratis/255519/",
+      "lyric": "Quiero ponerme a beber y un alto faso fumar\nPor la mujer que mató mis sentimientos iré a buscar\nMi amor te quiero, ingrata mala gata\nQuiero ponerme a beber y un alto faso fumar\nPor la mujer que mató mis sentimientos iré a buscar\nNo, no debiste jugar con mi tonto corazón\nLo que hiciste con mi amor algún día lo vas a pagar\n\nNo estoy triste, no es mi llanto\nEs el humo de este fasito que me hace llorar\nQuién te crees, una diosa\nFlor hermosa que algún día lo pagarás\n\nEsta llorando mi corazón por tu falso amor\nCuando pienso en las horas de tu amor\nY en tus brazos sólo me queda esta noche\nFumancharme mi alto faso, te quierooo\nQuiero ponerme a beber y un alto faso fumar\nPor la mujer que mató mis sentimientos iré a buscar\nNo, no debiste jugar con mi tonto corazón\nLo que hiciste con mi amor algún día lo vas a pagar\n\nNo estoy triste, no es mi llanto\nEs el humo de este fasito que me hace llorar\nQuién te crees, una diosa\nFlor hermosa que algún día lo pagarás"
     },
     {
       "id": "2-minutos-pinas-van-pinas-vienen",
@@ -761,11 +836,13 @@
 
       ],
       "fragments": [
-        "Piñas van, piñas vienen, los muchachos se entretienen\npiñas van, piñas vienen, los muchachos se entretienen",
-        "todo puede ser por una mujer\ntodo puede ser por algún billete",
-        "Víctor Galindez, Carlos Monzón, Nicolino Loche,\nHoracio Acavallo",
-        "Víctor Galindez, Carlos Monzón, Ringo Bonavena, Uby Sacco"
-      ]
+        "Piñas van, piñas vienen, los muchachos se entretienen",
+        "todo puede ser por una mujer\ntodo puede ser por algún billete.",
+        "Víctor Galindez, Carlos Monzón, Nicolino Loche,\nHoracio Acavallo.",
+        "Piñas van, piñas vienen"
+      ],
+      "url": "https://www.letras.com/2-minutos/13686/",
+      "lyric": "Piñas van, piñas vienen, los muchachos se entretienen\npiñas van, piñas vienen, los muchachos se entretienen\ntodo puede ser por una mujer\ntodo puede ser por algún billete.\nVíctor Galindez, Carlos Monzón, Nicolino Loche,\nHoracio Acavallo.\n\nPiñas van, piñas vienen, los muchachos se entretienen\npiñas van, piñas vienen, los muchachos se entretienen\ntodo puede ser por una mujer\ntodo puede ser por algún billete.\nVíctor Galindez, Carlos Monzón, Ringo Bonavena, Uby Sacco.\n\nPiñas van, piñas vienen, los muchachos se entretienen\npiñas van, piñas vienen, los muchachos se entretienen\nPiñas van, piñas vienen\npiñas van, piñas vienen."
     },
     {
       "id": "2-minutos-otra-mujer",
@@ -780,12 +857,13 @@
 
       ],
       "fragments": [
-        "No te tortures más, ella te abandonó\nY ya no hay solución\nEl verano que pasaron, pudo ser mejor\nPero ella igual, te abandonó",
-        "Y el invierno se quedó, y su fantasma también\nY la herida que no para, de sanar",
-        "Es de noche en la ciudad, y hace frío en las calles\nY en la televisión, no hay nada para ver\nTu vaso esta vacío, la botella también\nSon las 6 de la mañana, y no hay nada para hacer",
-        "No te tortures más\nElla te abandonó\nPero otra mujer\nA tu vida llegará",
-        "Otra mujer, llegará\nOtra mujer, a tu vida llegará"
-      ]
+        "No te tortures más, ella te abandonó\nY ya no hay solución",
+        "Es de noche en la ciudad, y hace frío en las calles\nY en la televisión, no hay nada para ver",
+        "Otra mujer, llegará\nOtra mujer, a tu vida llegará",
+        "otra mujer, otra mujer, a tu vida llegará"
+      ],
+      "url": "https://www.letras.com/2-minutos/13703/",
+      "lyric": "No te tortures más, ella te abandonó\nY ya no hay solución\nEl verano que pasaron, pudo ser mejor\nPero ella igual, te abandonó\nY el invierno se quedó, y su fantasma también\nY la herida que no para, de sanar\n\nEs de noche en la ciudad, y hace frío en las calles\nY en la televisión, no hay nada para ver\nTu vaso esta vacío, la botella también\nSon las 6 de la mañana, y no hay nada para hacer\n\nNo te tortures más\nElla te abandonó\nPero otra mujer\nA tu vida llegará\n\nOtra mujer, llegará\nOtra mujer, a tu vida llegará\nOtra mujer, llegará\nOtra mujer, a tu vida llegará\nOtra mujer, llegará\nOtra mujer, a tu vida llegará\nOtra mujer, llegará\nOtra mujer, otra mujer, a tu vida llegará"
     },
     {
       "id": "2-minutos-cancion-de-amor",
@@ -801,11 +879,14 @@
 
       ],
       "fragments": [
-        "Yo que estoy enamorado de vos\nDesde hace mucho tiempo\nMe gusta tu cuerpo esbelto\nPero más me gusta lo de adentro",
-        "Muchas veces me di vuelta por vos\nY muchas dadas vueltas más yo tendré\nSiempre te he sido fiel\nPero vos conmigo no lo sos",
-        "¡Cerveza, yo te quiero!\n¡Cerveza, yo adoro!\n¡Cerveza, yo te quiero!\n¡Gancia, yo te adoro!",
-        "¡Cerveza, yo te quiero!\n¡Cerveza, yo adoro!\n¡Cerveza, yo te quiero!\n¡Ginebra, yo te adoro!"
-      ]
+        "Yo que estoy enamorado de vos",
+        "Me gusta tu cuerpo esbelto\nPero más me gusta lo de adentro",
+        "Siempre te he sido fiel\nPero vos conmigo no lo sos",
+        "¡Cerveza, yo te quiero!",
+        "¡Ginebra, yo te adoro!"
+      ],
+      "url": "https://www.letras.com/2-minutos/13698/",
+      "lyric": "Yo que estoy enamorado de vos\nDesde hace mucho tiempo\nMe gusta tu cuerpo esbelto\nPero más me gusta lo de adentro\nMuchas veces me di vuelta por vos\nY muchas dadas vueltas más yo tendré\nSiempre te he sido fiel\nPero vos conmigo no lo sos\n\nYo que estoy enamorado de vos\nDesde hace mucho tiempo\nMe gusta tu cuerpo esbelto\nPero más me gusta lo de adentro\nMuchas veces me di vuelta por vos\nY muchas dadas vueltas más yo tendré\nSiempre te he sido fiel\nPero vos conmigo no lo sos\n\n¡Cerveza, yo te quiero!\n¡Cerveza, yo adoro!\n¡Cerveza, yo te quiero!\n¡Gancia, yo te adoro!\n\nYo que estoy enamorado de vos\nDesde hace mucho tiempo\nMe gusta tu cuerpo esbelto\nPero más me gusta lo de adentro\nMuchas veces me di vuelta por vos\nY muchas dadas vueltas más yo tendré\nSiempre te he sido fiel\nPero vos conmigo no lo sos\n\n¡Cerveza, yo te quiero!\n¡Cerveza, yo adoro!\n¡Cerveza, yo te quiero!\n¡Ginebra, yo te adoro!"
     },
     {
       "id": "los-buitres-carretera-perdida",
@@ -820,13 +901,15 @@
 
       ],
       "fragments": [
-        "Tan fácil, fácil, no es\nHorizonte lejano\nCorrer y correr\nEl día que no llega\nY dura es la noche en soledad",
-        "Pero el hombre que mira lejos no aprende a ver",
-        "Estás parada en el umbral\nDivina, furiosa, dispuesta a matar\nUna daga y una estrella del fondo del mar",
+        "Estás parada en el umbral\nDivina, furiosa, dispuesta a matar",
         "Ahora estamos aquí\nCarretera perdida\nCamino sin fin",
-        "Se estrellan en la pared\nLas flores, los vasos, la risa, la hiel\nPreguntaste por qué te quiero\nY un viento azul\nQue nos lleva a los dos",
-        "Yo conozco al boxeador\nQue besa la lona y escupe la cruz\nSe arrastra hasta la esquina\nSusurra al oído de su entrenador"
-      ]
+        "Se estrellan en la pared\nLas flores, los vasos, la risa, la hiel",
+        "Preguntaste por qué te quiero\nY un viento azul\nQue nos lleva a los dos",
+        "Yo conozco al boxeador\nQue besa la lona y escupe la cruz",
+        "Carretera perdida\nDorado de amor"
+      ],
+      "url": "https://www.letras.com/buitres/254348/",
+      "lyric": "Tan fácil, fácil, no es\nHorizonte lejano\nCorrer y correr\nEl día que no llega\nY dura es la noche en soledad\nPero el hombre que mira lejos no aprende a ver\n\nEstás parada en el umbral\nDivina, furiosa, dispuesta a matar\nUna daga y una estrella del fondo del mar\nVi tus lágrimas de dolor y de placer\n\nAhora estamos aquí\nCarretera perdida\nCamino sin fin\n\nSe estrellan en la pared\nLas flores, los vasos, la risa, la hiel\nPreguntaste por qué te quiero\nY un viento azul\nQue nos lleva a los dos\nCarretera perdida\nDorado de amor\n\nYo conozco al boxeador\nQue besa la lona y escupe la cruz\nSe arrastra hasta la esquina\nSusurra al oído de su entrenador\nAgua fresca en las heridas y aire, por favor\n\nTan fácil, fácil, no es\nHorizonte lejano, correr y correr\nHistorias que no acaban bien, ni mal\nTranscurren, no más\nLos amantes siempre quieren su propia canción\n\nHoy cantamos aquí\nCarretera perdida en otro país\n\nSe estrellan en la pared\nLas flores, los vasos, la risa, la hiel\nPreguntaste por qué te quiero\nY un viento azul\nQue nos lleva a los dos\nCarretera perdida\nDorado de amor"
     },
     {
       "id": "los-buitres-fresias",
@@ -841,12 +924,14 @@
 
       ],
       "fragments": [
-        "fresias\nen las manos\nojos de lluvia\ny cuatro filtros muertos",
-        "cardos\nen los labios\nborra de un café que jamás pediste",
-        "preguntaste:\n\"donde hay otra vida para mi?\ndonde el cielo es azul?\ndonde me perdí?\"",
+        "ojos de lluvia\ny y cuatro filtros muertos",
+        "preguntaste:\n\"donde hay otra vida para mi?\ndonde el cielo es azul?\ndonde me perdí?",
         "vamos al mar\nvamos a otro lugar\nquiero estar bien\npuede ser esta vez?",
-        "es mi cara un cristal roto en mil pedazos\npero ya sabés yo no elijo mi suerte\nmi verano\nmi cura de sueño"
-      ]
+        "no me mires\nesta piel\nno es mi piel",
+        "es mi cara un cristal roto en mil pedazos"
+      ],
+      "url": "https://www.letras.com/buitres/254353/",
+      "lyric": "fresias\nen las manos\nojos de lluvia\ny cuatro filtros muertos\n\ncardos\nen los labios\nborra de un café que jamás pediste\n\npreguntaste:\n\"donde hay otra vida para mi?\ndonde el cielo es azul?\ndonde me perdí?\n\nvamos al mar\nvamos a otro lugar\nquiero estar bien\npuede ser esta vez?\"\n\nlluvia\nno me mires\nesta piel\nno es mi piel\nla que más me gusta\n\nvamos\nno quiero mirar\nes mi cara un cristal roto en mil pedazos\npero ya sabés yo no elijo mi suerte\nmi verano\nmi cura de sueño\n\nvamos al mar..."
     },
     {
       "id": "los-buitres-ojos",
@@ -882,12 +967,16 @@
 
       ],
       "fragments": [
-        "Nunca hubo una palabra que valiera para ti\nSiempre me viste como el payaso de la fiesta\nPorque yo soy del montón\nSoy del montón y no me podés ver",
-        "Porque tu piel siempre quiso brillar\nY ahora que todo cae estás tan loco por cambiar\nY yo no\nYo soy del montón\nY esta es mi cara",
-        "Te vi crecer y predicar\nQue hay que decir\nA quien hay que votar\nQue música hay que escuchar\nQue ropa, droga y que se yo",
-        "Decí\nRaviol\nQue hacés\nPor dios\nBailando mal\nHacé el favor\nUn paso atrás\nQue se te ve la hilacha",
-        "Tenés mi edad y solo sabés lamer\nPor un lugar en donde otros suden sangre para vos\nPero yo no\nYo soy del montón"
-      ]
+        "Porque yo soy del montón",
+        "Soy del montón y no me podés ver",
+        "Y yo no\nYo soy del montón\nY esta es mi cara",
+        "Que música hay que escuchar",
+        "Fuera de tiempo y lugar",
+        "Se terminó y no se que vas a hacer",
+        "Por un lugar en donde otros suden sangre para vos"
+      ],
+      "url": "https://www.letras.com/buitres/254365/",
+      "lyric": "Nunca hubo una palabra que valiera para ti\nSiempre me viste como el payaso de la fiesta\nPorque yo soy del montón\nSoy del montón y no me podés ver\nPorque tu piel siempre quiso brillar\nY ahora que todo cae estás tan loco por cambiar\nY yo no\nYo soy del montón\nY esta es mi cara\n\nTe vi crecer y predicar\nQue hay que decir\nA quien hay que votar\nQue música hay que escuchar\nQue ropa, droga y que se yo\nYo soy del montón\nSoy del montón y aquí es donde estoy\n\nFuera de tiempo y lugar\nY si,\nEs verdad\nQue nunca me alcanzó\nCon la limosna de llorar y festejar con vos\n\nDecí\nRaviol\nQue hacés\nPor dios\nBailando mal\nHacé el favor\nUn paso atrás\nQue se te ve la hilacha\nY no\nSe terminó\nSe terminó y no se que vas a hacer\nTenés mi edad y solo sabés lamer\nPor un lugar en donde otros suden sangre para vos\nPero yo no\nYo soy del montón"
     },
     {
       "id": "trotsky-vengaran-ni-olvido-ni-perdon",
@@ -921,12 +1010,13 @@
 
       ],
       "fragments": [
-        "No puedo entender\nQuizas nunca lo hare\nPero te juro que esta vez\nEsperaba mejor suerte",
-        "Tus besos de hotel\nEl perfume de tu piel\nQuiero tenerlo y nunca aprendo a perder\nAlto es el precio de querer\nA un amor cuando es infiel",
-        "Me gusta pensar\nQue algun dia volveras\nQue estas arrepentida\nQue ya nada sera igual",
-        "Pero vuelvo a escuchar la mas cruda realidad\nEn boca de amigos que ya no vuelven mas",
-        "Abierta la herida juro q esta vez aprendere\na no dejar de volver por mas que extrañe\ntus piernas, tu risa tus manos rayandome de pasion\nDrogandome con tu voz\nPartiendome el alma en dos..."
-      ]
+        "Tus besos de hotel\nEl perfume de tu piel",
+        "Alto es el precio de querer\nA un amor cuando es infiel",
+        "Abierta la herida juro q esta vez aprendere\na no dejar de volver por mas que extrañe",
+        "tus piernas, tu risa tus manos rayandome de pasion\nDrogandome con tu voz\nPartiendome el alma en dos..."
+      ],
+      "url": "https://www.letras.com/trotsky-vengaran/265862/",
+      "lyric": "No puedo entender\nQuizas nunca lo hare\nPero te juro que esta vez\nEsperaba mejor suerte\nTus besos de hotel\nEl perfume de tu piel\nQuiero tenerlo y nunca aprendo a perder\nAlto es el precio de querer\nA un amor cuando es infiel\n\nMe gusta pensar\nQue algun dia volveras\nQue estas arrepentida\nQue ya nada sera igual\nPero vuelvo a escuchar la mas cruda realidad\nEn boca de amigos que ya no vuelven mas\n\nAbierta la herida juro q esta vez aprendere\na no dejar de volver por mas que extrañe\ntus piernas, tu risa tus manos rayandome de pasion\nDrogandome con tu voz\nPartiendome el alma en dos..."
     },
     {
       "id": "trotsky-vengaran-detras-del-arco",
@@ -942,12 +1032,13 @@
 
       ],
       "fragments": [
-        "Desde muy temprano el barrio te llama\nLevantás los trapos y algo para entrar\nLos de verde miran, como si fueras al frente\nNo se dan cuenta que es tu vida y nada más",
-        "Mandanga de noche, mandanga de día\nEl fino en la boca, ronca de gritar\nContra el alambrado, es como vivís la vida\nTirando el resto hasta el final",
-        "Esta banda no puede parar\nEsta aguanta y nunca va a faltar\nEn las buenas, en las malas mucho más\nLa banda nunca te va a abandonar",
-        "Desde atrás del arco, el cemento tiembla\nNo somos de palo, somos uno más\nSi no vas a la cancha, no podés sacar la foto\nGente de fiesta hasta el final",
-        "Y juegues donde juegues voy a estar\nLa banda nunca te va a abandonar"
-      ]
+        "Desde atrás del arco, el cemento tiembla",
+        "Esta aguanta y nunca va a faltar",
+        "En las buenas, en las malas mucho más",
+        "La banda nunca te va a abandonar"
+      ],
+      "url": "https://www.letras.com/trotsky-vengaran/378227/",
+      "lyric": "Desde muy temprano el barrio te llama\nLevantás los trapos y algo para entrar\nLos de verde miran, como si fueras al frente\nNo se dan cuenta que es tu vida y nada más\n\nMandanga de noche, mandanga de día\nEl fino en la boca, ronca de gritar\nContra el alambrado, es como vivís la vida\nTirando el resto hasta el final\nHasta el final\n\nEsta banda no puede parar\nEsta aguanta y nunca va a faltar\nEn las buenas, en las malas mucho más\nLa banda nunca te va a abandonar\n\nDesde atrás del arco, el cemento tiembla\nNo somos de palo, somos uno más\nSi no vas a la cancha, no podés sacar la foto\nGente de fiesta hasta el final\nHasta el final\n\nEsta banda no puede parar\nEsta aguanta y nunca va a faltar\nEn las buenas, en las malas mucho más\nLa banda nunca te va a abandonar\n\nEsta banda no puede parar\nEsta aguanta y nunca va a faltar\nEn las buenas, en las malas mucho más\nLa banda nunca te va a abandonar\n\nY juegues donde juegues voy a estar\nLa banda nunca te va a abandonar"
     },
     {
       "id": "trotsky-vengaran-historias-sin-terminar",
@@ -962,13 +1053,14 @@
 
       ],
       "fragments": [
-        "No sé qué es lo que me mueve\nNo sé qué es lo que me duele\nNo sé qué es lo que hago mal",
-        "Ya se que no hay atajos\nYa se nada es sin trabajo\n¿Pero cual es el precio que hay que pagar?",
+        "No sé qué es lo que me mueve\nNo sé qué es lo que me duele",
         "Tanto tienes, tanto vales\nSolo sirve ganar y nada más",
-        "Yo quiero ver la Luna reflejada en el mar\nPerder el tiempo con amigos nada en que pensar\nSentir la brisa de tu aliento muy cerca de mi\nSentir por un momento que no todo tiene un fin",
-        "No te vayas\nEsta noche\nNo te vayas por favor\n¿Por qué nada se detiene?\n¿Por qué nada es suficiente?\n¿Por qué todo tiene que cambiar?",
+        "Yo quiero ver la Luna reflejada en el mar\nPerder el tiempo con amigos nada en que pensar",
+        "¿Por qué todo tiene que cambiar?",
         "Se que no existe un final feliz\nSolo historias sin terminar"
-      ]
+      ],
+      "url": "https://www.letras.com/trotsky-vengaran/913321/",
+      "lyric": "No sé qué es lo que me mueve\nNo sé qué es lo que me duele\nNo sé qué es lo que hago mal\n\nYa se que no hay atajos\nYa se nada es sin trabajo\n¿Pero cual es el precio que hay que pagar?\n\nTanto tienes, tanto vales\nSolo sirve ganar y nada más\n\nYo quiero ver la Luna reflejada en el mar\nPerder el tiempo con amigos nada en que pensar\nSentir la brisa de tu aliento muy cerca de mi\nSentir por un momento que no todo tiene un fin\nTiene un fin\n\nNo te vayas\nEsta noche\nNo te vayas por favor\n¿Por qué nada se detiene?\n¿Por qué nada es suficiente?\n¿Por qué todo tiene que cambiar?\nSe que no existe un final feliz\nSolo historias sin terminar\n\nYo quiero ver la Luna reflejada en el mar\nPerder el tiempo con amigos nada en que pensar\nSentir la brisa de tu aliento muy cerca de mi\nSentir por un momento que no todo tiene un fin\n\nYo quiero ver la Luna reflejada en el mar\nPerder el tiempo con amigos nada en que pensar\nSentir la brisa de tu aliento muy cerca de mi\nSentir por un momento que no todo tiene un fin\nTiene un fin"
     },
     {
       "id": "trotsky-vengaran-vestida-para-matar",
@@ -983,12 +1075,15 @@
 
       ],
       "fragments": [
-        "Princesa del adios\nTe escapaste sin pedir perdon\nDesataste lo peor de mi\nEn el momento que te vi partir",
-        "Princesa del dolor\nFlor de fango en mi callejon\nDe tus espinas no me preocupe\nY la sangre no paro de correr\nComo vos, otra vez",
-        "Y te encuentro hoy y aquí\nVestida para matar\nMe embriago en tus encantos una vez mas",
-        "No se por que se fue\nNo se por que volvio\nFinalmente la encuentro otra vez\nComo siempre caigo a tus pies",
-        "Princesa del perdon\nQuizas mañana no sepa de vos\nYa se ke no puedo cambiar\nPero esat noche no te vas a escapar"
-      ]
+        "Princesa del adios\nTe escapaste sin pedir perdón",
+        "Y te encuentro hoy y aquí\nVestida para matar",
+        "Me embriago en tus encantos una vez mas",
+        "Esta noche es ideal\nQuisiera que esto dure una eternidad",
+        "No se por que se fue\nNo se por que volvio",
+        "Princesa del perdon\nQuizas mañana no sepa de vos"
+      ],
+      "url": "https://www.letras.com/trotsky-vengaran/vestida-para-matar/",
+      "lyric": "Princesa del adios\nTe escapaste sin pedir perdon\nDesataste lo peor de mi\nEn el momento que te vi partir\n\nPrincesa del dolor\nFlor de fango en mi callejon\nDe tus espinas no me preocupe\nY la sangre no paro de correr\nComo vos, otra vez\n\nY te encuentro hoy y aquí\nVestida para matar\nMe embriago en tus encantos una vez mas\nY estamos hoy aquí\nEsta noche es ideal\nQuisiera que esto dure una eternidad\n\nNo se por que se fue\nNo se por que volvio\nFinalmente la encuentro otra vez\nComo siempre caigo a tus pies\n\nPrincesa del perdon\nQuizas mañana no sepa de vos\nYa se ke no puedo cambiar\nPero esat noche no te vas a escapar\nOh no, otra vez no"
     },
     {
       "id": "la-vela-zafar",
@@ -1003,13 +1098,15 @@
 
       ],
       "fragments": [
-        "Soy de la ciudad, con todo lo que ves\nCon su ruido, con su gente, consume vejez\nY no puedo evitar el humo que entra hoy\nPero igual sigo creciendo, soy otro carbón",
-        "No voy a imaginar la pena en los demás\nCompro aire, y si es puro, pago mucho más",
+        "Soy de la ciudad, con todo lo que ves\nCon su ruido, con su gente, consume vejez",
         "No voy a tolerar que ya no tengan fe\nQue se bajen los brazos, que no haya lucidez",
-        "Me voy, volando por ahí\nY estoy convencido de ir\nMe voy, silbando y sin rencor\nY estoy zafando del olor",
-        "Me encontré con la gente que sabe valorar\nQue de turista, en la capital, han sabido vagar\nY no ha encarado al fin la cruda realidad\nDe respirar hollín, de llorar alquitrán",
-        "Y empiezo a envejecer, sudando mi verdad\nCriado pa' toser con mucha variedad\nDeberíamos andar desnudos pa' sentirnos mejor"
-      ]
+        "Me voy, volando por ahí\nY estoy convencido de ir",
+        "Y estoy zafando del olor",
+        "De respirar hollín, de llorar alquitrán",
+        "Soy de la ciudad con todo lo que ves\nCon su ruido, con su gente, consume vejez"
+      ],
+      "url": "https://www.letras.com/la-vela-puerca/229453/",
+      "lyric": "Soy de la ciudad, con todo lo que ves\nCon su ruido, con su gente, consume vejez\nY no puedo evitar el humo que entra hoy\nPero igual sigo creciendo, soy otro carbón\n\nNo voy a imaginar la pena en los demás\nCompro aire, y si es puro, pago mucho más\nNo voy a tolerar que ya no tengan fe\nQue se bajen los brazos, que no haya lucidez\n\nMe voy, volando por ahí\nY estoy convencido de ir\nMe voy, silbando y sin rencor\nY estoy zafando del olor\n\nMe encontré con la gente que sabe valorar\nQue de turista, en la capital, han sabido vagar\nY no ha encarado al fin la cruda realidad\nDe respirar hollín, de llorar alquitrán\n\nY empiezo a envejecer, sudando mi verdad\nCriado pa' toser con mucha variedad\nY adonde irá a parar, cargando con mi olor\nDeberíamos andar desnudos pa' sentirnos mejor\n\nMe voy, volando por ahí\nY estoy, convencido de ir\nMe voy, silbando y sin rencor\nY estoy zafando del olor (epa)\n\nSoy de la ciudad con todo lo que ves\nCon su ruido, con su gente, consume vejez\nY no puedo evitar el humo que entra hoy\nPero igual sigo creciendo, soy otro carbón\n\nNo voy a imaginar la pena en los demás\nCompro aire, y si es puro, pago mucho más\nNo voy a tolerar que ya no tengan fe\nQue se bajen los brazos, que no haya lucidez\n\nMe voy, volando por ahí\nY estoy convencido de ir\nMe voy, silbando y sin rencor\nY estoy zafando del olor\n\nMe voy, volando por ahí\nY estoy convencido de ir\nMe voy, silbando y sin rencor\nY estoy zafando del olor"
     },
     {
       "id": "la-vela-va-a-escampar",
@@ -1024,13 +1121,14 @@
 
       ],
       "fragments": [
-        "Hoy, asume lo que venga\nSea para bien, o todo mal\nY, aunque pierda lo que tenga\nSe va a morder para aguantar",
-        "Hoy, qué claro ve las cosas\nQue ayer no vio, ni va a exigir\nSobre su pena se posa\nQuiere entender para seguir",
         "Llega la batalla\nY contra él estalla\nAlgún día, va a escampar",
-        "¿Y cómo sale de esta?\nQuiere la respuesta\nSabe qué no es escapar",
+        "Hoy, asume lo que venga\nSea para bien, o todo mal\nY, aunque pierda lo que tenga\nSe va a morder para aguantar",
         "Su paciencia va a montar\nTodo un circo para verlo desfilar\nAl dolor que supo ser\nY al que ahora ya no quiere ver volver",
+        "Llega la batalla\nY contra él, estalla\nAlgún día va a escampar",
         "Se refugia en un farol\nY entre dos flores que siempre apuntan al Sol\nAsí cruza su pared\nMe sonríe y rompe con su propia red"
-      ]
+      ],
+      "url": "https://www.letras.com/la-vela-puerca/229452/",
+      "lyric": "Hoy, asume lo que venga\nSea para bien, o todo mal\nY, aunque pierda lo que tenga\nSe va a morder para aguantar\n\nHoy, qué claro ve las cosas\nQue ayer no vio, ni va a exigir\nSobre su pena se posa\nQuiere entender para seguir\n\nLlega la batalla\nY contra él estalla\nAlgún día, va a escampar\n\n¿Y cómo sale de esta?\nQuiere la respuesta\nSabe qué no es escapar\n\nHoy, qué raro que lo miran\nSe pone en pie y quiere hablar\nY a su boca se le olvida\nLo que una vez quiso explicar\n\nSu paciencia va a montar\nTodo un circo para verlo desfilar\nAl dolor que supo ser\nY al que ahora ya no quiere ver volver\n\nHoy, se siente satisfecho\nAunque aquel rol no exista más\nPara vida, con su pecho\nY su canción vuelve a sonar\n\nHoy, recibe los aplausos\nSupo ser sal y, también, miel\nY conecta con sus pasos\nQue, al resbalar, no cae bien\n\nTerminó su guerra\nLos pies en la tierra\nY su mano a un corazón\n\nSu pensar, tranquilo\nSu pena, un olvido\nY su alma, una pasión\n\nY hoy, asume lo que venga\nSea para bien, o todo mal\nY, aunque pierda lo que tenga\nSe va a morder para aguantar\n\nSu paciencia va a montar\nTodo un circo para verlo desfilar\nAl dolor que supo ser\nY al que, ahora, ya no quiere ver volver\n\nSe refugia en un farol\nY entre dos flores que siempre apuntan al Sol\nAsí cruza su pared\nMe sonríe y rompe con su propia red\n\nLlega la batalla\nY contra él, estalla\nAlgún día va a escampar\n\nY cómo sale de esta\nQuiere la respuesta\nSabe qué no es escapar\n\nSu paciencia va a montar\nTodo un circo para verlo desfilar\nAl dolor que supo ser\nY al que, ahora, ya no quiere ver volver\n\nSe refugia en un farol\nY entre dos flores que siempre apuntan al Sol\nAsí cruza su pared\nMe sonríe y rompe con su propia red\nSu propia red"
     },
     {
       "id": "la-vela-el-viejo",
@@ -1045,13 +1143,15 @@
 
       ],
       "fragments": [
-        "La cabecita despierta\nOrgullo de su mamá\nEl niño creció en su casa\nEl adolescente quiere asomar",
-        "Resbalando las veredas\nEl barrio lo encandiló\nDando vueltas las esquinas\nTocó placeres, tocó dolor",
-        "Se enamoró de la vida\nTodos los días, todas las noches\nDesayuno con las damas\nLa cena, se la salteó",
-        "Viejo divino, ¿dónde vas?\nYo sé muy bien que no querés mirar atrás\nFinal amargo, solo queda hoy\nTu perro flaco y el fondo de un vino pa' entibiar",
-        "Pero algunos pajaritos\nNo se pueden encerrar\nSe les va penando el alma\nDe pronto, ya no quieren cantar",
-        "Se desparramó de a poco, después que entraba pa' los 40\nY casi sin darse cuenta, alcohólico se volvió\nY fue bajando escalones, muchos inviernos a la deriva\nLas vueltas que da la vida, en la calle, terminó"
-      ]
+        "Viejo divino, ¿dónde vas?\nYo sé muy bien que no querés mirar atrás",
+        "Final amargo, solo queda hoy\nTu perro flaco y el fondo de un vino pa' entibiar",
+        "Pero algunos pajaritos\nNo se pueden encerrar",
+        "Se desparramó de a poco, después que entraba pa' los 40\nY casi sin darse cuenta, alcohólico se volvió",
+        "Viejo divino, ¿dónde vas?\nYo sé muy bien que no podés mirar atrás",
+        "Final amargo, solo queda hoy\nTu perro flaco y el fondo de un vino pa' entibiar"
+      ],
+      "url": "https://www.letras.com/la-vela-puerca/319385/",
+      "lyric": "La cabecita despierta\nOrgullo de su mamá\nEl niño creció en su casa\nEl adolescente quiere asomar\n\nResbalando las veredas\nEl barrio lo encandiló\nDando vueltas las esquinas\nTocó placeres, tocó dolor\n\nSe enamoró de la vida\nTodos los días, todas las noches\nDesayuno con las damas\nLa cena, se la salteó\n\nVa caminando sin rumbo\nLleva la calma del vagabundo\nPero dejando la vida\nDonde mande la ocasión\n\nViejo divino, ¿dónde vas?\nYo sé muy bien que no querés mirar atrás\nFinal amargo, solo queda hoy\nTu perro flaco y el fondo de un vino pa' entibiar\n\nDespués de las juventudes\nCansado de tropezar\nSe busca una buena esposa\nY 14 horas pa' trabajar\n\nPero algunos pajaritos\nNo se pueden encerrar\nSe les va penando el alma\nDe pronto, ya no quieren cantar\n\nSe desparramó de a poco, después que entraba pa' los 40\nY casi sin darse cuenta, alcohólico se volvió\nY fue bajando escalones, muchos inviernos a la deriva\nLas vueltas que da la vida, en la calle, terminó\n\nViejo divino, ¿dónde vas?\nYo sé muy bien que no querés mirar atrás\nFinal amargo, solo queda hoy\nTu perro flaco y el fondo de un vino pa' entibiar\n\nAh-ah\nViejo divino, ¿dónde vas?\nYo sé muy bien que no podés mirar atrás\nFinal amargo, solo queda hoy\nTu perro flaco y el fondo de un vino pa' entibiar\nY el fondo de un vino pa' entibiar\nUn perro flaco y el fondo de un vino pa' entibiar"
     },
     {
       "id": "la-vela-jose-sabia",
@@ -1067,13 +1167,16 @@
 
       ],
       "fragments": [
-        "José sabía que no puede ser\nQue esos amores no pueden durar\nY que la vida es así\nQue te da solo pa' quitarte",
-        "Y, así, arrancó para algún callejón\nMirando nada, escuchando un adiós\nAdiós a todo placer\nQue te saque de la amargura",
-        "El mostrador ya no aguantaba más\nDe codo, un callo, y de pie por la fe\nQue tiene el que se cayó\nPara levantarse de nuevo",
-        "Y, sin embargo, levantó\nCopas y copas al dolor",
-        "Al dolor de seguir vivo\nQue es lo bueno que tiene el dolor\nY también al placer de ganar y perder\nCuando todo parece jodido, es cuando hay que poner",
-        "El amor sabe durar\nLo que dura en llorar un muerto"
-      ]
+        "José sabía que no puede ser\nQue esos amores no pueden durar",
+        "Y, así, arrancó para algún callejón\nMirando nada, escuchando un adiós",
+        "Al dolor de seguir vivo\nQue es lo bueno que tiene el dolor",
+        "Ya se olvidó de lo lindo que fue\nYa se olvidó, y no se va a acordar más",
+        "No se me quede, José, por favor\nAlguna vuelta le vamo' a encontrar",
+        "Y, con orgullo, levantó (y, con orgullo, levantó)\nCopas y copas al dolor (copas y copas al dolor)",
+        "Cuando todo parece jodido, es cuando hay que poner"
+      ],
+      "url": "https://www.letras.com/la-vela-puerca/250341/",
+      "lyric": "José sabía que no puede ser\nQue esos amores no pueden durar\nY que la vida es así\nQue te da solo pa' quitarte\n\nY, así, arrancó para algún callejón\nMirando nada, escuchando un adiós\nAdiós a todo placer\nQue te saque de la amargura\n\nEl mostrador ya no aguantaba más\nDe codo, un callo, y de pie por la fe\nQue tiene el que se cayó\nPara levantarse de nuevo\n\nYa no había letras pa' su caminar\nAmanecía, y la feria, otra vez\nBuscándole su lugar\nPara quien se la juega entero\n\nY, sin embargo, levantó\nCopas y copas al dolor\n\nAl dolor de seguir vivo\nQue es lo bueno que tiene el dolor\nY también al placer de ganar y perder (al placer)\nCuando todo parece jodido, es cuando hay que poner\n\nEl día se iba y, con él, su penar\nYa estaba listo pa' verla volar\nQue no se vaya a caer\nPensaba cuando cerraba el puesto\n\nY, así, arrancó para algún callejón (la-la-la-rai-la)\nMirando nada, escuchando un adiós (lai-lai-laira-la-la-la-la)\nEl amor sabe durar\nLo que dura en llorar un muerto\n\nYa se olvidó de lo lindo que fue\nYa se olvidó, y no se va a acordar más\nEra feliz sin amor\nPensaba, y se le caía una gota\n\nNo se me quede, José, por favor\nAlguna vuelta le vamo' a encontrar\nY déjese de pensar\nQue la música es una nota\n\nY, con orgullo, levantó (y, con orgullo, levantó)\nCopas y copas al dolor (copas y copas al dolor)\n\nAl dolor de seguir vivo\nQue es lo bueno que tiene el dolor\nY también al placer de ganar y perder\nCuando todo parece jodido, es cuando hay que poner\nSi todo parece jodido, es cuando hay que poner\n\nLai-lai-lai-lai-laira, lai-lai-la-la"
     },
     {
       "id": "4-pesos-de-propina-mi-revolucion",
@@ -1089,12 +1192,16 @@
 
       ],
       "fragments": [
-        "Hoy la pelea que doy\nEs quererme más\nHoy el grito que doy\nEs silencio",
+        "Hoy la pelea que doy\nEs quererme más",
         "Hoy te pido perdón\nSi te lastimé el corazón",
-        "Hoy no quiero lo que me hace mal\nLo oscuro del juego\nHoy que es tiempo de sanar\nLas heridas del tiempo",
-        "Hoy pude ver quien soy\nConocerme más\nHoy que el veneno\nEncontró su remedio",
-        "Esa es mi revolución\nLlenar de amor mi sangre\nY si reviento\nQue se esparza en el viento\nEl amor que llevo adentro"
-      ]
+        "Hoy que es tiempo de sanar\nLas heridas del tiempo",
+        "Hoy que pronto será ayer\nRegálate el momento",
+        "Esa es mi revolución",
+        "Llenar de amor mi sangre",
+        "El amor que llevo adentro"
+      ],
+      "url": "https://www.letras.com/4-pesos-de-propina/mi-revolucion/",
+      "lyric": "Hoy la pelea que doy\nEs quererme más\nHoy el grito que doy\nEs silencio\nHoy te pido perdón\nSi te lastimé el corazón\n\nHoy no quiero lo que me hace mal\nLo oscuro del juego\nHoy que es tiempo de sanar\nLas heridas del tiempo\nHoy que pronto será ayer\nRegálate el momento\n\nHoy pude ver quien soy\nConocerme más\nHoy que el veneno\nEncontró su remedio\nHoy me doy el perdón\nSi me lastimé el corazón\n\nHoy vale más despertar\nQue soñar en este juego\nHoy que es tiempo de sanar\nLas heridas del tiempo\nHoy que es tiempo de ser luz\n\nEsa es mi revolución\nLlenar de amor mi sangre\nY si reviento\nQue se esparza en el viento\nEl amor que llevo adentro\nEsa es mi revolución"
     },
     {
       "id": "4-pesos-de-propina-pirata",
@@ -1109,13 +1216,14 @@
 
       ],
       "fragments": [
-        "Pirata,\nno todo lo que brilla es plata\nescucha mi consejo\nlibertad o sello",
-        "Estas esperando que mi canto te de de comer\nestas engordando con mi arte y aparte\nle pones un sello, linda foto y lo queres vender\nno inventaste nada y te llevás la mejor parte",
-        "ay que bonito el cartelito\nque anuncia un hit total\ntotal, total para que",
-        "Si vende como loco y esta primero en las radios\nson catorce pesos que agarras por unidad\nlo que vos grabaste hoy lo maneja un otario\nque se queda con el resto, del resto del total",
-        "En mi bandera va una calavera\nlibertad o sello\nescucha mi consejo",
-        "Hoy te lo digo no cuentes conmigo\ncon un solo ojo\nveo mucho más"
-      ]
+        "Pirata,\nno todo lo que brilla es plata\nescucha mi consejo\nlibertad o sello.",
+        "ay que bonito el cartelito\nque anuncia un hit total\ntotal, total para que.",
+        "En mi bandera va una calavera\nlibertad o sello\nescucha mi consejo.",
+        "Hoy te lo digo no cuentes conmigo\ncon un solo ojo\nveo mucho más.",
+        "Pirata,\nno todo lo que brilla es plata\nescucha mi consejo\nlibertad o sello."
+      ],
+      "url": "https://www.letras.com/4-pesos-de-propina/1177661/",
+      "lyric": "Pirata,\nno todo lo que brilla es plata\nescucha mi consejo\nlibertad o sello.\n\nEstas esperando que mi canto te de de comer\nestas engordando con mi arte y aparte\nle pones un sello, linda foto y lo queres vender\nno inventaste nada y te llevás la mejor parte.\n\nay que bonito el cartelito\nque anuncia un hit total\ntotal, total para que.\n\nSi vende como loco y esta primero en las radios\nson catorce pesos que agarras por unidad\nlo que vos grabaste hoy lo maneja un otario\nque se queda con el resto, del resto del total.\n\nEn mi bandera va una calavera\nlibertad o sello\nescucha mi consejo.\n\nPirata,\nno todo lo que brilla es plata\nescucha mi consejo\nlibertad o sello.\n\nY esta es la cantora que te promete los cuetes\nel poster, la revista, la gira y mucho más\nno es que no queremos ver los discos y los billetes\nsi aparece la guita vos no la vas a llevar.\n\nHoy te lo digo no cuentes conmigo\ncon un solo ojo\nveo mucho más.\n\nPirata,\nno todo lo que brilla es plata\nescucha mi consejo\nlibertad o sello."
     },
     {
       "id": "4-pesos-de-propina-hoy-sopa-hoy",
@@ -1130,12 +1238,16 @@
 
       ],
       "fragments": [
-        "Hay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso",
-        "Métale baldosas grises, y pedazos de cordones\nÉchele un poco de sal al hormigón\nAlquitrán bien picadito,\nAdoquines saltaditos\nY en las bocas de tormenta pimentón",
-        "Que la risa con permiso\nY la flor del paraíso\nA ese guiso le dará un toque dulzón",
-        "Hoy invito yo, no me vaya a despreciar\nTómelo con calma porque otra cosa no hay\nTome servilleta\nTome plato hondo\nTápese la ñata\nTome carrerita\nY zambúllase como en el mar",
-        "Que el mecanismo de las ollas a presión\nHace aprontar la comida rapidito\nCon el vapor organizado en una gran concentración"
-      ]
+        "Hay que dura, ta la calle\nVamo a meterla en la sopa",
+        "Métale baldosas grises, y pedazos de cordones\nÉchele un poco de sal al hormigón",
+        "Hoy invito yo, no me vaya a despreciar\nTómelo con calma porque otra cosa no hay",
+        "Hay que dura ta la olla\nVamo a meterla en la sopa para ver si la apagamo",
+        "Pongo (un boton es) entonces agonía\nUna lágrima del día",
+        "Que el mecanismo de las ollas a presión\nHace aprontar la comida rapidito",
+        "Mastique y trague sin parar\nYa se va a ablandar"
+      ],
+      "url": "https://www.letras.com/4-pesos-de-propina/hoy-sopa-hoy/",
+      "lyric": "Hay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso\n\nHay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso\n\nMétale baldosas grises, y pedazos de cordones\nÉchele un poco de sal al hormigón\nAlquitrán bien picadito,\nAdoquines saltaditos\nY en las bocas de tormenta pimentón\nQué recetón!\n\nHay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso\n\nQue la risa con permiso\nY la flor del paraíso\nA ese guiso le dará un toque dulzón\nRecoja ánimos del piso\nJuegue con melancolía\nY su sopa será de televisión\nQué recetón!\n\nHoy invito yo, no me vaya a despreciar\nTómelo con calma porque otra cosa no hay\nTome servilleta\nTome plato hondo\nTápese la ñata\nTome carrerita\nY zambúllase como en el mar\n\nHay que dura ta la olla\nVamo a meterla en la sopa para ver si la apagamo\nOlla abollada, calle y hueso\nVamo a hacer con ella un caldo bien espeso\n\nPongo (un boton es) entonces agonía\nUna lágrima del día\nComerciantes de neurosis un montón\nAgréguele cansancio y gente\nBien a punto del reviente\nY meta todo dentro de la olla a presión\nY atención\n\nQue el mecanismo de las ollas a presión\nHace aprontar la comida rapidito\nCon el vapor organizado en una gran concentración\nLlevando de estandarte el descarte proteínico\nQue el mecanismo de las ollas a presión\nTiene pensado hasta el último detalle\nCuando el vapor es calentado, acrecentado, propasado\nY hace su manifestación\nAparece de costado un pitito que hace pii\nDéjela hervir algún rato\nQue la suela los zapatos\nNo se cuecen todas al primer hervor\nEche carcamales viejos\nY botones sin pellejo\nDe los verdes\nQue le dan muy buen sabor\nY al comedor\n\nHay que dura, ta la calle\nVamo a meterla en la sopa\nPara ver si la ablandamo\nHay que dura, puro hueso\nVamo a hacer con ella un caldo bien espeso\nMastique y trague sin parar\nYa se va a ablandar\nCon agua estancada puede acompañar."
     },
     {
       "id": "l-autentika-cumbia-ni-ahi",
@@ -1173,14 +1285,16 @@
 
       ],
       "fragments": [
-        "Resulta que agarré y que decidí matarme\nPorque ya no había nada de donde agarrarme\nNo es que yo sea un tipo bajoneado\nPero no me iba a salvar ni Superman drogado",
-        "Una cosa sí tenía bien clarita\nAl cielo no iba a ir ni aunque me dieran guita\nEl infierno para mí era una maravilla\nQuemándome al igual que un pollo a la parrilla",
-        "Así que sí, sí, iba a pedir\nAl cielo no pretendía ir\nY a ver con quien tenía que ir a hablar\nQue yo tenía cuña en Uruguay",
-        "Al cielo siempre me lo había imaginado\nComo cuando se moría un dibujo animado\nComo algún cuadro horrible de Miguel Ángel\nO como el paraíso que contaba el Dante",
-        "De rebote me enteré que la eternidad\nDura mucho tiempo, y a veces más\nY no puedo soportar que todo prosiga\nSentado en una nube como un vejiga",
-        "Tocando mal el arpa y desafinando\nRodeado de angelitos siempre meando\nSacando telarañas de mis genitales\nPorque allá son todas vírgenes las orientales",
-        "Prefería en el infierno estar\nAunque tuviera que soportar\nA Rivera, a Oribe y a Garzón\nY la hinchada de Peñarol"
-      ]
+        "Resulta que agarré y que decidí matarme\nPorque ya no había nada de donde agarrarme",
+        "Al cielo no iba a ir ni aunque me dieran guita\nEl infierno para mí era una maravilla",
+        "Así que no, por favor\nAl cielo no, al cielo no, al cielo no, al cielo no",
+        "Pero quien me convenció de que el cielo era un bodrio\nYo ya le tenía un poquito de odio",
+        "Fueron las palabras de mi abuela Popa\nCuando se me aparecía jugando a la copa",
+        "Y que decía: Mirá mi amor\nAcá en el cielo todo es de terror\nPorque no hay quiniela ni hay maní",
+        "Prefería en el infierno estar\nAunque tuviera que soportar\nA Rivera, a Oribe y a Garzón"
+      ],
+      "url": "https://www.letras.com/cuarteto-de-nos/376182/",
+      "lyric": "Resulta que agarré y que decidí matarme\nPorque ya no había nada de donde agarrarme\nNo es que yo sea un tipo bajoneado\nPero no me iba a salvar ni Superman drogado\n\nUna cosa sí tenía bien clarita\nAl cielo no iba a ir ni aunque me dieran guita\nEl infierno para mí era una maravilla\nQuemándome al igual que un pollo a la parrilla\n\nAsí que sí, sí, iba a pedir\nAl cielo no pretendía ir\nY a ver con quien tenía que ir a hablar\nQue yo tenía cuña en Uruguay\nAsí que no, por favor\nAl cielo no, al cielo no, al cielo no, al cielo no\n\nAl cielo siempre me lo había imaginado\nComo cuando se moría un dibujo animado\nComo algún cuadro horrible de Miguel Ángel\nO como el paraíso que contaba el Dante\n\nPero quien me convenció de que el cielo era un bodrio\nYo ya le tenía un poquito de odio\nFueron las palabras de mi abuela Popa\nCuando se me aparecía jugando a la copa\n\nY que decía: Mirá mi amor\nAcá en el cielo todo es de terror\nPorque no hay quiniela ni hay maní\nNi ningún bar donde tomar anís\nAsí que no, por favor\nAl cielo no, al cielo no, al cielo no, al cielo no\n\nDe rebote me enteré que la eternidad\nDura mucho tiempo, y a veces más\nY no puedo soportar que todo prosiga\nSentado en una nube como un vejiga\n\nTocando mal el arpa y desafinando\nRodeado de angelitos siempre meando\nSacando telarañas de mis genitales\nPorque allá son todas vírgenes las orientales\n\nPrefería en el infierno estar\nAunque tuviera que soportar\nA Rivera, a Oribe y a Garzón\nY la hinchada de Peñarol\nAsí que no, por favor\nAl cielo no, al cielo no, al cielo no, al cielo no, al cielo no, al cielo no\nCielo no, al cielo no, al cielo no, cielo no, al cielo no, al cielo no\nCielo no, cielo no, cielo no, cielo no, cielo no"
     },
     {
       "id": "cuarteto-de-nos-cancion-de-amor",
@@ -1196,12 +1310,15 @@
 
       ],
       "fragments": [
-        "Aunque hable de resaca\nDe pichí y de hacerse caca\nAunque ahora esté cenando\nY en la sopa vomitando\nA pesar del mal olor\nEsta es una canción de amor",
-        "Aunque las chicas no deliren\nY cuando canto no suspiren\nY aunque no me tiren flores\nNi me den sus direcciones",
-        "Aunque hable de mi muerte\nY de un transexual sin suerte\nY aunque hable de mi entierro\nMi velorio y mi destierro",
-        "Aunque pronuncie sho en lugar de yo\nY nadie diga que soy un triunfador\nSigue siendo una canción de amor",
-        "Aunque te parezca relajada\nY no la cante tu empleada\nY aunque la toque el cuarteto\nY no cuente ni un secreto\nQue se ahogue en el alcohol\nEsta es una canción de amor"
-      ]
+        "Aunque hable de resaca\nDe pichí y de hacerse caca",
+        "Esta es una canción de amor",
+        "Aunque no hable de una traición\nNi que por nadie sufra mi corazón",
+        "Aunque hable de mi muerte\nY de un transexual sin suerte",
+        "Sigue siendo una canción de amor",
+        "Aunque te parezca relajada\nY no la cante tu empleada"
+      ],
+      "url": "https://www.letras.com/cuarteto-de-nos/376192/",
+      "lyric": "Aunque hable de resaca\nDe pichí y de hacerse caca\nAunque ahora esté cenando\nY en la sopa vomitando\nA pesar del mal olor\nEsta es una canción de amor\n\nAunque las chicas no deliren\nY cuando canto no suspiren\nY aunque no me tiren flores\nNi me den sus direcciones\nAunque yo no sea un señor\nEsta es una canción de amor\n\nAunque no hable de una traición\nNi que por nadie sufra mi corazón\nSigue siendo una canción de amor\nSigue siendo una canción de amor\nSigue siendo una canción de amor\n\nAunque hable de mi muerte\nY de un transexual sin suerte\nY aunque hable de mi entierro\nMi velorio y mi destierro\nAunque acabe en el cajón\nEsta es una canción de amor\n\nAunque pronuncie sho en lugar de yo\nY nadie diga que soy un triunfador\nSigue siendo una canción de amor\nSigue siendo una canción de amor\nSigue siendo una canción de amor\n\nAunque te parezca relajada\nY no la cante tu empleada\nY aunque la toque el cuarteto\nY no cuente ni un secreto\nQue se ahogue en el alcohol\nEsta es una canción de amor\n\nAunque no haya ninguna ilusión\nY que mañana sea igual que hoy\nSigue siendo una canción de amor\nSigue siendo una canción de amor\nSigue siendo una canción de amor\nSigue siendo una canción de amor\nSigue siendo una canción de amor"
     },
     {
       "id": "cuarteto-de-nos-el-dia-que-artigas-se-emborracho",
@@ -1217,14 +1334,16 @@
 
       ],
       "fragments": [
-        "El día que Artigas se emborrachó\nHizo cualquier cagada como un buen señor\nPero como ningún libro nunca lo contó\nPor eso ahora agarro y se los cuento yo",
-        "Con la lengua trabada explicó el general\nQué color en su bandera iba a utilizar\nBlanco y rojo en honor al vino que me tomé\nY azul por el pedo que después me agarré",
-        "Y se emborrachó, porque la guerra perdió\nY se emborrachó, porque alguien lo traicionó\nSe emborrachó, y la patria se lo agradeció",
-        "Llegamos al Ayuí con el éxodo oriental\nGritaba haciendo eses nuestro general\nY un paisano le avisó: Pero usté está en cuete\nEste no es el Ayui, no ve que es el Miguelete",
-        "Llegó al Hervidero y antes de tropezar\nPreguntó a que hora tocaba la Banda Oriental\nTomó un bicarbonato que después eructó\nY le puso a ese pueblo Purificación",
-        "Ese día dejó como a diez embarazadas\nSe casó con la prima que era medio retardada\nLe dijo a Posadas: Agarrala que me crece\nY vomitó en las instrucciones del año trece",
-        "Y mamado hasta las patas dijo: Me gusta esa china\nY en realidad no era otro que el negro Ansina\nFajó a Lavalleja que le quiso explicar\nY el pedo se le fue recién en el Paraguay"
-      ]
+        "El día que Artigas se emborrachó",
+        "Hizo cualquier cagada como un buen señor",
+        "Pero como ningún libro nunca lo contó\nPor eso ahora agarro y se los cuento yo",
+        "Y azul por el pedo que después me agarré",
+        "Llegamos al Ayuí con el éxodo oriental\nGritaba haciendo eses nuestro general",
+        "Se emborrachó, porque la guerra perdió\nY se emborrachó, porque alguien lo traicionó\nSe emborrachó, y la patria se lo agradeció",
+        "Y vomitó en las instrucciones del año trece"
+      ],
+      "url": "https://www.letras.com/cuarteto-de-nos/376209/",
+      "lyric": "Mi autoridad es la hermana de vosotros\nY ella se deja de mi presencia soberana\n\nEl día que Artigas se emborrachó\nHizo cualquier cagada como un buen señor\nPero como ningún libro nunca lo contó\nPor eso ahora agarro y se los cuento yo\n\nCon la lengua trabada explicó el general\nQué color en su bandera iba a utilizar\nBlanco y rojo en honor al vino que me tomé\nY azul por el pedo que después me agarré\n\nY se emborrachó, porque la guerra perdió\nY se emborrachó, porque alguien lo traicionó\nSe emborrachó, y la patria se lo agradeció\n\nLlegamos al Ayuí con el éxodo oriental\nGritaba haciendo eses nuestro general\nY un paisano le avisó: Pero usté está en cuete\nEste no es el Ayui, no ve que es el Miguelete\n\nLlegó al Hervidero y antes de tropezar\nPreguntó a que hora tocaba la Banda Oriental\nTomó un bicarbonato que después eructó\nY le puso a ese pueblo Purificación\n\nY se emborrachó, porque la guerra perdió\nY se emborrachó, porque alguien lo traicionó\nSe emborrachó, y la patria se lo agradeció\n\nEse día dejó como a diez embarazadas\nSe casó con la prima que era medio retardada\nLe dijo a Posadas: Agarrala que me crece\nY vomitó en las instrucciones del año trece\n\nY mamado hasta las patas dijo: Me gusta esa china\nY en realidad no era otro que el negro Ansina\nFajó a Lavalleja que le quiso explicar\nY el pedo se le fue recién en el Paraguay\n\nSe emborrachó, porque la guerra perdió\nY se emborrachó, porque alguien lo traicionó\nSe emborrachó, y la patria se lo agradeció\n\nSe emborrachó, porque la guerra perdió\nY se emborrachó, porque alguien lo traicionó\nSe emborrachó, y la patria se lo agradeció\n\nMozo!\nUn whisky para los vencidos!"
     },
     {
       "id": "cuarteto-de-nos-el-empleado-y-la-muerte",
@@ -1239,12 +1358,522 @@
 
       ],
       "fragments": [
-        "Esta es la muerte que te viene a buscar\nTe está buscando por todo el Uruguay",
-        "Ahora iba a pagar la cuenta del gas\nY mañana tengo que ir a trabajar\nLas horas del mes ya me las tomé\nAsí que ni miras que vaya a faltar",
-        "Tengo que pagar ahora el alquiler\nY la cuota del calefón también\nYo no puedo irme así sin avisar\nSi me muero ahora me van a matar",
-        "Pasan el partido en la televisión\nYa va deteniéndose tu corazón",
-        "Por el túnel negro vas hacia la luz\nUy! La ute! Sáquenme del ataúd!",
-        "Mañana el cuarenta y siete va a salir. Tenemos que irnos\nNo quiero morir!"
+        "Esta es la muerte que te viene a buscar",
+        "Te está buscando por todo el Uruguay",
+        "Yo no puedo irme así sin avisar",
+        "Si me muero ahora me van a matar",
+        "Por el túnel negro vas hacia la luz",
+        "Mañana el cuarenta y siete va a salir. Tenemos que irnos"
+      ],
+      "url": "https://www.letras.com/cuarteto-de-nos/376211/",
+      "lyric": "[Muerte] Esta es la muerte que te viene a buscar\nBarrancas: No creo\n[Muerte] Te está buscando por todo el Uruguay\nBarrancas: No puedo\n\n[Barrancas] Ahora iba a pagar la cuenta del gas\nY mañana tengo que ir a trabajar\nLas horas del mes ya me las tomé\nAsí que ni miras que vaya a faltar\n\nTengo que pagar ahora el alquiler\nY la cuota del calefón también\nYo no puedo irme así sin avisar\nSi me muero ahora me van a matar\n\n[Muerte] Es el momento nos tenemos que ir\nBarrancas: Ta luego\n[Muerte]: Basta de bromas ya te toca morir\nBarrancas: No quiero\n\n[Barrancas] Pasan el partido en la televisión\n[Muerte] Ya va deteniéndose tu corazón\nBarrancas: Pero tengo mucho para organizar\n[Muerte] Ahora solo te tenés que relajar\n\n[Muerte] Por el túnel negro vas hacia la luz\nBarrancas: Uy! La ute! Sáquenme del ataúd!\n[Muerte] Mañana el cuarenta y siete va a salir. Tenemos que irnos\nBarrancas: No quiero morir!"
+    },
+    {
+      "id": "damas-gratis-los-duenos-de-pabellon",
+      "artistId": "damas-gratis",
+      "song": "Los Dueños De Pabellon",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Los Dueños De Pabellon",
+        "Los Duenos De Pabellon"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/damas-gratis/256864/",
+      "lyric": "Ahora nosotros tomamos el control\nSomos los dueños del pabellon\nEstamos cansados de tanta represion\nY vamo a tocar de esta prision\n\nAhora nosotros tomamos el control\nSomos los dueños del pabellon\nEstamos cansados de tanta represion\nY vamo a tocar de esta prision\n\nQuiero que todos se amotinen\nLevanten bien las manos\nQue se pongan a rezar\nLos guardias y refugiados\nDe esta prision uhh ohh ohh\nDe esta prision uhh ohh ohh\n\nA mi no me importa morir\nAbrime la celda que me quiero ir\nA mi no me importa morir\nAbrime la celda que me quiero ir\n\nA mi no me importa morir\nAbrime la celda que me quiero ir\nA mi no me importa morir\nAbrime la celda que me quiero ir\n\nSeñor carcelero\nDejeme salir\nSeñor carcelero\nDejeme salir\n\nOtra vez...\n\nEste es el super teclado de pablito lescano",
+      "fragments": [
+        "Somos los dueños del pabellon",
+        "Estamos cansados de tanta represion\nY vamo a tocar de esta prision",
+        "Quiero que todos se amotinen\nLevanten bien las manos",
+        "A mi no me importa morir\nAbrime la celda que me quiero ir",
+        "Señor carcelero\nDejeme salir",
+        "Este es el super teclado de pablito lescano"
+      ]
+    },
+    {
+      "id": "andres-calamaro-cartas-sin-marcar",
+      "artistId": "andres-calamaro",
+      "song": "Cartas Sin Marcar",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Cartas Sin Marcar"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/andres-calamaro/6608/",
+      "lyric": "Igual que un niño abandonado\nQue en la calle lo han dejado\nYo te busco desesperado\nNecesito un amigo\nNecesito que alguien quiera hablar conmigo\n\nCuando empieza a amanecer\nLa verdad es tan cruel\nY tu lo sabes, eres testigo\nAhora soy un mendigo\nQue camina por las calles perdido\n\nNo me siento bien\nHoy perdí la fe\nLa suerte juega con cartas sin marcar\nNo se puede cambiar\n\nIgual que un niño abandonado\nQue en la calle lo han dejado\nYo te busco desesperado\nNecesito un amigo\nNecesito que alguien quiera hablar conmigo\n\nCuando empieza a amanecer\nLa verdad es tan cruel\nY tu lo sabes, eres testigo\nAhora soy un mendigo\nQue camina por las calles perdido\n\nNo me siento bien (no, no me siento bien)\nHoy perdí la fe\nLa suerte juega con cartas sin marcar\nNo se puede cambiar\n\nNo me siento bien (no, no, no me siento bien)\nHoy perdí la fe\nLa suerte juega con cartas sin marcar\nNo se puede cambiar\n\nNo me siento bien (no, no me siento bien)\nHoy perdí la fe\nLa suerte juega con cartas sin marcar\nNo se puede cambiar\n\nNo me siento bien (no, no, no me siento bien)\nHoy perdí la fe\nLa suerte juega con cartas sin marcar\nNo se puede cambiar\n\nLa suerte juega con cartas sin marcar\nLa suerte juega con cartas sin marcar (cartas, cartas sin marcar, cartas, cartas)\nLa suerte juega con cartas sin marcar\nLa suerte juega con cartas sin marcar\nLa suerte juega con cartas sin marcar (la suerte juega con cartas sin marcar)\nLa suerte juega con cartas sin marcar (la suerte juega con cartas sin marcar)",
+      "fragments": [
+        "Igual que un niño abandonado\nQue en la calle lo han dejado",
+        "No me siento bien\nHoy perdí la fe",
+        "La suerte juega con cartas sin marcar\nNo se puede cambiar",
+        "Cuando empieza a amanecer\nLa verdad es tan cruel",
+        "Ahora soy un mendigo\nQue camina por las calles perdido",
+        "La suerte juega con cartas sin marcar"
+      ]
+    },
+    {
+      "id": "andres-calamaro-diez-anos-despues",
+      "artistId": "andres-calamaro",
+      "song": "Diez Años Despues",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Diez Años Despues",
+        "Diez Anos Despues"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/andres-calamaro/321629/",
+      "lyric": "Si diez años después, te vuelvo a encontrar en algún lugar\nNo te olvides que soy distinto de aquel, pero casi igual\nSi la casualidad nos vuelve a juntar diez años después\nAlgo se va a incendiar, no voy mostrar mi lado cortés\n\nAquello fue un gran punto de partida, pero a la vez que fácil se te olvida\nDiez años después quien puede volver atrás\nEstamos en la tierra cuatro días, y el cielo no me ofrece garantías\nDiez años después, mejor volver a empezar\n\nSi tu credulidad se deterioró en algún lugar\nNo te olvides que soy testigo casual de tu soledad\nSi diez años después no estamos igual qué le vas a hacer\nOtros diez años más y luego a empezar juntos otra vez\n\nAquello fue una linda primavera, pero fue solamente la primera\nDiez años después el tiempo empieza a pasar\nMe quedan balas en la cartuchera, pero te guardo siempre la primera\nDiez años después, mejor reír que llorar\n\nUna carta te di, que nunca escribí, que nadie leyó\nHoy diez años después, todo sigue igual, nunca te llegó\nDentro del corazón al día de hoy no queda lugar\nSi perdí la razón no fue por amor, fue por soledad\n\nLa vida es una gran sala de espera, la otra es una caja de madera\nDiez años después mejor dormir que soñar\nNo se puede vivir de otra manera, porque sino la gente ni se entera\nDiez años después quien puede volver atrás\nDiez años después mejor decir que callar",
+      "fragments": [
+        "Si diez años después, te vuelvo a encontrar en algún lugar",
+        "Si la casualidad nos vuelve a juntar diez años después\nAlgo se va a incendiar, no voy mostrar mi lado cortés",
+        "Diez años después el tiempo empieza a pasar\nMe quedan balas en la cartuchera, pero te guardo siempre la primera",
+        "Hoy diez años después, todo sigue igual, nunca te llegó",
+        "Si perdí la razón no fue por amor, fue por soledad",
+        "Diez años después mejor dormir que soñar"
+      ]
+    },
+    {
+      "id": "andres-calamaro-estadio-azteca",
+      "artistId": "andres-calamaro",
+      "song": "Estadio Azteca",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Estadio Azteca"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/andres-calamaro/321633/",
+      "lyric": "Prendido\nA tu botella vacía\nEsa que antes, siempre tuvo gusto a nada\n\nApretando los dedos\nAgarrándole, dándole mi vida\nA ese para-avalanchas\n\nCuando era niño\nY conocí el estadio Azteca\nMe quedé duro, me aplastó ver al gigante\nDe grande me volvió a pasar lo mismo\nPero ya estaba duro mucho antes\n\nDicen que hay\nDicen que hay\nUn mundo de tentaciones\nTambién hay caramelos\nCon forma de corazones\n\nDicen que hay\nBueno, malo\nDicen que hay más o menos\nDicen que hay algo que tener\nY no muchos tenemos\nY no muchos tenemos\n\nGracias le doy a la virgen, gracias le doy al señor\nPorque entre tanto rigor, y habiendo pedido tanto\nNo perdí mi amor al canto ni mi voz, como cantor\n\nPrendido\nA tu botella vacía\nEsa que antes, siempre tuvo gusto a nada\n\nAtención pido al silencio\nY silencio a la atención\nQue voy en esta ocacion si me ayuda la memoria\nA contarles que a mi historia le faltaba lo mejor",
+      "fragments": [
+        "Cuando era niño\nY conocí el estadio Azteca",
+        "Dicen que hay\nUn mundo de tentaciones",
+        "Gracias le doy a la virgen, gracias le doy al señor",
+        "Prendido\nA tu botella vacía"
+      ]
+    },
+    {
+      "id": "andres-calamaro-flaca",
+      "artistId": "andres-calamaro",
+      "song": "Flaca",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Flaca"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/andres-calamaro/1678/",
+      "lyric": "Flaca\nNo me claves\nTus puñales\nPor la espalda\nTan profundo\nNo me duelen\nNo me hacen mal\n\nLejos\nEn el centro\nDe la tierra\nLas raíces\nDel amor\nDonde estaban\nQuedarán\n\nEntre el: No me olvides\nMe dejé nuestros abriles olvidados\nEn el fondo del placard\nDel cuarto de invitados\nEran tiempos dorados\nUn pasado mejor\n\nAunque casi me equivoco\nY te digo poco a poco\nNo me mientas\nNo me digas la verdad\nNo te quedes callada\nNo levantes la voz\nNi me pidas perdón\n\nAunque casi te confieso\nQue también he sido un perro compañero\nUn perro ideal que aprendió a ladrar\nY a volver al hogar\nPara poder comer\n\nFlaca\nNo me claves\nTus puñales\nPor la espalda\nTan profundo\nNo me duelen\nNo me hacen mal\n\nLejos\nEn el centro\nDe la tierra\nLas raíces\nDel amor\nDonde estaban\nQuedarán",
+      "fragments": [
+        "No me claves\nTus puñales\nPor la espalda",
+        "Entre el: No me olvides\nMe dejé nuestros abriles olvidados",
+        "Aunque casi te confieso\nQue también he sido un perro compañero",
+        "Flaca\nNo me claves\nTus puñales\nPor la espalda",
+        "Lejos\nEn el centro\nDe la tierra\nLas raíces\nDel amor"
+      ]
+    },
+    {
+      "id": "andres-calamaro-mil-horas",
+      "artistId": "andres-calamaro",
+      "song": "Mil Horas",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Mil Horas"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/andres-calamaro/436011/",
+      "lyric": "Hace frío y estoy lejos de casa\nHace tiempo que estoy sentado sobre esta piedra\nYo me pregunto\n¿Para qué sirven las guerras?\n\nTengo un cohete en el pantalón\nVos estás tan fría, como la nieve a mi alrededor\nVos estás tan blanca\nY yo no sé qué hacer\n\nLa otra noche, te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste, me miraste y me dijiste: Loco\nEstás mojado, ya no te quiero\n\nEn el circo, vos ya sos una estrella\nUna estrella roja que todo se lo imagina\nSi te preguntan, vos no me conocías\nNo, no\n\nYo tengo un cohete en el pantalón\nVos estás tan fría, como la nieve a mi alrededor\nVos estás tan blanca\nQue yo no sé qué hacer\n\nTe esperé bajo la lluvia, no, no, no\n\nLa otra noche, te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste, me miraste y me dijiste: Loco\nEstás mojado, ya no te quiero\n\nLa otra noche, te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste, me miraste y me dijiste: Loco\nEstás mojado, ya no te quiero",
+      "fragments": [
+        "Tengo un cohete en el pantalón",
+        "Vos estás tan fría, como la nieve a mi alrededor\nVos estás tan blanca\nY yo no sé qué hacer",
+        "La otra noche, te esperé bajo la lluvia dos horas\nMil horas, como un perro\nY cuando llegaste, me miraste y me dijiste: Loco\nEstás mojado, ya no te quiero",
+        "En el circo, vos ya sos una estrella\nUna estrella roja que todo se lo imagina"
+      ]
+    },
+    {
+      "id": "andres-calamaro-paloma",
+      "artistId": "andres-calamaro",
+      "song": "Paloma",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Paloma"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/andres-calamaro/6626/",
+      "lyric": "Mi vida, fuimos a volar\nCon un solo paracaídas\nUno solo va a quedar\nVolando a la deriva\n\nVivir así no es vivir\nEsperando y esperando\nPorque vivir es jugar\nY yo quiero seguir jugando\n\nLe dije a mi corazón\nSin gloria, pero sin pena\nNo cometas el crimen, varón\nSi no vas a cumplir la condena\n\nQuiero vivir dos veces\nPara poder olvidarte\nQuiero llevarte conmigo\nY no voy a ninguna parte\n\nNo te preocupes, paloma\nHoy no estoy adentro mío\nTu amor es mi enfermedad\nSoy un envase vacío\n\nNo te preocupes, paloma\nNo hay pájaros en el nido\nDos ilusiones se irán a volar\nPero otras dos han venido\n\nSi me olvido de vivir\nColgado de sentimiento\nVoy a vivir para repetir otra vez\nEste momento\n\nTe bajaría del cielo, mujer\nLa Luna hasta tu cama\nPorque es muy poco de amor\nSolo una vez por semana\n\nPuse precio a mi libertad\nY nadie quiso pagarlo\nTe cambio tu corazón por el mío\nPara mirarlo y mirarlo\n\nHampas de gloria, mujer\nQuiero un pedazo de cielo\nPara invitarte a dormir\nEn la cama o en el suelo\n\nUn sacrificio ritual, bien o mal\nYo quiero hacerle a mi estrella\nSin principio ni final\nNo puedo vivir sin ella\n\nQuiero vivir dos veces\nPara poder olvidarte\nQuiero llevarte conmigo\nY no voy a ninguna parte\n\nNo te preocupes, paloma\nHoy no estoy adentro mío\nTu amor es mi enfermedad\nSoy un envase vacío\n\nNo te preocupes, paloma\nNo hay pájaros en el nido\nDos ilusiones se irán a volar\nPero otras dos han venido",
+      "fragments": [
+        "Vivir así no es vivir\nEsperando y esperando",
+        "Quiero vivir dos veces\nPara poder olvidarte",
+        "No te preocupes, paloma\nHoy no estoy adentro mío",
+        "Te bajaría del cielo, mujer\nLa Luna hasta tu cama",
+        "Puse precio a mi libertad\nY nadie quiso pagarlo",
+        "Un sacrificio ritual, bien o mal\nYo quiero hacerle a mi estrella",
+        "No te preocupes, paloma\nHoy no estoy adentro mío"
+      ]
+    },
+    {
+      "id": "mana-bendita-tu-luz",
+      "artistId": "mana",
+      "song": "Bendita Tu Luz",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Bendita Tu Luz"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/mana/771212/",
+      "lyric": "Bendito el lugar\nY el motivo de estar ahí\nBendita la coincidencia\n\nBendito el reloj\nQue nos puso puntual ahí\nBendita sea tu presencia\n\nBendito Dios por encontrarnos\nEn el camino\nY de quitarme esta soledad\nDe mi destino\n\nBendita la luz\nBendita la luz de tu mirada\nBendita la luz\nBendita la luz de tu mirada desde el alma\n\nBenditos ojos que me esquivaban\nSimulaban desdén, que me ignoraban\nY, de repente, sostienes la mirada\n\nBendito Dios por encontrarnos\nEn el camino\nY de quitarme esta soledad\nDe mi destino\n\nBendita la luz\nBendita la luz de tu mirada\nBendita la luz\nBendita la luz de tu mirada, oh\n\nGloria divina de esta suerte\nDel buen tino\nY de encontrarte justo ahí\nEn medio del camino\n\nGloria al cielo de encontrarte ahora\nLlevarte mi soledad\nY coincidir en mi destino\nEn el mismo destino\n\nBendita la luz\nBendita la luz de tu mirada\nBendita la luz\nBendita la luz de tu mirada\n\nBendita mirada, ooh\nBendita mirada desde el alma\n(Tu mirada) bendita, bendita, bendita mirada\nBendita tu alma y bendita tu luz\n\n(Tu mirada, ooh) oh, no, te digo\nEs tan bendita tu luz, amor, amor\n(Tu mirada) bendito el reloj y bendito el lugar\nBenditos tus besos cerquita del mar\n\n(Tu mirada, ooh)\nAmor, amor\n¡Qué bendita tu mirada!\nTu mirada, amor",
+      "fragments": [
+        "Bendita la luz\nBendita la luz de tu mirada",
+        "Bendito Dios por encontrarnos\nEn el camino\nY de quitarme esta soledad\nDe mi destino",
+        "Benditos ojos que me esquivaban\nSimulaban desdén, que me ignoraban\nY, de repente, sostienes la mirada",
+        "Gloria divina de esta suerte\nDel buen tino\nY de encontrarte justo ahí\nEn medio del camino",
+        "Bendita tu alma y bendita tu luz",
+        "Es tan bendita tu luz, amor, amor",
+        "¡Qué bendita tu mirada!"
+      ]
+    },
+    {
+      "id": "mana-en-el-muelle-de-san-blas",
+      "artistId": "mana",
+      "song": "En El Muelle de San Blas",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "En El Muelle de San Blas"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/mana/24195/",
+      "lyric": "Ella despidió a su amor\nÉl partió en un barco en el muelle de San Blas\nÉl juró que volvería\nY, empapada en llanto, ella juró que esperaría\n\nMiles de lunas pasaron\nY siempre ella estaba en el muelle, esperando\nMuchas tardes se anidaron\nSe anidaron en su pelo y en sus labios\n\nLlevaba el mismo vestido\nY por si él volviera, no se fuera a equivocar\nLos cangrejos le mordían\nSu ropaje, su tristeza y su ilusión\n\nY el tiempo se escurrió\nY sus ojos se le llenaron de amaneceres\nY del mar se enamoró\nY su cuerpo se enraizó en el muelle\n\nSola\nSola en el olvido\nSola\nSola con su espíritu\nSola\nSola con su amor, el mar\nSola\nEn el muelle de San Blas\n\nSu cabello se blanqueó\nPero ningún barco a su amor le devolvía\nY en el pueblo, le decían\nLe decían la loca del muelle de San Blas\n\nY una tarde de abril\nLa intentaron trasladar al manicomio\nNadie la pudo arrancar\nY, del mar, nunca jamás la separaron\n\nSola\nSola en el olvido\nSola\nSola con su espíritu\nSola\nSola con su amor, el mar\nSola\nEn el muelle de San Blas\n\nSola\nSola en el olvido\nSola\nSola con su espíritu\nSola\nSola con el Sol y el mar\nSola\n\nOh, sola\nSola en el olvido\nSola\nSola con su espíritu\nSola\nSola con su amor, el mar\nSola\nEn el muelle de San Blas\n\nSe quedó, se quedó\nSola, sola\nSe quedó, se quedó\nCon el Sol y con el mar\n\nSe quedó ahí\nSe quedó hasta el fin\nSe quedó ahí\nSe quedó en el muelle de San Blas\n\nUoh\nSola, sola se quedó",
+      "fragments": [
+        "Él partió en un barco en el muelle de San Blas",
+        "Miles de lunas pasaron\nY siempre ella estaba en el muelle, esperando",
+        "Sola\nSola con su amor, el mar",
+        "Y del mar, nunca jamás la separaron",
+        "Se quedó ahí\nSe quedó hasta el fin\nSe quedó en el muelle de San Blas"
+      ]
+    },
+    {
+      "id": "mana-labios-compartidos",
+      "artistId": "mana",
+      "song": "Labios Compartidos",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Labios Compartidos"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/mana/651634/",
+      "lyric": "Amor mío\nSi estoy debajo del vaivén de tus piernas\nSi estoy hundido en un vaivén de caderas\nEsto es el cielo, es mi cielo\n\nAmor fugado\nMe tomas, me dejas, me exprimes y me tiras a un lado\nTe vas a otros cielos y regresas como los colibríes\nMe tienes como un perro a tus pies\n\nOtra vez mi boca insensata\nVuelve a caer en tu piel\nVuelve a mí tu boca y provoca\nVuelvo a caer de tus pechos a tu par de pies\n\nLabios compartidos, labios divididos, mi amor\nYo no puedo compartir tus labios\nY comparto el engaño, y comparto mis días y el dolor\nYa no puedo compartir tus labios\n\nOh, amor\nOh, amor compartido\n\nAmor mutante\nAmigos con derecho y sin derecho de tenerte siempre\nY siempre tengo que esperar paciente\nEl pedazo que me toca de ti\n\nRelámpagos de alcohol\nLas voces solas lloran en el Sol (eh)\nMi boca en llamas, torturada\nTe desnudas, angelada, luego te vas\n\nOtra vez mi boca insensata\nVuelve a caer en tu piel de miel\nVuelve a mí tu boca, duele\nVuelvo a caer de tus pechos a tu par de pies\n\nLabios compartidos, labios divididos, mi amor\nYo no puedo compartir tus labios\nY comparto el engaño, y comparto mis días y el dolor\nYa no puedo compartir tus labios\n\nQue me parta un rayo\nQue me entierre el olvido, mi amor\nPero no puedo más compartir tus labios, compartir tus besos\nLabios compartidos\n\nTe amo con toda mi fe, sin medida\nTe amo, aunque estés compartida\nTus labios tienen el control\n\nTe amo con toda mi fe, sin medida\nTe amo, aunque estés compartida\nY sigues tú con el control",
+      "fragments": [
+        "Esto es el cielo, es mi cielo",
+        "Labios compartidos, labios divididos, mi amor\nYo no puedo compartir tus labios",
+        "Amigos con derecho y sin derecho de tenerte siempre\nY siempre tengo que esperar paciente",
+        "Relámpagos de alcohol\nLas voces solas lloran en el Sol (eh)",
+        "Vuelve a caer de tus pechos a tu par de pies",
+        "Ya no puedo compartir tus labios",
+        "Que me parta un rayo\nQue me entierre el olvido, mi amor"
+      ]
+    },
+    {
+      "id": "mana-mariposa-traicionera",
+      "artistId": "mana",
+      "song": "Mariposa Traicionera",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Mariposa Traicionera"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/mana/69073/",
+      "lyric": "Eres como una mariposa\nVuelas y te posas, vas de boca en boca\nFácil y ligera de quien te provoca\n\nYo soy ratón de tu ratonera\nTrampa que no mata, pero no libera\nVivo muriendo prisionero\n\nMariposa traicionera\nTodo se lo lleva el viento\nMariposa, no regreso\n\nAy, mariposa de amor, mi mariposa de amor\nYa no regreso contigo\nAy, mariposa de amor, mi mariposa de amor\nNunca jamás junto a ti\n\nVuela, amor\nVuela, dolor\nY no regreses a un lado\n\nYa vete de flor en flor\nSeduciendo a los pistilos\nY vuela cerca del Sol\nPa' que sientas lo que es dolor\n\nAy, mujer, cómo haces daño\nPasan los minutos cual si fueran años\nMira, estos celos me están matando\n\nAy, mujer, qué fácil eres\nAbres tus alitas, muslos de colores\nDonde se posan tus amores\n\nMariposa traicionera\nTodo se lo lleva el viento\nMariposa, no regreso\n\nAy, mariposa de amor, mi mariposa de amor\nYa no regreso contigo\nAy, mariposa de amor, mi mariposa de amor\nNunca jamás junto a ti\n\nVuela, amor\nVuela, dolor\nQue tengas suerte en tu vida\n\nAy, ay, ay, ay, ay, dolor\nYo te lloré todo un río\nAy, ay, ay, ay, ay, amor\nTú te me vas a volar",
+      "fragments": [
+        "Eres como una mariposa\nVuelas y te posas, vas de boca en boca",
+        "Mariposa traicionera\nTodo se lo lleva el viento\nMariposa, no regreso",
+        "Ay, mariposa de amor, mi mariposa de amor\nYa no regreso contigo",
+        "Vuela, amor\nVuela, dolor\nY no regreses a un lado",
+        "Ay, mujer, cómo haces daño\nPasan los minutos cual si fueran años",
+        "Ay, mujer, qué fácil eres\nAbres tus alitas, muslos de colores",
+        "Ay, ay, ay, ay, ay, dolor\nYo te lloré todo un río"
+      ]
+    },
+    {
+      "id": "mana-oye-mi-amor",
+      "artistId": "mana",
+      "song": "Oye Mi Amor",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Oye Mi Amor"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/mana/24200/",
+      "lyric": "No sabes cómo te deseo\nNo sabes cómo te he soñado\nSi tú supieras que me muero\nPor tu amor y por tus labios\n\nSi tú supieras que soy sincero\nQue yo soy derecho y no te fallo\nSi tú supieras lo que te quiero\nPodría darte todo, hasta mis ojos\nEy\n\nPero tú ya tienes otro\nUn tipo frío y aburrido\nUn tonto que es un reprimido\nEso no te queda a ti\nNo te va\n\nOye, mi amor\nNo me digas que no\nY vamos juntando las almas\n\nOye, mi amor\nNo me digas que no\nY vamos juntando los cuerpos\n\nConmigo, tú alucinarías, ¿cómo no?\nConmigo, tú hasta el fin del mundo\nContigo, yo me perdería\nContigo, yo quiero todo y nada a medias\n\nPero tú ya tienes otro\nUn tipo frío y aburrido\nUn tonto que es un reprimido\nEso no te queda a ti\nNo te va\nNo-no-no, no\n\nOye, mi amor\nNo me digas que no\nY vamos juntando las almas\n\nOye, mi amor\nNo me digas que no\nY vamos juntando los cuerpos\n\nOye, mi amor\nNo me digas que no\nY vamos juntando las almas\n\nOye, mi amor\nNo me digas que no\nY vamos juntando los cuerpos",
+      "fragments": [
+        "Si tú supieras que me muero\nPor tu amor y por tus labios",
+        "Oye, mi amor\nNo me digas que no",
+        "Conmigo, tú alucinarías, ¿cómo no?\nContigo, yo quiero todo y nada a medias",
+        "Pero tú ya tienes otro\nUn tipo frío y aburrido",
+        "Eso no te queda a ti\nNo te va"
+      ]
+    },
+    {
+      "id": "vilma-palma-auto-rojo",
+      "artistId": "vilma-palma",
+      "song": "Auto Rojo",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Auto Rojo"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/vilma-palma-e-vampiros/129486/",
+      "lyric": "Te busqué en mi auto rojo a las seis\nLlevaba un frac muy nuevo\nQue en verdad no me quedaba muy bien\n\nTe llevé por la ruta que va a al sur\nNene, no vas rápido\nMe dijiste mirándome extrañada\n\nUh-oh, uh-oh\nUh-oh, uh-oh\nUh-oh, uh-oh\nUh-oh, uh-oh\n\nTe confesé que quiero\nMeterte en mi cama\nViéndote sonreír de placer\n\nTe prometí que solo\nTocaría tus pies\nSi empañamos los vidrios, está bien\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nChura, chu - cha - ru - chura\nChura, chu - cha - ru - chura\nChura, chu - cha - ru - chura\nChura, chu - cha - ru - chura\n\nSoñaba ver tu pecho tatuado\nDebajo de tu collar\nQue en verdad tengo ganas de arrancar\n\nTe toqué por la línea que va al sur\n¿Puede ser más rápido?\nTe dije mirándote exaltado\n\nUh-oh, uh-oh\nUh-oh, uh-oh\nUh-oh, uh-oh\nUh-oh, uh-oh\n\nTe confesé que quiero\nMeterte en mi cama\nViéndote sonreír de placer\n\nTe prometí que solo\nTocaría tus pies\nSi empañamos los vidrios está bien\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nAmor, si estás con ganas de más\n¿Por qué no te desvistes en la parte de atrás?\nSi te da igual, desgarra mi frac\nEsta noche es muy simple dices que no y ya está\nNo puedo parar, ya no aguanto más\nMe siento imparable con tu parte de atrás\nSi te da igual, date la vuelta\n\nTe confesé que quiero\nMeterte en mi cama\nViéndote sonreír de placer\n\nTe prometí que solo\nTocaría tus pies\nSi empañamos los vidrios está bien\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nAhora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor\n\nChura, chu - cha - ru - chura\nChura, chu - cha - ru - chura\nChura, chu - cha - ru - chura\nChura, chu - cha - ru - chura",
+      "fragments": [
+        "Te busqué en mi auto rojo a las seis\nLlevaba un frac muy nuevo\nQue en verdad no me quedaba muy bien",
+        "Ahora hace calor\nY la música suena bastante bien\nTe juré por mi amor\nDe que atrás la vamos a pasar mejor",
+        "Chura, chu - cha - ru - chura",
+        "Soñaba ver tu pecho tatuado\nDebajo de tu collar\nQue en verdad tengo ganas de arrancar",
+        "Amor, si estás con ganas de más\n¿Por qué no te desvistes en la parte de atrás?\nSi te da igual, desgarra mi frac",
+        "Te confesé que quiero\nMeterte en mi cama\nViéndote sonreír de placer"
+      ]
+    },
+    {
+      "id": "vilma-palma-fondo-profundo",
+      "artistId": "vilma-palma",
+      "song": "Fondo Profundo",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Fondo Profundo"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/vilma-palma-e-vampiros/129500/",
+      "lyric": "(Ay  me has dejado sin un suspiro esta noche, mujer)\n(¿Adónde irá a parar?)\n(¡Échale!)\n\nServí otra botella\nQue me esta quemando un fuego profundo que se consume\nLo que hemos vivido\n\nLlénalo hasta el borde\nBrindo por tus ojos que se van yendo de mi mirada\nYa no veré nada\n\nEs por la fuerza de mi amor\nQue siento así, me desespero\nQue aunque reviente de dolor,\nJamas viví cosa tan buena\n\nEs este vaso que tome quizás de más\nY me envenena\nSiento la pena de tu adiós\nNo me hará mal, no temas nena, eh, eh\n\nLa noche se pasa\nY sigo tomando a fondo profundo hasta que no se sienta\nQue todo es un sueño\n\nBésame una hora\nQuisiera quedarme con tu sonrisa como recuerdo\nPara cuando extrañe\n\nEs por la fuerza de mi amor\nQue siento así, me desespero\nQue aunque reviente de dolor,\nJamas viví cosa tan buena\n\nEs este vaso que tome quizás de más\nY me envenena\nSiento la pena de tu adiós\nNo me hará mal, no temas nena, eh, eh\n\n(Y no me tengas miedo)\nNada más deja que te lleve\n(Y no me tengas miedo)\nNada más brindo a nuestro nombre\n(Y no sientas culpa)\nPégame hasta lo mas profundo\nYa no puedo estar escapando de la verdad por la vida entera\n\nEs por la fuerza de mi amor\nQue siento así, me desespero\nQue aunque reviente de dolor,\nJamas viví cosa tan buena\n\nEs este vaso que tome quizás de más\nY me envenena\nSiento la pena de tu adiós\nNo me hará mal, no temas nena\n\nEs por la fuerza de mi amor\nQue siento así, me desespero\nQue aunque reviente de dolor,\nJamas viví cosa tan buena\n\nEs este vaso que tome quizás de más\nY me envenena\nSiento la pena de tu adiós\nNo me hará mal, no temas nena, eh, eh",
+      "fragments": [
+        "Ay me has dejado sin un suspiro esta noche, mujer",
+        "Serví otra botella\nQue me está quemando un fuego profundo que se consume",
+        "Brindo por tus ojos que se van yendo de mi mirada\nYa no veré nada",
+        "Es por la fuerza de mi amor\nQue siento así, me desespero\nQue aunque reviente de dolor,\nJamas viví cosa tan buena",
+        "Siento la pena de tu adiós\nNo me hará mal, no temas nena, eh, eh",
+        "Nada más deja que te lleve\nNada más brindo a nuestro nombre",
+        "Pégame hasta lo mas profundo\nYa no puedo estar escapando de la verdad por la vida entera"
+      ]
+    },
+    {
+      "id": "astroboy-mi-reserva",
+      "artistId": "astroboy",
+      "song": "Mi reserva",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Mi reserva"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/astroboy/1338169/",
+      "lyric": "Pensando escribir una canción que le guste a todos\ntratando de ser normal sin ocultar que me vuelvo loco\npensando en otra cosa que me haga olvidar...\nMe acuerdo del glamour de las botas el peinado y el cuero\nsubirme a una estrella mirarte desde arriba todo el día si quiero...\nSumando melodías.. para entender\n\nQue esta es mi reserva para el resto de la noche\nesta es la prisión donde encadeno el corazón,\neste es el lugar es el momento y al final\nya no puedo pensar\n\nParado frente a mí me miro un rato y me confundo con otro\nTratando de ser normal sin ocultar que me vuelvo loco\nSumando melodías para entender...\n\nQue esta es mi reserva para el resto de la noche\nesta es la prisión donde encadeno el corazón,\neste es el lugar es el momento y al final\nsolo quiero rescatar lo que queda de esta noche\nesto es lo mejor a lo que puedo llegar hoy\neste es el lugar es el momento y al final\nsolo quiero rescatar....",
+      "fragments": [
+        "Me acuerdo del glamour de las botas el peinado y el cuero",
+        "Que esta es mi reserva para el resto de la noche\nesta es la prisión donde encadeno el corazón,",
+        "Tratando de ser normal sin ocultar que me vuelvo loco",
+        "Sumando melodías.. para entender",
+        "solo quiero rescatar lo que queda de esta noche",
+        "este es el lugar es el momento y al final"
+      ]
+    },
+    {
+      "id": "astroboy-time-has-passed",
+      "artistId": "astroboy",
+      "song": "Time Has Passed",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Time Has Passed"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/astroboy/931026/",
+      "lyric": "The time has passed and we stay here\nWe gather together to see the sun\nThe sunset passed and we still here\nWe're growing older underneath the stars\nTell me don't feel it, tell me don't cry\nTell me don't cry on those lonely nights\nTell me don't feel it, tell me don't cry\nTell me don't cry on those lonely nights\n\nThe time has passed and we stay here\nWe gather togeether to see the sun\nThe sunset passed and we still here\nWe're growing older underneath the stars\nTell me don't feel it, tell me don't cry\nTell me don't cry on those lonely nights\nTell me don't feel it, tell me don't cry\nTell me don't cry on those lonely nights\n\nThe time has passed and we stay here\nWe gather together to see the sun\nThe sunset passed and we're still here\nWe're growing older underneath the stars\nTell me don't feel it, tell me don't cry\nTell me don't cry on those lonely nights\nTell me don't feel it, tell me don't cry\nTell me don't cry on those lonely nights",
+      "fragments": [
+        "The time has passed and we stay here",
+        "We gather together to see the sun",
+        "We're growing older underneath the stars",
+        "Tell me don't feel it, tell me don't cry",
+        "Tell me don't cry on those lonely nights"
+      ]
+    },
+    {
+      "id": "astroboy-facil",
+      "artistId": "astroboy",
+      "song": "Fácil",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Fácil",
+        "Facil"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/astroboy/1338157/",
+      "lyric": "Fácil, todo es mas fácil de lo que parece\nCierto... nada es 100%, solo me divierto\nPorque extraño las cosas simples, extraño...\n\nFácil, todo es mas fácil de lo que parece\nCierto... nada es 100%, solo me divierto\nPorque extraño las cosas simples, extraño...\nPorque extraño las cosas simples, extraño...\n\nFácil, todo es mas fácil de lo que parece\nCierto... nada es 100%, solo me divierto\nPorque extraño las cosas simples, extraño...\nPorque extraño las cosas simples, extraño...\n\nLa canción mas fácil del mundo...",
+      "fragments": [
+        "Fácil, todo es más fácil de lo que parece",
+        "Cierto... nada es 100%, solo me divierto",
+        "Porque extraño las cosas simples, extraño...",
+        "La canción más fácil del mundo..."
+      ]
+    },
+    {
+      "id": "los-ladrones-sueltos-era-muda",
+      "artistId": "los-ladrones-sueltos",
+      "song": "Era Muda",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Era Muda"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/los-ladrones-sueltos/1210575/",
+      "lyric": "Salio apurada de su casa\ncon su pollera corta\nel la esperaba en la parada\nhacia mas de una hora\ny no le dijo nada\nella queria pasarla bien,\nno le dijo nada\ny se tomaron el 10\n\nSaco boleto doble hasta palermo,\nella lo miro y creia comprenderlo\ny no le dijo nada\nella queria pasarla bien,\nno le dijo nada\ny se bajaron del 10\n\nY era de noche y la abrazaba\ny no le dijo nada,\nsintio su mano en la espalda\ny no le dijo nada,\nla acariciaba despacito\ny no le dijo nada,\ny derrepente llego tito\nque \"cagada\"\n\nEn el verano fueron juntos,\nfueron juntos a la playa ,\na el le gustaba ir a las rocas\ny ella nunca se negaba\n\nNo le dijo nada\nella queria pasarla bien ,\nno le dijo nada\nya no se portaba bien\n\nY la llevo a su cueva entre las rocas tenia un colchon , vino y Vodka\nno le dijo nada\nella queria pasarla bien\ny no le dijo nada\nnunca se portaba bien\n\nY era de noche y la abrazaba\ny no le dijo nada,\nsintio su mano en la espalda\ny no le dijo nada ,\nla acariciaba despacito\ny no le dijo nada,\ny derrepente llego tito\n\nNo le dijo , no le dijo , no le dijo ,no le djio nada , nunca dijo ,nunca dijo ,nunca dijo nunca dijo nada\ndijo no le dijo nunca nunca dijo no nunca nunca dijo nada no le dijo no le dijo no le dijo no le dijo nada\n\nY un dia charlando se dio cunta\nque ella nunca decia nada,\ny ya charlando\ny con mucha ternura le dijo ,\nle dijo \"nena vos sos muda\"\n\nEra muda era muda\nera muda la mina muda\n\nNo le dijo , no le dijo , no le dijo ,no le djio nada , nunca dijo ,nunca dijo ,nunca dijo nunca dijo nada\ndijo no le dijo nunca nunca dijo no nunca nunca dijo nada no le dijo no le dijo no le dijo no le dijo nada",
+      "fragments": [
+        "Salio apurada de su casa\ncon su pollera corta",
+        "No le dijo nada\nella queria pasarla bien,",
+        "y derrepente llego tito\nque \"cagada\"",
+        "Era muda era muda\nera muda la mina muda"
+      ]
+    },
+    {
+      "id": "los-ladrones-sueltos-la-rubia-del-avion",
+      "artistId": "los-ladrones-sueltos",
+      "song": "La Rubia Del Avión",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "La Rubia Del Avión",
+        "La Rubia Del Avion"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/los-ladrones-sueltos/136225/",
+      "lyric": "Con una rubia en el avión directo a brasil\nCon una rubia en el avión, dispuesto a morir\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión\n\nMe voy de shopping\nMe voy de compras\nMe voy con ella, ah-ah-ah\nQue es una estrella\n\nLlevo las gafas\nTambién las patas\nLlevo el snorkel\nAy, ¡que calor que hace acá!\n\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión, dispuesto a morir\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión\n\nTodos me miran\nNadie se acerca\nA preguntarme, eh-eh-eh\nQue hago con ella\n\nElla es tan suave\nEs tan serena\nEs como un ave\nSobre la arena, yeah yeah yeah\n\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión, dispuesto a morir\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión\n\nSon pocos días\nY es tan intenso\nY ahora que pienso\nNo volvería\n\nQue buena suerte\nQue se me hizo\nFuiste el pasaje\nAl paraíso, yeah yeah yeah\n\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión, dispuesto a morir\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión\n\nY ahí me esperan\nMis compatriotas\nQue no imaginan\nLa cruel derrota\n\nY al bajar del avión, estaban ahí\nQue papelón, no les quise mentir\nNo pude con ella y tuve que dormir\nBajo las estrellas de un frío jardín\n\nCon la rubia del avión no pude dormir\nCon la rubia del avión no pude dormir\nCuando baje del avión, se van a reír\nCuando baje del avión, yeahh\n\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión, dispuesto a morir\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión, oh oh yeah\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión, dispuesto a morir\nCon una rubia en el avión directo a brasil\nCon una rubia en el avión",
+      "fragments": [
+        "Con una rubia en el avión directo a brasil",
+        "Me voy de shopping\nMe voy de compras\nMe voy con ella, ah-ah-ah",
+        "Llevo las gafas\nTambién las patas\nLlevo el snorkel\nAy, ¡que calor que hace acá!",
+        "Todos me miran\nNadie se acerca\nA preguntarme, eh-eh-eh",
+        "Ella es tan suave\nEs tan serena\nEs como un ave\nSobre la arena, yeah yeah yeah",
+        "Son pocos días\nY es tan intenso\nY ahora que pienso\nNo volvería",
+        "Y al bajar del avión, estaban ahí\nQue papelón, no les quise mentir",
+        "Con una rubia en el avión directo a brasil"
+      ]
+    },
+    {
+      "id": "cuarteto-de-nos-el-diablo-en-mi-corazon",
+      "artistId": "cuarteto-de-nos",
+      "song": "El Diablo En Mi Corazón",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "El Diablo En Mi Corazón",
+        "El Diablo En Mi Corazon"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/cuarteto-de-nos/376210/",
+      "lyric": "Son las nueve y pienso en lo que yo era\nAntes de que Él en mí estuviera\nYo quería ser como un trueno\nNo quería más ser un nenito bueno\n\nFue así que Él apareció\nMi alma se llevó\nY entró en mi corazón\n\nSon las diez y pienso acostado\nCómo yo podía ser tan nabo\nNo quería sentir más temor\nA la muerte, al amor, ni al dolor\n\nFue así que Él apareció\nMi alma me compró\nSoy feliz desde que entró\nEl Diablo en mi corazón\nEl Diablo en mi corazón\nEl Diablo en mi corazón\n\nSon las once y me veo un imbécil\nYendo a clase de catequesis\nNo quería rezar más de rodillas\nNi poner siempre la otra mejilla\n\nFue así que Él apareció\nLe agradezco yo a Dios\nPorque gracias a Él entró\nEl Diablo en mi corazón\nEl Diablo en mi corazón\nEl Diablo en mi corazón\n\nYa no me deprimo nunca más\nDesde que en mí entró Satanás\n\nEs mi cuerpo pero soy otro ser\nDesde que en mí entró Lucifer\n\nNo le tengo miedo al ataúd\nDesde que en mí entró Belcebú\n\nTodo ahora ya me importa un coño\nDesde que me entró el Demonio\n\nYa mi vida no es molestia\nDesde que me entró la Bestia\n\nAhora a todo digo: ¡Minga!\nDesde que me entró el Mandinga\n\nA la venganza no resisto\nDesde que soy el Anticristo\n\nY nada envidio a ningún rey\nDesde que soy el triple seis\n\nNo me importa si veo que alguien sufre\nDesde que tengo olor a azufre\n\nY no doy vueltas en mi cama\nDesde que caí envuelto en llamas\n\nEl Diablo en mi corazón\nEl Diablo en mi corazón\nEl Diablo en mi corazón",
+      "fragments": [
+        "Son las nueve y pienso en lo que yo era\nAntes de que Él en mí estuviera",
+        "No quería ser un nenito bueno",
+        "Mi alma se llevó\nY entró en mi corazón",
+        "Soy feliz desde que entró\nEl Diablo en mi corazón",
+        "Desde que me entró el Demonio",
+        "Y nada envidio a ningún rey\nDesde que soy el triple seis"
+      ]
+    },
+    {
+      "id": "cuarteto-de-nos-no-somos-latinos",
+      "artistId": "cuarteto-de-nos",
+      "song": "No Somos Latinos",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "No Somos Latinos"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/cuarteto-de-nos/376258/",
+      "lyric": "Pensarán que soy medio ladino\nO que vivo borracho de vino\nQuieren hacerme creer estos cretinos\nQue los uruguayos somos latinos\n\nHace un tiempo parecían joda\nSer chicano esté de moda\nSi me viera mi abuelito Arsenio\nCantando con acento caribeño\n\nY yo no digo \"ia está listo el poio\"\nNi \"frijoles\" ni \"arroio\"\n\"ierba\", \"iuio\" ni \"io io\"\n\nNo me jodan más no somos latinos\nNo me jodan más no somos latinos\nYo me crié aca en la suiza del sur\n\nYo no se bailar ni cumbia ni salsa\nNi me escapé de Cuba en una balsa\nMe parió en Montevideo mi mami\nYo no quiero ir a vivir a Miami\n\nHace rato en la radio, en la tele\nMe pudrieron a son y a merengue\nNo me hagan poner arisco\nYo no quiero ir al show de Don Francisco\n\nY piensan\nLos yanquis y los europeos\nSomos un país bananero\nCon palmeritas y calor\n\nNo me jodan más no somos latinos\nNo me jodan más no somos latinos\nYo me crié aca en la suiza del sur\n\nEn Colombia me decían gringo\nO alemán en Santo Domingo\nY en Honduras, Panamá y Venezuela\nUruguay ni saben donde queda\n\nPrefiero hablar con un filósofo sueco\nQue con un indio guatemalteco\nY tengo más en común con un rumano\nQue con un cholo boliviano\n\nY cuando leí \"las venas abiertas\"\nera un bodrio me di cuenta\na la cuarta hoja me dormí\n\nNo me jodan más no somos latinos\nNo me jodan más no somos latinos\nYo me crié aca en la suiza del sur\n\nYo me crié en la suiza del sur\nYo me crié en la suiza del sur\n\nUruguaios a gozal!",
+      "fragments": [
+        "Quieren hacerme creer estos cretinos\nQue los uruguayos somos latinos",
+        "No me jodan más no somos latinos\nNo me jodan más no somos latinos",
+        "Yo no se bailar ni cumbia ni salsa\nNi me escapé de Cuba en una balsa",
+        "Me parió en Montevideo mi mami\nYo no quiero ir a vivir a Miami",
+        "Y piensan\nLos yanquis y los europeos\nSomos un país bananero\nCon palmeritas y calor",
+        "Prefiero hablar con un filósofo sueco\nQue con un indio guatemalteco",
+        "Uruguay ni saben donde queda"
+      ]
+    },
+    {
+      "id": "la-tabare-que-nochen-la-de-aquel-dia",
+      "artistId": "la-tabare",
+      "song": "Que Nochen La de Aquel Día!",
+      "album": "",
+      "year": null,
+      "songAliases": [
+        "Que Nochen La de Aquel Día!",
+        "Que Nochen La de Aquel Dia!"
+      ],
+      "albumAliases": [
+
+      ],
+      "url": "https://www.letras.com/la-tabare/que-nochen-la-de-aquel-dia/",
+      "lyric": "Volvés pa´trás\nVos cada vez\nQue ves que vos\nCreés que te vas...\nNo entiendo.\n\nDecí que si\nY decidí\nPor si o por no\nPor que si no\nNo entiendo... Nada.\n\nDesabrochando broches en cuartos de hotel\nHundiendo a troches y moche barcos de papel\n¡Que noche aquella noche la del día aquel!\nNo entiendo...\n\nNo se por qué\nSe qué no se\nQue no se que\nNo se qué se...\nNo entiendo.\n\nDe dos en dos\nSi vos sos vos\nO vos no sos\nEsos dedos.\nNo entiendo... Nada\n\nSe escuchan los reproches de la esposa infiel\nGritando a sotto voce en la luna sin miel\n¡Que noche aquella noche la del día aquel!\nNo entiendo...\n\nNo entiendo por que no entiendo\nAlgunas cosas sencillas:\n¿Por qué nos sentamos en sillas?\n¿Por qué para andar un rato\nNos ponemos un par de zapatos?\n¿Por qué a cualquier hora\nCualquiera se enamora?\n¿Por qué para comer hay que pagar?\n¿ Por qué hay que aceptar trabajar y obedecer?...\nNo entiendo por que no entiendo\nLo que no quiero entender...\n\nVos tan viváz\n¿ De que vivis?\n¿Cómo la ves?\n¿De qué la vas?\nNo entiendo...\n\n¿Qué es que querés?\nMe amás de mas\n¿Que más me das?\n¿Me merecés?\nNo entiendo... Nada.\n\nFantoche buda conectado vía antel\nProfeta del derroche de amor a granel\n¡Que noche aquella noche la del día aquel!\nNo entiendo por que...",
+      "fragments": [
+        "Desabrochando broches en cuartos de hotel\nHundiendo a troches y moche barcos de papel",
+        "¡Que noche aquella noche la del día aquel!",
+        "¿Por qué nos sentamos en sillas?\n¿Por qué para andar un rato\nNos ponemos un par de zapatos?",
+        "Se escuchan los reproches de la esposa infiel\nGritando a sotto voce en la luna sin miel",
+        "¿Qué es que querés?\nMe amás de mas\n¿Que más me das?",
+        "Fantoche buda conectado vía antel\nProfeta del derroche de amor a granel"
       ]
     }
   ]
