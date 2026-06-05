@@ -6,6 +6,21 @@ import {
 
 const root = document.getElementById('view');
 
+// ── SW cache version ─────────────────────────────────────────────
+// Read the active cache name (e.g. `lyrics-v14`) and surface it in the
+// masthead so the running shell version is visible at a glance.
+let cacheVersion = '';
+const readCacheVersion = async () => {
+  if (!('caches' in self)) return '';
+  try {
+    const keys = await caches.keys();
+    const match = keys.find((k) => k.startsWith('lyrics-'));
+    return match ? match.slice('lyrics-'.length) : '';
+  } catch {
+    return '';
+  }
+};
+
 // ── Animation-once gate ──────────────────────────────────────────
 // CSS entry animations are declared with `.is-animate` so a re-render
 // alone does not replay them. `onceClass(key, 'is-animate')` returns the
@@ -218,7 +233,7 @@ const Masthead = () =>
       h('span', { style: 'color:var(--ink-thin); font-style: italic; font-weight: 400;' }, ' Hunt'),
     ),
     h('span', { class: 'masthead__meta' },
-      h('span', { class: 'dot' }), '42.uy / lyrics'
+      h('span', { class: 'dot' }), cacheVersion || '42.uy / lyrics'
     ),
   );
 
@@ -334,6 +349,7 @@ const Setup = (state) => {
       h('div', { class: 'duration' },
         DurationOption(8, prefs.turnSec),
         DurationOption(10, prefs.turnSec),
+        DurationOption(12, prefs.turnSec),
       ),
     ),
 
@@ -605,6 +621,7 @@ const startTicker = () => {
 
 const start = async () => {
   await store.ready;
+  cacheVersion = await readCacheVersion();
   store.subscribe(render);
   render(store.state);
   startTicker();
