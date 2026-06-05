@@ -213,7 +213,9 @@ class Ollama
   end
 
   # Returns the raw assistant response string. Caller parses JSON.
-  def complete(prompt)
+  # `temperature` defaults to 0.2 (deterministic-ish); pass higher (e.g.
+  # 0.5) for self-consistency sampling.
+  def complete(prompt, temperature: 0.2)
     uri = URI.join(@base.to_s.sub(%r{/?$}, '/'), 'api/generate')
     req = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
     req.body = JSON.generate(
@@ -221,7 +223,7 @@ class Ollama
       prompt:  prompt,
       stream:  false,
       format:  'json',
-      options: { temperature: 0.2 }
+      options: { temperature: temperature }
     )
 
     res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https', open_timeout: 10, read_timeout: 300) do |http|
@@ -260,17 +262,175 @@ PROMPT_TEMPLATE = <<~PROMPT
   %<lyric>s
 PROMPT
 
+# CoT + negative examples (Tier B #8). Replaces the abstract "evitá
+# relleno" rule with concrete anti-patterns drawn from the cross-artist
+# distinctiveness analysis ("yo te quiero" appears in Damas Gratis,
+# Julieta Venegas, and 2 Minutos all in the same corpus). Pairs with a
+# parallel "preferí" block to bias toward concrete imagery and artist
+# vocabulary. Used by `select_fragments_with_llm` (now the default).
+COT_NEGEX_PROMPT_TEMPLATE = <<~PROMPT
+  Sos un curador de un juego de adivinar canciones en español.
+  El jugador ve un fragmento de letra y tiene que adivinar a qué artista pertenece.
+  Tu tarea es elegir fragmentos que un fan reconocería al instante.
+
+  ANTES de elegir, identificá EXPLÍCITAMENTE de 3 a 5 rasgos que hacen reconocible
+  a ESTA canción específica. Pensá:
+  - ¿Qué frases o imágenes son únicas de esta canción (no aparecen en otras)?
+  - ¿Qué hooks o estribillos tiene? ¿Cuál es la frase más cantada?
+  - ¿Qué vocabulario, voseo, lunfardo o referencias culturales marcan al artista?
+  - ¿Cómo está estructurada (diálogo, llamada-respuesta, estribillo repetido)?
+
+  EVITÁ estos fragmentos:
+  - Frases genéricas de amor sin contexto: "yo te quiero", "te amo", "para siempre",
+    "no puedo vivir sin ti", "eres mi vida". Aparecen en cientos de canciones, no
+    identifican a ninguna.
+  - Versos sin imagen concreta: clichés sin lugar, objeto, persona o nombre propio.
+  - Emociones puras sin metáfora: "estoy feliz", "estoy triste", "te extraño". Buscá
+    otro fragmento que tenga una palabra distintiva.
+
+  PREFERÍ fragmentos que:
+  - Contienen una palabra, lugar, objeto, o nombre propio único de esta canción
+    (ej. "Estadio Azteca", "calefón", "la ute", "limón y sal").
+  - Tienen una imagen sensorial concreta (ver, oír, tocar algo específico).
+  - Usan voseo, lunfardo, jerga del artista, o referencias culturales específicas.
+  - Si el coro es icónico, incluí UNA vez la versión más distintiva del coro.
+
+  Después de identificar los rasgos, elegí entre 5 y 8 fragmentos que
+  EJEMPLIFIQUEN esos rasgos siguiendo las reglas de arriba.
+
+  Reglas para los fragmentos:
+  - Cada fragmento puede ser de 1 a 4 líneas.
+  - Conservá los saltos de línea originales (usá \\n entre líneas).
+  - No traduzcas. No parafrasees. Copiá los versos tal como aparecen.
+  - Si el coro es icónico, incluilo una sola vez (no repetido).
+  - No incluyas un fragmento cuyo texto esté contenido en otro fragmento de la lista.
+  - Priorizá los versos que mejor ejemplifican los rasgos identificados.
+
+  Devolvé EXCLUSIVAMENTE un JSON válido con esta forma exacta:
+  {
+    "rasgos": ["rasgo 1", "rasgo 2", "rasgo 3"],
+    "fragments": ["frag 1", "frag 2", ...]
+  }
+
+  No agregues texto fuera del JSON. No agregues comentarios.
+
+  Canción: %<title>s
+  Artista: %<artist>s
+  Letra:
+  %<lyric>s
+PROMPT
+
+# Original CoT (Tier A #3). Retained so bench scripts can A/B against
+# negative-examples variant. Use COT_NEGEX_PROMPT_TEMPLATE for new work.
+COT_PROMPT_TEMPLATE = <<~PROMPT
+  Sos un curador de un juego de adivinar canciones en español.
+  El jugador ve un fragmento de letra y tiene que adivinar a qué artista pertenece.
+  Tu tarea es elegir fragmentos que un fan reconocería al instante.
+
+  ANTES de elegir, identificá EXPLÍCITAMENTE de 3 a 5 rasgos que hacen reconocible
+  a ESTA canción específica. Pensá:
+  - ¿Qué frases o imágenes son únicas de esta canción (no aparecen en otras)?
+  - ¿Qué hooks o estribillos tiene? ¿Cuál es la frase más cantada?
+  - ¿Qué vocabulario, voseo, lunfardo o referencias culturales marcan al artista?
+  - ¿Cómo está estructurada (diálogo, llamada-respuesta, estribillo repetido)?
+
+  Después, elegí entre 5 y 8 fragmentos que EJEMPLIFIQUEN esos rasgos.
+
+  Reglas para los fragmentos:
+  - Cada fragmento puede ser de 1 a 4 líneas.
+  - Conservá los saltos de línea originales (usá \\n entre líneas).
+  - No traduzcas. No parafrasees. Copiá los versos tal como aparecen.
+  - Si el coro es icónico, incluilo una sola vez (no repetido).
+  - No incluyas un fragmento cuyo texto esté contenido en otro fragmento de la lista.
+  - Priorizá los versos que mejor ejemplifican los rasgos identificados.
+
+  Devolvé EXCLUSIVAMENTE un JSON válido con esta forma exacta:
+  {
+    "rasgos": ["rasgo 1", "rasgo 2", "rasgo 3"],
+    "fragments": ["frag 1", "frag 2", ...]
+  }
+
+  No agregues texto fuera del JSON. No agregues comentarios.
+
+  Canción: %<title>s
+  Artista: %<artist>s
+  Letra:
+  %<lyric>s
+PROMPT
+
 FRAGMENT_MIN_LEN = 20
 FRAGMENT_MAX_LEN = 400
 FRAGMENT_MIN_COUNT = 3
 FRAGMENT_MAX_COUNT = 12
 
+# Large-pool prompt (Tier A #4): same CoT structure but asks for a larger
+# candidate set so a downstream judge can filter to the best N. Used by
+# select_fragments_large_pool.
+LARGE_POOL_PROMPT_TEMPLATE = <<~PROMPT
+  Sos un curador de un juego de adivinar canciones en español.
+  El jugador ve un fragmento de letra y tiene que adivinar a qué artista pertenece.
+
+  ANTES de elegir, identificá EXPLÍCITAMENTE de 3 a 5 rasgos que hacen reconocible
+  a ESTA canción específica:
+  - ¿Qué frases o imágenes son únicas (no aparecen en otras canciones)?
+  - ¿Qué hooks o estribillos tiene?
+  - ¿Qué vocabulario, voseo, lunfardo o referencias culturales marcan al artista?
+  - ¿Cómo está estructurada (diálogo, llamada-respuesta, estribillo repetido)?
+
+  Después, generá entre 12 y 15 fragmentos CANDIDATOS. Un editor posterior
+  va a elegir los mejores. Tu tarea es ofrecer un set diverso y rico, no
+  reducido. Incluí variantes: una sola línea cuando es un hook, dos líneas
+  cuando forman una unidad, fragmentos de diálogo, el verso con el título.
+
+  Reglas:
+  - Entre 12 y 15 fragmentos.
+  - Cada fragmento puede ser de 1 a 4 líneas.
+  - Conservá los saltos de línea originales (usá \\n entre líneas).
+  - No traduzcas. No parafrasees. Copiá los versos tal como aparecen.
+  - No incluyas un fragmento cuyo texto esté contenido en otro fragmento de la lista.
+  - Cubrí distintas secciones de la canción (estrofas, estribillo, puente).
+
+  Devolvé EXCLUSIVAMENTE un JSON válido con esta forma exacta:
+  {
+    "rasgos": ["rasgo 1", "rasgo 2", "rasgo 3"],
+    "fragments": ["frag 1", "frag 2", ...]
+  }
+
+  No agregues texto fuera del JSON. No agregues comentarios.
+
+  Canción: %<title>s
+  Artista: %<artist>s
+  Letra:
+  %<lyric>s
+PROMPT
+
+# Drop fragments whose normalized text is a substring of another fragment's.
+# CoT prompting occasionally emits compound duplicates (frag A + frag B as
+# a third "fragment"); this is the simplest catch.
+def dedup_substring_fragments(frags)
+  norms = frags.map { |f|
+    f.unicode_normalize(:nfd).gsub(/\p{Mn}/, '').downcase
+     .gsub(/[^a-z0-9]+/, ' ').gsub(/\s+/, ' ').strip
+  }
+  drop = Array.new(frags.size, false)
+  frags.each_index do |i|
+    next if drop[i] || norms[i].empty?
+    frags.each_index do |j|
+      next if i == j || drop[j] || norms[j].empty?
+      next unless norms[i].include?(norms[j])
+      # i contains j: drop j if it's strictly shorter, or same-length-but-later
+      if norms[j].length < norms[i].length || (norms[j].length == norms[i].length && j > i)
+        drop[j] = true
+      end
+    end
+  end
+  frags.each_with_index.reject { |_, i| drop[i] }.map(&:first)
+end
+
 def validate_fragments(raw_response)
   obj = JSON.parse(raw_response)
   frags = obj['fragments']
   raise "no fragments key" unless frags.is_a?(Array)
-  raise "fragment count #{frags.size} outside [#{FRAGMENT_MIN_COUNT}, #{FRAGMENT_MAX_COUNT}]" \
-    if frags.size < FRAGMENT_MIN_COUNT || frags.size > FRAGMENT_MAX_COUNT
 
   frags.each_with_index do |f, i|
     raise "fragment #{i} not a string" unless f.is_a?(String)
@@ -279,15 +439,23 @@ def validate_fragments(raw_response)
     raise "fragment #{i} too long (#{stripped.length} chars)"  if stripped.length > FRAGMENT_MAX_LEN
   end
 
-  frags.map(&:strip).reject(&:empty?)
+  clean   = frags.map(&:strip).reject(&:empty?)
+  deduped = dedup_substring_fragments(clean)
+
+  if deduped.size < FRAGMENT_MIN_COUNT || deduped.size > FRAGMENT_MAX_COUNT
+    raise "fragment count #{deduped.size} (after dedup of #{clean.size}) outside [#{FRAGMENT_MIN_COUNT}, #{FRAGMENT_MAX_COUNT}]"
+  end
+
+  deduped
 end
 
-def select_fragments_with_llm(ollama, title:, artist:, lyric:, max_retries: 3)
-  prompt = format(PROMPT_TEMPLATE, title: title, artist: artist, lyric: lyric)
+def select_fragments_with_llm(ollama, title:, artist:, lyric:, max_retries: 3,
+                              prompt_template: COT_PROMPT_TEMPLATE, temperature: 0.2)
+  prompt = format(prompt_template, title: title, artist: artist, lyric: lyric)
   last_error = nil
   max_retries.times do |attempt|
     begin
-      raw = ollama.complete(prompt)
+      raw = ollama.complete(prompt, temperature: temperature)
       return validate_fragments(raw)
     rescue StandardError => e
       last_error = e
@@ -295,6 +463,117 @@ def select_fragments_with_llm(ollama, title:, artist:, lyric:, max_retries: 3)
     end
   end
   raise Ollama::Error, "gave up after #{max_retries} attempts: #{last_error&.message}"
+end
+
+# Self-consistency (Tier B #6): run the CoT extractor N times at elevated
+# temperature, then keep fragments that appear in ≥ min_runs of N samples.
+# Fuzzy match is normalized substring containment (catches speaker-tag
+# variants and minor punctuation shifts). Idiosyncratic single-run picks
+# are dropped; the consensus set surfaces what the model finds
+# *consistently* salient. Cost: N × extractor latency.
+def consensus_fragments(samples, min_runs: 2)
+  all = []
+  samples.each_with_index do |frags, run_id|
+    frags.each { |f| all << { 'text' => f, 'run' => run_id } }
+  end
+  return [] if all.empty?
+
+  norms = all.map { |a|
+    a['text'].unicode_normalize(:nfd).gsub(/\p{Mn}/, '').downcase
+     .gsub(/[^a-z0-9]+/, ' ').gsub(/\s+/, ' ').strip
+  }
+  parent = (0...all.size).to_a
+  find = lambda do |i|
+    parent[i] == i ? i : (parent[i] = find.call(parent[i]))
+  end
+
+  all.each_index do |i|
+    next if norms[i].empty?
+    all.each_index do |j|
+      next if i >= j || norms[j].empty?
+      next unless norms[i].include?(norms[j]) || norms[j].include?(norms[i])
+      pi = find.call(i)
+      pj = find.call(j)
+      parent[pj] = pi if pi != pj
+    end
+  end
+
+  clusters = Hash.new { |h, k| h[k] = [] }
+  all.each_index { |i| clusters[find.call(i)] << i }
+
+  # Keep clusters that span ≥ min_runs distinct runs (the consensus).
+  consensus = clusters.values.select do |idxs|
+    idxs.map { |i| all[i]['run'] }.uniq.size >= min_runs
+  end
+
+  # Representative = longest text in the cluster (most informative variant).
+  reps = consensus.map { |idxs| idxs.max_by { |i| all[i]['text'].length } }
+                  .map { |i| all[i]['text'] }
+  dedup_substring_fragments(reps)
+end
+
+def select_fragments_self_consistent(ollama, title:, artist:, lyric:,
+                                     n_samples: 3, temperature: 0.5, min_runs: 2,
+                                     prompt_template: COT_PROMPT_TEMPLATE)
+  samples = []
+  n_samples.times do |i|
+    $stderr.puts "  self-consistency sample #{i + 1}/#{n_samples}"
+    begin
+      frags = select_fragments_with_llm(ollama,
+        title: title, artist: artist, lyric: lyric,
+        prompt_template: prompt_template, temperature: temperature)
+      samples << frags
+    rescue StandardError => e
+      $stderr.puts "    sample #{i + 1} failed: #{e.message}"
+    end
+  end
+  # All samples failed — raise so the caller's rescue block skips this song
+  # rather than silently overwriting existing fragments with an empty array.
+  raise Ollama::Error, "self-consistency: all #{n_samples} samples failed" if samples.empty?
+
+  consensus = consensus_fragments(samples, min_runs: min_runs)
+  if consensus.size >= FRAGMENT_MIN_COUNT
+    return consensus[0, FRAGMENT_MAX_COUNT]
+  end
+  # Fallback: not enough consensus. Use the longest single-run output.
+  $stderr.puts "  consensus only #{consensus.size}; falling back to best single sample"
+  samples.max_by(&:size)
+end
+
+# Large-pool variant: asks the model for 12-15 candidates. Caller is
+# expected to score+filter them downstream (per-fragment judge → top N).
+# Uses relaxed count bounds because validate_fragments' default range
+# tops out at FRAGMENT_MAX_COUNT=12.
+LARGE_POOL_MIN = 10
+LARGE_POOL_MAX = 16
+
+def select_fragments_large_pool(ollama, title:, artist:, lyric:, max_retries: 3)
+  prompt = format(LARGE_POOL_PROMPT_TEMPLATE, title: title, artist: artist, lyric: lyric)
+  last_error = nil
+  max_retries.times do |attempt|
+    begin
+      raw = ollama.complete(prompt)
+      obj = JSON.parse(raw)
+      frags = obj['fragments']
+      raise 'no fragments key' unless frags.is_a?(Array)
+      frags.each_with_index do |f, i|
+        raise "fragment #{i} not a string" unless f.is_a?(String)
+        s = f.strip
+        raise "fragment #{i} too short (#{s.length})" if s.length < FRAGMENT_MIN_LEN
+        raise "fragment #{i} too long (#{s.length})"  if s.length > FRAGMENT_MAX_LEN
+      end
+      clean   = frags.map(&:strip).reject(&:empty?)
+      deduped = dedup_substring_fragments(clean)
+      if deduped.size < LARGE_POOL_MIN || deduped.size > LARGE_POOL_MAX
+        raise "pool size #{deduped.size} outside [#{LARGE_POOL_MIN}, #{LARGE_POOL_MAX}]"
+      end
+      return deduped
+    rescue StandardError => e
+      last_error = e
+      $stderr.puts "  large-pool attempt #{attempt + 1}/#{max_retries}: #{e.message}"
+    end
+  end
+  raise Ollama::Error, "large-pool gave up after #{max_retries}: #{last_error&.message}"
 end
 
 # ── Input parsing ────────────────────────────────────────────────
@@ -446,7 +725,7 @@ def process_phase(sidecar_paths, db, ollama)
       url    = data['url']
 
       $stderr.puts "→ #{artist['id']} :: #{title}"
-      frags = select_fragments_with_llm(
+      frags = select_fragments_self_consistent(
         ollama,
         title:  title,
         artist: artist['displayName'],

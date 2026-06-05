@@ -92,7 +92,7 @@ candidates.each do |song|
 
   $stderr.puts "→ #{song['id']}"
   begin
-    frags = select_fragments_with_llm(
+    frags = select_fragments_self_consistent(
       ollama,
       title:  song['song'],
       artist: artist['displayName'],
