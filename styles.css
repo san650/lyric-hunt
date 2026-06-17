@@ -308,6 +308,21 @@ main {
   font-size: 0.9rem;
 }
 
+/* Untimed mode: no countdown, just a static ∞ glyph in place of seconds. */
+.pieza__clock--infinity {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--stage);
+  animation: none;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1;
+  box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.18);
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}
+.pieza__clock--infinity::before { display: none; }
+
 /* Whole HUD shakes in the last two seconds */
 .pieza-wrap.is-urgent {
   animation: hudShake 0.18s linear infinite;
@@ -1147,6 +1162,15 @@ main {
   text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
 }
 
+/* Unlimited tile renders a single ∞ glyph centered (no unit suffix). The
+   serif italic ∞ is optically wider than two digits, so bump the line-height
+   a hair so it sits centered alongside numeric siblings. */
+.duration__opt--infinity { padding-block: 0.7rem 0.7rem; }
+.duration__opt--infinity .duration__num {
+  font-size: clamp(2.4rem, 9vw, 3rem);
+  line-height: 0.95;
+}
+
 .setup__actions { margin-top: 0.2rem; }
 .setup__start {
   padding: 1.05rem 1.4rem;
@@ -1299,7 +1323,7 @@ main {
   font-style: italic;
   font-weight: 900;
   font-variation-settings: "opsz" 144, "SOFT" 100;
-  font-size: clamp(7rem, 32vw, 11rem);
+  font-size: clamp(4.5rem, 22vw, 8rem);
   line-height: 0.82;
   color: var(--pink);
   letter-spacing: -0.055em;
@@ -1308,8 +1332,13 @@ main {
     0 0 28px rgba(255, 45, 149, 0.6),
     0 0 56px rgba(255, 45, 149, 0.35);
   position: relative;
-  display: grid;
-  gap: 0.45rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.4rem;
+}
+.final__stat {
+  display: block;
+  min-width: 0;
 }
 .final__big__num {
   display: block;
@@ -1333,6 +1362,14 @@ main {
 }
 .final__big__num::after {
   content: counter(n);
+}
+/* Time variant renders literal text (e.g. "0:42") instead of a counter,
+   so the ::after counter must be suppressed and tabular-nums applied to
+   keep the colon-separated digits from jittering. */
+.final__big__num--time::after { content: none; }
+.final__big__num--time {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
 }
 .final--lose .final__big { color: var(--red); text-shadow: 0 0 28px rgba(255, 56, 72, 0.55); }
 .final--mid  .final__big { color: var(--yellow); text-shadow: 0 0 28px rgba(255, 214, 10, 0.55); }

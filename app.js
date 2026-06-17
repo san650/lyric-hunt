@@ -86,6 +86,17 @@ const remainingSec = (deadlineAt) =>
 
 const turnMs = () => store.state.prefs.turnSec * 1000;
 
+// prefs.turnSec === 0 ⇒ no per-round timer (unlimited mode).
+const isTimed = () => store.state.prefs.turnSec > 0;
+
+// "M:SS" for the Final screen total-time stat.
+const fmtTime = (ms) => {
+  const total = Math.max(0, Math.round(ms / 1000));
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+};
+
 // ── Flash + lifecycle ────────────────────────────────────────────
 // After a pick we briefly hold the screen so the player sees lime on the
 // right answer (and red on a wrong one) before advancing.
@@ -126,7 +137,7 @@ const startGame = () => {
   const piece = pickFragment([], prefs.artistIds);
   if (!piece) return;
   const correct = findSong(piece.songId).artistId;
-  const deadlineAt = armTimer(timeoutArtist, turnMs());
+  const deadlineAt = isTimed() ? armTimer(timeoutArtist, turnMs()) : null;
   store.setLifecycle({
     screen: 'playing',
     stage: 'artist',
@@ -138,6 +149,7 @@ const startGame = () => {
     pickedArtistId: null,
     revealed: null,
     flash: null,
+    roundStartedAt: Date.now(),
     deadlineAt,
   });
 };
@@ -149,7 +161,7 @@ const nextRound = () => {
   const key = `${piece.songId}:${piece.fragmentId}`;
   const newSeen = seenKeys.includes(key) ? seenKeys : [...seenKeys, key];
   const correct = findSong(piece.songId).artistId;
-  const deadlineAt = armTimer(timeoutArtist, turnMs());
+  const deadlineAt = isTimed() ? armTimer(timeoutArtist, turnMs()) : null;
   store.setLifecycle({
     stage: 'artist',
     currentPiece: piece,
@@ -158,6 +170,7 @@ const nextRound = () => {
     revealed: null,
     flash: null,
     seenKeys: newSeen,
+    roundStartedAt: Date.now(),
     deadlineAt,
   });
 };
@@ -166,9 +179,10 @@ const pickArtist = (artistId) => {
   // Ignore taps while we're already showing the flash for this round.
   if (store.state.flash) return;
   cancelTimer();
-  const { currentPiece } = store.state;
+  const { currentPiece, roundStartedAt } = store.state;
   const song = findSong(currentPiece.songId);
   const ok = artistId === song.artistId;
+  const elapsedMs = roundStartedAt ? Date.now() - roundStartedAt : 0;
   store.setLifecycle({
     pickedArtistId: artistId,
     deadlineAt: null,
@@ -180,17 +194,19 @@ const pickArtist = (artistId) => {
       pickedArtistId: artistId,
       artistOk: ok,
       timedOut: false,
+      elapsedMs,
     }],
   });
   setTimeout(ok ? nextRound : endGame, ok ? FLASH_OK_MS : FLASH_BAD_MS);
 };
 
 // Timer expiry — treat as a wrong pick (no pick). Brief flash showing the
-// right answer, then end the game.
+// right answer, then end the game. Never fires in untimed mode.
 const timeoutArtist = () => {
   if (store.state.screen !== 'playing' || store.state.flash) return;
-  const { currentPiece } = store.state;
+  const { currentPiece, roundStartedAt } = store.state;
   const song = findSong(currentPiece.songId);
+  const elapsedMs = roundStartedAt ? Date.now() - roundStartedAt : 0;
   store.setLifecycle({
     pickedArtistId: null,
     deadlineAt: null,
@@ -201,6 +217,7 @@ const timeoutArtist = () => {
       pickedArtistId: null,
       artistOk: false,
       timedOut: true,
+      elapsedMs,
     }],
   });
   setTimeout(endGame, FLASH_BAD_MS);
@@ -211,7 +228,8 @@ const MAX_RECORD = 500;
 const endGame = () => {
   cancelTimer();
   const played = store.state.pieces.length;
-  const entry = { score: store.state.score, played, when: Date.now() };
+  const totalMs = store.state.pieces.reduce((a, p) => a + (p.elapsedMs || 0), 0);
+  const entry = { score: store.state.score, played, totalMs, when: Date.now() };
   const record = [...store.state.record, entry].slice(-MAX_RECORD);
   store.setLifecycle({ screen: 'final', flash: null, record, deadlineAt: null });
 };
@@ -295,14 +313,22 @@ const ArtistToggle = (artist, idx, selected, soleSelected) => {
 
 const DurationOption = (sec, current) => {
   const isOn = sec === current;
+  const isUnlimited = sec === 0;
   return h('button', {
-    class: 'duration__opt' + (isOn ? ' is-on' : ''),
+    class: 'duration__opt'
+      + (isOn ? ' is-on' : '')
+      + (isUnlimited ? ' duration__opt--infinity' : ''),
     type: 'button',
     'aria-pressed': isOn ? 'true' : 'false',
+    'aria-label': isUnlimited ? 'No timer' : `${sec} seconds`,
     onclick: () => setTurnSec(sec),
   },
-    h('span', { class: 'duration__num' }, fmtN(sec)),
-    h('span', { class: 'duration__unit' }, 's'),
+    isUnlimited
+      ? h('span', { class: 'duration__num' }, '∞')
+      : [
+          h('span', { class: 'duration__num' }, fmtN(sec)),
+          h('span', { class: 'duration__unit' }, 's'),
+        ],
   );
 };
 
@@ -350,6 +376,7 @@ const Setup = (state) => {
         DurationOption(8, prefs.turnSec),
         DurationOption(10, prefs.turnSec),
         DurationOption(12, prefs.turnSec),
+        DurationOption(0, prefs.turnSec),
       ),
     ),
 
@@ -417,25 +444,33 @@ const TimerBar = (deadlineAt) => {
 };
 
 const Pieza = (state) => {
+  const timed = state.prefs.turnSec > 0;
   const sec = state.flash ? null : remainingSec(state.deadlineAt);
   const urgent = sec !== null && sec <= 2;
   const streak = state.score;
+  // Untimed mode: clock badge becomes a static ∞; flash still shows ✓/✗.
+  const clockBadge = state.flash
+    ? h('span', { class: 'pieza__clock pieza__clock--paused' }, state.flash.ok ? '✓' : '✗')
+    : timed
+      ? h('span', {
+          class: 'pieza__clock' + (urgent ? ' pieza__clock--urgent' : ''),
+          'aria-label': 'Seconds remaining',
+        }, `${sec}s`)
+      : h('span', {
+          class: 'pieza__clock pieza__clock--infinity',
+          'aria-label': 'No timer',
+        }, '∞');
   return h('div', { class: 'pieza-wrap' + (urgent ? ' is-urgent' : '') },
     h('div', { class: 'pieza' },
       h('span', { class: 'pieza__streak' },
         h('span', { class: 'pieza__streak__label' }, 'Streak'),
         h('em', { class: 'pieza__streak__num' + (streak >= 5 ? ' is-hot' : '') }, fmtN(streak)),
       ),
-      sec !== null
-        ? h('span', {
-            class: 'pieza__clock' + (urgent ? ' pieza__clock--urgent' : ''),
-            'aria-label': 'Seconds remaining',
-          }, `${sec}s`)
-        : h('span', { class: 'pieza__clock pieza__clock--paused' }, state.flash?.ok ? '✓' : '✗'),
+      clockBadge,
     ),
-    state.flash
-      ? null
-      : h('div', { class: 'pieza__timeline' }, TimerBar(state.deadlineAt)),
+    timed && !state.flash
+      ? h('div', { class: 'pieza__timeline' }, TimerBar(state.deadlineAt))
+      : null,
   );
 };
 
@@ -525,6 +560,7 @@ const Final = (state) => {
   const streak = state.score;
   const tier = tierFor(streak, played);
   const justFinished = state.record[state.record.length - 1] ?? null;
+  const totalMs = state.pieces.reduce((a, p) => a + (p.elapsedMs || 0), 0);
 
   return h('div', { class: `final final--${tier}` },
     Masthead(),
@@ -534,12 +570,23 @@ const Final = (state) => {
       h('div', { class: 'final__sub' }, SUB_BY_TIER[tier]),
     ),
     h('div', { class: 'final__big' },
-      h('span', {
-        class: 'final__big__num is-animate',
-        style: `--target:${streak};`,
-        'aria-label': `${streak} in a row`,
-      }),
-      h('small', {}, streak === 1 ? '1 in a row' : `${streak} in a row`),
+      h('div', { class: 'final__stat final__stat--streak' },
+        h('span', {
+          class: 'final__big__num is-animate',
+          style: `--target:${streak};`,
+          'aria-label': `${streak} in a row`,
+        }),
+        h('small', {}, streak === 1 ? '1 in a row' : `${streak} in a row`),
+      ),
+      played > 0
+        ? h('div', { class: 'final__stat final__stat--time' },
+            h('span', {
+              class: 'final__big__num final__big__num--time',
+              'aria-label': `total time ${fmtTime(totalMs)}`,
+            }, fmtTime(totalMs)),
+            h('small', {}, 'total time'),
+          )
+        : null,
     ),
     BestRecord(state.record, justFinished),
     played > 0 ? Tally(state) : null,
@@ -625,13 +672,15 @@ const start = async () => {
   store.subscribe(render);
   render(store.state);
   startTicker();
-  // If we hydrated mid-round (user reloaded with the timer running), re-arm
-  // it with a fresh window — the in-memory setTimeout from before the reload
-  // is gone, and there's no flash mid-flight on cold start.
+  // If we hydrated mid-round (user reloaded), reset round timing so the
+  // player isn't penalized for the offline gap. In timed mode we also
+  // re-arm the timer (the in-memory setTimeout from before the reload is
+  // gone). There's no flash mid-flight on cold start.
   if (store.state.screen === 'playing'
       && store.state.stage === 'artist'
       && !store.state.flash) {
-    store.setLifecycle({ deadlineAt: armTimer(timeoutArtist, turnMs()) });
+    const deadlineAt = isTimed() ? armTimer(timeoutArtist, turnMs()) : null;
+    store.setLifecycle({ roundStartedAt: Date.now(), deadlineAt });
   }
 };
 

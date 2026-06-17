@@ -15,13 +15,18 @@ import { ARTISTS } from './lyrics.js';
 //   pickedArtistId:   the artistId the user clicked (set when leaving artist)
 //   revealed:         null | { artistOk, timedOut }
 //   score:            current streak — number of correct guesses in a row
-//   pieces:           [{ songId, fragmentId, artistOk, pickedArtistId }]
+//   pieces:           [{ songId, fragmentId, artistOk, pickedArtistId, elapsedMs }]
 //   seenKeys:         array of "songId:fragmentId" already drawn this game
+//   roundStartedAt:   wall-clock millis when current round armed; used to
+//                     compute per-piece elapsedMs on resolve. Independent of
+//                     deadlineAt so untimed mode still measures answer time.
 //   deadlineAt:       wall-clock millis for the artist-stage timer expiry
-//   record:           lifetime [{ score, played, when }] — score is streak
+//                     (null when prefs.turnSec === 0, i.e. no-timer mode)
+//   record:           lifetime [{ score, played, totalMs, when }]
 //   prefs:            persisted user preferences ({ artistIds, turnSec })
+//                     turnSec === 0 means no timer (unlimited per round)
 
-const SCHEMA = 6;
+const SCHEMA = 7;
 const DEFAULT_TURN_SEC = 8;
 
 const defaultPrefs = () => ({
@@ -43,6 +48,7 @@ const initialState = () => ({
   score: 0,
   pieces: [],
   seenKeys: [],
+  roundStartedAt: null,
   deadlineAt: null,
   record: [],
   prefs: defaultPrefs(),
