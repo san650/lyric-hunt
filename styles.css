@@ -1523,6 +1523,67 @@ main {
   50%      { transform: rotate(-1deg) scale(1.04); }
 }
 
+/* ── Composite ("the song you played") ─────────────────────────────
+   End-of-game panel: every fragment the player saw, stitched into
+   one piece. Reuses the Fraunces italic vocabulary so it reads as
+   poetry, not a list. Entry animation runs once per session via
+   `.is-animate` — re-opens are instant. */
+.composite__toggle {
+  width: 100%;
+  margin-top: 0.2rem;
+  font-size: 0.74rem;
+}
+.composite {
+  margin-top: 0.6rem;
+  padding: 1.1rem 0.9rem 1.2rem;
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(0, 229, 255, 0.10), transparent 70%),
+    var(--stage);
+  border: 1.5px solid var(--rule);
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px var(--rule-soft),
+    inset 0 0 30px rgba(0, 0, 0, 0.3);
+  display: grid;
+  gap: 0.85rem;
+}
+.composite__label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-thin);
+}
+.composite__body {
+  display: grid;
+  gap: 1rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-variation-settings: "opsz" 144, "SOFT" 70;
+  font-size: clamp(1.05rem, 4.4vw, 1.3rem);
+  line-height: 1.35;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+.composite__stanza {
+  margin: 0;
+}
+/* Stanza-staggered fade-in — only when the panel just opened (.is-animate
+   on the wrapper). Subsequent re-renders see no .is-animate, so the
+   animation does not replay. */
+.composite.is-animate .composite__stanza {
+  opacity: 0;
+  animation: stanzaIn 520ms var(--ease) forwards;
+  animation-delay: calc(140ms + var(--i, 0) * 110ms);
+}
+@keyframes stanzaIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* Focus visible */
 :focus-visible {
   outline: 2px solid var(--cyan);
@@ -1548,4 +1609,5 @@ main {
   .pieza__timer__fill           { animation: none; width: 100%; }
   .masthead__meta .dot          { animation: none; }
   .setup__title-dot             { animation: none; }
+  .composite.is-animate .composite__stanza { animation: none; opacity: 1; transform: none; }
 }

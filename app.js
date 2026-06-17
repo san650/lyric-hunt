@@ -35,6 +35,20 @@ const onceClass = (key, cls) => {
   return ' ' + cls;
 };
 
+// ── Final-screen composite toggle ────────────────────────────────
+// UI panel state lives in this module, not the persisted store. Reset
+// alongside `animated` on any lifecycle change that leaves Final, so
+// a new game's composite panel can animate afresh.
+let compositeOpen = false;
+const toggleComposite = () => {
+  compositeOpen = !compositeOpen;
+  render(store.state);
+};
+const resetCompositeUI = () => {
+  compositeOpen = false;
+  animated.delete('composite:open');
+};
+
 // ── DOM helpers ──────────────────────────────────────────────────
 // Tiny createElement wrapper. Children appended as text nodes or Nodes —
 // never as HTML strings — so user-supplied strings can't inject markup.
@@ -105,10 +119,12 @@ const FLASH_BAD_MS = 900;
 
 const goToSetup = () => {
   cancelTimer();
+  resetCompositeUI();
   store.setLifecycle({ screen: 'setup' });
 };
 const backToIntro = () => {
   cancelTimer();
+  resetCompositeUI();
   store.setLifecycle({ screen: 'intro' });
 };
 
@@ -133,6 +149,7 @@ const setTurnSec = (sec) => {
 
 const startGame = () => {
   animated.clear();
+  resetCompositeUI();
   const { prefs } = store.state;
   const piece = pickFragment([], prefs.artistIds);
   if (!piece) return;
@@ -590,6 +607,15 @@ const Final = (state) => {
     ),
     BestRecord(state.record, justFinished),
     played > 0 ? Tally(state) : null,
+    played >= 2
+      ? h('button', {
+          class: 'btn btn--ghost composite__toggle',
+          type: 'button',
+          'aria-expanded': compositeOpen ? 'true' : 'false',
+          onclick: toggleComposite,
+        }, compositeOpen ? 'Hide the song ←' : 'See the song you made →')
+      : null,
+    played >= 2 && compositeOpen ? Composite(state.pieces) : null,
     h('div', { class: 'actions' },
       h('button', { class: 'btn btn--primary', type: 'button', onclick: restart }, 'Again →'),
       h('button', { class: 'btn btn--ghost',  type: 'button', onclick: backToIntro }, 'Back to start'),
@@ -639,6 +665,36 @@ const Tally = (state) =>
         ),
       );
     }),
+  );
+
+// ── Composite (the "song you made") ──────────────────────────────
+// Joins every fragment the player saw into one piece — chronological,
+// no attribution. Stanza-staggered entry animation runs once per session
+// via onceClass('composite:open').
+const stanzaLines = (text) => {
+  const lines = text.split('\n');
+  const out = [];
+  lines.forEach((line, i) => {
+    out.push(line);
+    if (i < lines.length - 1) out.push(h('br'));
+  });
+  return out;
+};
+
+const Stanza = (text, i) =>
+  h('p', { class: 'composite__stanza', style: `--i:${i}` },
+    ...stanzaLines(text),
+  );
+
+const Composite = (pieces) =>
+  h('section', { class: 'composite' + onceClass('composite:open', 'is-animate') },
+    h('div', { class: 'composite__label' }, 'The song you played'),
+    h('div', { class: 'composite__body' },
+      ...pieces
+        .map((p) => findSong(p.songId).fragments[p.fragmentId])
+        .filter(Boolean)
+        .map((text, i) => Stanza(text, i)),
+    ),
   );
 
 // ── Render loop ──────────────────────────────────────────────────
