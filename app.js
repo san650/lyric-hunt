@@ -2,13 +2,12 @@ import { store } from './store.js';
 import {
   ARTISTS, SONGS, pickFragment, pickArtistChoices,
   findArtist, findSong, artistOf, playableArtists,
+  mulberry32, fnvHash,
 } from './lyrics.js';
 
 const root = document.getElementById('view');
 
 // ── SW cache version ─────────────────────────────────────────────
-// Read the active cache name (e.g. `lyrics-v14`) and surface it in the
-// masthead so the running shell version is visible at a glance.
 let cacheVersion = '';
 const readCacheVersion = async () => {
   if (!('caches' in self)) return '';
@@ -23,11 +22,8 @@ const readCacheVersion = async () => {
 
 // ── Animation-once gate ──────────────────────────────────────────
 // CSS entry animations are declared with `.is-animate` so a re-render
-// alone does not replay them. `onceClass(key, 'is-animate')` returns the
-// modifier on first sight of `key` and an empty string thereafter.
-// Cleared on game start so a fresh round can animate even if a key was
-// used in a prior game.
-// See: pwa-gotchas/reference/render-restarts-animation.md
+// alone does not replay them. Cleared on game start so a fresh round
+// can animate again. See: pwa-gotchas/reference/render-restarts-animation.md
 const animated = new Set();
 const onceClass = (key, cls) => {
   if (animated.has(key)) return '';
@@ -35,11 +31,12 @@ const onceClass = (key, cls) => {
   return ' ' + cls;
 };
 
-// ── Final-screen composite toggle ────────────────────────────────
-// UI panel state lives in this module, not the persisted store. Reset
-// alongside `animated` on any lifecycle change that leaves Final, so
-// a new game's composite panel can animate afresh.
+// ── UI panel toggles (module-level, not store) ───────────────────
+// Mirrors the `animated` Set pattern. Reset on any lifecycle change
+// that leaves the screen owning the panel.
 let compositeOpen = false;
+let sheetOpen = false;
+
 const toggleComposite = () => {
   compositeOpen = !compositeOpen;
   render(store.state);
@@ -49,7 +46,11 @@ const resetCompositeUI = () => {
   animated.delete('composite:open');
 };
 
-// ── DOM helpers ──────────────────────────────────────────────────
+const openSheet = () => { sheetOpen = true; animated.delete('sheet:open'); render(store.state); };
+const closeSheet = () => { sheetOpen = false; render(store.state); };
+const resetSheetUI = () => { sheetOpen = false; animated.delete('sheet:open'); };
+
+// ── DOM helper ───────────────────────────────────────────────────
 // Tiny createElement wrapper. Children appended as text nodes or Nodes —
 // never as HTML strings — so user-supplied strings can't inject markup.
 const h = (tag, attrs = {}, ...children) => {
@@ -72,20 +73,50 @@ const h = (tag, attrs = {}, ...children) => {
   return el;
 };
 
+// ── Formatting ───────────────────────────────────────────────────
 const fmtN = (n) => String(n).padStart(2, '0');
 
-// ── Stage timer ──────────────────────────────────────────────────
-// The user has turnSec seconds to pick an artist; when the deadline
-// passes the round auto-resolves and the game ends.
-let activeTimeoutId = null;
+const fmtTime = (ms) => {
+  const total = Math.max(0, Math.round(ms / 1000));
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+};
 
+const dateKey = (d = new Date()) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+const WEEKDAYS_ES = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+
+const sameDay = (a, b) =>
+  a.getFullYear() === b.getFullYear()
+  && a.getMonth() === b.getMonth()
+  && a.getDate() === b.getDate();
+
+const fmtRelative = (ms) => {
+  const now = Date.now();
+  const diffSec = (now - ms) / 1000;
+  if (diffSec < 60) return 'ahora';
+  if (diffSec < 3600) return `hace ${Math.max(1, Math.round(diffSec / 60))} min`;
+  const a = new Date(ms);
+  const b = new Date(now);
+  if (sameDay(a, b)) {
+    return `hoy · ${String(a.getHours()).padStart(2, '0')}:${String(a.getMinutes()).padStart(2, '0')}`;
+  }
+  const yesterday = new Date(b); yesterday.setDate(b.getDate() - 1);
+  if (sameDay(a, yesterday)) return 'ayer';
+  if (now - ms < 7 * 24 * 3600 * 1000) return WEEKDAYS_ES[a.getDay()];
+  return `${String(a.getDate()).padStart(2, '0')}/${String(a.getMonth() + 1).padStart(2, '0')}`;
+};
+
+// ── Stage timer ──────────────────────────────────────────────────
+let activeTimeoutId = null;
 const cancelTimer = () => {
   if (activeTimeoutId !== null) {
     clearTimeout(activeTimeoutId);
     activeTimeoutId = null;
   }
 };
-
 const armTimer = (onExpire, ms) => {
   cancelTimer();
   activeTimeoutId = setTimeout(() => {
@@ -94,67 +125,68 @@ const armTimer = (onExpire, ms) => {
   }, ms);
   return Date.now() + ms;
 };
-
 const remainingSec = (deadlineAt) =>
   deadlineAt ? Math.max(0, Math.ceil((deadlineAt - Date.now()) / 1000)) : null;
 
-const turnMs = () => store.state.prefs.turnSec * 1000;
+// Daily mode forces a fixed timer + full roster, independent of prefs.
+const DAILY_TURN_SEC = 10;
+const effectiveTurnSec = () =>
+  store.state.playMode === 'daily' ? DAILY_TURN_SEC : store.state.prefs.turnSec;
+const effectiveArtistIds = () =>
+  store.state.playMode === 'daily' ? ARTISTS.map((a) => a.id) : store.state.prefs.artistIds;
 
-// prefs.turnSec === 0 ⇒ no per-round timer (unlimited mode).
-const isTimed = () => store.state.prefs.turnSec > 0;
+// ── Daily RNG ────────────────────────────────────────────────────
+// Each round draws from a fresh RNG seeded with (dailySeed, roundIdx), so
+// the piece sequence survives reload — we can rebuild any round from the
+// persisted (dailySeed, pieces.length) pair.
+const dailyRngForRound = (seed, roundIdx) =>
+  mulberry32((seed ^ ((roundIdx + 1) * 0x9E3779B9)) >>> 0);
 
-// "M:SS" for the Final screen total-time stat.
-const fmtTime = (ms) => {
-  const total = Math.max(0, Math.round(ms / 1000));
-  const m = Math.floor(total / 60);
-  const s = total % 60;
-  return `${m}:${String(s).padStart(2, '0')}`;
-};
+const seedForToday = () => fnvHash(dateKey());
+
+// ── Personal best ────────────────────────────────────────────────
+// PB at the moment a fresh game started, so the HUD ghost doesn't shift
+// mid-game. Recomputed on game start and on hydrate-mid-game.
+let pbAtGameStart = 0;
+const personalBest = (record) =>
+  record.length ? Math.max(...record.map((r) => r.score)) : 0;
 
 // ── Flash + lifecycle ────────────────────────────────────────────
-// After a pick we briefly hold the screen so the player sees lime on the
-// right answer (and red on a wrong one) before advancing.
 const FLASH_OK_MS  = 420;
 const FLASH_BAD_MS = 900;
 
-const goToSetup = () => {
-  cancelTimer();
-  resetCompositeUI();
-  store.setLifecycle({ screen: 'setup' });
-};
 const backToIntro = () => {
   cancelTimer();
   resetCompositeUI();
-  store.setLifecycle({ screen: 'intro' });
+  resetSheetUI();
+  store.setLifecycle({ screen: 'intro', playMode: 'normal', dailySeed: null });
 };
 
 const toggleArtist = (artistId) => {
   const set = new Set(store.state.prefs.artistIds);
   if (set.has(artistId)) set.delete(artistId);
   else set.add(artistId);
-  // Guard: never let the lineup drop below two — view also disables the
-  // last toggle, this is just belt-and-braces.
   if (set.size < 2) return;
-  store.setLifecycle({
-    prefs: { ...store.state.prefs, artistIds: [...set] },
-  });
+  store.setLifecycle({ prefs: { ...store.state.prefs, artistIds: [...set] } });
 };
 
 const setTurnSec = (sec) => {
   if (sec === store.state.prefs.turnSec) return;
-  store.setLifecycle({
-    prefs: { ...store.state.prefs, turnSec: sec },
-  });
+  store.setLifecycle({ prefs: { ...store.state.prefs, turnSec: sec } });
 };
 
 const startGame = () => {
   animated.clear();
   resetCompositeUI();
+  resetSheetUI();
+  pbAtGameStart = personalBest(store.state.record);
   const { prefs } = store.state;
   const piece = pickFragment([], prefs.artistIds);
   if (!piece) return;
   const correct = findSong(piece.songId).artistId;
-  const deadlineAt = isTimed() ? armTimer(timeoutArtist, turnMs()) : null;
+  const deadlineAt = prefs.turnSec > 0
+    ? armTimer(timeoutArtist, prefs.turnSec * 1000)
+    : null;
   store.setLifecycle({
     screen: 'playing',
     stage: 'artist',
@@ -168,21 +200,60 @@ const startGame = () => {
     flash: null,
     roundStartedAt: Date.now(),
     deadlineAt,
+    playMode: 'normal',
+    dailySeed: null,
+  });
+};
+
+const startDaily = () => {
+  animated.clear();
+  resetCompositeUI();
+  resetSheetUI();
+  pbAtGameStart = personalBest(store.state.record);
+  const dailySeed = seedForToday();
+  const rng = dailyRngForRound(dailySeed, 0);
+  const roster = ARTISTS.map((a) => a.id);
+  const piece = pickFragment([], roster, rng);
+  if (!piece) return;
+  const correct = findSong(piece.songId).artistId;
+  const choices = pickArtistChoices(correct, roster, rng);
+  const deadlineAt = armTimer(timeoutArtist, DAILY_TURN_SEC * 1000);
+  store.setLifecycle({
+    screen: 'playing',
+    stage: 'artist',
+    score: 0,
+    pieces: [],
+    seenKeys: [`${piece.songId}:${piece.fragmentId}`],
+    currentPiece: piece,
+    choices,
+    pickedArtistId: null,
+    revealed: null,
+    flash: null,
+    roundStartedAt: Date.now(),
+    deadlineAt,
+    playMode: 'daily',
+    dailySeed,
   });
 };
 
 const nextRound = () => {
-  const { seenKeys, prefs } = store.state;
-  const piece = pickFragment(seenKeys, prefs.artistIds);
+  const { seenKeys, playMode, dailySeed, pieces } = store.state;
+  const allowed = effectiveArtistIds();
+  const turnSec = effectiveTurnSec();
+  const rng = (playMode === 'daily' && dailySeed != null)
+    ? dailyRngForRound(dailySeed, pieces.length)
+    : Math.random;
+  const piece = pickFragment(seenKeys, allowed, rng);
   if (!piece) { endGame(); return; }
   const key = `${piece.songId}:${piece.fragmentId}`;
   const newSeen = seenKeys.includes(key) ? seenKeys : [...seenKeys, key];
   const correct = findSong(piece.songId).artistId;
-  const deadlineAt = isTimed() ? armTimer(timeoutArtist, turnMs()) : null;
+  const choices = pickArtistChoices(correct, allowed, rng);
+  const deadlineAt = turnSec > 0 ? armTimer(timeoutArtist, turnSec * 1000) : null;
   store.setLifecycle({
     stage: 'artist',
     currentPiece: piece,
-    choices: pickArtistChoices(correct, prefs.artistIds),
+    choices,
     pickedArtistId: null,
     revealed: null,
     flash: null,
@@ -193,7 +264,6 @@ const nextRound = () => {
 };
 
 const pickArtist = (artistId) => {
-  // Ignore taps while we're already showing the flash for this round.
   if (store.state.flash) return;
   cancelTimer();
   const { currentPiece, roundStartedAt } = store.state;
@@ -217,8 +287,6 @@ const pickArtist = (artistId) => {
   setTimeout(ok ? nextRound : endGame, ok ? FLASH_OK_MS : FLASH_BAD_MS);
 };
 
-// Timer expiry — treat as a wrong pick (no pick). Brief flash showing the
-// right answer, then end the game. Never fires in untimed mode.
 const timeoutArtist = () => {
   if (store.state.screen !== 'playing' || store.state.flash) return;
   const { currentPiece, roundStartedAt } = store.state;
@@ -244,74 +312,208 @@ const MAX_RECORD = 500;
 
 const endGame = () => {
   cancelTimer();
-  const played = store.state.pieces.length;
-  const totalMs = store.state.pieces.reduce((a, p) => a + (p.elapsedMs || 0), 0);
-  const entry = { score: store.state.score, played, totalMs, when: Date.now() };
-  const record = [...store.state.record, entry].slice(-MAX_RECORD);
-  store.setLifecycle({ screen: 'final', flash: null, record, deadlineAt: null });
+  const { pieces, score, playMode, dailyResults, record } = store.state;
+  const played = pieces.length;
+  const totalMs = pieces.reduce((a, p) => a + (p.elapsedMs || 0), 0);
+  const entry = { score, played, totalMs, when: Date.now() };
+  const newRecord = [...record, entry].slice(-MAX_RECORD);
+
+  let newDailyResults = dailyResults;
+  if (playMode === 'daily' && played > 0) {
+    const k = dateKey();
+    const prev = dailyResults[k];
+    const better = !prev
+      || score > prev.score
+      || (score === prev.score && totalMs < prev.totalMs);
+    if (better) newDailyResults = { ...dailyResults, [k]: entry };
+  }
+
+  store.setLifecycle({
+    screen: 'final',
+    flash: null,
+    record: newRecord,
+    dailyResults: newDailyResults,
+    deadlineAt: null,
+  });
 };
 
-const restart = startGame;
+const restart = () => {
+  if (store.state.playMode === 'daily') startDaily();
+  else startGame();
+};
 
 // ── Top-level view ───────────────────────────────────────────────
 const view = (state) => {
-  if (state.screen === 'intro')   return Intro();
-  if (state.screen === 'setup')   return Setup(state);
   if (state.screen === 'final')   return Final(state);
-  return Playing(state);
+  if (state.screen === 'playing') return Playing(state);
+  return Inicio(state);
 };
 
 const Masthead = () =>
   h('header', { class: 'masthead' },
-    h('span', { class: 'masthead__title' },
-      'Lyric',
-      h('span', { style: 'color:var(--ink-thin); font-style: italic; font-weight: 400;' }, ' Hunt'),
-    ),
-    h('span', { class: 'masthead__meta' },
-      h('span', { class: 'dot' }), cacheVersion || '42.uy / lyrics'
-    ),
+    h('span', { class: 'masthead__title' }, 'Lyric Hunt'),
+    h('span', { class: 'masthead__meta' }, cacheVersion || '42.uy / lyrics'),
   );
 
-// ── Intro ────────────────────────────────────────────────────────
-const Intro = () =>
-  h('div', { class: 'intro' },
+// ── Inicio (start screen) ────────────────────────────────────────
+const Inicio = (state) => {
+  const playable = new Set(playableArtists().map((a) => a.id));
+  const selectedPlayable = state.prefs.artistIds.filter((id) => playable.has(id));
+  const canStart = state.prefs.artistIds.length >= 2 && selectedPlayable.length >= 1;
+  const todayDaily = state.dailyResults?.[dateKey()] ?? null;
+  return h('div', { class: 'inicio' + onceClass('inicio', 'is-animate') },
     Masthead(),
-    h('div', { class: 'intro__mark' },
-      'Guess', h('em', {}, 'whose line this is.'),
-    ),
-    h('p', { class: 'intro__deck' },
-      `A single line, ${ARTISTS.length} suspects. Pick the artist before the clock runs out. One miss and the curtain falls.`,
-    ),
-    h('div', { class: 'intro__rule' }),
-    BestRecord(store.state.record, null),
-    h('div', { class: 'actions intro__actions' },
-      h('button', { class: 'btn btn--primary intro__btn', onclick: startGame },
-        'Play →'
-      ),
-      h('button', { class: 'btn btn--ghost intro__setup', onclick: goToSetup },
-        'Setup'
-      ),
-    ),
-    h('div', { class: 'intro__foot' },
-      `Catalogue: ${ARTISTS.length} artists · ${SONGS.length} songs · ${SONGS.reduce((a, s) => a + s.fragments.length, 0)} verses`
+    Hero(),
+    TimePicker(state.prefs.turnSec),
+    LineupRow(state.prefs.artistIds),
+    Actions(canStart, todayDaily),
+    RecentRuns(state.record),
+    Catalogue(),
+    sheetOpen ? ArtistSheet(state) : null,
+  );
+};
+
+const Hero = () =>
+  h('div', { class: 'inicio__hero' },
+    h('h1', { class: 'inicio__title' }, 'Lyric Hunt'),
+    h('p', { class: 'inicio__deck' }, 'adiviná de quién es el verso.'),
+  );
+
+const TimeChip = (sec, current) => {
+  const isOn = sec === current;
+  const isInf = sec === 0;
+  return h('button', {
+    class: 'time-picker__opt' + (isOn ? ' is-on' : '') + (isInf ? ' is-inf' : ''),
+    type: 'button',
+    'aria-pressed': isOn ? 'true' : 'false',
+    'aria-label': isInf ? 'sin tiempo' : `${sec} segundos`,
+    onclick: () => setTurnSec(sec),
+  }, isInf ? '∞' : `${fmtN(sec)}s`);
+};
+
+const TimePicker = (turnSec) =>
+  h('section', { class: 'inicio__section' },
+    h('div', { class: 'inicio__label' }, 'tiempo'),
+    h('div', { class: 'time-picker' },
+      TimeChip(8, turnSec),
+      TimeChip(10, turnSec),
+      TimeChip(12, turnSec),
+      TimeChip(0, turnSec),
     ),
   );
 
-// ── Setup ────────────────────────────────────────────────────────
+const LineupRow = (artistIds) => {
+  const playable = playableArtists();
+  const playableSet = new Set(playable.map((a) => a.id));
+  const selected = artistIds.filter((id) => playableSet.has(id)).length;
+  return h('section', { class: 'inicio__section' },
+    h('div', { class: 'inicio__label' }, 'artistas'),
+    h('button', {
+      class: 'lineup-row',
+      type: 'button',
+      onclick: openSheet,
+    },
+      h('span', { class: 'lineup-row__count' }, `${selected} / ${playable.length}`),
+      h('span', { class: 'lineup-row__cta' }, 'cambiar →'),
+    ),
+  );
+};
+
+const Actions = (canStart, todayDaily) =>
+  h('section', { class: 'inicio__actions' },
+    h('button', {
+      class: 'btn btn--primary inicio__play',
+      type: 'button',
+      disabled: !canStart,
+      onclick: startGame,
+    }, 'Jugar →'),
+    !canStart
+      ? h('div', { class: 'inicio__hint' }, 'Mínimo dos artistas.')
+      : null,
+    todayDaily
+      ? h('div', { class: 'daily-row daily-row--done' },
+          h('span', { class: 'daily-row__label' }, 'reto del día ✓'),
+          h('span', { class: 'daily-row__stat' }, `★ ${todayDaily.score}`),
+          h('span', { class: 'daily-row__stat' }, fmtTime(todayDaily.totalMs ?? 0)),
+          h('button', {
+            class: 'daily-row__again',
+            type: 'button',
+            onclick: startDaily,
+          }, 'otra vez →'),
+        )
+      : h('button', {
+          class: 'btn btn--ghost inicio__daily',
+          type: 'button',
+          onclick: startDaily,
+        }, 'Reto del día →'),
+  );
+
+const RecentRuns = (record) => {
+  const recent = [...record].slice(-10).reverse();
+  if (recent.length === 0) return null;
+  const bestScore = Math.max(...record.map((r) => r.score));
+  return h('section', { class: 'inicio__section' },
+    h('div', { class: 'inicio__label' }, 'tus partidas'),
+    h('ul', { class: 'recent-runs' },
+      ...recent.map((r, i) =>
+        h('li', {
+          class: 'recent-runs__row'
+            + (r.score === bestScore && bestScore > 0 ? ' is-best' : ''),
+          style: `--i:${i}`,
+        },
+          h('span', { class: 'recent-runs__streak' },
+            h('span', { class: 'recent-runs__star' }, '★'),
+            h('span', { class: 'recent-runs__num' }, fmtN(r.score)),
+          ),
+          h('span', { class: 'recent-runs__time' }, fmtTime(r.totalMs ?? 0)),
+          h('span', { class: 'recent-runs__when' }, fmtRelative(r.when)),
+        )
+      ),
+    ),
+  );
+};
+
+const Catalogue = () =>
+  h('div', { class: 'catalogue' },
+    `catálogo · ${ARTISTS.length} artistas · ${SONGS.length} canciones · ${SONGS.reduce((a, s) => a + (s.fragments?.length || 0), 0)} versos`,
+  );
+
+// ── Artist sheet (bottom sheet over Inicio) ──────────────────────
+const ArtistSheet = (state) => {
+  const lineup = ARTISTS;
+  const lineupIds = new Set(lineup.map((a) => a.id));
+  const selected = state.prefs.artistIds.filter((id) => lineupIds.has(id));
+  const soleSelected = selected.length <= 2;
+  return h('div', { class: 'sheet' + onceClass('sheet:open', 'is-animate') },
+    h('div', { class: 'sheet__backdrop', onclick: closeSheet }),
+    h('div', { class: 'sheet__panel' },
+      h('div', { class: 'sheet__head' },
+        h('span', { class: 'sheet__title' }, 'artistas'),
+        h('span', { class: 'sheet__count' }, `${selected.length} / ${lineup.length}`),
+        h('button', { class: 'sheet__close', type: 'button', onclick: closeSheet }, 'Listo'),
+      ),
+      h('div', { class: 'sheet__body' },
+        h('div', { class: 'lineup' },
+          ...lineup.map((a, i) => ArtistToggle(a, i, selected, soleSelected)),
+        ),
+        soleSelected
+          ? h('div', { class: 'sheet__hint' }, 'Mínimo dos. El resto, vos elegís.')
+          : null,
+      ),
+    ),
+  );
+};
+
 const ArtistToggle = (artist, idx, selected, soleSelected) => {
   const isOn = selected.includes(artist.id);
   const songCount = SONGS.filter((s) => s.artistId === artist.id).length;
   const silent = songCount === 0;
-  // Stop the user disabling the second-to-last artist from the UI; the
-  // toggleArtist guard also catches this but disabling here is what makes
-  // the affordance obvious (cursor + dim state).
   const disabled = isOn && soleSelected;
   return h('button', {
     class: 'lineup__card'
       + (isOn ? ' is-on' : '')
       + (disabled ? ' is-locked' : '')
-      + (silent ? ' is-silent' : '')
-      + onceClass(`lineup:${artist.id}`, 'is-animate'),
+      + (silent ? ' is-silent' : ''),
     type: 'button',
     style: `--i:${idx}`,
     'aria-pressed': isOn ? 'true' : 'false',
@@ -323,92 +525,7 @@ const ArtistToggle = (artist, idx, selected, soleSelected) => {
       silent
         ? null
         : h('span', { class: 'lineup__meta' },
-            `${songCount} song${songCount === 1 ? '' : 's'}`),
-    ),
-  );
-};
-
-const DurationOption = (sec, current) => {
-  const isOn = sec === current;
-  const isUnlimited = sec === 0;
-  return h('button', {
-    class: 'duration__opt'
-      + (isOn ? ' is-on' : '')
-      + (isUnlimited ? ' duration__opt--infinity' : ''),
-    type: 'button',
-    'aria-pressed': isOn ? 'true' : 'false',
-    'aria-label': isUnlimited ? 'No timer' : `${sec} seconds`,
-    onclick: () => setTurnSec(sec),
-  },
-    isUnlimited
-      ? h('span', { class: 'duration__num' }, '∞')
-      : [
-          h('span', { class: 'duration__num' }, fmtN(sec)),
-          h('span', { class: 'duration__unit' }, 's'),
-        ],
-  );
-};
-
-const Setup = (state) => {
-  const { prefs } = state;
-  const lineup = ARTISTS;
-  const lineupIds = new Set(lineup.map((a) => a.id));
-  const selected = prefs.artistIds.filter((id) => lineupIds.has(id));
-  const soleSelected = selected.length <= 2;
-  // Need ≥2 selected so we have at least one decoy, and at least one of
-  // those must actually have material so pickFragment has a piece to draw.
-  const playableSet = new Set(playableArtists().map((a) => a.id));
-  const playableSelected = selected.filter((id) => playableSet.has(id)).length;
-  const canStart = selected.length >= 2 && playableSelected >= 1;
-  return h('div', { class: 'setup' },
-    Masthead(),
-    h('div', { class: 'setup__head' },
-      h('h2', { class: 'setup__title' },
-        'Setup',
-        h('span', { class: 'setup__title-dot' }),
-      ),
-      h('p', { class: 'setup__deck' }, "Choose tonight's lineup and how long you've got to call each line."),
-    ),
-
-    h('section', { class: 'setup__section' },
-      h('div', { class: 'setup__sectionhead' },
-        h('span', { class: 'setup__label' }, 'Lineup'),
-        h('span', { class: 'setup__count' }, `${selected.length}/${lineup.length}`),
-      ),
-      h('div', { class: 'lineup' },
-        ...lineup.map((a, i) => ArtistToggle(a, i, selected, soleSelected)),
-      ),
-      soleSelected
-        ? h('div', { class: 'setup__hint' }, 'Two minimum — the rest are yours to drop.')
-        : selected.length >= 2 && playableSelected === 0
-          ? h('div', { class: 'setup__hint' }, "None of the picked artists have lyrics yet — add at least one that does.")
-          : null,
-    ),
-
-    h('section', { class: 'setup__section' },
-      h('div', { class: 'setup__sectionhead' },
-        h('span', { class: 'setup__label' }, 'Turn length'),
-      ),
-      h('div', { class: 'duration' },
-        DurationOption(8, prefs.turnSec),
-        DurationOption(10, prefs.turnSec),
-        DurationOption(12, prefs.turnSec),
-        DurationOption(0, prefs.turnSec),
-      ),
-    ),
-
-    h('div', { class: 'actions setup__actions' },
-      h('button', {
-        class: 'btn btn--primary setup__start',
-        type: 'button',
-        disabled: !canStart,
-        onclick: startGame,
-      }, 'Start the round →'),
-      h('button', {
-        class: 'btn btn--ghost',
-        type: 'button',
-        onclick: backToIntro,
-      }, 'Back'),
+            `${songCount} canción${songCount === 1 ? '' : 'es'}`),
     ),
   );
 };
@@ -436,23 +553,18 @@ const renderLyric = (text, pieceKey) => {
 
 const Epigraph = (piece, pieceKey) =>
   h('blockquote', { class: 'epigraph' },
-    h('span', { class: 'epigraph__corner epigraph__corner--tl' }, 'mystery line'),
-    h('span', { class: 'epigraph__corner epigraph__corner--tr' }, '◆◆◆'),
     h('p', { class: 'epigraph__quote' },
       ...renderLyric(piece.fragment, pieceKey)
     ),
   );
 
-// Visual timer bar — drained by CSS animation. Negative animation-delay
-// snapshots how much time has already passed so re-renders or hydrates
-// resume from the right position instead of restarting from 100%.
+// Timer bar drained via CSS animation; ticker fine-tunes width via custom prop.
 const TimerBar = (deadlineAt) => {
-  const ms = turnMs();
+  const sec = effectiveTurnSec();
+  if (sec === 0 || !deadlineAt) return null;
+  const ms = sec * 1000;
   const elapsed = Math.max(0, ms - (deadlineAt - Date.now()));
-  return h('div', {
-    class: 'pieza__timer',
-    'aria-hidden': 'true',
-  },
+  return h('div', { class: 'pieza__timer', 'aria-hidden': 'true' },
     h('div', {
       class: 'pieza__timer__fill',
       style: `--turn-ms:${ms}ms; --elapsed:${elapsed};`,
@@ -460,30 +572,44 @@ const TimerBar = (deadlineAt) => {
   );
 };
 
+const streakGhost = (current) => {
+  if (pbAtGameStart <= 0) return null;
+  if (current > pbAtGameStart) return '¡récord!';
+  if (current === pbAtGameStart && current > 0) return '¡empate!';
+  return `tu mejor ${pbAtGameStart}`;
+};
+
 const Pieza = (state) => {
-  const timed = state.prefs.turnSec > 0;
+  const timed = effectiveTurnSec() > 0;
   const sec = state.flash ? null : remainingSec(state.deadlineAt);
   const urgent = sec !== null && sec <= 2;
   const streak = state.score;
-  // Untimed mode: clock badge becomes a static ∞; flash still shows ✓/✗.
+  const ghost = streakGhost(streak);
+  const isDaily = state.playMode === 'daily';
+
   const clockBadge = state.flash
     ? h('span', { class: 'pieza__clock pieza__clock--paused' }, state.flash.ok ? '✓' : '✗')
     : timed
       ? h('span', {
           class: 'pieza__clock' + (urgent ? ' pieza__clock--urgent' : ''),
-          'aria-label': 'Seconds remaining',
+          'aria-label': 'Segundos restantes',
         }, `${sec}s`)
       : h('span', {
           class: 'pieza__clock pieza__clock--infinity',
-          'aria-label': 'No timer',
+          'aria-label': 'Sin tiempo',
         }, '∞');
+
   return h('div', { class: 'pieza-wrap' + (urgent ? ' is-urgent' : '') },
     h('div', { class: 'pieza' },
-      h('span', { class: 'pieza__streak' },
-        h('span', { class: 'pieza__streak__label' }, 'Streak'),
+      h('div', { class: 'pieza__streak' },
+        h('span', { class: 'pieza__streak__label' }, 'Racha'),
         h('em', { class: 'pieza__streak__num' + (streak >= 5 ? ' is-hot' : '') }, fmtN(streak)),
+        ghost ? h('span', { class: 'pieza__streak__ghost' }, ghost) : null,
       ),
-      clockBadge,
+      h('div', { class: 'pieza__right' },
+        isDaily ? h('span', { class: 'pieza__mode' }, 'reto') : null,
+        clockBadge,
+      ),
     ),
     timed && !state.flash
       ? h('div', { class: 'pieza__timeline' }, TimerBar(state.deadlineAt))
@@ -494,9 +620,8 @@ const Pieza = (state) => {
 // ── Playing ──────────────────────────────────────────────────────
 const Playing = (state) => {
   const piece = state.currentPiece;
-  if (!piece) return Intro();
+  if (!piece) return Inicio(state);
   const pieceKey = `${piece.songId}:${piece.fragmentId}`;
-
   return h('div', { class: 'page' },
     Masthead(),
     Pieza(state),
@@ -527,14 +652,13 @@ const Choice = (artistId, idx, pieceKey, flash) => {
 
 const ArtistStage = (state, pieceKey) =>
   h('section', { class: 'stage stage--artist' },
-    h('div', { class: 'prompt' }, 'Who?'),
+    h('div', { class: 'prompt' }, '¿Quién?'),
     h('div', { class: 'choices' },
       ...state.choices.map((id, i) => Choice(id, i, pieceKey, state.flash))
     ),
   );
 
 // ── Final ────────────────────────────────────────────────────────
-// Tier: drives banner color, title, and which entry animation plays.
 const tierFor = (streak, played) => {
   if (played === 0) return 'none';
   if (streak >= 5)  return 'win';
@@ -543,22 +667,21 @@ const tierFor = (streak, played) => {
 };
 
 const TITLE_BY_TIER = {
-  win:  'ENCORE!',
-  mid:  'NOT BAD',
-  lose: 'OFF KEY',
-  none: 'CURTAIN',
+  win:  '¡OTRA!',
+  mid:  'NADA MAL',
+  lose: 'DESAFINADO',
+  none: 'TELÓN',
 };
-
 const SUB_BY_TIER = {
-  win:  'crowd is on its feet',
-  mid:  'a respectable run',
-  lose: 'crowd has left the building',
-  none: 'no songs were sung',
+  win:  'el público de pie',
+  mid:  'una buena tirada',
+  lose: 'el público se fue',
+  none: 'no sonó ninguna canción',
 };
 
-const CONFETTI_COLORS = ['#ff2d95', '#00e5ff', '#ffd60a', '#7cff6b', '#9b5cff'];
+const CONFETTI_COLORS = ['#ffb86b', '#7cff6b', '#f4ece0'];
 const Confetti = () => {
-  const N = 32;
+  const N = 24;
   const spans = [];
   for (let i = 0; i < N; i++) {
     const x = Math.floor(Math.random() * 100);
@@ -572,17 +695,21 @@ const Confetti = () => {
   return h('div', { class: 'confetti', 'aria-hidden': 'true' }, ...spans);
 };
 
+const seguidasLabel = (n) => n === 1 ? '1 seguida' : `${n} seguidas`;
+
 const Final = (state) => {
   const played = state.pieces.length;
   const streak = state.score;
   const tier = tierFor(streak, played);
   const justFinished = state.record[state.record.length - 1] ?? null;
   const totalMs = state.pieces.reduce((a, p) => a + (p.elapsedMs || 0), 0);
+  const isDaily = state.playMode === 'daily';
 
   return h('div', { class: `final final--${tier}` },
     Masthead(),
     h('div', { class: 'final__banner' },
       tier === 'win' ? Confetti() : null,
+      isDaily ? h('div', { class: 'final__mode' }, 'reto del día') : null,
       h('h1', { class: 'final__title' }, TITLE_BY_TIER[tier]),
       h('div', { class: 'final__sub' }, SUB_BY_TIER[tier]),
     ),
@@ -591,17 +718,17 @@ const Final = (state) => {
         h('span', {
           class: 'final__big__num is-animate',
           style: `--target:${streak};`,
-          'aria-label': `${streak} in a row`,
+          'aria-label': seguidasLabel(streak),
         }),
-        h('small', {}, streak === 1 ? '1 in a row' : `${streak} in a row`),
+        h('small', {}, seguidasLabel(streak)),
       ),
       played > 0
         ? h('div', { class: 'final__stat final__stat--time' },
             h('span', {
               class: 'final__big__num final__big__num--time',
-              'aria-label': `total time ${fmtTime(totalMs)}`,
+              'aria-label': `tiempo total ${fmtTime(totalMs)}`,
             }, fmtTime(totalMs)),
-            h('small', {}, 'total time'),
+            h('small', {}, 'tiempo total'),
           )
         : null,
     ),
@@ -613,31 +740,29 @@ const Final = (state) => {
           type: 'button',
           'aria-expanded': compositeOpen ? 'true' : 'false',
           onclick: toggleComposite,
-        }, compositeOpen ? 'Hide the song ←' : 'See the song you made →')
+        }, compositeOpen ? 'Ocultar canción ←' : 'Ver la canción que armaste →')
       : null,
     played >= 2 && compositeOpen ? Composite(state.pieces) : null,
     h('div', { class: 'actions' },
-      h('button', { class: 'btn btn--primary', type: 'button', onclick: restart }, 'Again →'),
-      h('button', { class: 'btn btn--ghost',  type: 'button', onclick: backToIntro }, 'Back to start'),
+      h('button', { class: 'btn btn--primary', type: 'button', onclick: restart }, 'Otra vez →'),
+      h('button', { class: 'btn btn--ghost',  type: 'button', onclick: backToIntro }, 'Al inicio'),
     ),
   );
 };
 
-// ── Best record ──────────────────────────────────────────────────
-// Slim badge — just the lifetime high score (and a "New record" flag when
-// the just-finished game eclipses every prior one).
 const BestRecord = (record, justFinished) => {
   if (record.length === 0) return null;
   const bestScore = Math.max(...record.map((e) => e.score));
+  if (bestScore === 0) return null;
   const newRecord = justFinished
     && justFinished.score > 0
     && justFinished.score >= bestScore
     && (record.length === 1
         || justFinished.score > Math.max(...record.slice(0, -1).map((e) => e.score)));
   return h('aside', { class: 'best-record' },
-    h('span', { class: 'best-record__label' }, 'Best Record'),
+    h('span', { class: 'best-record__label' }, 'Récord'),
     h('span', { class: 'best-record__value' }, bestScore),
-    newRecord ? h('span', { class: 'best-record__badge' }, 'New') : null,
+    newRecord ? h('span', { class: 'best-record__badge' }, '¡Nuevo!') : null,
   );
 };
 
@@ -646,12 +771,14 @@ const Tally = (state) =>
     ...state.pieces.map((p, i) => {
       const song = findSong(p.songId);
       const realArtist = artistOf(p.songId);
+      const split = h('span', { class: 'tally__split' }, fmtTime(p.elapsedMs || 0));
       if (p.artistOk) {
         return h('div', { class: 'tally__row tally__row--ok' },
           h('span', { class: 'tally__no' }, fmtN(i + 1)),
           h('span', { class: 'tally__mark' }, '✓'),
           h('b', {}, realArtist.displayName),
           h('span', { class: 'tally__song' }, song.song),
+          split,
         );
       }
       const picked = p.pickedArtistId ? findArtist(p.pickedArtistId) : null;
@@ -661,16 +788,14 @@ const Tally = (state) =>
         h('b', {}, realArtist.displayName),
         h('span', { class: 'tally__song' }, song.song),
         h('span', { class: 'tally__pick' },
-          p.timedOut ? 'timed out' : `you said: ${picked ? picked.displayName : '—'}`,
+          p.timedOut ? 'sin tiempo' : `elegiste: ${picked ? picked.displayName : '—'}`,
         ),
+        split,
       );
     }),
   );
 
-// ── Composite (the "song you made") ──────────────────────────────
-// Joins every fragment the player saw into one piece — chronological,
-// no attribution. Stanza-staggered entry animation runs once per session
-// via onceClass('composite:open').
+// ── Composite ("la canción que armaste") ─────────────────────────
 const stanzaLines = (text) => {
   const lines = text.split('\n');
   const out = [];
@@ -688,7 +813,7 @@ const Stanza = (text, i) =>
 
 const Composite = (pieces) =>
   h('section', { class: 'composite' + onceClass('composite:open', 'is-animate') },
-    h('div', { class: 'composite__label' }, 'The song you played'),
+    h('div', { class: 'composite__label' }, 'la canción que armaste'),
     h('div', { class: 'composite__body' },
       ...pieces
         .map((p) => findSong(p.songId).fragments[p.fragmentId])
@@ -699,14 +824,12 @@ const Composite = (pieces) =>
 
 // ── Render loop ──────────────────────────────────────────────────
 const render = (state) => {
+  document.body.classList.toggle('has-sheet', sheetOpen);
   root.replaceChildren(view(state));
 };
 
-// Countdown ticker: updates the `.pieza__clock` text node ~5x/sec while
-// the artist stage is live, and toggles the urgent class on both the
-// clock badge and the wrapping HUD (so the whole row can shake at <2s).
-// Touching narrow DOM bits — not the whole tree — avoids restarting any
-// animations or losing focus.
+// Countdown ticker — touches narrow DOM only. No-op when deadlineAt is null
+// (untimed mode).
 const startTicker = () => {
   setInterval(() => {
     const { screen, deadlineAt, flash } = store.state;
@@ -728,14 +851,14 @@ const start = async () => {
   store.subscribe(render);
   render(store.state);
   startTicker();
-  // If we hydrated mid-round (user reloaded), reset round timing so the
-  // player isn't penalized for the offline gap. In timed mode we also
-  // re-arm the timer (the in-memory setTimeout from before the reload is
-  // gone). There's no flash mid-flight on cold start.
+  // Hydrated mid-round: rebuild round-local state. Timer rearmed only when
+  // timed; round timing reset to now so the offline gap isn't counted.
   if (store.state.screen === 'playing'
       && store.state.stage === 'artist'
       && !store.state.flash) {
-    const deadlineAt = isTimed() ? armTimer(timeoutArtist, turnMs()) : null;
+    pbAtGameStart = personalBest(store.state.record);
+    const turnSec = effectiveTurnSec();
+    const deadlineAt = turnSec > 0 ? armTimer(timeoutArtist, turnSec * 1000) : null;
     store.setLifecycle({ roundStartedAt: Date.now(), deadlineAt });
   }
 };

@@ -139,11 +139,36 @@ export const checkBonus = (guess, song) => {
   return null;
 };
 
+// ── Seeded RNG ───────────────────────────────────────────────────
+// Mulberry32 — small 32-bit PRNG. Used by the daily challenge so the
+// piece sequence is deterministic per-date and reproducible across
+// reloads. fnvHash gives us a 32-bit seed from an arbitrary string.
+
+export const fnvHash = (s) => {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+  }
+  return h >>> 0;
+};
+
+export const mulberry32 = (seed) => {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+};
+
 // ── Sampling ─────────────────────────────────────────────────────
-const shuffle = (a) => {
+const shuffle = (a, rng = Math.random) => {
   const r = a.slice();
   for (let i = r.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [r[i], r[j]] = [r[j], r[i]];
   }
   return r;
@@ -163,12 +188,12 @@ const allPairs = (allowedArtistIds = null) => {
   return out;
 };
 
-export const pickFragment = (seenKeys = [], allowedArtistIds = null) => {
+export const pickFragment = (seenKeys = [], allowedArtistIds = null, rng = Math.random) => {
   const all = allPairs(allowedArtistIds);
   if (all.length === 0) return null;
   let available = all.filter((p) => !seenKeys.includes(`${p.songId}:${p.fragmentId}`));
   if (available.length === 0) available = all;
-  const pick = available[Math.floor(Math.random() * available.length)];
+  const pick = available[Math.floor(rng() * available.length)];
   const song = SONGS.find((s) => s.id === pick.songId);
   return {
     songId: song.id,
@@ -181,15 +206,15 @@ export const pickFragment = (seenKeys = [], allowedArtistIds = null) => {
 // every selected artist appears in shuffled order; above it, the correct
 // artist plus a random sample of selected decoys, also shuffled.
 // `allowedArtistIds` should always contain `correctArtistId`.
-export const pickArtistChoices = (correctArtistId, allowedArtistIds = null) => {
+export const pickArtistChoices = (correctArtistId, allowedArtistIds = null, rng = Math.random) => {
   const pool = allowedArtistIds
     ? ARTISTS.filter((a) => allowedArtistIds.includes(a.id))
     : ARTISTS;
   if (pool.length <= ARTIST_CHOICE_LIMIT) {
-    return shuffle(pool).map((a) => a.id);
+    return shuffle(pool, rng).map((a) => a.id);
   }
   const correct = findArtist(correctArtistId);
   const others  = pool.filter((a) => a.id !== correctArtistId);
-  const picks   = [correct, ...shuffle(others).slice(0, ARTIST_CHOICE_LIMIT - 1)];
-  return shuffle(picks).map((a) => a.id);
+  const picks   = [correct, ...shuffle(others, rng).slice(0, ARTIST_CHOICE_LIMIT - 1)];
+  return shuffle(picks, rng).map((a) => a.id);
 };

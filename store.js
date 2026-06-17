@@ -8,14 +8,16 @@ import { ARTISTS } from './lyrics.js';
 //                     old persisted blobs get discarded instead of merged
 //                     into the new defaults (and leaving holes like an
 //                     empty `choices` mid-game)
-//   screen:           'intro' | 'setup' | 'playing' | 'final'
+//   screen:           'intro' | 'playing' | 'final'
+//                     ('setup' was removed in schema 8 — collapsed into intro)
 //   stage:            'artist' | 'revealed'   (within `playing`)
 //   currentPiece:     { fragment, songId, fragmentId }  ← seeded on next()
 //   choices:          array of artistId — the chips shown in artist stage
 //   pickedArtistId:   the artistId the user clicked (set when leaving artist)
 //   revealed:         null | { artistOk, timedOut }
 //   score:            current streak — number of correct guesses in a row
-//   pieces:           [{ songId, fragmentId, artistOk, pickedArtistId, elapsedMs }]
+//   pieces:           [{ songId, fragmentId, artistOk, pickedArtistId,
+//                       timedOut, elapsedMs }]
 //   seenKeys:         array of "songId:fragmentId" already drawn this game
 //   roundStartedAt:   wall-clock millis when current round armed; used to
 //                     compute per-piece elapsedMs on resolve. Independent of
@@ -25,8 +27,14 @@ import { ARTISTS } from './lyrics.js';
 //   record:           lifetime [{ score, played, totalMs, when }]
 //   prefs:            persisted user preferences ({ artistIds, turnSec })
 //                     turnSec === 0 means no timer (unlimited per round)
+//   playMode:         'normal' | 'daily'  (transient game-mode flag; daily
+//                     mode forces turnSec=10 + full roster + seeded RNG)
+//   dailySeed:        number | null — 32-bit seed for the daily RNG (set
+//                     only while playMode === 'daily')
+//   dailyResults:     { 'YYYY-MM-DD': { score, played, totalMs, when } }
+//                     persisted per-day best result for the daily challenge
 
-const SCHEMA = 7;
+const SCHEMA = 8;
 const DEFAULT_TURN_SEC = 8;
 
 const defaultPrefs = () => ({
@@ -52,6 +60,9 @@ const initialState = () => ({
   deadlineAt: null,
   record: [],
   prefs: defaultPrefs(),
+  playMode: 'normal',
+  dailySeed: null,
+  dailyResults: {},
 });
 
 class Store {

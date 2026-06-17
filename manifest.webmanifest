@@ -1,14 +1,14 @@
 {
   "name": "Lyric Hunt",
   "short_name": "Lyric Hunt",
-  "description": "Guess the artist, song, and album from a single line of a lyric.",
+  "description": "Adiviná de quién es el verso. Un juego de letras para tu colección de rock en español.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f4f0e8",
-  "theme_color": "#f4f0e8",
-  "lang": "en",
+  "background_color": "#0a0612",
+  "theme_color": "#0a0612",
+  "lang": "es",
   "icons": [
     {
       "src": "./icon.svg",
